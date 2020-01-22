@@ -27,12 +27,18 @@ class PuckDetector :
         if i_circles is not None:
             circles = np.uint16(np.around(i_circles))
             for i in circles[0, :]:
-                center = (i[0], i[1])
+                xPos = i[0]
+                yPos = i[1]
+
+                center = (xPos, yPos)
                 # circle center
                 cv2.circle(i_frame, center, 1, (0, 100, 100), 3)
                 # circle outline
                 radius = i[2]
                 cv2.circle(i_frame, center, radius, (255, 0, 0), 3)
+
+            cv2.putText(i_frame,"x position = " + str(xPos),(10,30), cv2.FONT_HERSHEY_SIMPLEX,0.75,(0,0,0),2)
+            cv2.putText(i_frame,"y position = " + str(yPos),(10,55),cv2.FONT_HERSHEY_SIMPLEX,0.75,(0,0,0),2)
 
         cv2.imshow('Output', i_frame)
 
