@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>The Hockus Pockus Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet"> 
+
+    <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
+    <script type="text/javascript" src="ros.js"></script>
+  </head>
+  <body>
+    <nav class="zone blue sticky">
+      <ul class="main-nav">
+        <li class="push-left"><a href="">About</a></li>
+        <li><a href="">The Hockus Pockus Project</a></li>
+        <li class="push-right"><a href="">Settings</a></li>
+      </ul>
+    </nav>
+
+    <div class="container zone red"><img class="cover" src="img/hockus.png"></div>
+
+    <div class="zone green grid-wrapper">
+      <ul>
+        <li class="box zone">Connection status: <span id="status"></span></li>
+        <li class="box zone">Last message on /txt_msg: <span id="msg"></span></li>
+      </ul>
+    </div>
+    
+    <footer class="zone yellow">The Hockus Pockus Project 2020</footer>
+  </body>
+</html>
