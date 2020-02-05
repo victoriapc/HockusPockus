@@ -4,8 +4,9 @@
   <version>0.0.0</version>
   <description>The ui package</description>
 
-  <maintainer email="sexyraoul@todo.todo">sexyraoul</maintainer>
-
+  <maintainer email="victoriapc@todo.todo">victoriapc</maintainer>
+  <maintainer email="babindemers@todo.todo">babindemers</maintainer>
+  
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
