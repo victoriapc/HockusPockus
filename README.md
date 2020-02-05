@@ -8,7 +8,8 @@ The web interface uses http-server. You need to install npm beforehand in order 
 
     sudo apt update
     sudo apt upgrade
-    sudo apt install nodejs-dev node-gyp libssl1.0-dev ros-melodic-rosbridge-server
+    sudo apt install nodejs-dev node-gyp libssl1.0-dev ros-melodic-rosbridge-server ros-melodic-web-video-server
+
 	sudo apt install npm
 	sudo npm install http-server -g
 
