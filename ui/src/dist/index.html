@@ -5,15 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Hockus Pockus - Dashboard</title>
+        <meta name="author" content="vicpc et son office husband" />
+        <title>The Hockus Pockus Project</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+        <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript" src="js/ros.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="index.html">Hockus Pockus</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             ><!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -103,8 +106,10 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Puck position: </div>
-                                    <span id="puck_pos"></span>
+                                    <div class="card-body">Ros Info: </div>
+                                    <li class="box zone">Connection status: <span id="status"></span></li>
+                                    <li class="box zone">Last message on /txt_msg: <span id="msg"></span></li>
+                                    <li class="box zone">Puck position: <span id="puck_pos"></span></li>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
@@ -176,36 +181,5 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
-        <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-        <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-        <script type="text/javascript" type="text/javascript">
-        
-        var ros = new ROSLIB.Ros;
-        ros.connect('ws://localhost:9090');
-
-        var video = document.querySelector("#videoElement");
-
-        if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-            video.srcObject = stream;
-            })
-            .catch(function (err0r) {
-            console.log("Something went wrong with video!");
-            });
-        }
-
-        var pos_listener = new ROSLIB.Topic({
-            ros : ros,
-            name : '/puck_pos',
-            messageType : 'geometry_msgs/Point'
-        });
-
-        pos_listener.subscribe(function(m) {
-            console.log('Received message on ' + pos_listener.name + ': ' + m.x)
-            document.getElementById("puck_pos").innerHTML = m.x;
-        });
-
-        </script>
     </body>
 </html>
