@@ -103,11 +103,8 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
+                                    <div class="card-body">Puck position: </div>
+                                    <span id="puck_pos"></span>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
@@ -156,7 +153,7 @@
                         </div>
                     </div>
                 </main>
-                <footer class="py-4 bg-light mt-auto">
+                <!-- <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Your Website 2019</div>
@@ -167,7 +164,7 @@
                             </div>
                         </div>
                     </div>
-                </footer>
+                </footer> -->
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
@@ -179,18 +176,36 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
-        <script>
+        <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+        <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript" type="text/javascript">
+        
+        var ros = new ROSLIB.Ros;
+        ros.connect('ws://localhost:9090');
+
         var video = document.querySelector("#videoElement");
 
-            if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                video.srcObject = stream;
-                })
-                .catch(function (err0r) {
-                console.log("Something went wrong!");
-                });
-            }
+        if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+            video.srcObject = stream;
+            })
+            .catch(function (err0r) {
+            console.log("Something went wrong with video!");
+            });
+        }
+
+        var pos_listener = new ROSLIB.Topic({
+            ros : ros,
+            name : '/puck_pos',
+            messageType : 'geometry_msgs/Point'
+        });
+
+        pos_listener.subscribe(function(m) {
+            console.log('Received message on ' + pos_listener.name + ': ' + m.x)
+            document.getElementById("puck_pos").innerHTML = m.x;
+        });
+
         </script>
     </body>
 </html>
