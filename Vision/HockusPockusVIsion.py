@@ -1,6 +1,42 @@
 import cv2
 import numpy as np
+
 import sys
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QApplication
+
+from dialog_BGR import *
+
+class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
+    def __init__(self,i_Color,i_videoCaptureIndex=0, i_FPS=30):
+        super(QDialog, self).__init__()
+        self.setupUi(self)
+        self.show()
+        self.config = PuckDetectorConfiguration(i_Color,  i_Color,i_videoCaptureIndex, i_FPS)
+        self.horizontalSlider_blue.setValue(i_Color[0])
+        self.horizontalSlider_green.setValue(i_Color[1])
+        self.horizontalSlider_red.setValue(i_Color[2])
+        self.update_blue()
+        self.update_red()
+        self.update_green()
+        self.horizontalSlider_blue.sliderMoved.connect(self.update_blue)
+        self.horizontalSlider_red.sliderMoved.connect(self.update_red)
+        self.horizontalSlider_green.sliderMoved.connect(self.update_green)
+
+        QThread(self.config.SetConfiguration())
+
+
+    def update_blue(self):
+        self.config.SetBlueValue(self.horizontalSlider_blue.value())
+        self.label_blue.setText("Blue : " +  str(self.horizontalSlider_blue.value()))
+    def update_red(self):
+        self.config.SetRedValue(self.horizontalSlider_red.value())
+        self.label_red.setText("Red : " + str(self.horizontalSlider_red.value()))
+    def update_green(self):
+        self.config.SetGreenValue(self.horizontalSlider_green.value())
+        self.label_green.setText("Green : " + str(self.horizontalSlider_green.value()))
 
 class PuckDetectorBase :
     ESCAPE_KEY = 27
@@ -99,9 +135,12 @@ class PuckDetectorConfiguration(PuckDetectorBase):
 
     INCREASE_RADIUS = ord('u')
     DECREASE_RADIUS = ord('j')
-    def __init__(self, i_videoCaptureIndex=0, i_FPS=30):
-        PuckDetectorBase.__init__(self, [30, 100, 100], [50, 255, 255],125, i_videoCaptureIndex, i_FPS)
-
+    def __init__(self, i_lowerColor,  i_upperColor, i_videoCaptureIndex=0, i_FPS=30):
+        PuckDetectorBase.__init__(self, i_lowerColor,i_upperColor,125, i_videoCaptureIndex, i_FPS)
+        self.RANGE = 50
+        self.BLUE = 0
+        self.GREEN = 1
+        self.RED =2
 
 
     def SetConfiguration(self):
@@ -151,10 +190,52 @@ class PuckDetectorConfiguration(PuckDetectorBase):
             elif i_inputKey == self.DECREASE_RADIUS:
                 self.m_radius -= 1
 
+    def SetRedValue(self,i_value):
+        if i_value - self.RANGE >0:
+            self.m_lowerColor[2] = i_value - self.RANGE
+        else:
+            self.m_lowerColor[2] = 0
+        if i_value + self.RANGE <255:
+            self.m_upperColor[2] = i_value + self.RANGE
+        else:
+            self.m_upperColor[2] = 255
+
+        print("Min rouge : " + str(self.m_lowerColor[2]))
+        print("Max rouge : " + str(self.m_upperColor[2]))
+
+    def SetGreenValue(self,i_value):
+        if i_value - self.RANGE >0:
+            self.m_lowerColor[1] = i_value - self.RANGE
+        else:
+            self.m_lowerColor[1] = 0
+        if i_value + self.RANGE <255:
+            self.m_upperColor[1] = i_value + self.RANGE
+        else:
+            self.m_upperColor[1] = 255
+
+        print("Min vert : " + str(self.m_lowerColor[1]))
+        print("Max vert : " + str(self.m_upperColor[1]))
+
+    def SetBlueValue(self,i_value):
+        if i_value - self.RANGE >0:
+            self.m_lowerColor[0] = i_value - self.RANGE
+        else:
+            self.m_lowerColor[0] = 0
+        if i_value + self.RANGE <255:
+            self.m_upperColor[0] = i_value + self.RANGE
+        else:
+            self.m_upperColor[0] = 255
+
+        print("Min bleu : " + str(self.m_lowerColor[0]))
+        print("Max bleu : " + str(self.m_upperColor[0]))
+
+
 
     def ApplyConfiguration(self):
         pass
 
 if __name__ == "__main__" :
-    _puckConfiguration = PuckDetectorConfiguration()
-    _puckConfiguration.SetConfiguration()
+    app = QApplication(sys.argv)
+    mainWin = dialog_config_BGR([40, 160, 250],1)
+    ret = app.exec_()
+    sys.exit(ret)
