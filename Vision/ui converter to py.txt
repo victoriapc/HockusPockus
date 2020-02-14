@@ -1,0 +1,3 @@
+Command line to insert to convert the UI to a py code:
+
+pyuic5 -x dialog_BGR.ui -o dialog_BGR.py
