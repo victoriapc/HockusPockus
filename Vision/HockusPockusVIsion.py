@@ -15,9 +15,9 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
         self.setupUi(self)
         self.show()
         self.config = PuckDetectorConfiguration(i_Color,  i_Color,i_videoCaptureIndex, i_FPS)
-        self.horizontalSlider_blue.setValue(i_Color[0])
-        self.horizontalSlider_green.setValue(i_Color[1])
-        self.horizontalSlider_red.setValue(i_Color[2])
+        self.horizontalSlider_blue.setValue(i_Color[PuckDetectorBase.BLUE])
+        self.horizontalSlider_green.setValue(i_Color[PuckDetectorBase.GREEN])
+        self.horizontalSlider_red.setValue(i_Color[PuckDetectorBase.RED])
         self.update_blue()
         self.update_red()
         self.update_green()
@@ -40,6 +40,9 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
 
 class PuckDetectorBase :
     ESCAPE_KEY = 27
+    BLUE = 0
+    GREEN = 1
+    RED = 2
 
     def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_videoCaptureIndex=0, i_FPS=30):
         self.m_radius = i_radius
@@ -138,10 +141,6 @@ class PuckDetectorConfiguration(PuckDetectorBase):
     def __init__(self, i_lowerColor,  i_upperColor, i_videoCaptureIndex=0, i_FPS=30):
         PuckDetectorBase.__init__(self, i_lowerColor,i_upperColor,125, i_videoCaptureIndex, i_FPS)
         self.RANGE = 50
-        self.BLUE = 0
-        self.GREEN = 1
-        self.RED =2
-
 
     def SetConfiguration(self):
         isReceivingFeed = True
@@ -159,83 +158,61 @@ class PuckDetectorConfiguration(PuckDetectorBase):
 
     def SetParameters(self,i_inputKey):
             if i_inputKey == self.INCREASE_RMAX:
-                self.m_upperColor[2]+=1
+                self.m_upperColor[PuckDetectorBase.RED]+=1
             elif i_inputKey == self.DECREASE_RMAX:
-                self.m_upperColor[2] -= 1
+                self.m_upperColor[PuckDetectorBase.RED] -= 1
             elif i_inputKey == self.INCREASE_RMIN:
-                self.m_lowerColor[2] += 1
+                self.m_lowerColor[PuckDetectorBase.RED] += 1
             elif i_inputKey == self.DECREASE_RMIN:
-                self.m_upperColor[2] -= 1
+                self.m_upperColor[PuckDetectorBase.RED] -= 1
 
             elif i_inputKey == self.INCREASE_GMAX:
-                self.m_upperColor[1]+=1
+                self.m_upperColor[PuckDetectorBase.GREEN]+=1
             elif i_inputKey == self.DECREASE_GMAX:
-                self.m_upperColor[1] -= 1
+                self.m_upperColor[PuckDetectorBase.GREEN] -= 1
             elif i_inputKey == self.INCREASE_GMIN:
-                self.m_lowerColor[1] += 1
+                self.m_lowerColor[PuckDetectorBase.GREEN] += 1
             elif i_inputKey == self.DECREASE_GMIN:
-                self.m_upperColor[1] -= 1
+                self.m_upperColor[PuckDetectorBase.GREEN] -= 1
 
             elif i_inputKey == self.INCREASE_BMAX:
-                self.m_upperColor[0]+=1
+                self.m_upperColor[PuckDetectorBase.BLUE]+=1
             elif i_inputKey == self.DECREASE_BMAX:
-                self.m_upperColor[0] -= 1
+                self.m_upperColor[PuckDetectorBase.BLUE] -= 1
             elif i_inputKey == self.INCREASE_BMIN:
-                self.m_lowerColor[0] += 1
+                self.m_lowerColor[PuckDetectorBase.BLUE] += 1
             elif i_inputKey == self.DECREASE_BMIN:
-                self.m_upperColor[0] -= 1
+                self.m_upperColor[PuckDetectorBase.BLUE] -= 1
 
             elif i_inputKey == self.INCREASE_RADIUS:
                 self.m_radius += 1
             elif i_inputKey == self.DECREASE_RADIUS:
                 self.m_radius -= 1
 
-    def SetRedValue(self,i_value):
+    def setColorValue(self,i_value,i_color):
         if i_value - self.RANGE >0:
-            self.m_lowerColor[2] = i_value - self.RANGE
+            self.m_lowerColor[i_color] = i_value - self.RANGE
         else:
-            self.m_lowerColor[2] = 0
+            self.m_lowerColor[i_color] = 0
         if i_value + self.RANGE <255:
-            self.m_upperColor[2] = i_value + self.RANGE
+            self.m_upperColor[i_color] = i_value + self.RANGE
         else:
-            self.m_upperColor[2] = 255
+            self.m_upperColor[i_color] = 255
 
-        print("Min rouge : " + str(self.m_lowerColor[2]))
-        print("Max rouge : " + str(self.m_upperColor[2]))
+    def SetRedValue(self,i_value):
+        self.setColorValue(i_value,PuckDetectorBase.RED)
 
     def SetGreenValue(self,i_value):
-        if i_value - self.RANGE >0:
-            self.m_lowerColor[1] = i_value - self.RANGE
-        else:
-            self.m_lowerColor[1] = 0
-        if i_value + self.RANGE <255:
-            self.m_upperColor[1] = i_value + self.RANGE
-        else:
-            self.m_upperColor[1] = 255
-
-        print("Min vert : " + str(self.m_lowerColor[1]))
-        print("Max vert : " + str(self.m_upperColor[1]))
+        self.setColorValue(i_value,PuckDetectorBase.GREEN)
 
     def SetBlueValue(self,i_value):
-        if i_value - self.RANGE >0:
-            self.m_lowerColor[0] = i_value - self.RANGE
-        else:
-            self.m_lowerColor[0] = 0
-        if i_value + self.RANGE <255:
-            self.m_upperColor[0] = i_value + self.RANGE
-        else:
-            self.m_upperColor[0] = 255
-
-        print("Min bleu : " + str(self.m_lowerColor[0]))
-        print("Max bleu : " + str(self.m_upperColor[0]))
-
-
+        self.setColorValue(i_value,PuckDetectorBase.BLUE)
 
     def ApplyConfiguration(self):
         pass
 
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
-    mainWin = dialog_config_BGR([40, 160, 250],1)
+    mainWin = dialog_config_BGR([40, 160, 250],0)
     ret = app.exec_()
     sys.exit(ret)
