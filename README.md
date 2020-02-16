@@ -16,7 +16,7 @@ The web interface uses http-server. You need to install npm beforehand in order 
 In order to use the code, you need to clone it in a catkin workspace, located in your home directory.
 
     cd ~/
-    mkdir -p ws_name/src/
+    mkdir -p hockus/src/
     cd hockus/src/
     git clone https://github.com/victoriapc/HockusPockus.git
     cd ..
@@ -25,11 +25,16 @@ In order to use the code, you need to clone it in a catkin workspace, located in
 
 Once you have access to the code, you need to allow the script to work
 
-    cd ~/ws_name/src/HockusPockus/ui/src/
+    cd ~/hockus/src/HockusPockus/ui/src/
     chmod 755 ui.sh
+
+Configure your webcam by finding its path. Currently, the used path is /dev/video0, which will mostly be your case if you don't have another camera or webcam connected to your computer.
+
+If it's not the case, change the path in the webcam's launch file.
 
 You are now ready to launch the interface.
 
-    cd ~/ws_name/
+    cd ~/hockus/
     source devel/setup.bash
     roslaunch main main.launch
+

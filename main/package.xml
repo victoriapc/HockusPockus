@@ -9,9 +9,15 @@
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>webcam</build_depend>
+  <build_export_depend>webcam</build_export_depend>
+  <exec_depend>webcam</exec_depend>
   <build_depend>rosbridge_server</build_depend>
   <build_export_depend>rosbridge_server</build_export_depend>
   <exec_depend>rosbridge_server</exec_depend>
+  <build_depend>ui</build_depend>
+  <build_export_depend>ui</build_export_depend>
+  <exec_depend>ui</exec_depend>
 
   <export>
 

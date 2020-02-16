@@ -1,17 +1,15 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(main)
-
+project(webcam)
 
 find_package(catkin REQUIRED COMPONENTS
-  rosbridge_server
-  webcam
-  ui
+  usb_cam
+  web_video_server
 )
 
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES main
-#  CATKIN_DEPENDS rosbridge_server
+#  LIBRARIES webcam_test
+#  CATKIN_DEPENDS libuvc_camera
 #  DEPENDS system_lib
 )
 

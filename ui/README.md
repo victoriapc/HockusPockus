@@ -23,7 +23,9 @@
 * Conserver les permissions d'un fichier:
 
 	https://stackoverflow.com/questions/3207728/retaining-file-permissions-with-git
-
+	https://www.kirupa.com/html5/accessing_your_webcam_in_html5.htm
+	https://msadowski.github.io/ros-web-tutorial-pt3-web_video_server/
+	
 
 ## Autres notes
 
