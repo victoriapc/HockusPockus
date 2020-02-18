@@ -3,7 +3,8 @@ import numpy as np
 from math import sqrt
 
 import sys
-import json
+import pickle
+import os
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
@@ -58,11 +59,6 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
         self.horizontalSlider_green.sliderMoved.connect(self.update_green)
 
         QThread(self.m_config.SetConfiguration())
-
-        # BEGIN TODO : REMOVE
-        p = PuckDetector(self.m_config.m_lowerColor,self.m_config.m_upperColor,self.m_config.m_radius)
-        p.findPuck()
-        # END TODO : REMOVE
 
     def okPressed(self):
         self.m_config.userWantsToQuit()
@@ -179,7 +175,31 @@ class PuckDetector(PuckDetectorBase) :
 
 
 class PuckDetectorBuilder:
-    pass
+    def __init__(self,i_videoCaptureIndex=0, i_FPS=30 ):
+        self.m_videoCaptureIndex = i_videoCaptureIndex
+        self.m_FPS = i_FPS
+
+    def build(self):
+        if os.path.isfile('config.json'):
+            with open('config.json', 'rb') as file:
+                configData = pickle.load(file)
+        else:
+            config = PuckDetectorConfiguration([0,0,0],[0,0,0],0,self.m_videoCaptureIndex,self.m_FPS)
+            app = QApplication(sys.argv)
+
+            mainWin = dialog_config_Radius(config)
+            config.autoConfiguration()  # TODO: add progress bar
+            mainWin2 = dialog_config_BGR(config)
+
+            with open('config.json', 'wb') as file:
+                configData = {}
+                configData['lowerColor'] = config.m_lowerColor
+                configData['upperColor'] = config.m_upperColor
+                configData['radius'] = config.m_radius
+                pickle.dump(configData, file)
+           
+        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_videoCaptureIndex,self.m_FPS)
+
 
 class PuckDetectorConfiguration(PuckDetectorBase):
     INCREASE_RMAX = ord('q')
@@ -315,9 +335,6 @@ class PuckDetectorConfiguration(PuckDetectorBase):
     def GetBlueValue(self):
         return self.m_lowerColor[self.BLUE] + self.RANGE
 
-    def ApplyConfiguration(self):
-        pass
-
     def DisplayRadius(self):
         isReceivingFeed = True
         self.m_userWantsToQuit = False
@@ -328,31 +345,10 @@ class PuckDetectorConfiguration(PuckDetectorBase):
             cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
 
 if __name__ == "__main__" :
-    config = PuckDetectorConfiguration([0,0,0],[0,0,0],0)
-
-    app = QApplication(sys.argv)
-
-    mainWin = dialog_config_Radius(config)
-    config.autoConfiguration()  # TODO: add progress bar
-    mainWin2 = dialog_config_BGR(config)
-
-    with open('test.txt', 'w+') as file:
-        file.writelines('test')
-
-    with open('config.json', 'w') as file:
-        data = {}
-        data['lowerColor'] = config.m_lowerColor
-        data['upperColor'] = config.m_upperColor
-        data['radius'] = config.m_radius
-        json.dump(data, file)
-
-    with open('config.json', 'r') as file:
-        data = json.load(file)
-
-    pd = PuckDetector(data["lowerColor"],data["upperColor"],data["radius"])
+    builder = PuckDetectorBuilder(0,30)
+    pd = builder.build()
     pd.findPuck()
 
-    sys.exit(app.exec())
 
 
 
