@@ -3,6 +3,7 @@ import numpy as np
 from math import sqrt
 
 import sys
+import json
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
@@ -335,7 +336,20 @@ if __name__ == "__main__" :
     config.autoConfiguration()  # TODO: add progress bar
     mainWin2 = dialog_config_BGR(config)
 
-    pd = PuckDetector(config.m_lowerColor,config.m_upperColor,config.m_radius)
+    with open('test.txt', 'w+') as file:
+        file.writelines('test')
+
+    with open('config.json', 'w') as file:
+        data = {}
+        data['lowerColor'] = config.m_lowerColor
+        data['upperColor'] = config.m_upperColor
+        data['radius'] = config.m_radius
+        json.dump(data, file)
+
+    with open('config.json', 'r') as file:
+        data = json.load(file)
+
+    pd = PuckDetector(data["lowerColor"],data["upperColor"],data["radius"])
     pd.findPuck()
 
     sys.exit(app.exec())
