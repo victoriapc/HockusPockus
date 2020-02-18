@@ -11,15 +11,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog_BGR(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(637, 418)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+    def setupUi(self, Dialog_BGR):
+        Dialog_BGR.setObjectName("Dialog_BGR")
+        Dialog_BGR.resize(637, 418)
+        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog_BGR)
         self.buttonBox.setGeometry(QtCore.QRect(240, 320, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.layoutWidget = QtWidgets.QWidget(Dialog)
+        self.layoutWidget = QtWidgets.QWidget(Dialog_BGR)
         self.layoutWidget.setGeometry(QtCore.QRect(90, 79, 484, 200))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
@@ -64,25 +64,25 @@ class Ui_Dialog_BGR(object):
         self.verticalLayout_2.addWidget(self.label_red)
         self.horizontalLayout.addWidget(self.frame_2)
 
-        self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(Dialog_BGR)
+        self.buttonBox.accepted.connect(Dialog_BGR.accept)
+        self.buttonBox.rejected.connect(Dialog_BGR.reject)
+        QtCore.QMetaObject.connectSlotsByName(Dialog_BGR)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, Dialog_BGR):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label_title.setText(_translate("Dialog", "Blue, green and red minimum values"))
-        self.label_blue.setText(_translate("Dialog", "Blue"))
-        self.label_green.setText(_translate("Dialog", "Green"))
-        self.label_red.setText(_translate("Dialog", "Red"))
+        Dialog_BGR.setWindowTitle(_translate("Dialog_BGR", "Dialog"))
+        self.label_title.setText(_translate("Dialog_BGR", "Blue, green and red minimum values"))
+        self.label_blue.setText(_translate("Dialog_BGR", "Blue"))
+        self.label_green.setText(_translate("Dialog_BGR", "Green"))
+        self.label_red.setText(_translate("Dialog_BGR", "Red"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    Dialog_BGR = QtWidgets.QDialog()
+    ui = Ui_Dialog_BGR()
+    ui.setupUi(Dialog_BGR)
+    Dialog_BGR.show()
     sys.exit(app.exec_())
