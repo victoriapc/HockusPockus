@@ -9,43 +9,72 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QApplication
 
 from dialog_BGR import *
+from dialog_Radius import *
+
+class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
+    def __init__(self,i_config):
+        super(QDialog, self).__init__()
+        self.setupUi(self)
+        self.show()
+
+        self.m_config = i_config
+
+        self.horizontalSlider_radius.sliderMoved.connect(self.update_Radius)
+        self.buttonBox.accepted.connect(self.okPressed)
+        self.horizontalSlider_radius.setValue(30) # The default radius value of the puck is 30
+        self.update_Radius()
+        QThread(self.m_config.DisplayRadius())
+
+
+    def okPressed(self):
+        self.m_config.userWantsToQuit()
+        self.hide()
+
+    def update_Radius(self):
+        self.m_config.SetRadiusValue(self.horizontalSlider_radius.value())
+        self.labe_radius_value.setText("Radius : " + str(self.horizontalSlider_radius.value()))
+
+
 
 class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
-    def __init__(self,i_videoCaptureIndex=0, i_FPS=30):
+    def __init__(self,i_config):
         super(QDialog, self).__init__()
         self.setupUi(self)
         self.show()
         radius = 30 #TODO :Dynamic
-        self.config = PuckDetectorConfiguration([0,0,0], [0,0,0], radius, i_videoCaptureIndex, i_FPS)
-        self.config.autoConfiguration()
+        self.m_config = i_config
 
-        self.horizontalSlider_blue.setValue(self.config.GetBlueValue())
-        self.horizontalSlider_green.setValue(self.config.GetGreenValue())
-        self.horizontalSlider_red.setValue(self.config.GetRedValue())
+        self.horizontalSlider_blue.setValue(self.m_config.GetBlueValue())
+        self.horizontalSlider_green.setValue(self.m_config.GetGreenValue())
+        self.horizontalSlider_red.setValue(self.m_config.GetRedValue())
 
         self.update_blue()
         self.update_red()
-        self.update_green()
 
+        self.buttonBox.accepted.connect(self.okPressed)
         self.horizontalSlider_blue.sliderMoved.connect(self.update_blue)
         self.horizontalSlider_red.sliderMoved.connect(self.update_red)
         self.horizontalSlider_green.sliderMoved.connect(self.update_green)
 
-        QThread(self.config.SetConfiguration())
+        QThread(self.m_config.SetConfiguration())
 
         # BEGIN TODO : REMOVE
-        p = PuckDetector(self.config.m_lowerColor,self.config.m_upperColor,self.config.m_radius)
+        p = PuckDetector(self.m_config.m_lowerColor,self.m_config.m_upperColor,self.m_config.m_radius)
         p.findPuck()
         # END TODO : REMOVE
 
+    def okPressed(self):
+        self.m_config.userWantsToQuit()
+        self.hide()
+
     def update_blue(self):
-        self.config.SetBlueValue(self.horizontalSlider_blue.value())
+        self.m_config.SetBlueValue(self.horizontalSlider_blue.value())
         self.label_blue.setText("Blue : " +  str(self.horizontalSlider_blue.value()))
     def update_red(self):
-        self.config.SetRedValue(self.horizontalSlider_red.value())
+        self.m_config.SetRedValue(self.horizontalSlider_red.value())
         self.label_red.setText("Red : " + str(self.horizontalSlider_red.value()))
     def update_green(self):
-        self.config.SetGreenValue(self.horizontalSlider_green.value())
+        self.m_config.SetGreenValue(self.horizontalSlider_green.value())
         self.label_green.setText("Green : " + str(self.horizontalSlider_green.value()))
 
 class PuckDetectorBase :
@@ -62,8 +91,10 @@ class PuckDetectorBase :
 
     RADIUS_TOLERANCE = 25
 
+
     def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_videoCaptureIndex=0, i_FPS=30):
         self.m_radius = i_radius
+        self.m_userWantsToQuit = False
         self.newInfo = False
         self.m_lowerColor = np.array(i_lowerColor)
         self.m_upperColor = np.array(i_upperColor)
@@ -74,6 +105,8 @@ class PuckDetectorBase :
         cv2.destroyAllWindows()
         self.m_camera.release()
 
+    def userWantsToQuit(self):
+        self.m_userWantsToQuit = True
     def displayCirclesOnFrame(self,i_frame,i_xPosOfCenter,i_yPosOfCenter,i_radius):
         center = (i_xPosOfCenter, i_yPosOfCenter)
         # circle center
@@ -171,8 +204,8 @@ class PuckDetectorConfiguration(PuckDetectorBase):
 
     def SetConfiguration(self):
         isReceivingFeed = True
-        userWantsToQuit = False
-        while (isReceivingFeed and not userWantsToQuit):
+        self.m_userWantsToQuit = False
+        while (isReceivingFeed and not self.m_userWantsToQuit):
             isReceivingFeed, frame = self.m_camera.read()
             ProcessedFrame = self.ProcessFrames(frame)
 
@@ -180,27 +213,10 @@ class PuckDetectorConfiguration(PuckDetectorBase):
             cv2.imshow('Output', ProcessedFrame)
 
             inputKey = cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
-            userWantsToQuit = inputKey == self.ESCAPE_KEY
             self.SetParameters(inputKey)
 
-    # BEGIN TODO :REMOVE
-    def autoConfigurationInit(self):
-        isReceivingFeed, frame = self.m_camera.read()
-        userWantsToQuit = False
-        while (isReceivingFeed and not userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.read()
-            self.displayCirclesOnFrame(frame,self.CENTER_OF_SCREEN_X_POS, self.CENTER_OF_SCREEN_Y_POS,self.m_radius)
-            cv2.imshow('Output', frame)
-            inputKey = cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
-            userWantsToQuit = inputKey == self.ESCAPE_KEY
-
-        cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
-        return self.m_camera.read()
-
-    # END TODO :REMOVE
-
     def autoConfiguration(self):
-        hasReceivedFrame, frame = self.autoConfigurationInit()
+        hasReceivedFrame, frame = self.m_camera.read()
         maxScore = 0
         values = [0,0,0]
         resolutionStep = 20
@@ -267,6 +283,9 @@ class PuckDetectorConfiguration(PuckDetectorBase):
             elif i_inputKey == self.DECREASE_RADIUS:
                 self.m_radius -= 1
 
+    def SetRadiusValue(self, i_radius):
+        self.m_radius = i_radius
+
     def setColorValue(self,i_value,i_color):
         if i_value - self.RANGE >0:
             self.m_lowerColor[i_color] = i_value - self.RANGE
@@ -298,9 +317,28 @@ class PuckDetectorConfiguration(PuckDetectorBase):
     def ApplyConfiguration(self):
         pass
 
+    def DisplayRadius(self):
+        isReceivingFeed = True
+        self.m_userWantsToQuit = False
+        while (isReceivingFeed and not self.m_userWantsToQuit):
+            isReceivingFeed, frame = self.m_camera.read()
+            self.displayCirclesOnFrame(frame,self.CENTER_OF_SCREEN_X_POS,self.CENTER_OF_SCREEN_Y_POS,self.m_radius)
+            cv2.imshow('Output',frame)
+            cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
+
 if __name__ == "__main__" :
+    config = PuckDetectorConfiguration([0,0,0],[0,0,0],0)
 
     app = QApplication(sys.argv)
-    mainWin = dialog_config_BGR()
-    ret = app.exec_()
-    sys.exit(ret)
+
+    mainWin = dialog_config_Radius(config)
+    config.autoConfiguration()  # TODO: add progress bar
+    mainWin2 = dialog_config_BGR(config)
+
+    pd = PuckDetector(config.m_lowerColor,config.m_upperColor,config.m_radius)
+    pd.findPuck()
+
+    sys.exit(app.exec())
+
+
+
