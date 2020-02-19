@@ -1,10 +1,19 @@
 import cv2
 import numpy as np
 from math import sqrt
+from abc import ABC, abstractmethod
 
 import sys
 import pickle
 import os
+
+try:
+    import rospy
+    from sensor_msgs.msg import Image
+    from cv_bridge import CvBridge, CvBridgeError
+except ImportError:
+    pass
+
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
@@ -74,6 +83,46 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
         self.m_config.SetGreenValue(self.horizontalSlider_green.value())
         self.label_green.setText("Green : " + str(self.horizontalSlider_green.value()))
 
+class Camera(ABC) :
+    def __init__(self):
+        super().__init__()
+        
+    @abstractmethod
+    def getNextFrame(self):
+        pass
+
+class CameraROS(Camera) :
+    def __init__(self):
+        super().__init__()
+        rospy.init_node('vision')
+        self.m_webcam = rospy.Subscriber("/usb_cam/image_raw", Image, updateFrame)
+        self.m_frame = None
+        self.m_bridge = CvBridge()
+
+    def updateFrame(self,i_image):
+        try:
+            cv_image = bridge.imgmsg_to_cv2(i_image, "passthrough")
+        except CvBridgeError:
+            pass
+
+        self.m_frame = cv_image
+
+    def getNextFrame(self):
+        return (True,self.m_frame)
+
+class CameraUSB(Camera) :
+    def __init__(self, i_videoCaptureIndex=0, i_FPS=30):
+        super().__init__()
+        self.m_camera = cv2.VideoCapture(i_videoCaptureIndex)
+        self.timeBetweenFrames = 1000 / i_FPS  # The time between two frames is : 1000 ms/s * (1s/Number of frames per second)
+
+    def __del__(self):
+        self.m_camera.release()
+
+    def getNextFrame(self):
+        cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
+        return self.m_camera.read()
+
 class PuckDetectorBase :
     ESCAPE_KEY = 27
 
@@ -89,18 +138,16 @@ class PuckDetectorBase :
     RADIUS_TOLERANCE = 25
 
 
-    def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_videoCaptureIndex=0, i_FPS=30):
+    def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_camera):
         self.m_radius = i_radius
         self.m_userWantsToQuit = False
         self.newInfo = False
         self.m_lowerColor = np.array(i_lowerColor)
         self.m_upperColor = np.array(i_upperColor)
-        self.m_camera = cv2.VideoCapture(i_videoCaptureIndex)
-        self.timeBetweenFrames = 1000 / i_FPS  # The time between two frames is : 1000 ms/s * (1s/Number of frames per second)
+        self.m_camera = i_camera
 
     def __del__(self):
         cv2.destroyAllWindows()
-        self.m_camera.release()
 
     def userWantsToQuit(self):
         self.m_userWantsToQuit = True
@@ -135,8 +182,8 @@ class PuckDetectorBase :
         return None
 
 class PuckDetector(PuckDetectorBase) :
-    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_videoCaptureIndex = 0, i_FPS = 30,i_displayOutput = True):
-        PuckDetectorBase.__init__(self, i_lowerColor, i_upperColor, i_radius, i_videoCaptureIndex, i_FPS)
+    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_displayOutput = True):
+        PuckDetectorBase.__init__(self, i_lowerColor, i_upperColor, i_radius, i_camera)
 
         self.m_displayOutput = i_displayOutput
         self.xPos = 0
@@ -163,29 +210,25 @@ class PuckDetector(PuckDetectorBase) :
         isReceivingFeed = True
         userWantsToQuit = False
         while (isReceivingFeed and not userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.read()
-            circles = self.findCircles(frame)
+            isReceivingFeed, frame = self.m_camera.getNextFrame()
+            if frame.size > 0 :
+                circles = self.findCircles(frame)
 
-            self.updatePosition(circles)
+                self.updatePosition(circles)
 
-            if(self.m_displayOutput) :
-                self.displayFeed(frame)
-
-            inputKey = cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
-            userWantsToQuit = inputKey == self.ESCAPE_KEY
-
+                if(self.m_displayOutput) :
+                    self.displayFeed(frame)
 
 class PuckDetectorBuilder:
-    def __init__(self,i_videoCaptureIndex=0, i_FPS=30 ):
-        self.m_videoCaptureIndex = i_videoCaptureIndex
-        self.m_FPS = i_FPS
+    def __init__(self,i_camera):
+        self.m_camera = i_camera
 
     def build(self):
         if os.path.isfile('config.json'):
             with open('config.json', 'rb') as file:
                 configData = pickle.load(file)
         else:
-            config = PuckDetectorConfiguration([0,0,0],[0,0,0],0,self.m_videoCaptureIndex,self.m_FPS)
+            config = PuckDetectorConfiguration([0,0,0],[0,0,0],0,self.m_camera)
             app = QApplication(sys.argv)
 
             mainWin = dialog_config_Radius(config)
@@ -199,46 +242,27 @@ class PuckDetectorBuilder:
                 configData['radius'] = config.m_radius
                 pickle.dump(configData, file)
            
-        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_videoCaptureIndex,self.m_FPS)
+        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera)
 
 
 class PuckDetectorConfiguration(PuckDetectorBase):
-    INCREASE_RMAX = ord('q')
-    DECREASE_RMAX = ord('a')
-    INCREASE_RMIN = ord('w')
-    DECREASE_RMIN = ord('s')
 
-    INCREASE_GMAX = ord('e')
-    DECREASE_GMAX = ord('d')
-    INCREASE_GMIN = ord('r')
-    DECREASE_GMIN = ord('f')
-
-    INCREASE_BMAX = ord('t')
-    DECREASE_BMAX = ord('g')
-    INCREASE_BMIN = ord('y')
-    DECREASE_BMIN = ord('h')
-
-    INCREASE_RADIUS = ord('u')
-    DECREASE_RADIUS = ord('j')
-    def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_videoCaptureIndex=0, i_FPS=30):
-        PuckDetectorBase.__init__(self, i_lowerColor,i_upperColor,i_radius, i_videoCaptureIndex, i_FPS)
+    def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_camera):
+        PuckDetectorBase.__init__(self, i_lowerColor,i_upperColor,i_radius,i_camera)
         self.RANGE = 50
 
     def SetConfiguration(self):
         isReceivingFeed = True
         self.m_userWantsToQuit = False
         while (isReceivingFeed and not self.m_userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.read()
+            isReceivingFeed, frame = self.m_camera.getNextFrame()
             ProcessedFrame = self.ProcessFrames(frame)
 
 
             cv2.imshow('Output', ProcessedFrame)
 
-            inputKey = cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
-            self.SetParameters(inputKey)
-
     def autoConfiguration(self):
-        hasReceivedFrame, frame = self.m_camera.read()
+        hasReceivedFrame, frame = self.m_camera.getNextFrame()
         maxScore = 0
         values = [0,0,0]
         resolutionStep = 20
@@ -271,39 +295,6 @@ class PuckDetectorConfiguration(PuckDetectorBase):
                 if sqrt((x-self.CENTER_OF_SCREEN_X_POS)**2+ (y-self.CENTER_OF_SCREEN_Y_POS)**2) <= self.m_radius :
                     score += i_frame[y,x]
         return score
-
-    def SetParameters(self,i_inputKey):
-            if i_inputKey == self.INCREASE_RMAX:
-                self.m_upperColor[PuckDetectorBase.RED]+=1
-            elif i_inputKey == self.DECREASE_RMAX:
-                self.m_upperColor[PuckDetectorBase.RED] -= 1
-            elif i_inputKey == self.INCREASE_RMIN:
-                self.m_lowerColor[PuckDetectorBase.RED] += 1
-            elif i_inputKey == self.DECREASE_RMIN:
-                self.m_upperColor[PuckDetectorBase.RED] -= 1
-
-            elif i_inputKey == self.INCREASE_GMAX:
-                self.m_upperColor[PuckDetectorBase.GREEN]+=1
-            elif i_inputKey == self.DECREASE_GMAX:
-                self.m_upperColor[PuckDetectorBase.GREEN] -= 1
-            elif i_inputKey == self.INCREASE_GMIN:
-                self.m_lowerColor[PuckDetectorBase.GREEN] += 1
-            elif i_inputKey == self.DECREASE_GMIN:
-                self.m_upperColor[PuckDetectorBase.GREEN] -= 1
-
-            elif i_inputKey == self.INCREASE_BMAX:
-                self.m_upperColor[PuckDetectorBase.BLUE]+=1
-            elif i_inputKey == self.DECREASE_BMAX:
-                self.m_upperColor[PuckDetectorBase.BLUE] -= 1
-            elif i_inputKey == self.INCREASE_BMIN:
-                self.m_lowerColor[PuckDetectorBase.BLUE] += 1
-            elif i_inputKey == self.DECREASE_BMIN:
-                self.m_upperColor[PuckDetectorBase.BLUE] -= 1
-
-            elif i_inputKey == self.INCREASE_RADIUS:
-                self.m_radius += 1
-            elif i_inputKey == self.DECREASE_RADIUS:
-                self.m_radius -= 1
 
     def SetRadiusValue(self, i_radius):
         self.m_radius = i_radius
@@ -340,12 +331,12 @@ class PuckDetectorConfiguration(PuckDetectorBase):
         isReceivingFeed = True
         self.m_userWantsToQuit = False
         while (isReceivingFeed and not self.m_userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.read()
+            isReceivingFeed, frame = self.m_camera.getNextFrame()
             self.displayCirclesOnFrame(frame,self.CENTER_OF_SCREEN_X_POS,self.CENTER_OF_SCREEN_Y_POS,self.m_radius)
             cv2.imshow('Output',frame)
-            cv2.waitKey(int(self.timeBetweenFrames)) & 0xFF
 
 if __name__ == "__main__" :
-    builder = PuckDetectorBuilder(0,30)
+    cam = CameraUSB(0,30)
+    builder = PuckDetectorBuilder(cam)
     pd = builder.build()
     pd.findPuck()

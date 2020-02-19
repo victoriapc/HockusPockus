@@ -2,7 +2,11 @@
 Robot playing air hockey.
 This open-source project is part of the Robotics Engineering Project Course at the Université de Sherbrooke.
 
-You will find the code and how we built our three-way air hockey table in our wiki!
+This project was mostly produce and run on Ubuntu mate 18.04
+
+You will find the installation and building instructions of our three-way air hockey table in our wiki.
+
+Quick install steps:
 
 The web interface uses http-server. You need to install npm beforehand in order to use it.
 
@@ -10,8 +14,8 @@ The web interface uses http-server. You need to install npm beforehand in order 
     sudo apt upgrade
     sudo apt install nodejs-dev node-gyp libssl1.0-dev ros-melodic-rosbridge-server ros-melodic-web-video-server
 
-	sudo apt install npm
-	sudo npm install http-server -g
+    sudo apt install npm
+    sudo npm install http-server -g
 
 In order to use the code, you need to clone it in a catkin workspace, located in your home directory.
 
