@@ -1,5 +1,6 @@
 <launch>
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
     <include file="$(find webcam)/launch/webcam.launch"/>
-    <node name="ui" pkg="ui" type="ui.sh"/>
+    <include file="$(find vision)/launch/vision.launch"/>
+    <include file="$(find ui)/launch/ui.launch"/>
 </launch>

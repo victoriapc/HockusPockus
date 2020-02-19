@@ -1,0 +1,8 @@
+<launch>
+    <!-- This node will launch web video server -->
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server">
+        <param name="port" value="7070"/>
+    </node>
+    
+    <node name="ui" pkg="ui" type="ui.sh"/>
+</launch>
