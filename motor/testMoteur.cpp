@@ -22,14 +22,12 @@ int main(int argc, char*argv[])
 	wiringPiSetup();
 	pinMode(5, OUTPUT);
 	pinMode(4, OUTPUT);
-	digitalWrite(4,HIGH);
 	while(1)
 	{
-		usleep(750);
-		//delay(1);
+		//usleep
+		delay(1);
 		digitalWrite(5,HIGH);
-		usleep(750);
-		//delay(1);
+		delay(1);
 		digitalWrite(5,LOW);
 	}
 }

@@ -2,7 +2,11 @@
 Robot playing air hockey.
 This open-source project is part of the Robotics Engineering Project Course at the Université de Sherbrooke.
 
+This project was mostly produce and run on Ubuntu mate 18.04
+
 You will find the code and how we built our three-way air hockey table in our wiki!
+
+Quick install steps:
 
 The web interface uses http-server. You need to install npm beforehand in order to use it.
 

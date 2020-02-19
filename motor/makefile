@@ -1,8 +1,9 @@
 buildLib : testMoteur.cpp
-	g++ testMoteur.cpp -Wall -pthread -l wiringPi -g -o testMoteur -lrt -lcrypt
+	g++ -g -o testMoteur testMoteur.cpp -Wall -pthread -l wiringPi
 	
 buildAll: testMoteur.cpp
-	g++ testMoteur.cpp -Wall -pthread -l wiringPi -g -o testMoteur -lrt -lcrypt
+
+		g++ -g -o testMoteur testMoteur.cpp -Wall -pthread -l wiringPi
 		
 clean: rm -f *.o test
 
