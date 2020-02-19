@@ -37,6 +37,8 @@ class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
         self.update_Radius()
         QThread(self.m_config.DisplayRadius())
 
+    def reject(self):
+        self.okPressed()
 
     def okPressed(self):
         self.m_config.userWantsToQuit()
@@ -85,6 +87,9 @@ class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
         self.update_H()
         self.update_S()
         self.update_V()
+
+    def reject(self):
+        self.okPressed()
 
     def okPressed(self):
         self.m_config.userWantsToQuit()
