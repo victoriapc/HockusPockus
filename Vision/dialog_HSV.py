@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'dialog_BGR.ui'
+# Form implementation generated from reading ui file 'dialog_HSV.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.1
 #
@@ -10,16 +10,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog_BGR(object):
-    def setupUi(self, Dialog_BGR):
-        Dialog_BGR.setObjectName("Dialog_BGR")
-        Dialog_BGR.resize(637, 418)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog_BGR)
+class Ui_Dialog_HSV(object):
+    def setupUi(self, Dialog_HSV):
+        Dialog_HSV.setObjectName("Dialog_HSV")
+        Dialog_HSV.resize(637, 418)
+        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog_HSV)
         self.buttonBox.setGeometry(QtCore.QRect(240, 320, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.layoutWidget = QtWidgets.QWidget(Dialog_BGR)
+        self.layoutWidget = QtWidgets.QWidget(Dialog_HSV)
         self.layoutWidget.setGeometry(QtCore.QRect(90, 79, 484, 200))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
@@ -43,46 +43,46 @@ class Ui_Dialog_BGR(object):
         self.horizontalSlider_blue.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_blue.setObjectName("horizontalSlider_blue")
         self.verticalLayout_2.addWidget(self.horizontalSlider_blue)
-        self.label_blue = QtWidgets.QLabel(self.frame_2)
-        self.label_blue.setObjectName("label_blue")
-        self.verticalLayout_2.addWidget(self.label_blue)
+        self.label_H = QtWidgets.QLabel(self.frame_2)
+        self.label_H.setObjectName("label_H")
+        self.verticalLayout_2.addWidget(self.label_H)
         self.horizontalSlider_green = QtWidgets.QSlider(self.frame_2)
         self.horizontalSlider_green.setMaximum(255)
         self.horizontalSlider_green.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_green.setObjectName("horizontalSlider_green")
         self.verticalLayout_2.addWidget(self.horizontalSlider_green)
-        self.label_green = QtWidgets.QLabel(self.frame_2)
-        self.label_green.setObjectName("label_green")
-        self.verticalLayout_2.addWidget(self.label_green)
+        self.label_S = QtWidgets.QLabel(self.frame_2)
+        self.label_S.setObjectName("label_S")
+        self.verticalLayout_2.addWidget(self.label_S)
         self.horizontalSlider_red = QtWidgets.QSlider(self.frame_2)
         self.horizontalSlider_red.setMaximum(255)
         self.horizontalSlider_red.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_red.setObjectName("horizontalSlider_red")
         self.verticalLayout_2.addWidget(self.horizontalSlider_red)
-        self.label_red = QtWidgets.QLabel(self.frame_2)
-        self.label_red.setObjectName("label_red")
-        self.verticalLayout_2.addWidget(self.label_red)
+        self.label_V = QtWidgets.QLabel(self.frame_2)
+        self.label_V.setObjectName("label_V")
+        self.verticalLayout_2.addWidget(self.label_V)
         self.horizontalLayout.addWidget(self.frame_2)
 
-        self.retranslateUi(Dialog_BGR)
-        self.buttonBox.accepted.connect(Dialog_BGR.accept)
-        self.buttonBox.rejected.connect(Dialog_BGR.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog_BGR)
+        self.retranslateUi(Dialog_HSV)
+        self.buttonBox.accepted.connect(Dialog_HSV.accept)
+        self.buttonBox.rejected.connect(Dialog_HSV.reject)
+        QtCore.QMetaObject.connectSlotsByName(Dialog_HSV)
 
-    def retranslateUi(self, Dialog_BGR):
+    def retranslateUi(self, Dialog_HSV):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_BGR.setWindowTitle(_translate("Dialog_BGR", "Dialog"))
-        self.label_title.setText(_translate("Dialog_BGR", "Blue, green and red minimum values"))
-        self.label_blue.setText(_translate("Dialog_BGR", "Blue"))
-        self.label_green.setText(_translate("Dialog_BGR", "Green"))
-        self.label_red.setText(_translate("Dialog_BGR", "Red"))
+        Dialog_HSV.setWindowTitle(_translate("Dialog_HSV", "Dialog"))
+        self.label_title.setText(_translate("Dialog_HSV", "HSV Color Values"))
+        self.label_H.setText(_translate("Dialog_HSV", "H"))
+        self.label_S.setText(_translate("Dialog_HSV", "S"))
+        self.label_V.setText(_translate("Dialog_HSV", "V"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog_BGR = QtWidgets.QDialog()
-    ui = Ui_Dialog_BGR()
-    ui.setupUi(Dialog_BGR)
-    Dialog_BGR.show()
+    Dialog_HSV = QtWidgets.QDialog()
+    ui = Ui_Dialog_HSV()
+    ui.setupUi(Dialog_HSV)
+    Dialog_HSV.show()
     sys.exit(app.exec_())
