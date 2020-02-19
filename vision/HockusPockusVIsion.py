@@ -19,7 +19,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QApplication
 
-from dialog_BGR import *
+from dialog_HSV import *
 from dialog_Radius import *
 
 class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
@@ -47,7 +47,7 @@ class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
 
 
 
-class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
+class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
     def __init__(self,i_config):
         super(QDialog, self).__init__()
         self.setupUi(self)
@@ -55,17 +55,18 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
         radius = 30 #TODO :Dynamic
         self.m_config = i_config
 
-        self.horizontalSlider_blue.setValue(self.m_config.GetBlueValue())
-        self.horizontalSlider_green.setValue(self.m_config.GetGreenValue())
-        self.horizontalSlider_red.setValue(self.m_config.GetRedValue())
+        self.horizontalSlider_H.setValue(self.m_config.GetHValue())
+        self.horizontalSlider_S.setValue(self.m_config.GetSValue())
+        self.horizontalSlider_V.setValue(self.m_config.GetVValue())
 
-        self.update_blue()
-        self.update_red()
+        self.update_H()
+        self.update_S()
+        self.update_V()
 
         self.buttonBox.accepted.connect(self.okPressed)
-        self.horizontalSlider_blue.sliderMoved.connect(self.update_blue)
-        self.horizontalSlider_red.sliderMoved.connect(self.update_red)
-        self.horizontalSlider_green.sliderMoved.connect(self.update_green)
+        self.horizontalSlider_H.sliderMoved.connect(self.update_H)
+        self.horizontalSlider_S.sliderMoved.connect(self.update_S)
+        self.horizontalSlider_V.sliderMoved.connect(self.update_V)
 
         QThread(self.m_config.SetConfiguration())
 
@@ -73,15 +74,17 @@ class dialog_config_BGR(QDialog, Ui_Dialog_BGR):
         self.m_config.userWantsToQuit()
         self.hide()
 
-    def update_blue(self):
-        self.m_config.SetBlueValue(self.horizontalSlider_blue.value())
-        self.label_blue.setText("Blue : " +  str(self.horizontalSlider_blue.value()))
-    def update_red(self):
-        self.m_config.SetRedValue(self.horizontalSlider_red.value())
-        self.label_red.setText("Red : " + str(self.horizontalSlider_red.value()))
-    def update_green(self):
-        self.m_config.SetGreenValue(self.horizontalSlider_green.value())
-        self.label_green.setText("Green : " + str(self.horizontalSlider_green.value()))
+    def update_H(self):
+        self.m_config.SetHValue(self.horizontalSlider_H.value())
+        self.label_H.setText("H : " +  str(self.horizontalSlider_H.value()))
+
+    def update_S(self):
+        self.m_config.SetSValue(self.horizontalSlider_S.value())
+        self.label_S.setText("S : " + str(self.horizontalSlider_S.value()))
+
+    def update_V(self):
+        self.m_config.SetVValue(self.horizontalSlider_V.value())
+        self.label_V.setText("V : " + str(self.horizontalSlider_V.value()))
 
 class Camera(ABC) :
     def __init__(self):
@@ -126,9 +129,9 @@ class CameraUSB(Camera) :
 class PuckDetectorBase :
     ESCAPE_KEY = 27
 
-    BLUE = 0
-    GREEN = 1
-    RED = 2
+    H = 0
+    S = 1
+    V = 2
 
     MAX_COLOR_VALUE = 255
 
@@ -163,8 +166,7 @@ class PuckDetectorBase :
         cv2.putText(i_frame, "y position = " + str(i_yPosOfCenter), (10, 55), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 0), 2)
 
     def ProcessFrames(self, i_frame):
-        hsv = cv2.cvtColor(i_frame, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, self.m_lowerColor, self.m_upperColor)
+        mask = cv2.inRange(i_frame, self.m_lowerColor, self.m_upperColor)
         maskedFrame = cv2.bitwise_and(i_frame, i_frame, mask=mask)
         grayedFrame = cv2.cvtColor(maskedFrame, cv2.COLOR_BGR2GRAY)
         processedFrame = cv2.medianBlur(grayedFrame, 5)
@@ -233,7 +235,7 @@ class PuckDetectorBuilder:
 
             mainWin = dialog_config_Radius(config)
             config.autoConfiguration()  # TODO: add progress bar
-            mainWin2 = dialog_config_BGR(config)
+            mainWin2 = dialog_config_HSV(config)
 
             with open('config.json', 'wb') as file:
                 configData = {}
@@ -268,25 +270,25 @@ class PuckDetectorConfiguration(PuckDetectorBase):
         resolutionStep = 20
 
         if hasReceivedFrame :
-            for blue in range(0,PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep) :
-                for green in range(0, PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep):
-                    for red in range(0, PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep):
-                        self.SetBlueValue(blue)
-                        self.SetGreenValue(green)
-                        self.SetRedValue(red)
+            for H in range(0,PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep) :
+                for S in range(0, PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep):
+                    for V in range(0, PuckDetectorBase.MAX_COLOR_VALUE,resolutionStep):
+                        self.SetHValue(H)
+                        self.SetSValue(S)
+                        self.SetVValue(V)
                         ProcessedFrame = self.ProcessFrames(frame)
                         currentScore = self.getScoreOfFrame(ProcessedFrame)
                         if (currentScore > maxScore ) :
                             maxScore = currentScore
-                            values[self.BLUE] = blue
-                            values[self.GREEN] = green
-                            values[self.RED] = red
+                            values[self.H] = H
+                            values[self.S] = S
+                            values[self.V] = V
 
-                print("PROGRESS = " + str(100*blue / PuckDetectorBase.MAX_COLOR_VALUE) + " %")
+                print("PROGRESS = " + str(100*H / PuckDetectorBase.MAX_COLOR_VALUE) + " %")
 
-        self.SetBlueValue(values[self.BLUE])
-        self.SetGreenValue(values[self.GREEN])
-        self.SetRedValue(values[self.RED])
+        self.SetHValue(values[self.H])
+        self.SetSValue(values[self.S])
+        self.SetVValue(values[self.V])
 
     def getScoreOfFrame(self,i_frame):
         score = 0
@@ -309,23 +311,23 @@ class PuckDetectorConfiguration(PuckDetectorBase):
         else:
             self.m_upperColor[i_color] = 255
 
-    def SetRedValue(self,i_value):
-        self.setColorValue(i_value,PuckDetectorBase.RED)
+    def SetVValue(self,i_value):
+        self.setColorValue(i_value,PuckDetectorBase.V)
 
-    def SetGreenValue(self,i_value):
-        self.setColorValue(i_value,PuckDetectorBase.GREEN)
+    def SetSValue(self,i_value):
+        self.setColorValue(i_value,PuckDetectorBase.S)
 
-    def SetBlueValue(self,i_value):
-        self.setColorValue(i_value,PuckDetectorBase.BLUE)
+    def SetHValue(self,i_value):
+        self.setColorValue(i_value,PuckDetectorBase.H)
 
-    def GetRedValue(self):
-        return self.m_lowerColor[self.RED] + self.RANGE
+    def GetVValue(self):
+        return self.m_lowerColor[self.V] + self.RANGE
 
-    def GetGreenValue(self):
-        return self.m_lowerColor[self.GREEN] + self.RANGE
+    def GetSValue(self):
+        return self.m_lowerColor[self.S] + self.RANGE
 
-    def GetBlueValue(self):
-        return self.m_lowerColor[self.BLUE] + self.RANGE
+    def GetHValue(self):
+        return self.m_lowerColor[self.H] + self.RANGE
 
     def DisplayRadius(self):
         isReceivingFeed = True
