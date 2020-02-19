@@ -7,6 +7,13 @@ import sys
 import pickle
 import os
 
+try:
+    import rospy
+    from sensor_msgs.msg import Image
+    from cv_bridge import CvBridge, CvBridgeError
+except ImportError:
+    pass
+
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
@@ -87,9 +94,21 @@ class Camera(ABC) :
 class CameraROS(Camera) :
     def __init__(self):
         super().__init__()
+        rospy.init_node('vision')
+        self.m_webcam = rospy.Subscriber("/usb_cam/image_raw", Image, updateFrame)
+        self.m_frame = None
+        self.m_bridge = CvBridge()
+
+    def updateFrame(self,i_image):
+        try:
+            cv_image = bridge.imgmsg_to_cv2(i_image, "passthrough")
+        except CvBridgeError:
+            pass
+
+        self.m_frame = cv_image
 
     def getNextFrame(self):
-        pass
+        return (True,self.m_frame)
 
 class CameraUSB(Camera) :
     def __init__(self, i_videoCaptureIndex=0, i_FPS=30):
