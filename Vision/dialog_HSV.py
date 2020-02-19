@@ -14,11 +14,6 @@ class Ui_Dialog_HSV(object):
     def setupUi(self, Dialog_HSV):
         Dialog_HSV.setObjectName("Dialog_HSV")
         Dialog_HSV.resize(637, 418)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog_HSV)
-        self.buttonBox.setGeometry(QtCore.QRect(240, 320, 341, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
         self.layoutWidget = QtWidgets.QWidget(Dialog_HSV)
         self.layoutWidget.setGeometry(QtCore.QRect(90, 79, 484, 200))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -63,6 +58,20 @@ class Ui_Dialog_HSV(object):
         self.label_V.setObjectName("label_V")
         self.verticalLayout_2.addWidget(self.label_V)
         self.horizontalLayout.addWidget(self.frame_2)
+        self.widget = QtWidgets.QWidget(Dialog_HSV)
+        self.widget.setGeometry(QtCore.QRect(400, 330, 195, 30))
+        self.widget.setObjectName("widget")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.buttonBox = QtWidgets.QDialogButtonBox(self.widget)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.horizontalLayout_2.addWidget(self.buttonBox)
+        self.Button_reset = QtWidgets.QPushButton(self.widget)
+        self.Button_reset.setObjectName("Button_reset")
+        self.horizontalLayout_2.addWidget(self.Button_reset)
 
         self.retranslateUi(Dialog_HSV)
         self.buttonBox.accepted.connect(Dialog_HSV.accept)
@@ -76,6 +85,7 @@ class Ui_Dialog_HSV(object):
         self.label_H.setText(_translate("Dialog_HSV", "H"))
         self.label_S.setText(_translate("Dialog_HSV", "S"))
         self.label_V.setText(_translate("Dialog_HSV", "V"))
+        self.Button_reset.setText(_translate("Dialog_HSV", "Reset"))
 
 
 if __name__ == "__main__":
