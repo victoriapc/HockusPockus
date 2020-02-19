@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 import sys
 import pickle
 import os
+import copy
 
 try:
     import rospy
@@ -52,8 +53,9 @@ class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
         super(QDialog, self).__init__()
         self.setupUi(self)
         self.show()
-        radius = 30 #TODO :Dynamic
         self.m_config = i_config
+        self.defaultLowerValues = copy.deepcopy(self.m_config.m_lowerColor)
+        self.defaultUpperValues = copy.deepcopy(self.m_config.m_upperColor)
 
         self.horizontalSlider_H.setValue(self.m_config.GetHValue())
         self.horizontalSlider_S.setValue(self.m_config.GetSValue())
@@ -63,12 +65,26 @@ class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
         self.update_S()
         self.update_V()
 
+        self.Button_reset.clicked.connect(self.resetValues)
+
         self.buttonBox.accepted.connect(self.okPressed)
         self.horizontalSlider_H.sliderMoved.connect(self.update_H)
         self.horizontalSlider_S.sliderMoved.connect(self.update_S)
         self.horizontalSlider_V.sliderMoved.connect(self.update_V)
 
         QThread(self.m_config.SetConfiguration())
+
+    def resetValues(self):
+        self.m_config.m_lowerColor = copy.deepcopy(self.defaultLowerValues)
+        self.m_config.m_upperColor = copy.deepcopy(self.defaultUpperValues)
+
+        self.horizontalSlider_H.setValue(self.m_config.GetHValue())
+        self.horizontalSlider_S.setValue(self.m_config.GetSValue())
+        self.horizontalSlider_V.setValue(self.m_config.GetVValue())
+
+        self.update_H()
+        self.update_S()
+        self.update_V()
 
     def okPressed(self):
         self.m_config.userWantsToQuit()
