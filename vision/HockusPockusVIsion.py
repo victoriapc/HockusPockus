@@ -165,6 +165,7 @@ class PuckDetector(PuckDetectorBase) :
         while (isReceivingFeed and not userWantsToQuit):
             isReceivingFeed, frame = self.m_camera.read()
             circles = self.findCircles(frame)
+
             self.updatePosition(circles)
 
             if(self.m_displayOutput) :
@@ -348,7 +349,3 @@ if __name__ == "__main__" :
     builder = PuckDetectorBuilder(0,30)
     pd = builder.build()
     pd.findPuck()
-
-
-
-
