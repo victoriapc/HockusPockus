@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ui</name>
+  <version>0.0.0</version>
+  <description>The ui package</description>
+
+  <maintainer email="victoriapc@todo.todo">victoriapc</maintainer>
+  <maintainer email="babindemers@todo.todo">babindemers</maintainer>
+  
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+
+  </export>
+</package>
