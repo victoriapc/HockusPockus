@@ -6,7 +6,7 @@ This project was mostly produce and run on Ubuntu mate 18.04
 
 You will find the installation and building instructions of our three-way air hockey table in our wiki.
 
-Quick install steps:
+## Quick install steps:
 
 The web interface uses http-server. You need to install npm beforehand in order to use it.
 
