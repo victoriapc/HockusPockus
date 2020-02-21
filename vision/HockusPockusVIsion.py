@@ -122,6 +122,7 @@ class CameraROS(Camera) :
         rospy.init_node('vision')
         self.m_webcam = rospy.Subscriber("/usb_cam/image_raw", Image, updateFrame)
         self.m_frame = None
+        self.m_buffer = None
         self.m_bridge = CvBridge()
         timeBetweenFrames = 1000 / i_FPS  # The time between two frames is : 1000 ms/s * (1s/Number of frames per second)
         self.waitTime = int(timeBetweenFrames/4)
@@ -129,24 +130,23 @@ class CameraROS(Camera) :
         self.hasNewFrameLock = threading.Lock()
 
     def updateFrame(self,i_image):
-        try:
-            cv_image = bridge.imgmsg_to_cv2(i_image, "passthrough")
-            self.m_frame = cv_image
-            self.__setHasNewFrame(True)
-        except CvBridgeError:
-            pass
+        with self.hasNewFrameLock :
+            self.m_buffer = i_image
+            self.hasNewFrame = True
 
     def getNextFrame(self):
         while (not self.hasNewFrame) :
             cv2.waitKey(int(self.waitTime)) & 0xFF
-            
-        self.__setHasNewFrame(False)
+
+        with self.hasNewFrameLock:
+            try:
+                self.m_frame = bridge.imgmsg_to_cv2(self.m_buffer, "passthrough")
+            except CvBridgeError:
+                pass
+            self.__setHasNewFrame(False)
+
         return (True,self.m_frame)
 
-    def __setHasNewFrame(self,i_hasNewFrame):
-        self.hasNewFrameLock.acquire()
-        self.hasNewFrame = i_hasNewFrame
-        self.hasNewFrameLock.release()
 
 class CameraUSB(Camera) :
     def __init__(self, i_videoCaptureIndex=0, i_FPS=30):
