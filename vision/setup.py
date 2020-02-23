@@ -19,5 +19,11 @@ except ImportError:
     print (package + ' is not installed, installing it now!')
     install(package)
 
+try:
+    import doxypypy
+except ImportError:
+    package = 'doxypypy'
+    print (package + ' is not installed, installing it now!')
+    install(package)
 
 sys.exit(1)

@@ -130,6 +130,11 @@ class CameraROS(Camera) :
         self.hasNewFrameLock = threading.Lock()
 
     def updateFrame(self,i_image):
+        """
+        Call back method called when a new frame is published by the webcam (in a ROS topic) : the frame is stored in self.m_buffer and self.hasNewFrame is udpated accordingly
+        Args:
+            i_image:  The new frame published by the webcam
+        """
         with self.hasNewFrameLock :
             self.m_buffer = i_image
             self.hasNewFrame = True
