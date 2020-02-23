@@ -353,17 +353,18 @@ class PuckDetectorBase :
         return None
 
 class PuckDetector(PuckDetectorBase) :
-    """
-    PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
-    correspond to the last known center of the puck
-    Args:
-        i_lowerColor: HSV values of the lower threshold used to identify the puck
-        i_upperColor: HSV values of the Upper threshold used to identify the puck
-        i_radius: Radius of the puck in pixels
-        i_camera: pointer to a concrete implementation of the abstract base class Camera
-        i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
-    """
+
     def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_displayOutput = True):
+        """
+        PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
+        correspond to the last known center of the puck
+        Args:
+            i_lowerColor: HSV values of the lower threshold used to identify the puck
+            i_upperColor: HSV values of the Upper threshold used to identify the puck
+            i_radius: Radius of the puck in pixels
+            i_camera: pointer to a concrete implementation of the abstract base class Camera
+            i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
+        """
         PuckDetectorBase.__init__(self, i_lowerColor, i_upperColor, i_radius, i_camera)
 
         self.m_displayOutput = i_displayOutput
@@ -454,15 +455,15 @@ class PuckDetectorBuilder:
 
 
 class PuckDetectorConfiguration(PuckDetectorBase):
-    """
-    PuckDetectorConfiguration class's constructor.
-    Args:
-        i_lowerColor: HSV values of the lower threshold used to identify the puck
-        i_upperColor: HSV values of the Upper threshold used to identify the puck
-        i_radius: Radius of the puck in pixels
-        i_camera: pointer to a concrete implementation of the abstract base class Camera
-    """
     def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_camera):
+        """
+        PuckDetectorConfiguration class's constructor.
+        Args:
+            i_lowerColor: HSV values of the lower threshold used to identify the puck
+            i_upperColor: HSV values of the Upper threshold used to identify the puck
+            i_radius: Radius of the puck in pixels
+            i_camera: pointer to a concrete implementation of the abstract base class Camera
+        """
         PuckDetectorBase.__init__(self, i_lowerColor,i_upperColor,i_radius,i_camera)
         self.RANGE = 50
 
