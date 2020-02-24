@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   rosbridge_server
   webcam
   ui
+  vision
 )
 
 catkin_package(

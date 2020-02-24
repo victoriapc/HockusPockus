@@ -13,7 +13,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES main
-#  CATKIN_DEPENDS rosbridge_server
+  CATKIN_DEPENDS rospy
 #  DEPENDS system_lib
 )
 

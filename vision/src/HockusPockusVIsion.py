@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import cv2
 import numpy as np
 from math import sqrt
@@ -336,6 +338,7 @@ class PuckDetectorConfiguration(PuckDetectorBase):
             cv2.imshow('Output',frame)
 
 if __name__ == "__main__" :
+    rospy.init_node('vision')
     cam = CameraUSB(0,30)
     builder = PuckDetectorBuilder(cam)
     pd = builder.build()
