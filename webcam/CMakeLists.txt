@@ -3,7 +3,6 @@ project(webcam)
 
 find_package(catkin REQUIRED COMPONENTS
   usb_cam
-  web_video_server
 )
 
 catkin_package(
