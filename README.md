@@ -46,7 +46,6 @@ If you want this workspace as your default when you open a terminal, source it i
     source /home/YOURCOMPUTERNAME/hockus/devel/setup.bash
     
 ## TODO
-- Vision ReadMe.md
 - ui ReadMe.md
 - motor ReadMe.md
 - Homepage ReadMe.md
