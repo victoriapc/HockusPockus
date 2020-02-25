@@ -4,5 +4,5 @@
         <param name="port" value="7070"/>
     </node>
     
-    <node name="ui" pkg="ui" type="ui.sh"/>
+    <node name="ui" pkg="ui" type="ui.sh" output='screen'/>
 </launch>

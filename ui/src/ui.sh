@@ -4,7 +4,6 @@
 killall http-server
 cd ~/hockus
 source devel/setup.bash
-roscd ui/src/
-ls
-http-server &
+cd ~/hockus/src/HockusPockus/ui/src/
+python -m SimpleHTTPServer 8080
 xdg-open http://localhost:8080
