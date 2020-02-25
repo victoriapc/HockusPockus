@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(main)
 
-
 find_package(catkin REQUIRED COMPONENTS
   rosbridge_server
   webcam
   ui
+  vision
 )
 
 catkin_package(

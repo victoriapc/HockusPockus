@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>webcam</name>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
   <description>The webcam package</description>
 
-  <maintainer email="victoria@todo.todo">victoria</maintainer>
+  <maintainer email="babw2501@usherbrooke.ca">William Babin-Demers</maintainer>
 
   <license>TODO</license>
 
@@ -12,9 +12,6 @@
   <build_depend>usb_cam</build_depend>
   <build_export_depend>usb_cam</build_export_depend>
   <exec_depend>usb_cam</exec_depend>
-  <build_depend>web_video_server</build_depend>
-  <build_export_depend>web_video_server</build_export_depend>
-  <exec_depend>web_video_server</exec_depend>
 
   <export>
   </export>

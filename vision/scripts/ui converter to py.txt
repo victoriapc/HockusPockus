@@ -1,0 +1,5 @@
+Command line to insert to convert the UI to a py code:
+
+pyuic5 -x dialog_HSV.ui -o dialog_HSV.py
+
+pyuic5 -x dialog_Radius.ui -o dialog_Radius.py

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>main</name>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
   <description>The main package</description>
 
-  <maintainer email="sexyraoul@todo.todo">sexyraoul</maintainer>
+  <maintainer email="babw2501@usherbrooke.ca">William Babin-Demers</maintainer>
 
   <license>TODO</license>
 
@@ -18,6 +18,9 @@
   <build_depend>ui</build_depend>
   <build_export_depend>ui</build_export_depend>
   <exec_depend>ui</exec_depend>
+  <build_depend>vision</build_depend>
+  <build_export_depend>vision</build_export_depend>
+  <exec_depend>vision</exec_depend>
 
   <export>
 
