@@ -1,5 +1,6 @@
 <launch>
-    <node name='vision' pkg='vision' type='test.py' output='screen'>
+    <node name='vision' pkg='vision' type='mainVision.py' output='screen'>
         <param name='config_folder' value='$(find vision)/config'/>
+        <param name='reconfigure' value='false'/>
     </node>
 </launch>
