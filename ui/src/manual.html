@@ -8,6 +8,8 @@
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
     <script type="text/javascript" src="ros.js"></script>
+    <script type="text/javascript" src="manual.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
   </head>
   <body>
     <!-- Top Navigation Bar -->
@@ -23,7 +25,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href=""
+                        <a class="nav-link" href="index.html"
                             ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard</a
                         >
@@ -65,48 +67,18 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Dashboard</h1>
-                    <!-- Button content -->
+                    <h1 class="mt-4">Joystick</h1>
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">WebSocket Info:</div>
-                                <li class="box zone">Connection status: <span id="status"></span></li>
-                            </div>
+                            <div id="zone_joystick" style="position: relative;  margin-top: 150px;"></div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Topic Info</div>
-                                <li class="box zone">Last message on /txt_msg: <span id="msg"></span></li>
+                            <div class="card bg-secondary text-white mb-4">
+                                <div class="card-body">Desired position</div>
+                                <li class="box zone">X <span id="puck_pos.x"></span></li>
+                                <li class="box zone">Y <span id="puck_pos.y"></span></li>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-success text-white mb-4">
-                                <div class="card-body">Topic Info</div>
-                                <li class="box zone">Puck position: <span id="puck_pos"></span></li>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">Settings</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Video Content -->
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Webcam's Topic</div>
-                                <img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_raw" width="100%" height="100%"></img>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Hockus Pockus</div>
-                                <img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%" height="100%"></img>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </main>
