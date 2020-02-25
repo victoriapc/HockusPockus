@@ -9,7 +9,7 @@ Inheritance diagram for Puck\+Detector\+Builder.\+Puck\+Detector\+Builder\+:\beg
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+camera, i\+\_\+mode, i\+\_\+path, i\+\_\+reconfigure)
+def \mbox{\hyperlink{class_puck_detector_builder_1_1_puck_detector_builder_a3ad605fef8650da4d031e7ff9bf3caa8}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+mode, i\+\_\+\+F\+PS)
 \item 
 def \mbox{\hyperlink{class_puck_detector_builder_1_1_puck_detector_builder_ab04534170dcf872cd34b6fcbcbecd876}{build}} (self)
 \end{DoxyCompactItemize}
@@ -40,16 +40,17 @@ int {\bfseries U\+SB} = 1
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}\label{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}} 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a3ad605fef8650da4d031e7ff9bf3caa8}\label{class_puck_detector_builder_1_1_puck_detector_builder_a3ad605fef8650da4d031e7ff9bf3caa8}} 
 \index{PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def Puck\+Detector\+Builder.\+Puck\+Detector\+Builder.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+mode,  }\item[{}]{i\+\_\+path,  }\item[{}]{i\+\_\+reconfigure }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def Puck\+Detector\+Builder.\+Puck\+Detector\+Builder.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+mode,  }\item[{}]{i\+\_\+\+F\+PS }\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
 pointer to a concrete implementation of the abstract base class Camera
 Args:
-    i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_mode: Indicates the type of the camera that is going to be used (ROS,USB,...)
+    i_FPS : The number of frame per seconds of the camera
 \end{DoxyVerb}
  
 

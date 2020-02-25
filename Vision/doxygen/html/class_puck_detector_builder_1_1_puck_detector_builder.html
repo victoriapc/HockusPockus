@@ -99,8 +99,8 @@ Inheritance diagram for PuckDetectorBuilder.PuckDetectorBuilder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3ba0d3a7fce41b65b5cc4a1405089390"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_builder_1_1_puck_detector_builder.html#a3ba0d3a7fce41b65b5cc4a1405089390">__init__</a> (self, i_camera, i_mode, i_path, i_reconfigure)</td></tr>
-<tr class="separator:a3ba0d3a7fce41b65b5cc4a1405089390"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad605fef8650da4d031e7ff9bf3caa8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_builder_1_1_puck_detector_builder.html#a3ad605fef8650da4d031e7ff9bf3caa8">__init__</a> (self, i_mode, i_FPS)</td></tr>
+<tr class="separator:a3ad605fef8650da4d031e7ff9bf3caa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04534170dcf872cd34b6fcbcbecd876"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_builder_1_1_puck_detector_builder.html#ab04534170dcf872cd34b6fcbcbecd876">build</a> (self)</td></tr>
 <tr class="separator:ab04534170dcf872cd34b6fcbcbecd876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -129,8 +129,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>USB</b> = 1</td></tr>
 <tr class="separator:a3f3d04e175e81f0018a549e62114a576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3ba0d3a7fce41b65b5cc4a1405089390"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ba0d3a7fce41b65b5cc4a1405089390">&#9670;&nbsp;</a></span>__init__()</h2>
+<a id="a3ad605fef8650da4d031e7ff9bf3caa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad605fef8650da4d031e7ff9bf3caa8">&#9670;&nbsp;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,25 +145,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>USB</b> = 1</td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>i_camera</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>i_mode</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>i_path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>i_reconfigure</em>&#160;</td>
+          <td class="paramname"><em>i_FPS</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,7 +163,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>USB</b> = 1</td></tr>
 <pre class="fragment">PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
 pointer to a concrete implementation of the abstract base class Camera
 Args:
-    i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_mode: Indicates the type of the camera that is going to be used (ROS,USB,...)
+    i_FPS : The number of frame per seconds of the camera
 </pre> 
 </div>
 </div>

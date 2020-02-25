@@ -44,7 +44,7 @@ var NAVTREEINDEX0 =
 "class_puck_detector_base_1_1_puck_detector_base.html#affa922c691a9934aef002896d607b6be":[0,0,6,0,4],
 "class_puck_detector_builder_1_1_puck_detector_builder.html":[0,0,7,0],
 "class_puck_detector_builder_1_1_puck_detector_builder.html#a264a331e37c8e5c23b47af309022c009":[0,0,7,0,2],
-"class_puck_detector_builder_1_1_puck_detector_builder.html#a3ba0d3a7fce41b65b5cc4a1405089390":[0,0,7,0,0],
+"class_puck_detector_builder_1_1_puck_detector_builder.html#a3ad605fef8650da4d031e7ff9bf3caa8":[0,0,7,0,0],
 "class_puck_detector_builder_1_1_puck_detector_builder.html#a5b2c5b13d376b722d381f9be62c2949b":[0,0,7,0,4],
 "class_puck_detector_builder_1_1_puck_detector_builder.html#aa615fc1a3e1a9211ab814ad9334e070b":[0,0,7,0,5],
 "class_puck_detector_builder_1_1_puck_detector_builder.html#ab04534170dcf872cd34b6fcbcbecd876":[0,0,7,0,1],
