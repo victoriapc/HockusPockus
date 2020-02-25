@@ -13,7 +13,7 @@ class PuckDetectorBuilder(object):
     ROS = 0
     USB = 1
 
-    def __init__(self, i_camera, i_mode):
+    def __init__(self, i_camera, i_mode,i_path, i_reconfigure):
         """
         PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
         pointer to a concrete implementation of the abstract base class Camera
@@ -22,6 +22,8 @@ class PuckDetectorBuilder(object):
         """
         self.m_camera = i_camera
         self.m_mode = i_mode
+        self.m_path = i_path + '/config.json'
+        self.m_reconfigure = i_reconfigure
 
     def build(self):
         """
@@ -30,8 +32,9 @@ class PuckDetectorBuilder(object):
         Returns:
             The newly created PuckDetector object
         """
-        if os.path.isfile('config.json'):
-            with open('config.json', 'rb') as file:
+
+        if os.path.isfile(self.m_path) and not self.m_reconfigure:
+            with open(self.m_path, 'rb') as file:
                 configData = pickle.load(file)
         else:
             config = PuckDetectorConfiguration([0, 0, 0], [0, 0, 0], 0, self.m_camera)
@@ -41,7 +44,7 @@ class PuckDetectorBuilder(object):
             config.autoConfiguration()  # TODO: add progress bar
             mainWin2 = dialog_config_HSV(config)
 
-            with open('config.json', 'wb') as file:
+            with open(self.m_path, 'wb') as file:
                 configData = {}
                 configData['lowerColor'] = config.m_lowerColor
                 configData['upperColor'] = config.m_upperColor

@@ -25,7 +25,7 @@ class PuckDetectorROS(PuckDetectorBase) :
         super(PuckDetectorROS, self).__init__(i_lowerColor, i_upperColor, i_radius, i_camera, i_displayOutput)
         self.pos_pub = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
         self.m_bridge = CvBridge()
-        self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image)
+        self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
 
     def updatePosition(self,i_circles):
         super(PuckDetectorROS, self).updatePosition(i_circles)
