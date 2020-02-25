@@ -1,5 +1,5 @@
 buildLib : testMoteur.cpp
-	g++ -g -o testMoteur testMoteur.cpp -Wall -pthread -l wiringPi
+	g++ -g -o testMoteur testMoteur.cpp -Wall -pthread -l wiringPi -lrt -lcrypt
 	
 buildAll: testMoteur.cpp
 
