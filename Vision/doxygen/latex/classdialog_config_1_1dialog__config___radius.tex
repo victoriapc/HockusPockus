@@ -1,0 +1,73 @@
+\hypertarget{classdialog_config_1_1dialog__config___radius}{}\doxysection{dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius Class Reference}
+\label{classdialog_config_1_1dialog__config___radius}\index{dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}}
+Inheritance diagram for dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdialog_config_1_1dialog__config___radius}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdialog_config_1_1dialog__config___radius_adb44caf9a360cd925496bc17765c15d9}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+config)
+\item 
+def \mbox{\hyperlink{classdialog_config_1_1dialog__config___radius_a52be66d2aedbdb5b6bab5e49c0dda088}{reject}} (self)
+\item 
+def \mbox{\hyperlink{classdialog_config_1_1dialog__config___radius_ab5b4c38fcdd5de9765857c2053c9e2a0}{ok\+Pressed}} (self)
+\item 
+def \mbox{\hyperlink{classdialog_config_1_1dialog__config___radius_a2f4e20e8248d6b8d8b4018ad5e4f9a44}{update\+\_\+\+Radius}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdialog_config_1_1dialog__config___radius_a5bbc3a005b31221b580e762bb9f8ad7b}\label{classdialog_config_1_1dialog__config___radius_a5bbc3a005b31221b580e762bb9f8ad7b}} 
+{\bfseries m\+\_\+config}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdialog_config_1_1dialog__config___radius_adb44caf9a360cd925496bc17765c15d9}\label{classdialog_config_1_1dialog__config___radius_adb44caf9a360cd925496bc17765c15d9}} 
+\index{dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+config }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}dialog_config_Radius class's constructor. Initializes, notably, the GUI that is used to get the value
+of the radius of the puck (in pixel)
+Args:
+    i_config: A pointer to a PuckDetectorConfiguration object
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdialog_config_1_1dialog__config___radius_ab5b4c38fcdd5de9765857c2053c9e2a0}\label{classdialog_config_1_1dialog__config___radius_ab5b4c38fcdd5de9765857c2053c9e2a0}} 
+\index{dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}!okPressed@{okPressed}}
+\index{okPressed@{okPressed}!dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}}
+\doxysubsubsection{\texorpdfstring{okPressed()}{okPressed()}}
+{\footnotesize\ttfamily def dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius.\+ok\+Pressed (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayRadius() thread dies
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdialog_config_1_1dialog__config___radius_a52be66d2aedbdb5b6bab5e49c0dda088}\label{classdialog_config_1_1dialog__config___radius_a52be66d2aedbdb5b6bab5e49c0dda088}} 
+\index{dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}!reject@{reject}}
+\index{reject@{reject}!dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}}
+\doxysubsubsection{\texorpdfstring{reject()}{reject()}}
+{\footnotesize\ttfamily def dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius.\+reject (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Specifies what should happen when the "X" button of the GUI is pressed : it should do the same thing as
+when the "OK" button is pressed (see okPressed() method)
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classdialog_config_1_1dialog__config___radius_a2f4e20e8248d6b8d8b4018ad5e4f9a44}\label{classdialog_config_1_1dialog__config___radius_a2f4e20e8248d6b8d8b4018ad5e4f9a44}} 
+\index{dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}!update\_Radius@{update\_Radius}}
+\index{update\_Radius@{update\_Radius}!dialogConfig.dialog\_config\_Radius@{dialogConfig.dialog\_config\_Radius}}
+\doxysubsubsection{\texorpdfstring{update\_Radius()}{update\_Radius()}}
+{\footnotesize\ttfamily def dialog\+Config.\+dialog\+\_\+config\+\_\+\+Radius.\+update\+\_\+\+Radius (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Called when the user changes the value of the radius slider. Used to update the internal value of the
+radius in the PuckDetectorConfiguration object and to update the label value of the slider
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/dialog\+Config.\+py\end{DoxyCompactItemize}

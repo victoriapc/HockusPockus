@@ -1,0 +1,61 @@
+\hypertarget{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b}{}\doxysection{Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+SB Class Reference}
+\label{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b}\index{PuckDetectorUSB.PuckDetectorUSB@{PuckDetectorUSB.PuckDetectorUSB}}
+Inheritance diagram for Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+SB\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_ab1ce9efb9f6e0d0ccf9428d0b7c221cd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+lower\+Color, i\+\_\+upper\+Color, i\+\_\+radius, i\+\_\+camera, i\+\_\+display\+Output=True)
+\item 
+def \mbox{\hyperlink{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_a5cb037a6f52caa578643905c6ada0906}{display\+Feed}} (self, i\+\_\+frame)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_ab1ce9efb9f6e0d0ccf9428d0b7c221cd}\label{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_ab1ce9efb9f6e0d0ccf9428d0b7c221cd}} 
+\index{PuckDetectorUSB.PuckDetectorUSB@{PuckDetectorUSB.PuckDetectorUSB}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorUSB.PuckDetectorUSB@{PuckDetectorUSB.PuckDetectorUSB}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+S\+B.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+lower\+Color,  }\item[{}]{i\+\_\+upper\+Color,  }\item[{}]{i\+\_\+radius,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+display\+Output = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
+correspond to the last known center of the puck
+Args:
+    i_lowerColor: HSV values of the lower threshold used to identify the puck
+    i_upperColor: HSV values of the Upper threshold used to identify the puck
+    i_radius: Radius of the puck in pixels
+    i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a18903f1c6fbec4bc0ea14314e0f7b0a2}{Puck\+Detector\+Base.\+Puck\+Detector\+Base}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_a5cb037a6f52caa578643905c6ada0906}\label{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_a5cb037a6f52caa578643905c6ada0906}} 
+\index{PuckDetectorUSB.PuckDetectorUSB@{PuckDetectorUSB.PuckDetectorUSB}!displayFeed@{displayFeed}}
+\index{displayFeed@{displayFeed}!PuckDetectorUSB.PuckDetectorUSB@{PuckDetectorUSB.PuckDetectorUSB}}
+\doxysubsubsection{\texorpdfstring{displayFeed()}{displayFeed()}}
+{\footnotesize\ttfamily def Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+S\+B.\+display\+Feed (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+frame }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Publish one altered frame (calls displayCirclesOnFrame() and displayCirclesPositionOnFrame() on i_frame in order
+to draw a circle around the puck on the frame and to write its coordinates) to a ROS topic
+Args:
+    i_frame: The orginal frame
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a5e183ac8529a77326365e67f858ec94d}{Puck\+Detector\+Base.\+Puck\+Detector\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/Puck\+Detector\+U\+S\+B.\+py\end{DoxyCompactItemize}

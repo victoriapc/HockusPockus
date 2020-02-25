@@ -1,0 +1,72 @@
+\hypertarget{class_puck_detector_builder_1_1_puck_detector_builder}{}\doxysection{Puck\+Detector\+Builder.\+Puck\+Detector\+Builder Class Reference}
+\label{class_puck_detector_builder_1_1_puck_detector_builder}\index{PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}}
+Inheritance diagram for Puck\+Detector\+Builder.\+Puck\+Detector\+Builder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_puck_detector_builder_1_1_puck_detector_builder}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+camera, i\+\_\+mode, i\+\_\+path, i\+\_\+reconfigure)
+\item 
+def \mbox{\hyperlink{class_puck_detector_builder_1_1_puck_detector_builder_ab04534170dcf872cd34b6fcbcbecd876}{build}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a264a331e37c8e5c23b47af309022c009}\label{class_puck_detector_builder_1_1_puck_detector_builder_a264a331e37c8e5c23b47af309022c009}} 
+{\bfseries m\+\_\+camera}
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_ae8cceaee1abb1ba8a7e2a4e2c10384dd}\label{class_puck_detector_builder_1_1_puck_detector_builder_ae8cceaee1abb1ba8a7e2a4e2c10384dd}} 
+{\bfseries m\+\_\+mode}
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a5b2c5b13d376b722d381f9be62c2949b}\label{class_puck_detector_builder_1_1_puck_detector_builder_a5b2c5b13d376b722d381f9be62c2949b}} 
+{\bfseries m\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_aa615fc1a3e1a9211ab814ad9334e070b}\label{class_puck_detector_builder_1_1_puck_detector_builder_aa615fc1a3e1a9211ab814ad9334e070b}} 
+{\bfseries m\+\_\+reconfigure}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_ad1547e3842f2a43c783b09fb4b1a05f9}\label{class_puck_detector_builder_1_1_puck_detector_builder_ad1547e3842f2a43c783b09fb4b1a05f9}} 
+int {\bfseries R\+OS} = 0
+\item 
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a3f3d04e175e81f0018a549e62114a576}\label{class_puck_detector_builder_1_1_puck_detector_builder_a3f3d04e175e81f0018a549e62114a576}} 
+int {\bfseries U\+SB} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}\label{class_puck_detector_builder_1_1_puck_detector_builder_a3ba0d3a7fce41b65b5cc4a1405089390}} 
+\index{PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Builder.\+Puck\+Detector\+Builder.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+mode,  }\item[{}]{i\+\_\+path,  }\item[{}]{i\+\_\+reconfigure }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
+pointer to a concrete implementation of the abstract base class Camera
+Args:
+    i_camera: pointer to a concrete implementation of the abstract base class Camera
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_puck_detector_builder_1_1_puck_detector_builder_ab04534170dcf872cd34b6fcbcbecd876}\label{class_puck_detector_builder_1_1_puck_detector_builder_ab04534170dcf872cd34b6fcbcbecd876}} 
+\index{PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}!build@{build}}
+\index{build@{build}!PuckDetectorBuilder.PuckDetectorBuilder@{PuckDetectorBuilder.PuckDetectorBuilder}}
+\doxysubsubsection{\texorpdfstring{build()}{build()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Builder.\+Puck\+Detector\+Builder.\+build (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Builds a PuckDetector object. Tries to find configurations values from a file. It if succeeds, it initializes
+the PuckDetector object with these values. Otherwise, it begins the configuration process with the PuckDetectorConfiguration class
+Returns:
+    The newly created PuckDetector object
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/Puck\+Detector\+Builder.\+py\end{DoxyCompactItemize}

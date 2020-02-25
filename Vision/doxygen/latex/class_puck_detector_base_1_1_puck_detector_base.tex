@@ -1,0 +1,106 @@
+\hypertarget{class_puck_detector_base_1_1_puck_detector_base}{}\doxysection{Puck\+Detector\+Base.\+Puck\+Detector\+Base Class Reference}
+\label{class_puck_detector_base_1_1_puck_detector_base}\index{PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}}
+Inheritance diagram for Puck\+Detector\+Base.\+Puck\+Detector\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_puck_detector_base_1_1_puck_detector_base}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a18903f1c6fbec4bc0ea14314e0f7b0a2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+lower\+Color, i\+\_\+upper\+Color, i\+\_\+radius, i\+\_\+camera, i\+\_\+display\+Output)
+\item 
+def \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a1c5a1611ee8dd0e82fcbd797538a18d4}{update\+Position}} (self, i\+\_\+circles)
+\item 
+def \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a5e183ac8529a77326365e67f858ec94d}{display\+Feed}} (self, i\+\_\+frame)
+\item 
+def \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_abe4d504d36796159761ee5cb09c09989}{find\+Puck}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_affa922c691a9934aef002896d607b6be}\label{class_puck_detector_base_1_1_puck_detector_base_affa922c691a9934aef002896d607b6be}} 
+{\bfseries m\+\_\+display\+Output}
+\item 
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_aab5fbdcc0a7c6549e393d6f56e7e9a94}\label{class_puck_detector_base_1_1_puck_detector_base_aab5fbdcc0a7c6549e393d6f56e7e9a94}} 
+{\bfseries x\+Pos}
+\item 
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_afbf42034ccebe6fb352ba94b87e04c7d}\label{class_puck_detector_base_1_1_puck_detector_base_afbf42034ccebe6fb352ba94b87e04c7d}} 
+{\bfseries y\+Pos}
+\item 
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_a925ba6ba2c1fe61280e3273e2c3c9ca4}\label{class_puck_detector_base_1_1_puck_detector_base_a925ba6ba2c1fe61280e3273e2c3c9ca4}} 
+{\bfseries new\+Info}
+\item 
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_abf0b41a06fe98dd49d62ced3e982cb92}\label{class_puck_detector_base_1_1_puck_detector_base_abf0b41a06fe98dd49d62ced3e982cb92}} 
+{\bfseries radius}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_a18903f1c6fbec4bc0ea14314e0f7b0a2}\label{class_puck_detector_base_1_1_puck_detector_base_a18903f1c6fbec4bc0ea14314e0f7b0a2}} 
+\index{PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Base.\+Puck\+Detector\+Base.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+lower\+Color,  }\item[{}]{i\+\_\+upper\+Color,  }\item[{}]{i\+\_\+radius,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+display\+Output }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
+correspond to the last known center of the puck
+Args:
+    i_lowerColor: HSV values of the lower threshold used to identify the puck
+    i_upperColor: HSV values of the Upper threshold used to identify the puck
+    i_radius: Radius of the puck in pixels
+    i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
+\end{DoxyVerb}
+ 
+
+Reimplemented in \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a3aa68043014ce57f524d03abdc1fa34f}{Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+OS}}, and \mbox{\hyperlink{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_ab1ce9efb9f6e0d0ccf9428d0b7c221cd}{Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+SB}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_a5e183ac8529a77326365e67f858ec94d}\label{class_puck_detector_base_1_1_puck_detector_base_a5e183ac8529a77326365e67f858ec94d}} 
+\index{PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}!displayFeed@{displayFeed}}
+\index{displayFeed@{displayFeed}!PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}}
+\doxysubsubsection{\texorpdfstring{displayFeed()}{displayFeed()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Base.\+Puck\+Detector\+Base.\+display\+Feed (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+frame }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Displays one altered frame (calls displayCirclesOnFrame() and displayCirclesPositionOnFrame() on i_frame in order
+to draw a circle around the puck on the frame and to write its coordinates
+Args:
+    i_frame: The orginal frame
+\end{DoxyVerb}
+ 
+
+Reimplemented in \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a009e2309c855ee4dadd56144d48abc2d}{Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+OS}}, and \mbox{\hyperlink{class_puck_detector_u_s_b_1_1_puck_detector_u_s_b_a5cb037a6f52caa578643905c6ada0906}{Puck\+Detector\+U\+S\+B.\+Puck\+Detector\+U\+SB}}.
+
+\mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_abe4d504d36796159761ee5cb09c09989}\label{class_puck_detector_base_1_1_puck_detector_base_abe4d504d36796159761ee5cb09c09989}} 
+\index{PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}!findPuck@{findPuck}}
+\index{findPuck@{findPuck}!PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}}
+\doxysubsubsection{\texorpdfstring{findPuck()}{findPuck()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Base.\+Puck\+Detector\+Base.\+find\+Puck (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This is the main method of the PuckDetector class. This method iterates indefinitely (or
+until the camera fails) and finds the puck in every new frame
+\end{DoxyVerb}
+ \mbox{\Hypertarget{class_puck_detector_base_1_1_puck_detector_base_a1c5a1611ee8dd0e82fcbd797538a18d4}\label{class_puck_detector_base_1_1_puck_detector_base_a1c5a1611ee8dd0e82fcbd797538a18d4}} 
+\index{PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}!updatePosition@{updatePosition}}
+\index{updatePosition@{updatePosition}!PuckDetectorBase.PuckDetectorBase@{PuckDetectorBase.PuckDetectorBase}}
+\doxysubsubsection{\texorpdfstring{updatePosition()}{updatePosition()}}
+{\footnotesize\ttfamily def Puck\+Detector\+Base.\+Puck\+Detector\+Base.\+update\+Position (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+circles }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the position of the puck
+Args:
+    i_circles:   All known circles in a specific frame
+\end{DoxyVerb}
+ 
+
+Reimplemented in \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a46c39fa5822dc1f025487ba2f8704627}{Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+OS}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/Puck\+Detector\+Base.\+py\end{DoxyCompactItemize}

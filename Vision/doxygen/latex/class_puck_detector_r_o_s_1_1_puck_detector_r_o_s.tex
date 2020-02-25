@@ -1,0 +1,89 @@
+\hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s}{}\doxysection{Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+OS Class Reference}
+\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s}\index{PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}}
+Inheritance diagram for Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+OS\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a3aa68043014ce57f524d03abdc1fa34f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+lower\+Color, i\+\_\+upper\+Color, i\+\_\+radius, i\+\_\+camera, i\+\_\+display\+Output=True)
+\item 
+def \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a46c39fa5822dc1f025487ba2f8704627}{update\+Position}} (self, i\+\_\+circles)
+\item 
+def \mbox{\hyperlink{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a009e2309c855ee4dadd56144d48abc2d}{display\+Feed}} (self, i\+\_\+frame)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a5920a7a2f66f14817e375659e2512b56}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a5920a7a2f66f14817e375659e2512b56}} 
+{\bfseries pos\+\_\+pub}
+\item 
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a01d2c038f53b86f5b0544683dd8cbabf}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a01d2c038f53b86f5b0544683dd8cbabf}} 
+{\bfseries m\+\_\+bridge}
+\item 
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a675095674cc4a16ae35bca697a62a74c}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a675095674cc4a16ae35bca697a62a74c}} 
+{\bfseries m\+\_\+video\+Feed\+Publisher}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a3aa68043014ce57f524d03abdc1fa34f}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a3aa68043014ce57f524d03abdc1fa34f}} 
+\index{PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+O\+S.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+lower\+Color,  }\item[{}]{i\+\_\+upper\+Color,  }\item[{}]{i\+\_\+radius,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+display\+Output = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
+correspond to the last known center of the puck
+Args:
+    i_lowerColor: HSV values of the lower threshold used to identify the puck
+    i_upperColor: HSV values of the Upper threshold used to identify the puck
+    i_radius: Radius of the puck in pixels
+    i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a18903f1c6fbec4bc0ea14314e0f7b0a2}{Puck\+Detector\+Base.\+Puck\+Detector\+Base}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a009e2309c855ee4dadd56144d48abc2d}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a009e2309c855ee4dadd56144d48abc2d}} 
+\index{PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}!displayFeed@{displayFeed}}
+\index{displayFeed@{displayFeed}!PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}}
+\doxysubsubsection{\texorpdfstring{displayFeed()}{displayFeed()}}
+{\footnotesize\ttfamily def Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+O\+S.\+display\+Feed (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+frame }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Publish one altered frame (calls displayCirclesOnFrame() and displayCirclesPositionOnFrame() on i_frame in order
+to draw a circle around the puck on the frame and to write its coordinates) to a ROS topic
+Args:
+    i_frame: The orginal frame
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a5e183ac8529a77326365e67f858ec94d}{Puck\+Detector\+Base.\+Puck\+Detector\+Base}}.
+
+\mbox{\Hypertarget{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a46c39fa5822dc1f025487ba2f8704627}\label{class_puck_detector_r_o_s_1_1_puck_detector_r_o_s_a46c39fa5822dc1f025487ba2f8704627}} 
+\index{PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}!updatePosition@{updatePosition}}
+\index{updatePosition@{updatePosition}!PuckDetectorROS.PuckDetectorROS@{PuckDetectorROS.PuckDetectorROS}}
+\doxysubsubsection{\texorpdfstring{updatePosition()}{updatePosition()}}
+{\footnotesize\ttfamily def Puck\+Detector\+R\+O\+S.\+Puck\+Detector\+R\+O\+S.\+update\+Position (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+circles }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Updates the position of the puck
+Args:
+    i_circles:   All known circles in a specific frame
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_puck_detector_base_1_1_puck_detector_base_a1c5a1611ee8dd0e82fcbd797538a18d4}{Puck\+Detector\+Base.\+Puck\+Detector\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/Puck\+Detector\+R\+O\+S.\+py\end{DoxyCompactItemize}
