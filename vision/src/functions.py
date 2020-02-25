@@ -426,7 +426,7 @@ class PuckDetectorROS(PuckDetectorBase) :
         super(PuckDetectorROS, self).__init__(i_lowerColor, i_upperColor, i_radius, i_camera, i_displayOutput)
         self.pos_pub = rospy.Publisher("/puck_pos", Point, queue_size=10)
         self.m_bridge = CvBridge()
-        self.m_webcam = rospy.Publisher("/usb_cam/image_ouput", Image)
+        self.m_webcam = rospy.Publisher("/usb_cam/image_output", Image, queue_size=10)
 
     def updatePosition(self,i_circles):
         super(PuckDetectorROS, self).updatePosition(i_circles)
@@ -447,9 +447,11 @@ class PuckDetectorROS(PuckDetectorBase) :
             self.displayCirclesPositionOnFrame(i_frame,self.xPos, self.yPos)
             self.newInfo = False
 
-
-        frame = self.m_bridge.cv2_to_imgmsg(i_frame, "bgr8")
-        self.m_webcam.publish(frame)
+        try:
+            frame = self.m_bridge.cv2_to_imgmsg(i_frame, encoding="bgr8")
+            self.m_webcam.publish(frame)
+        except CvBridgeError, e:
+            rospy.logerr("CvBridge Error: {0}".format(e))
       
 class PuckDetectorBuilder(object):
     ROS = 0 
