@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>The Hockus Pockus Project</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="/branding/logoStart.png">
     <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet"> 
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
@@ -12,9 +13,8 @@
   <body>
     <!-- Top Navigation Bar -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"> 
-      <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-      <a class="navbar-brand" href="">Hockus Pockus</a>
-      <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+      <a class="navbar-brand" href="index.html"> 
+      <img src="/branding/logoEquipeCLEANblanc.png" height="120" width="120" ALIGN="left"></a>
     </nav>
     <!--Side Navigation Bar -->
     <div id="layoutSidenav">
@@ -22,45 +22,45 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href=""
+                        <div class="sb-sidenav-menu-heading">Home</div>
+                        <a class="nav-link" href="index.html"
                             ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard</a
+                            <img src="/branding/logoStart.png" height="20" width="20" ALIGN="left">
+                            &nbsp; Dashboard</a
                         >
-                        <a class="nav-link" href= "manual.html"
-                            ><div class="sb-nav-link-icon"><i class="fas fa-manual"></i></div>
-                            Manual Control</a
-                        >
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
+                        <a class="nav-link collapsed" href="rules.html" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
                             ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
+                            <img src="/ui/src/menu_icon/rules.png" height="20" width="20" ALIGN="left">
+                            &nbsp; Rules
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                         ></a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a><a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
                         </div>
-                        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
-                            ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href=""
+
+                        <div class="sb-sidenav-menu-heading">Configuration</div>
+                        <a class="nav-link" href="webcam.html"
                             ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts</a
-                        ><a class="nav-link" href=""
+                            <img src="/ui/src/menu_icon/webcam.png" height="20" width="20" ALIGN="left">
+                            &nbsp; Webcam</a
+                        ><a class="nav-link" href="settings.html"
                             ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables</a
+                            <img src="/ui/src/menu_icon/settings.png" height="20" width="20" ALIGN="left">
+                            &nbsp; Settings</a
                         >
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Hockus Pockus</div>
+                    <img src="/branding/logoProjetBlanc.png" alt="Logo of Hockus Pockus" height="42" width="95" ALIGN="right" opacity: 0.5;>
+                    <div class="small">Génie robotique</div>
                     2020
+                    <a href="https://github.com/victoriapc/HockusPockus" target="_blank">
+                    <img src="/branding/gitHub.png" alt="Github" height="24" width="24" opacity: 0.5;>
+                    </a>
                 </div>
             </nav>
         </div>
+
         <!-- Dashboard Content -->
         <div id="layoutSidenav_content">
             <main>
@@ -69,29 +69,33 @@
                     <!-- Button content -->
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
+                            <div class="card bg-success text-black mb-4">
                                 <div class="card-body">WebSocket Info:</div>
                                 <li class="box zone">Connection status: <span id="status"></span></li>
                             </div>
                         </div>
+
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-warning text-white mb-4">
+                            <div class="card bg-light text-black mb-4">
                                 <div class="card-body">Topic Info</div>
                                 <li class="box zone">Last message on /txt_msg: <span id="msg"></span></li>
                             </div>
                         </div>
+                        
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-success text-white mb-4">
+                            <div class="card bg-success text-black mb-4">
                                 <div class="card-body">Topic Info</div>
                                 <li class="box zone">Puck position: <span id="puck_pos"></span></li>
                             </div>
                         </div>
+                        
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-danger text-white mb-4">
+                            <div class="card bg-light text-black mb-4">
                                 <div class="card-body">Settings</div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Video Content -->
                     <div class="row">
                         <div class="col-xl-6">
@@ -103,7 +107,7 @@
                         <div class="col-xl-6">
                             <div class="card mb-4">
                                 <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Hockus Pockus</div>
-                                <img src="http://0.0.0.0:7070/stream_viewer?topic=/usb_cam/image_ouput" width="100%" height="100%"></img>
+                                <img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%" height="100%"></img>
                             </div>
                         </div>
                     </div>
@@ -111,6 +115,8 @@
                 </div>
             </main>
         </div>
+
+
     </div>
   </body>
 </html>
