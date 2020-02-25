@@ -16,5 +16,5 @@ The table is composed of a middle section, and 3 side sections.
 ## Mecanism
 Here's a preview of the result so far:
 
-![alt mecanism](resources/mecanism.png)
+![alt table](resources/mecanism.png)
 
