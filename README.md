@@ -8,22 +8,11 @@ You will find the installation and building instructions of our three-way air ho
 
 ## Quick install steps:
 
-The web interface uses rosbridge server. You need to install ROS Melodic beforehand.
+The web interface uses rosbridge server.
 
     sudo apt update
     sudo apt upgrade
-    sudo apt install ros-melodic-desktop-full
     sudo apt install ros-melodic-rosbridge-server ros-melodic-web-video-server
-
-To use ROS, you need to source it.
-
-    source /opt/ros/melodic/setup.bash
-    
-You can save time and write the line at the end of your .bashrc
-
-    cd ~
-    nano .bashrc
-    source /opt/ros/melodic/setup.bash
     
 In order to use the code, you need to clone it in a catkin workspace, located in your home directory.
 
@@ -50,7 +39,7 @@ You are now ready to launch the interface.
     source devel/setup.bash
     roslaunch main main.launch
 
-If you want this workspace as your default when you open a terminal, source it in your .bashrc like ROS.
+If you want this workspace as your default when you open a terminal, source it in your .bashrc.
 
     cd ~
     nano .bashrc
