@@ -36,8 +36,8 @@ class PuckDetectorBuilder(object):
 
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
-            self.m_path = rospy.get_param('/vision/config_folder')
-            self.m_reconfigure = rospy.get_param('/vision/reconfigure')
+            self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
+            self.m_reconfigure = rospy.get_param(ROS_IS_RECONFIGURE)
 
         elif self.m_mode == PuckDetectorBuilder.USB:
             self.m_camera = CameraUSB(0, i_FPS)
