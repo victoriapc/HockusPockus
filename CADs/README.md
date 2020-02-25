@@ -12,3 +12,9 @@ The pieces used to make the table can be found in the **Table** directory. Here'
 ![alt table](resources/table.png)
 
 The table is composed of a middle section, and 3 side sections. 
+
+## Mecanism
+Here's a preview of the result so far:
+
+![alt mecanism](resources/mecanism.png)
+
