@@ -7,24 +7,37 @@ createJoystick = function () {
         size: 200,
         color: '#dc3545',
     };
-    
+
     manager = nipplejs.create(options);
 
     linear_speed = 0;
     angular_speed = 0;
 
     self.manager.on('start', function (event, nipple) {
-      console.log("Movement start");
+        console.log("Movement start");
     });
 
     self.manager.on('move', function (event, nipple) {
-      console.log("Moving");
+        console.log("Moving");
     });
 
     self.manager.on('end', function () {
-      console.log("Movement end");
+        console.log("Movement end");
     });
-  }
-  window.onload = function () {
-    createJoystick();
-  }
+
+    window.onload = function () {
+        createJoystick();
+    }
+
+    manager.on('start', function (event, nipple) {
+        timer = setInterval(function () {
+        move(linear_speed, angular_speed);
+        }, 25);
+    });
+    manager.on('end', function () {
+        if (timer) {
+          clearInterval(timer);
+        }
+        self.move(0, 0);
+      });
+}
