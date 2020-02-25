@@ -1,5 +1,5 @@
 <launch>
-    <node name='vision' pkg='vision' type='test.py'>
+    <node name='vision' pkg='vision' type='functions.py' output='screen'>
         <param name='mode' value='1'/>
     </node>
 </launch>

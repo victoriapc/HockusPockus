@@ -5,6 +5,8 @@ from sensor_msgs.msg import Image
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 
+import functions.py
+
 rospy.init_node('vision')
 bridge = CvBridge()
 
@@ -31,3 +33,5 @@ pub_image = rospy.Publisher("/usb_cam/image_output", Image)
 
 while not rospy.is_shutdown():
     rospy.spin()
+
+    
