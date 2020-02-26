@@ -4,6 +4,8 @@ The motor arent't impemented in ROS yet. Currently, you can send pulse to the st
 ## Wiring
 Refer to the attached picture for the wiring of the motor, the controller and the raspberry pi.
 
+![alt](resources/breadboard.png)
+
 Do not connect the grounds of the power supply to the ground of the raspberry pi. Capacitors can be added to stabilise the power supply and avoid surges or dips.
 
 ## Testing

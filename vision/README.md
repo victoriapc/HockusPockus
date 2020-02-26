@@ -1,6 +1,11 @@
-# Vision calibration
-This section will guide you through the calibration process.
+# The Vision Package
+This package is responsible on finding the puck and returning its position. By receiving the webcam's video on a topic named */usb_cam/image_raw*, it uses CvBridge and Open CV to output a modified image on the topic */usb_cam/image_output*.
 
+The package is also responsible for the camera calibration. You can modify the settings in order to optimised the vision algorithm. In the config folder, a file is already given, but you can reconfigure your camera by changing the *reconfigure* paramater in the launch file to **true**.
+
+Below, you'll find the steps to calibrate your camera.
+
+# Calibration
 ## Centering the puck
 ![alt](resources/positionNotAjusted.png)
 When you will launch the calibration process, the puck will most likely not be in the center of the screen. Place the puck at the center of the red calibration circle.

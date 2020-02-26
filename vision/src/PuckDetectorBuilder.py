@@ -13,6 +13,8 @@ from dialogConfig import dialog_config_Radius
 from dialogConfig import dialog_config_HSV
 from PyQt5.QtWidgets import QApplication
 
+import ROS_CONSTANTS
+
 import sys
 import pickle
 import os

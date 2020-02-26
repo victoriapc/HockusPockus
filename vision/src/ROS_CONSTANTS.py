@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ROS_VISION_NODE_NAME = 'vision'
 ROS_BRIDGE_ENCODING = "bgr8"
 
