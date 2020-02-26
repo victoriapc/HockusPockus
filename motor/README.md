@@ -1,3 +1,6 @@
+# Motor
+The motor arent't impemented in ROS yet. Currently, you can send pulse to the stepper motors with the help of a breadboard. In a future release, the motor package will be responsible for sending position command to the robot.
+
 ## Wiring
 Refer to the attached picture for the wiring of the motor, the controller and the raspberry pi.
 
