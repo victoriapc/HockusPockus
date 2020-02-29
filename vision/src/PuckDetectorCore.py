@@ -15,7 +15,7 @@ class PuckDetectorCore(object) :
 
     RADIUS_TOLERANCE = 25
 
-    def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_camera):
+    def __init__(self, i_lowerColor,  i_upperColor , i_radius , i_camera,i_broadcaster):
         """
         PuckDetectorCore class's constructor. Initializes, notably, a self.m_camera attribute, which is a pointer to a concrete implementation
         of the abstract base class Camera
@@ -24,6 +24,7 @@ class PuckDetectorCore(object) :
             i_upperColor: HSV values of the Upper threshold used to identify the puck
             i_radius: Radius of the puck in pixels
             i_camera: pointer to a concrete implementation of the abstract base class Camera
+            i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
         """
 
         self.m_radius = i_radius
@@ -32,6 +33,7 @@ class PuckDetectorCore(object) :
         self.m_lowerColor = np.array(i_lowerColor)
         self.m_upperColor = np.array(i_upperColor)
         self.m_camera = i_camera
+        self.m_broadcaster = i_broadcaster
 
     def __del__(self):
         """

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['ui_5fdialog_5fhsv_57',['Ui_Dialog_HSV',['../classdialog___h_s_v_1_1_ui___dialog___h_s_v.html',1,'dialog_HSV']]],
-  ['ui_5fdialog_5fradius_58',['Ui_Dialog_Radius',['../classdialog___radius_1_1_ui___dialog___radius.html',1,'dialog_Radius']]]
+  ['puckdetector_57',['PuckDetector',['../class_puck_detector_1_1_puck_detector.html',1,'PuckDetector']]],
+  ['puckdetectorbuilder_58',['PuckDetectorBuilder',['../class_puck_detector_builder_1_1_puck_detector_builder.html',1,'PuckDetectorBuilder']]],
+  ['puckdetectorconfiguration_59',['PuckDetectorConfiguration',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html',1,'PuckDetectorConfiguration']]],
+  ['puckdetectorcore_60',['PuckDetectorCore',['../class_puck_detector_core_1_1_puck_detector_core.html',1,'PuckDetectorCore']]]
 ];

@@ -1,8 +1,9 @@
 from PuckDetectorCore import PuckDetectorCore
+from Broadcaster import Broadcaster
 
-class PuckDetectorBase(PuckDetectorCore) :
+class PuckDetector(PuckDetectorCore) :
 
-    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_displayOutput):
+    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_broadcaster, i_displayOutput = True):
         """
         PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
         correspond to the last known center of the puck
@@ -11,9 +12,10 @@ class PuckDetectorBase(PuckDetectorCore) :
             i_upperColor: HSV values of the Upper threshold used to identify the puck
             i_radius: Radius of the puck in pixels
             i_camera: pointer to a concrete implementation of the abstract base class Camera
+            i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
             i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
         """
-        PuckDetectorCore.__init__(self, i_lowerColor, i_upperColor, i_radius, i_camera)
+        PuckDetectorCore.__init__(self, i_lowerColor, i_upperColor, i_radius, i_camera,i_broadcaster)
 
         self.m_displayOutput = i_displayOutput
         self.xPos = 0
@@ -32,6 +34,7 @@ class PuckDetectorBase(PuckDetectorCore) :
             self.yPos = circle[1]
             self.radius = circle[2]
             self.newInfo = True
+        self.m_broadcaster.broadcastCoordinatesOfPuck(self.xPos, self.yPos)
 
     def displayFeed(self,i_frame):
         """
@@ -44,6 +47,7 @@ class PuckDetectorBase(PuckDetectorCore) :
             self.displayCirclesOnFrame(i_frame,self.xPos, self.yPos,self.radius)
             self.displayCirclesPositionOnFrame(i_frame,self.xPos, self.yPos)
             self.newInfo = False
+        self.m_broadcaster.broadcastVideoOfPuck(i_frame)
 
     def findPuck(self):
         """

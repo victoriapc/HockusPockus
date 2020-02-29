@@ -1,9 +1,10 @@
 import cv2
 from math import sqrt
 from PuckDetectorCore import PuckDetectorCore
+from Broadcaster import Broadcaster
 
 class PuckDetectorConfiguration(PuckDetectorCore):
-    def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_camera):
+    def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_camera,i_broadcaster):
         """
         PuckDetectorConfiguration class's constructor.
         Args:
@@ -11,8 +12,9 @@ class PuckDetectorConfiguration(PuckDetectorCore):
             i_upperColor: HSV values of the Upper threshold used to identify the puck
             i_radius: Radius of the puck in pixels
             i_camera: pointer to a concrete implementation of the abstract base class Camera
+            i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
         """
-        PuckDetectorCore.__init__(self, i_lowerColor,i_upperColor,i_radius,i_camera)
+        PuckDetectorCore.__init__(self, i_lowerColor,i_upperColor,i_radius,i_camera,i_broadcaster)
         self.RANGE = 50
 
     def SetConfiguration(self):
@@ -29,7 +31,7 @@ class PuckDetectorConfiguration(PuckDetectorCore):
             ProcessedFrame = self.ProcessFrames(frame)
 
 
-            cv2.imshow('Output', ProcessedFrame)
+            self.m_broadcaster.broadcastVideoOfPuck(ProcessedFrame)
 
     def autoConfiguration(self):
         """
@@ -57,7 +59,7 @@ class PuckDetectorConfiguration(PuckDetectorCore):
                             values[self.S] = S
                             values[self.V] = V
 
-                print "PROGRESS = " + str(100*H / PuckDetectorCore.MAX_COLOR_VALUE) + " %"
+                print ("PROGRESS = " + str(100*H / PuckDetectorCore.MAX_COLOR_VALUE) + " %")
 
         self.SetHValue(values[self.H])
         self.SetSValue(values[self.S])
@@ -163,4 +165,4 @@ class PuckDetectorConfiguration(PuckDetectorCore):
         while (isReceivingFeed and not self.m_userWantsToQuit):
             isReceivingFeed, frame = self.m_camera.getNextFrame()
             self.displayCirclesOnFrame(frame,self.CENTER_OF_SCREEN_X_POS,self.CENTER_OF_SCREEN_Y_POS,self.m_radius)
-            cv2.imshow('Output',frame)
+            self.m_broadcaster.broadcastVideoOfPuck(frame)

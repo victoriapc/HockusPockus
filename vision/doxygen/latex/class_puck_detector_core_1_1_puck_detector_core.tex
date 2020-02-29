@@ -3,13 +3,13 @@
 Inheritance diagram for Puck\+Detector\+Core.\+Puck\+Detector\+Core\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.276423cm]{class_puck_detector_core_1_1_puck_detector_core}
+\includegraphics[height=2.560976cm]{class_puck_detector_core_1_1_puck_detector_core}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{class_puck_detector_core_1_1_puck_detector_core_a7e6dee61937f864ae20e26fc487670c9}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+lower\+Color, i\+\_\+upper\+Color, i\+\_\+radius, i\+\_\+camera)
+def \mbox{\hyperlink{class_puck_detector_core_1_1_puck_detector_core_a7eca51c0b5c16b8295296aa36f6d1372}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+lower\+Color, i\+\_\+upper\+Color, i\+\_\+radius, i\+\_\+camera, i\+\_\+broadcaster)
 \item 
 def \mbox{\hyperlink{class_puck_detector_core_1_1_puck_detector_core_a3e89139ea971a921766ac44a33f11d13}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (self)
 \item 
@@ -45,6 +45,9 @@ def \mbox{\hyperlink{class_puck_detector_core_1_1_puck_detector_core_ae6e4eb555d
 \item 
 \mbox{\Hypertarget{class_puck_detector_core_1_1_puck_detector_core_a4192714274b8879bf8dd4bdabc2d2b20}\label{class_puck_detector_core_1_1_puck_detector_core_a4192714274b8879bf8dd4bdabc2d2b20}} 
 {\bfseries m\+\_\+camera}
+\item 
+\mbox{\Hypertarget{class_puck_detector_core_1_1_puck_detector_core_ab65fee2b535cc46627824ee3c696f587}\label{class_puck_detector_core_1_1_puck_detector_core_ab65fee2b535cc46627824ee3c696f587}} 
+{\bfseries m\+\_\+broadcaster}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -76,11 +79,11 @@ int {\bfseries R\+A\+D\+I\+U\+S\+\_\+\+T\+O\+L\+E\+R\+A\+N\+CE} = 25
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_puck_detector_core_1_1_puck_detector_core_a7e6dee61937f864ae20e26fc487670c9}\label{class_puck_detector_core_1_1_puck_detector_core_a7e6dee61937f864ae20e26fc487670c9}} 
+\mbox{\Hypertarget{class_puck_detector_core_1_1_puck_detector_core_a7eca51c0b5c16b8295296aa36f6d1372}\label{class_puck_detector_core_1_1_puck_detector_core_a7eca51c0b5c16b8295296aa36f6d1372}} 
 \index{PuckDetectorCore.PuckDetectorCore@{PuckDetectorCore.PuckDetectorCore}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!PuckDetectorCore.PuckDetectorCore@{PuckDetectorCore.PuckDetectorCore}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def Puck\+Detector\+Core.\+Puck\+Detector\+Core.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+lower\+Color,  }\item[{}]{i\+\_\+upper\+Color,  }\item[{}]{i\+\_\+radius,  }\item[{}]{i\+\_\+camera }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def Puck\+Detector\+Core.\+Puck\+Detector\+Core.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+lower\+Color,  }\item[{}]{i\+\_\+upper\+Color,  }\item[{}]{i\+\_\+radius,  }\item[{}]{i\+\_\+camera,  }\item[{}]{i\+\_\+broadcaster }\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}PuckDetectorCore class's constructor. Initializes, notably, a self.m_camera attribute, which is a pointer to a concrete implementation
 of the abstract base class Camera
@@ -89,10 +92,11 @@ Args:
     i_upperColor: HSV values of the Upper threshold used to identify the puck
     i_radius: Radius of the puck in pixels
     i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
 \end{DoxyVerb}
  
 
-Reimplemented in \mbox{\hyperlink{class_puck_detector_configuration_1_1_puck_detector_configuration_a3c3d538217ebb39288241f3f920ace88}{Puck\+Detector\+Configuration.\+Puck\+Detector\+Configuration}}.
+Reimplemented in \mbox{\hyperlink{class_puck_detector_configuration_1_1_puck_detector_configuration_aa6ae3704821d693ff6e3bb87025f3cad}{Puck\+Detector\+Configuration.\+Puck\+Detector\+Configuration}}.
 
 \mbox{\Hypertarget{class_puck_detector_core_1_1_puck_detector_core_a3e89139ea971a921766ac44a33f11d13}\label{class_puck_detector_core_1_1_puck_detector_core_a3e89139ea971a921766ac44a33f11d13}} 
 \index{PuckDetectorCore.PuckDetectorCore@{PuckDetectorCore.PuckDetectorCore}!\_\_del\_\_@{\_\_del\_\_}}

@@ -1,6 +1,6 @@
 var class_puck_detector_configuration_1_1_puck_detector_configuration =
 [
-    [ "__init__", "class_puck_detector_configuration_1_1_puck_detector_configuration.html#a3c3d538217ebb39288241f3f920ace88", null ],
+    [ "__init__", "class_puck_detector_configuration_1_1_puck_detector_configuration.html#aa6ae3704821d693ff6e3bb87025f3cad", null ],
     [ "autoConfiguration", "class_puck_detector_configuration_1_1_puck_detector_configuration.html#a81bd00c9ab321e6f5f61dea13816485d", null ],
     [ "DisplayRadius", "class_puck_detector_configuration_1_1_puck_detector_configuration.html#add0ab1ce777afa05c7bc78d11a2d7891", null ],
     [ "GetHValue", "class_puck_detector_configuration_1_1_puck_detector_configuration.html#a7011bc90e430bed5917ee93469b6098c", null ],

@@ -1,19 +1,20 @@
 from CameraROS import  CameraROS
 from CameraUSB import  CameraUSB
+from BroadcasterROS import BroadcasterROS
+from BroadcasterUSB import BroadcasterUSB
 
 try :
     import rospy
 except :
     pass
 
-from PuckDetectorROS import PuckDetectorROS
-from PuckDetectorUSB import PuckDetectorUSB
+from PuckDetector import PuckDetector
 from PuckDetectorConfiguration import PuckDetectorConfiguration
 from dialogConfig import dialog_config_Radius
 from dialogConfig import dialog_config_HSV
 from PyQt5.QtWidgets import QApplication
 
-import ROS_CONSTANTS
+from ROS_CONSTANTS import *
 
 import sys
 import pickle
@@ -32,17 +33,20 @@ class PuckDetectorBuilder(object):
             i_FPS : The number of frame per seconds of the camera
         """
         self.m_camera = None
+        self.m_broadcaster = None
         self.m_mode = i_mode
         self.m_path = ""
         self.m_reconfigure = False
 
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
+            self.m_broadcaster = BroadcasterROS()
             self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
             self.m_reconfigure = rospy.get_param(ROS_IS_RECONFIGURE)
 
         elif self.m_mode == PuckDetectorBuilder.USB:
             self.m_camera = CameraUSB(0, i_FPS)
+            self.m_broadcaster = BroadcasterUSB()
             self.m_path = os.getcwd()
 
         self.m_path = self.m_path + '/config.json'
@@ -59,7 +63,7 @@ class PuckDetectorBuilder(object):
             with open(self.m_path, 'rb') as file:
                 configData = pickle.load(file)
         else:
-            config = PuckDetectorConfiguration([0, 0, 0], [0, 0, 0], 0, self.m_camera)
+            config = PuckDetectorConfiguration([0, 0, 0], [0, 0, 0], 0, self.m_camera,self.m_broadcaster)
             app = QApplication(sys.argv)
 
             mainWin = dialog_config_Radius(config)
@@ -73,9 +77,4 @@ class PuckDetectorBuilder(object):
                 configData['radius'] = config.m_radius
                 pickle.dump(configData, file)
 
-        if self.m_mode == PuckDetectorBuilder.ROS:
-            return PuckDetectorROS(configData["lowerColor"], configData["upperColor"], configData["radius"],
-                                   self.m_camera)
-
-        elif self.m_mode == PuckDetectorBuilder.USB:
-            return PuckDetectorUSB(configData["lowerColor"], configData["upperColor"], configData["radius"], self.m_camera)
+        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,self.m_broadcaster)

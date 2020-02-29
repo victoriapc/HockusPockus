@@ -1,0 +1,78 @@
+\hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s}{}\doxysection{Broadcaster\+R\+O\+S.\+Broadcaster\+R\+OS Class Reference}
+\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s}\index{BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}}
+Inheritance diagram for Broadcaster\+R\+O\+S.\+Broadcaster\+R\+OS\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a1c7ec0b2367fdcaa25b25f327a79bcdc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a5e1cd8b4e6e3de4e21f8b3f449f75905}{broadcast\+Coordinates\+Of\+Puck}} (self, i\+\_\+x\+Pos, i\+\_\+\+Ypos)
+\item 
+def \mbox{\hyperlink{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_aa5b31ce07f48010121eee25934dc6f3f}{broadcast\+Video\+Of\+Puck}} (self, i\+\_\+frame)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a789f6368eb41fceb2052a4c1bfdd3b21}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a789f6368eb41fceb2052a4c1bfdd3b21}} 
+{\bfseries pos\+\_\+pub}
+\item 
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_acbcfcb344baa8b7bae1d8f353341ccb7}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_acbcfcb344baa8b7bae1d8f353341ccb7}} 
+{\bfseries m\+\_\+bridge}
+\item 
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a0d09bbe93fa9bfa7dbec0a458dc979a5}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a0d09bbe93fa9bfa7dbec0a458dc979a5}} 
+{\bfseries m\+\_\+video\+Feed\+Publisher}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a1c7ec0b2367fdcaa25b25f327a79bcdc}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a1c7ec0b2367fdcaa25b25f327a79bcdc}} 
+\index{BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Broadcaster\+R\+O\+S.\+Broadcaster\+R\+O\+S.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PuckDetector class's constructor. Initializes, notably, self.pos_pub and self.m_videoFeedPublisher, that are attributes that
+are used to publish position and video information, respectively
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a5e1cd8b4e6e3de4e21f8b3f449f75905}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_a5e1cd8b4e6e3de4e21f8b3f449f75905}} 
+\index{BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}!broadcastCoordinatesOfPuck@{broadcastCoordinatesOfPuck}}
+\index{broadcastCoordinatesOfPuck@{broadcastCoordinatesOfPuck}!BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}}
+\doxysubsubsection{\texorpdfstring{broadcastCoordinatesOfPuck()}{broadcastCoordinatesOfPuck()}}
+{\footnotesize\ttfamily def Broadcaster\+R\+O\+S.\+Broadcaster\+R\+O\+S.\+broadcast\+Coordinates\+Of\+Puck (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+x\+Pos,  }\item[{}]{i\+\_\+\+Ypos }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Broadcasts informations relatives to the position of the puck
+Args:
+    i_xPos: The X position of the puck
+    i_Ypos: The Y position of the puck
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_broadcaster_1_1_broadcaster_aff9d8c836f5e4f61ac6cc35f153fb697}{Broadcaster.\+Broadcaster}}.
+
+\mbox{\Hypertarget{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_aa5b31ce07f48010121eee25934dc6f3f}\label{class_broadcaster_r_o_s_1_1_broadcaster_r_o_s_aa5b31ce07f48010121eee25934dc6f3f}} 
+\index{BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}!broadcastVideoOfPuck@{broadcastVideoOfPuck}}
+\index{broadcastVideoOfPuck@{broadcastVideoOfPuck}!BroadcasterROS.BroadcasterROS@{BroadcasterROS.BroadcasterROS}}
+\doxysubsubsection{\texorpdfstring{broadcastVideoOfPuck()}{broadcastVideoOfPuck()}}
+{\footnotesize\ttfamily def Broadcaster\+R\+O\+S.\+Broadcaster\+R\+O\+S.\+broadcast\+Video\+Of\+Puck (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+frame }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Broadcasts the video feed of the puck
+Args:
+    i_frame: The altered frame to publish
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{class_broadcaster_1_1_broadcaster_ab6143b75dd98f94afe64d8611523314f}{Broadcaster.\+Broadcaster}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/Broadcaster\+R\+O\+S.\+py\end{DoxyCompactItemize}

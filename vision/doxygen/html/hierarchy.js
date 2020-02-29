@@ -1,6 +1,10 @@
 var hierarchy =
 [
     [ "object", null, [
+      [ "Broadcaster.Broadcaster", "class_broadcaster_1_1_broadcaster.html", [
+        [ "BroadcasterROS.BroadcasterROS", "class_broadcaster_r_o_s_1_1_broadcaster_r_o_s.html", null ],
+        [ "BroadcasterUSB.BroadcasterUSB", "class_broadcaster_u_s_b_1_1_broadcaster_u_s_b.html", null ]
+      ] ],
       [ "Camera.Camera", "class_camera_1_1_camera.html", [
         [ "CameraROS.CameraROS", "class_camera_r_o_s_1_1_camera_r_o_s.html", null ],
         [ "CameraUSB.CameraUSB", "class_camera_u_s_b_1_1_camera_u_s_b.html", null ]
@@ -13,10 +17,7 @@ var hierarchy =
       ] ],
       [ "PuckDetectorBuilder.PuckDetectorBuilder", "class_puck_detector_builder_1_1_puck_detector_builder.html", null ],
       [ "PuckDetectorCore.PuckDetectorCore", "class_puck_detector_core_1_1_puck_detector_core.html", [
-        [ "PuckDetectorBase.PuckDetectorBase", "class_puck_detector_base_1_1_puck_detector_base.html", [
-          [ "PuckDetectorROS.PuckDetectorROS", "class_puck_detector_r_o_s_1_1_puck_detector_r_o_s.html", null ],
-          [ "PuckDetectorUSB.PuckDetectorUSB", "class_puck_detector_u_s_b_1_1_puck_detector_u_s_b.html", null ]
-        ] ],
+        [ "PuckDetector.PuckDetector", "class_puck_detector_1_1_puck_detector.html", null ],
         [ "PuckDetectorConfiguration.PuckDetectorConfiguration", "class_puck_detector_configuration_1_1_puck_detector_configuration.html", null ]
       ] ]
     ] ],

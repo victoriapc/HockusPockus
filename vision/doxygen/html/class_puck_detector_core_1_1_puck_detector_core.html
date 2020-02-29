@@ -96,17 +96,15 @@ Inheritance diagram for PuckDetectorCore.PuckDetectorCore:</div>
  <div class="center">
   <img src="class_puck_detector_core_1_1_puck_detector_core.png" usemap="#PuckDetectorCore.PuckDetectorCore_map" alt=""/>
   <map id="PuckDetectorCore.PuckDetectorCore_map" name="PuckDetectorCore.PuckDetectorCore_map">
-<area href="class_puck_detector_base_1_1_puck_detector_base.html" alt="PuckDetectorBase.PuckDetectorBase" shape="rect" coords="165,112,485,136"/>
-<area href="class_puck_detector_configuration_1_1_puck_detector_configuration.html" alt="PuckDetectorConfiguration.PuckDetectorConfiguration" shape="rect" coords="495,112,815,136"/>
-<area href="class_puck_detector_r_o_s_1_1_puck_detector_r_o_s.html" alt="PuckDetectorROS.PuckDetectorROS" shape="rect" coords="0,168,320,192"/>
-<area href="class_puck_detector_u_s_b_1_1_puck_detector_u_s_b.html" alt="PuckDetectorUSB.PuckDetectorUSB" shape="rect" coords="330,168,650,192"/>
+<area href="class_puck_detector_1_1_puck_detector.html" alt="PuckDetector.PuckDetector" shape="rect" coords="0,112,320,136"/>
+<area href="class_puck_detector_configuration_1_1_puck_detector_configuration.html" alt="PuckDetectorConfiguration.PuckDetectorConfiguration" shape="rect" coords="330,112,650,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e6dee61937f864ae20e26fc487670c9"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_core_1_1_puck_detector_core.html#a7e6dee61937f864ae20e26fc487670c9">__init__</a> (self, i_lowerColor, i_upperColor, i_radius, i_camera)</td></tr>
-<tr class="separator:a7e6dee61937f864ae20e26fc487670c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eca51c0b5c16b8295296aa36f6d1372"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_core_1_1_puck_detector_core.html#a7eca51c0b5c16b8295296aa36f6d1372">__init__</a> (self, i_lowerColor, i_upperColor, i_radius, i_camera, i_broadcaster)</td></tr>
+<tr class="separator:a7eca51c0b5c16b8295296aa36f6d1372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e89139ea971a921766ac44a33f11d13"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_core_1_1_puck_detector_core.html#a3e89139ea971a921766ac44a33f11d13">__del__</a> (self)</td></tr>
 <tr class="separator:a3e89139ea971a921766ac44a33f11d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7b3be5dc4dd30c415a9e835bb0408a7"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_puck_detector_core_1_1_puck_detector_core.html#ae7b3be5dc4dd30c415a9e835bb0408a7">userWantsToQuit</a> (self)</td></tr>
@@ -142,6 +140,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a4192714274b8879bf8dd4bdabc2d2b20"><td class="memItemLeft" align="right" valign="top"><a id="a4192714274b8879bf8dd4bdabc2d2b20"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>m_camera</b></td></tr>
 <tr class="separator:a4192714274b8879bf8dd4bdabc2d2b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab65fee2b535cc46627824ee3c696f587"><td class="memItemLeft" align="right" valign="top"><a id="ab65fee2b535cc46627824ee3c696f587"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>m_broadcaster</b></td></tr>
+<tr class="separator:ab65fee2b535cc46627824ee3c696f587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -171,8 +172,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>RADIUS_TOLERANCE</b> =
 <tr class="separator:a7fc429c2d52adebc423f9e1f058ffa90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7e6dee61937f864ae20e26fc487670c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e6dee61937f864ae20e26fc487670c9">&#9670;&nbsp;</a></span>__init__()</h2>
+<a id="a7eca51c0b5c16b8295296aa36f6d1372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eca51c0b5c16b8295296aa36f6d1372">&#9670;&nbsp;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +206,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>RADIUS_TOLERANCE</b> =
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>i_camera</em>&#160;</td>
+          <td class="paramname"><em>i_camera</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>i_broadcaster</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -221,8 +228,9 @@ Args:
     i_upperColor: HSV values of the Upper threshold used to identify the puck
     i_radius: Radius of the puck in pixels
     i_camera: pointer to a concrete implementation of the abstract base class Camera
+    i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
 </pre> 
-<p>Reimplemented in <a class="el" href="class_puck_detector_configuration_1_1_puck_detector_configuration.html#a3c3d538217ebb39288241f3f920ace88">PuckDetectorConfiguration.PuckDetectorConfiguration</a>.</p>
+<p>Reimplemented in <a class="el" href="class_puck_detector_configuration_1_1_puck_detector_configuration.html#aa6ae3704821d693ff6e3bb87025f3cad">PuckDetectorConfiguration.PuckDetectorConfiguration</a>.</p>
 
 </div>
 </div>
