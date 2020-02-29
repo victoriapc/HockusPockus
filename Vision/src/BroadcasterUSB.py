@@ -12,7 +12,7 @@ class BroadcasterUSB(Broadcaster) :
 
     def broadcastVideoOfPuck(self,i_frame):
         """
-        Abstract method, implementation of this method is supposed to broadcast the video feed of the puck
+        "Broadcasts" the video feed of the puck (i.e, displays it on the screen)
         Args:
             i_frame: The altered frame to publish
         """
