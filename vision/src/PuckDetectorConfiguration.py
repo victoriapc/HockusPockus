@@ -59,7 +59,7 @@ class PuckDetectorConfiguration(PuckDetectorCore):
                             values[self.S] = S
                             values[self.V] = V
 
-                print ("PROGRESS = " + str(100*H / PuckDetectorCore.MAX_COLOR_VALUE) + " %")
+                print "PROGRESS = " + str(100*H / PuckDetectorCore.MAX_COLOR_VALUE) + " %"
 
         self.SetHValue(values[self.H])
         self.SetSValue(values[self.S])

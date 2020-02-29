@@ -16,7 +16,7 @@ ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME = "/puck_pos"
 
 # Main
 if __name__ == "__main__" :
-    MODE = PuckDetectorBuilder.USB # TODO: Dynamic
+    MODE = PuckDetectorBuilder.ROS # TODO: Dynamic
     builder = PuckDetectorBuilder(MODE,30)
     pd = builder.build()
     pd.findPuck()
