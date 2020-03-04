@@ -12,6 +12,9 @@ except ImportError:
 
 class MouseEventHandlerROS(MouseEventHandler):
     def __init__(self,i_callBackObject):
+        """
+        MouseEventHandlerROS's constructor
+        """
         MouseEventHandler.__init__(self, i_callBackObject)
 
     def start(self):

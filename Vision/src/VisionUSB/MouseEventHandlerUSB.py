@@ -3,6 +3,9 @@ from VisionInterfaces.MouseEventHandler import MouseEventHandler
 
 class MouseEventHandlerUSB(MouseEventHandler):
     def __init__(self,i_callBackObject,i_windowName):
+        """
+        MouseEventHandlerUSB's constructor
+        """
         MouseEventHandler.__init__(self, i_callBackObject)
         self.m_windowName = i_windowName
 
