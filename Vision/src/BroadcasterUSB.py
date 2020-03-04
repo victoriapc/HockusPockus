@@ -1,6 +1,9 @@
 from Broadcaster import Broadcaster
 import cv2
 class BroadcasterUSB(Broadcaster) :
+    def __init__(self,i_windowName):
+        self.m_windowName = i_windowName
+
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
         This implementation does nothing, as the USB implementation does not need to brodcast this information
@@ -16,4 +19,13 @@ class BroadcasterUSB(Broadcaster) :
         Args:
             i_frame: The altered frame to publish
         """
-        cv2.imshow('Output', i_frame)
+        cv2.imshow(self.m_windowName, i_frame)
+
+
+    def broadCastTableDimensions(self,i_tableDimensions):
+        """
+        This implementation does nothing, as the USB implementation does not need to brodcast this information
+        Args:
+            i_tableDimensions: The table dimensions
+        """
+        pass

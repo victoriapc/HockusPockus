@@ -11,6 +11,7 @@ class CameraUSB(Camera) :
         """
         self.m_camera = cv2.VideoCapture(i_videoCaptureIndex)
         self.timeBetweenFrames = 1000 / i_FPS  # The time between two frames is : 1000 ms/s * (1s/Number of frames per second)
+        self.getNextFrame()
 
     def __del__(self):
         """

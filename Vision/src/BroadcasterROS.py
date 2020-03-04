@@ -42,3 +42,11 @@ class BroadcasterROS(Broadcaster) :
 
         frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
         self.m_videoFeedPublisher.publish(frame)
+
+    def broadCastTableDimensions(self,i_tableDimensions):
+        """
+        Abstract method, implementation of this method is supposed to broadcast the table dimensions
+        Args:
+            i_tableDimensions: The table dimensions
+        """
+        pass

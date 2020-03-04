@@ -4,6 +4,9 @@ from PyQt5.QtWidgets import QDialog
 
 from dialog_HSV import *
 from dialog_Radius import *
+from dialog_DimensionsConverter import *
+from TableDimensions import  TableDimensions
+
 import copy
 
 class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
@@ -135,3 +138,53 @@ class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
         """
         self.m_config.SetVValue(self.horizontalSlider_V.value())
         self.label_V.setText("V : " + str(self.horizontalSlider_V.value()))
+        
+        
+class dialog_config_DimensionsConverter(QDialog, Ui_Dialog_DimensionsConverter):
+    def __init__(self,i_DimensionsConverterConfiguration):
+        """
+        dialog_config_DimensionsConverter class's constructor. Initializes, notably, the GUI that is used to get the values
+        of the edges (in pixels and in meters)
+        Args:
+            i_config: A pointer to a PuckDetectorConfiguration object
+        """
+        super(QDialog, self).__init__()
+        self.setupUi(self)
+        self.show()
+
+        self.m_DimensionsConverterConfiguration = i_DimensionsConverterConfiguration
+
+        self.buttonBox.accepted.connect(self.okPressed)
+        self.buttonBox.rejected.connect(self.retryPressed)
+
+        QThread(self.m_DimensionsConverterConfiguration.DisplayEdges())
+
+    def reject(self):
+        """
+        Specifies what should happen when the "X" button of the GUI is pressed : it should do the same thing as
+        when the "OK" button is pressed (see okPressed() method)
+        """
+        self.okPressed()
+
+    def retryPressed(self):
+        """
+        Specifies what should happen when the "Retry" button of the GUI is pressed : it should remove all edges that
+        were selected
+        """
+        self.m_DimensionsConverterConfiguration.resetEdges()
+
+    def okPressed(self):
+        """
+        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayRadius() thread dies
+        """
+        self.m_DimensionsConverterConfiguration.userWantsToQuit()
+
+        tableDimensions = TableDimensions()
+        tableDimensions.setLeft(self.doubleSpinBox_LeftSide.value())
+        tableDimensions.setTop(self.doubleSpinBox_TopSide.value())
+        tableDimensions.setRight(self.doubleSpinBox_RightSide.value())
+        tableDimensions.setBottom(self.doubleSpinBox_BottomSide.value())
+
+        self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
+        self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
+        self.hide()

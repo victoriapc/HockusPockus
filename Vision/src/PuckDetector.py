@@ -3,9 +3,9 @@ from Broadcaster import Broadcaster
 
 class PuckDetector(PuckDetectorCore) :
 
-    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_broadcaster, i_displayOutput = True):
+    def __init__(self,i_lowerColor, i_upperColor, i_radius, i_camera,i_broadcaster, i_dimensionsConverter, i_displayOutput = True):
         """
-        PuckDetector class's constructor. Initializes, notably, self.xPos and self.yPos, that are attributes that
+        PuckDetector class's constructor. Initializes, notably, self.xPosInPixels and self.yPosInPixels, that are attributes that
         correspond to the last known center of the puck
         Args:
             i_lowerColor: HSV values of the lower threshold used to identify the puck
@@ -13,14 +13,21 @@ class PuckDetector(PuckDetectorCore) :
             i_radius: Radius of the puck in pixels
             i_camera: pointer to a concrete implementation of the abstract base class Camera
             i_broadcaster : pointer to a concrete implementation of the abstract base class Broadcaster
+            i_dimensionsConverter : pointer to a DimensionsConverter object
             i_displayOutput: Boolean that indicates if the output video feed should be displayed by this script or not
         """
         PuckDetectorCore.__init__(self, i_lowerColor, i_upperColor, i_radius, i_camera,i_broadcaster)
 
         self.m_displayOutput = i_displayOutput
-        self.xPos = 0
-        self.yPos = 0
+        self.xPosInPixels = 0
+        self.yPosInPixels = 0
+
+        self.xPosInMeters = 0
+        self.yPosInMeters = 0
+
         self.newInfo = False
+
+        self.m_dimensionsConverter = i_dimensionsConverter
 
     def updatePosition(self,i_circles):
         """
@@ -30,11 +37,13 @@ class PuckDetector(PuckDetectorCore) :
         """
         circle = self.findPuckInAllCircles(i_circles)
         if circle is not None:
-            self.xPos = circle[0]
-            self.yPos = circle[1]
+            self.xPosInPixels = circle[0]
+            self.yPosInPixels = circle[1]
             self.radius = circle[2]
             self.newInfo = True
-        self.m_broadcaster.broadcastCoordinatesOfPuck(self.xPos, self.yPos)
+
+        self.xPosInMeters, self.yPosInMeters = self.m_dimensionsConverter.getCoordinatesInMeters((self.xPosInPixels, self.yPosInPixels))
+        self.m_broadcaster.broadcastCoordinatesOfPuck(self.xPosInMeters, self.yPosInMeters)
 
     def displayFeed(self,i_frame):
         """
@@ -44,8 +53,8 @@ class PuckDetector(PuckDetectorCore) :
             i_frame: The orginal frame
         """
         if self.newInfo :
-            self.displayCirclesOnFrame(i_frame,self.xPos, self.yPos,self.radius)
-            self.displayCirclesPositionOnFrame(i_frame,self.xPos, self.yPos)
+            self.displayCirclesOnFrame(i_frame,self.xPosInPixels, self.yPosInPixels,self.radius)
+            self.displayCirclesPositionOnFrame(i_frame,self.xPosInMeters, self.yPosInMeters)
             self.newInfo = False
         self.m_broadcaster.broadcastVideoOfPuck(i_frame)
 
