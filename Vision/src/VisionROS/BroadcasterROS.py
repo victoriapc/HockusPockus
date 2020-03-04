@@ -52,4 +52,5 @@ class BroadcasterROS(Broadcaster) :
         Args:
             i_tableDimensions: The table dimensions
         """
-        self.m_tableDimensionsPublisher.publish(numpy.array(i_tableDimensions, dtype=numpy.float32))
+        dimensions = [i_tableDimensions.getLeft(),i_tableDimensions.getTop(),i_tableDimensions.getRight(),i_tableDimensions.getBottom()]
+        self.m_tableDimensionsPublisher.publish(numpy.array(dimensions, dtype=numpy.float32))
