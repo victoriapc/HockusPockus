@@ -82,7 +82,6 @@ class PuckDetectorBuilder(object):
             self.m_mouseEventHandler.start()
             w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)
             self.m_mouseEventHandler.stop()
-            self.m_broadcaster.broadCastTableDimensions(self.dimensionsConverterConfigurator.getTableDimensions())
 
             w = dialog_config_Radius(puckDetectorConfigurator)
             puckDetectorConfigurator.autoConfiguration()  # TODO: add progress bar
@@ -91,13 +90,15 @@ class PuckDetectorBuilder(object):
             with open(self.m_path, 'wb') as file:
                 configData = {}
                 configData['edges'] = self.dimensionsConverterConfigurator.getEdges()
-                configData['m_pixelToMetersRatio'] = self.dimensionsConverterConfigurator.getPixelToMetersRatio()
+                configData['pixelToMetersRatio'] = self.dimensionsConverterConfigurator.getPixelToMetersRatio()
+                configData['tableDimensions'] = self.dimensionsConverterConfigurator.getTableDimensions()
 
                 configData['lowerColor'] = puckDetectorConfigurator.m_lowerColor
                 configData['upperColor'] = puckDetectorConfigurator.m_upperColor
                 configData['radius'] = puckDetectorConfigurator.m_radius
                 pickle.dump(configData, file)
 
-        dimensionsConverter = DimensionsConverter(configData['m_pixelToMetersRatio'],configData['edges'])
+        self.m_broadcaster.broadCastTableDimensions(configData['tableDimensions'])
+        dimensionsConverter = DimensionsConverter(configData['pixelToMetersRatio'],configData['edges'])
 
         return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,self.m_broadcaster,dimensionsConverter)
