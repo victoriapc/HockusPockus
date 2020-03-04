@@ -1,7 +1,7 @@
 import cv2
 from math import sqrt
-from PuckDetectorCore import PuckDetectorCore
-from Broadcaster import Broadcaster
+from VisionPuckDetector.PuckDetectorCore import PuckDetectorCore
+from VisionInterfaces.Broadcaster import Broadcaster
 
 class PuckDetectorConfiguration(PuckDetectorCore):
     def __init__(self, i_lowerColor,  i_upperColor, i_radius, i_camera,i_broadcaster):

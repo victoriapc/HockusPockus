@@ -2,10 +2,10 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QDialog
 
-from dialog_HSV import *
-from dialog_Radius import *
-from dialog_DimensionsConverter import *
-from TableDimensions import  TableDimensions
+from VisionDialog.dialog_HSV import *
+from VisionDialog.dialog_Radius import *
+from VisionDialog.dialog_DimensionsConverter import *
+from VisionUtils.TableDimensions import  TableDimensions
 
 import copy
 

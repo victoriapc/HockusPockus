@@ -1,4 +1,4 @@
-from DimensionsConverterCore import DimensionsConverterCore
+from VisionDimensionsConverter.DimensionsConverterCore import DimensionsConverterCore
 
 class DimensionsConverter(DimensionsConverterCore):
     def __init__(self,i_pixelToMetersRatio,i_edges):

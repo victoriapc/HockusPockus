@@ -1,6 +1,6 @@
-from Camera import Camera
+from VisionInterfaces.Camera import Camera
 import threading
-from ROS_CONSTANTS import *
+from VisionROS.ROS_CONSTANTS import *
 import cv2
 import numpy as np
 

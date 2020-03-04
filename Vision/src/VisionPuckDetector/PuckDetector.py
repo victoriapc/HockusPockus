@@ -1,5 +1,5 @@
-from PuckDetectorCore import PuckDetectorCore
-from Broadcaster import Broadcaster
+from VisionPuckDetector.PuckDetectorCore import PuckDetectorCore
+from VisionInterfaces.Broadcaster import Broadcaster
 
 class PuckDetector(PuckDetectorCore) :
 

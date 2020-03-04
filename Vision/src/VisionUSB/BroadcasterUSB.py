@@ -1,5 +1,6 @@
-from Broadcaster import Broadcaster
+from VisionInterfaces.Broadcaster import Broadcaster
 import cv2
+
 class BroadcasterUSB(Broadcaster) :
     def __init__(self,i_windowName):
         self.m_windowName = i_windowName

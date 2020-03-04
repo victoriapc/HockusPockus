@@ -1,5 +1,5 @@
 import cv2
-from MouseEventHandler import MouseEventHandler
+from VisionInterfaces.MouseEventHandler import MouseEventHandler
 
 class MouseEventHandlerUSB(MouseEventHandler):
     def __init__(self,i_callBackObject,i_windowName):

@@ -1,4 +1,4 @@
-from Camera import Camera
+from VisionInterfaces.Camera import Camera
 import cv2
 import numpy as np
 

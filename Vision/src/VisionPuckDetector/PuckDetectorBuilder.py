@@ -1,30 +1,30 @@
-from VisionROS.CameraROS import  CameraROS
-from CameraUSB import  CameraUSB
-from VisionROS.BroadcasterROS import BroadcasterROS
-from BroadcasterUSB import BroadcasterUSB
-from VisionROS.MouseEventHandlerROS import MouseEventHandlerROS
-from MouseEventHandlerUSB import MouseEventHandlerUSB
+import sys
+import pickle
+import os
+from PyQt5.QtWidgets import QApplication
 
 try :
     import rospy
 except :
     pass
 
-from PuckDetector import PuckDetector
-from PuckDetectorConfiguration import PuckDetectorConfiguration
-from DimensionsConverter import DimensionsConverter
-from DimensionsConverterConfiguration import DimensionsConverterConfiguration
+from VisionROS.CameraROS import  CameraROS
+from VisionUSB.CameraUSB import  CameraUSB
+from VisionROS.BroadcasterROS import BroadcasterROS
+from VisionUSB.BroadcasterUSB import BroadcasterUSB
+from VisionROS.MouseEventHandlerROS import MouseEventHandlerROS
+from VisionUSB.MouseEventHandlerUSB import MouseEventHandlerUSB
+from VisionROS.ROS_CONSTANTS import *
 
-from dialogConfig import dialog_config_Radius
-from dialogConfig import dialog_config_HSV
-from dialogConfig import dialog_config_DimensionsConverter
-from PyQt5.QtWidgets import QApplication
+from VisionPuckDetector.PuckDetector import PuckDetector
+from VisionPuckDetector.PuckDetectorConfiguration import PuckDetectorConfiguration
 
-from ROS_CONSTANTS import *
+from VisionDimensionsConverter.DimensionsConverter import DimensionsConverter
+from VisionDimensionsConverter.DimensionsConverterConfiguration import DimensionsConverterConfiguration
 
-import sys
-import pickle
-import os
+from VisionDialog.dialogConfig import dialog_config_Radius
+from VisionDialog.dialogConfig import dialog_config_HSV
+from VisionDialog.dialogConfig import dialog_config_DimensionsConverter
 
 class PuckDetectorBuilder(object):
     ROS = 0

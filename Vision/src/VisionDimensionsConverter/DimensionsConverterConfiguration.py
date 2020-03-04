@@ -1,5 +1,5 @@
 import cv2
-from DimensionsConverterCore import DimensionsConverterCore
+from VisionDimensionsConverter.DimensionsConverterCore import DimensionsConverterCore
 
 import threading
 
