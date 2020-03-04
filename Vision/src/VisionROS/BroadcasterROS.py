@@ -1,8 +1,10 @@
 from VisionInterfaces.Broadcaster import Broadcaster
 from VisionROS.ROS_CONSTANTS import *
+import numpy
 
 try:
     import rospy
+    from std_msgs.msg import Float
     from sensor_msgs.msg import Image
     from cv_bridge import CvBridge, CvBridgeError
     from geometry_msgs.msg import Point
@@ -13,12 +15,13 @@ class BroadcasterROS(Broadcaster) :
 
     def __init__(self):
         """
-        PuckDetector class's constructor. Initializes, notably, self.pos_pub and self.m_videoFeedPublisher, that are attributes that
+        PuckDetector class's constructor. Initializes, notably, self.positionPublisher and self.m_videoFeedPublisher, that are attributes that
         are used to publish position and video information, respectively
         """
-        self.pos_pub = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
+        self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
         self.m_bridge = CvBridge()
         self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
+        self.m_tableDimensionsPublisher = rospy.Publisher(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, rospy.numpy_msg(Float), queue_size=10)
 
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
@@ -31,7 +34,7 @@ class BroadcasterROS(Broadcaster) :
         msg.x = i_xPos
         msg.y = i_Ypos
 
-        self.pos_pub.publish(msg)
+        self.positionPublisher.publish(msg)
 
     def broadcastVideoOfPuck(self,i_frame):
         """
@@ -49,4 +52,4 @@ class BroadcasterROS(Broadcaster) :
         Args:
             i_tableDimensions: The table dimensions
         """
-        pass
+        self.m_tableDimensionsPublisher.publish(numpy.array(i_tableDimensions, dtype=numpy.float32))
