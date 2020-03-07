@@ -1,4 +1,4 @@
-![alt](ui/src/resources/logoProjet.png)
+![alt](ui/src/resources/logo_noir.png)
 
 Welcome to the Hockus Pockus Project!
 
