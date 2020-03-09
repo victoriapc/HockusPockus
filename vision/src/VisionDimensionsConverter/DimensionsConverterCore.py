@@ -1,4 +1,6 @@
 class DimensionsConverterCore(object):
+    X = 1
+    Y = 0
     def __init__(self,i_pixelToMetersRatio,i_edges):
         """
         DimensionsConverterCore class's constructor.

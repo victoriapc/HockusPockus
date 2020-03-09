@@ -16,7 +16,7 @@ class DimensionsConverter(DimensionsConverterCore):
         Returns:
             The coordinates in meters
         """
-        x = self.m_pixelToMetersRatio*(i_pixelsCoordinates[0] - self.m_origin[0])
-        y = self.m_pixelToMetersRatio*(self.m_origin[1] - i_pixelsCoordinates[1]) # The Y axis is the other way
+        x = self.m_pixelToMetersRatio*(i_pixelsCoordinates[DimensionsConverterCore.X] - self.m_origin[DimensionsConverterCore.X])
+        y = self.m_pixelToMetersRatio*(i_pixelsCoordinates[DimensionsConverterCore.Y] - self.m_origin[DimensionsConverterCore.Y])
 
         return (x,y)

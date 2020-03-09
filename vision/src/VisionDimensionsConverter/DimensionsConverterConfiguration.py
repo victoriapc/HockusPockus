@@ -77,13 +77,10 @@ class DimensionsConverterConfiguration(DimensionsConverterCore):
         BOTTOM = 3
         NUMBER_OF_SIDES = 4
 
-        X = 0
-        Y = 1
-
-        leftSide = abs(self.m_edges[TOP][Y] - self.m_edges[LEFT][Y])
-        topSide = abs(self.m_edges[TOP][X] - self.m_edges[RIGHT][X])
-        rightSide = abs(self.m_edges[RIGHT][Y] - self.m_edges[BOTTOM][Y])
-        bottomSide = abs(self.m_edges[LEFT][X] - self.m_edges[BOTTOM][X])
+        leftSide = abs(self.m_edges[TOP][DimensionsConverterCore.Y] - self.m_edges[LEFT][DimensionsConverterCore.Y])
+        topSide = abs(self.m_edges[TOP][DimensionsConverterCore.X] - self.m_edges[RIGHT][DimensionsConverterCore.X])
+        rightSide = abs(self.m_edges[RIGHT][DimensionsConverterCore.Y] - self.m_edges[BOTTOM][DimensionsConverterCore.Y])
+        bottomSide = abs(self.m_edges[LEFT][DimensionsConverterCore.X] - self.m_edges[BOTTOM][DimensionsConverterCore.X])
 
         self.m_pixelToMetersRatio = (self.m_sidesDimensions.getLeft()/leftSide) + (self.m_sidesDimensions.getTop()/topSide) + (self.m_sidesDimensions.getRight()/rightSide) + (self.m_sidesDimensions.getBottom()/bottomSide)
         self.m_pixelToMetersRatio = self.m_pixelToMetersRatio/NUMBER_OF_SIDES
