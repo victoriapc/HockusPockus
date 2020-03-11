@@ -16,6 +16,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   local_dir: html
-  github_token: $281781b146117d930f169942a6e2e27c7a2398cc
+  github_token: $GH_REPO_TOKEN
   on:
     branch: master
