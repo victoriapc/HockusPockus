@@ -35,51 +35,33 @@ class PuckDetectorConfiguration(PuckDetectorCore):
 
     def autoConfiguration(self):
         """
-         This method tries different settings and check how much the puck stands out with specific settings.
-         It iterates through all possibilites. When it is done, it applies the best settings. This should be used
+         This method check the HSV value of the puck region and applies these values to the settings. This should be used
          as a first step, before the user does fine tunning through the SetConfiguration() method.
         """
         hasReceivedFrame, frame = self.m_camera.getNextFrame()
-        maxScore = 0
-        values = [0,0,0]
-        resolutionStep = 20
-
-        if hasReceivedFrame :
-            for H in range(0,PuckDetectorCore.MAX_COLOR_VALUE,resolutionStep) :
-                for S in range(0, PuckDetectorCore.MAX_COLOR_VALUE,resolutionStep):
-                    for V in range(0, PuckDetectorCore.MAX_COLOR_VALUE,resolutionStep):
-                        self.SetHValue(H)
-                        self.SetSValue(S)
-                        self.SetVValue(V)
-                        ProcessedFrame = self.ProcessFrames(frame)
-                        currentScore = self.getScoreOfFrame(ProcessedFrame)
-                        if (currentScore > maxScore ) :
-                            maxScore = currentScore
-                            values[self.H] = H
-                            values[self.S] = S
-                            values[self.V] = V
-
-                print "PROGRESS = " + str(100*H / PuckDetectorCore.MAX_COLOR_VALUE) + " %"
+        values = self.getHSVOfPuck(frame)
 
         self.SetHValue(values[self.H])
         self.SetSValue(values[self.S])
         self.SetVValue(values[self.V])
 
-    def getScoreOfFrame(self,i_frame):
+    def getHSVOfPuck(self,i_frame):
         """
-        Used in the autoConfiguration() method to evaluate how much white there is in a the region of the
-        puck (and, therefore, how well some specific configurations settings perform)
+        Returns the average HSV values of the puck region
         Args:
             i_frame:   The frame to analyse
         Returns:
-            The score of the frame (the sum of the values of the pixel inside the region of interest)
+            The average HSV values of the puck region
         """
-        score = 0
+        values = [0,0,0]
+        nbOfPixels = 0
         for y in range(self.CENTER_OF_SCREEN_Y_POS-self.m_radius,self.CENTER_OF_SCREEN_Y_POS+self.m_radius):
             for x in range(self.CENTER_OF_SCREEN_X_POS - self.m_radius, self.CENTER_OF_SCREEN_X_POS + self.m_radius):
                 if sqrt((x-self.CENTER_OF_SCREEN_X_POS)**2+ (y-self.CENTER_OF_SCREEN_Y_POS)**2) <= self.m_radius :
-                    score += i_frame[y,x]
-        return score
+                    values += i_frame[y,x]
+                    nbOfPixels += 1
+
+        return values/nbOfPixels
 
     def SetRadiusValue(self, i_radius):
         """
