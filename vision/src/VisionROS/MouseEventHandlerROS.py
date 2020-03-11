@@ -21,7 +21,7 @@ class MouseEventHandlerROS(MouseEventHandler):
         """
         Starts the event handling process
         """
-        self.m_webcam = rospy.Subscriber(ROS_SUBSCRIBER_MOUSE_EVENT_TOPIC_NAME, Point, self.updateFrame)
+        self.m_webcam = rospy.Subscriber(ROS_SUBSCRIBER_MOUSE_EVENT_TOPIC_NAME, Point, self.callBack)
 
     def callBack(self,i_point):
         """

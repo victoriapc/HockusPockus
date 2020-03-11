@@ -77,6 +77,8 @@ class DimensionsConverterConfiguration(DimensionsConverterCore):
         BOTTOM = 3
         NUMBER_OF_SIDES = 4
 
+        print(self.m_edges)
+
         leftSide = abs(self.m_edges[TOP][DimensionsConverterCore.Y] - self.m_edges[LEFT][DimensionsConverterCore.Y])
         topSide = abs(self.m_edges[TOP][DimensionsConverterCore.X] - self.m_edges[RIGHT][DimensionsConverterCore.X])
         rightSide = abs(self.m_edges[RIGHT][DimensionsConverterCore.Y] - self.m_edges[BOTTOM][DimensionsConverterCore.Y])
