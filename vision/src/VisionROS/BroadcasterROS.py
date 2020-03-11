@@ -44,9 +44,14 @@ class BroadcasterROS(Broadcaster) :
         Args:
             i_frame: The altered frame to publish
         """
+        try:
+            frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
+            self.m_videoFeedPublisher.publish(frame)
 
-        frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
-        self.m_videoFeedPublisher.publish(frame)
+        except CvBridgeError as e:
+            frame = self.m_bridge.cv2_to_imgmsg(i_frame, "mono8")
+            self.m_videoFeedPublisher.publish(frame)
+
 
     def broadCastTableDimensions(self,i_tableDimensions):
         """
