@@ -1,3 +1,0 @@
-<launch>    
-    <node name="motor_controls" pkg="motor_controls" type="motor_controls"/>
-</launch>
