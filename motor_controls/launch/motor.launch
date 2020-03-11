@@ -1,0 +1,3 @@
+<launch>    
+    <node name="motors" pkg="motor_control" type="motor.sh"/>
+</launch>

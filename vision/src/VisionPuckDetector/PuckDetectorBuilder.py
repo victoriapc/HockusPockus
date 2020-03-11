@@ -49,8 +49,13 @@ class PuckDetectorBuilder(object):
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
             self.m_broadcaster = BroadcasterROS()
-            self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
-            self.m_mouseEventHandler = MouseEventHandlerROS(self.dimensionsConverterConfigurator)
+            # BEGIN TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
+            #self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
+            #self.m_mouseEventHandler = MouseEventHandlerROS(self.dimensionsConverterConfigurator)
+            USB_OUTPUT_NAME = 'Output'
+            self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,BroadcasterUSB(USB_OUTPUT_NAME))
+            self.m_mouseEventHandler = MouseEventHandlerUSB(self.dimensionsConverterConfigurator,USB_OUTPUT_NAME)
+            # END TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
             self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
             self.m_reconfigure = rospy.get_param(ROS_IS_RECONFIGURE)
 
