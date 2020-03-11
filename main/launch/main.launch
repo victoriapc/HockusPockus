@@ -3,5 +3,5 @@
     <include file="$(find webcam)/launch/webcam.launch"/>
     <include file="$(find vision)/launch/vision.launch"/>
     <include file="$(find ui)/launch/ui.launch"/>
-    <include file="$(find motor_control)/launch/motor.launch"/>
+    <include file="$(find motor_controls)/launch/motor.launch"/>
 </launch>

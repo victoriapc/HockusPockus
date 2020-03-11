@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   webcam
   ui
   vision
+  motor_controls
 )
 
 catkin_package(
