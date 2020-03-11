@@ -111,8 +111,8 @@ catkin_package(
 ###############
 ## PROFILING ##
 ###############
-add_compile_options(-pg)
-set(catkin_LIBRARIES ${catkin_LIBRARIES} -pg)
+# add_compile_options(-pg)
+# set(catkin_LIBRARIES ${catkin_LIBRARIES} -pg)
 
 
 ###########
