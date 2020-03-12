@@ -51,8 +51,6 @@ class dialog_config_Radius(QDialog, Ui_Dialog_Radius):
         self.m_config.SetRadiusValue(self.horizontalSlider_radius.value())
         self.labe_radius_value.setText("Radius : " + str(self.horizontalSlider_radius.value()))
 
-
-
 class dialog_config_HSV(QDialog, Ui_Dialog_HSV):
     def __init__(self,i_config):
         """

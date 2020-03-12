@@ -13,7 +13,7 @@
 #include <sstream>
 #include <string.h>
 #include "ros/ros.h"
-#include <geometry_msgs/Pose2D.h>
+#include <geometry_msgs/Point.h>
 
 #include <unistd.h>
 
@@ -26,34 +26,46 @@ float step_length = perimeter/STEPROT;
 float current_posx = 0;
 float current_posy = 0;
 
-void current_pos_callback(const geometry_msgs::Pose2D robot_pos){
+// Pub and Sub
+ros::Publisher pos_pub;
+ros::Subscriber desired_sub;
+ros::Subscriber robot_sub;
+
+void current_pos_callback(const geometry_msgs::Point robot_pos);
+void forward();
+void backward();
+void right();
+void left();
+
+geometry_msgs::Point point;
+
+void control_callback(const geometry_msgs::Point desired_pos);
+
+
+int main(int argc, char*argv[])
+{	
+	
+	// pthread_create(&thread_Control, NULL, control,NULL);	
+
+	wiringPiSetup();
+	// pin 4 and 5 for left motor
+	pinMode(5, OUTPUT);
+	pinMode(4, OUTPUT);
+	// pin 6 and 7 for right motor
+	pinMode(6, OUTPUT);
+	pinMode(7, OUTPUT);
+	
+	ros::init(argc, argv, "motor_controls");
+	ros::NodeHandle n;
+	pos_pub = n.advertise<geometry_msgs::Point>("robot_pos", 1000);
+	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
+	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
+	
+	 ros::spin();
+}
+void current_pos_callback(const geometry_msgs::Point robot_pos){
 	current_posx = robot_pos.x;
 	current_posy = robot_pos.y;
-}
-
-void control_callback(const geometry_msgs::Pose2D desired_pos){
-
-
-	if (desired_pos.x != current_posx){
-		if (desired_pos.x > current_posx){
-			right();
-		}
-
-		if (desired_pos.x < current_posx){
-			left();
-		}	
-	}
-
-	if (desired_pos.y != current_posy){
-		
-		if (desired_pos.y > current_posy){
-			forward();
-		}
-
-		if (desired_pos.y < current_posy){
-			backward();
-		}	
-	} 
 }
 
 void forward(){
@@ -77,7 +89,8 @@ void forward(){
 	digitalWrite(7,LOW);
 
 	current_posy += step_length;
-	pos_pub.publish(current_posy);
+	point.y = current_posy;
+	pos_pub.publish(point);
 }
 
 void backward(){
@@ -101,7 +114,8 @@ void backward(){
 	digitalWrite(7,LOW);
 
 	current_posy -= step_length;
-	pos_pub.publish(current_posy);
+	point.y = current_posy;
+	pos_pub.publish(point);
 }
 
 void right(){
@@ -125,7 +139,8 @@ void right(){
 	digitalWrite(7,LOW);
 
 	current_posx += step_length;
-	pos_pub.publish(current_posx);
+	point.x = current_posx;
+	pos_pub.publish(point);
 }
 
 void left(){
@@ -149,26 +164,30 @@ void left(){
 	digitalWrite(7,LOW);
 
 	current_posx -= step_length;
-	pos_pub.publish(current_posx);
+	point.x = current_posx;
+	pos_pub.publish(point);
 }
+void control_callback(const geometry_msgs::Point desired_pos){
 
-int main(int argc, char*argv[])
-{	
-	
-	// pthread_create(&thread_Control, NULL, control,NULL);	
 
-	wiringPiSetup();
-	// pin 4 and 5 for left motor
-	pinMode(5, OUTPUT);
-	pinMode(4, OUTPUT);
-	// pin 6 and 7 for right motor
-	pinMode(6, OUTPUT);
-	pinMode(7, OUTPUT);
+	if (desired_pos.x != current_posx){
+		if (desired_pos.x > current_posx){
+			right();
+		}
 
-	ros::Subscriber sub = n.subscribe("desired_pos", 1000, control_callback);
-	ros::Subscriber sub = n.subscribe("robot_pos", 1000, current_pos_callback);
+		if (desired_pos.x < current_posx){
+			left();
+		}	
+	}
 
-	ros::Publisher pos_pub = n.advertise<geometry_msgs::Pose2D>("robot_pos", 1000);
-	
-	
+	if (desired_pos.y != current_posy){
+		
+		if (desired_pos.y > current_posy){
+			forward();
+		}
+
+		if (desired_pos.y < current_posy){
+			backward();
+		}	
+	} 
 }

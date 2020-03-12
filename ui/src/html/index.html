@@ -54,22 +54,34 @@
 
 	<!-- Page Content -->
 	<main>
-		<center>
-		<h1>Rules</h1>
-		
-		<p> Every player starts with 7 lives </p>
-		<p> The game ends when one player has 0 life.</p>
-
-		<p> When a goal is scored, one point is added to the one who made the goal. </p>
-		<p> After each goal, the human player starts with the puck in is zone.</p>
-
-
-		<h2>3 player variant</h2>
-			
-		<p> The player who has been scored loses a life</p>
-		<p> The game ends when only one player remain.</p>
-		
-	</center>
+		<h1><center>Dashboard</center></h1>
+		<div class="top-row">
+			<div class="card-top">
+				<div class="card-top-header">New Game</div>
+				<span class='start-btn'>EASY</span>
+				<span class='start-btn'>MEDIUM</span>
+				<span class='start-btn'>HARD</span>
+			</div>
+			<div class="card-top">
+				<div class="card-top-header">Manual Control</div>
+				<span class='start-btn'>ACTIVATE</span>
+			</div>
+			<div class="card-top">
+				<div class="card-top-header">Current Position</div>
+			</div>
+			<div class="card-top">
+				<div class="card-top-header">Statistics</div>
+			</div>
+		</div>
+		<div class="bottom-row">
+			<div class="card-bottom">
+				<div class="card-bottom-header">Video</div>
+				<img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%"></img>
+			</div>
+			<div class="card-bottom">
+				<div id="game_card" class="card-bottom-header">Game</div>
+			</div>
+		</div>
 	</main>
 
 </body>

@@ -1,10 +1,12 @@
+#!/usr/bin/python
 from VisionInterfaces.Broadcaster import Broadcaster
 from VisionROS.ROS_CONSTANTS import *
 import numpy
 
 try:
     import rospy
-    from std_msgs.msg import Float
+    from rospy.numpy_msg import numpy_msg
+    from std_msgs.msg import Float32MultiArray
     from sensor_msgs.msg import Image
     from cv_bridge import CvBridge, CvBridgeError
     from geometry_msgs.msg import Point
@@ -21,8 +23,8 @@ class BroadcasterROS(Broadcaster) :
         self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
         self.m_bridge = CvBridge()
         self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
-        self.m_tableDimensionsPublisher = rospy.Publisher(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, rospy.numpy_msg(Float), queue_size=10)
-
+        self.m_tableDimensionsPublisher = rospy.Publisher(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, queue_size=10)
+        
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
         Broadcasts informations relatives to the position of the puck
@@ -42,9 +44,14 @@ class BroadcasterROS(Broadcaster) :
         Args:
             i_frame: The altered frame to publish
         """
+        try:
+            frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
+            self.m_videoFeedPublisher.publish(frame)
 
-        frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
-        self.m_videoFeedPublisher.publish(frame)
+        except CvBridgeError as e:
+            frame = self.m_bridge.cv2_to_imgmsg(i_frame, "mono8")
+            self.m_videoFeedPublisher.publish(frame)
+
 
     def broadCastTableDimensions(self,i_tableDimensions):
         """
@@ -52,5 +59,6 @@ class BroadcasterROS(Broadcaster) :
         Args:
             i_tableDimensions: The table dimensions
         """
-        dimensions = [i_tableDimensions.getLeft(),i_tableDimensions.getTop(),i_tableDimensions.getRight(),i_tableDimensions.getBottom()]
-        self.m_tableDimensionsPublisher.publish(numpy.array(dimensions, dtype=numpy.float32))
+        msg = Float32MultiArray()
+        msg.data = [i_tableDimensions.getLeft(),i_tableDimensions.getTop(),i_tableDimensions.getRight(),i_tableDimensions.getBottom()]
+        self.m_tableDimensionsPublisher.publish(msg)
