@@ -16,6 +16,11 @@ void Player::resetScore()
 	m_score = 0;
 }
 
+int Player::getScore()
+{
+	return m_score;
+}
+
 const std::string& Player::getName()
 {
 	return m_name;

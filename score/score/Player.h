@@ -6,6 +6,7 @@ public:
 	Player(const std::string& i_name);
 	void incrementScore();
 	void resetScore();
+	int getScore();
 	const std::string& getName();
 private:
 	std::string m_name; 
