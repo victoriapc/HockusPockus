@@ -1,8 +1,9 @@
 #include "Goal.h"
 
-Goal::Goal(GoalSensorBase* i_pGoalSensorBase, Player* i_pPlayer):
+Goal::Goal(GoalSensorBase* i_pGoalSensorBase, const std::string& i_playerID, PlayerManager* i_pPlayerManager) :
 	m_pGoalSensorBase(i_pGoalSensorBase),
-	m_pPlayer(i_pPlayer),
+	m_playerID(i_playerID),
+	m_pPlayerManager(i_pPlayerManager),
 	m_doSomeWork(true)
 {
 }
@@ -14,12 +15,6 @@ Goal::~Goal()
 		delete m_pGoalSensorBase; 
 		m_pGoalSensorBase = nullptr;
 	}
-
-	if (m_pPlayer != nullptr)
-	{
-		delete m_pPlayer;
-		m_pPlayer = nullptr;
-	}
 }
 
 void Goal::doKeepTrackOfScore()
@@ -27,7 +22,7 @@ void Goal::doKeepTrackOfScore()
 	while (m_doSomeWork)
 	{
 		m_pGoalSensorBase->checkForNextGoal(); // The flow of execution is blocked here while there is no goal
-		m_pPlayer->incrementScore();
+		m_pPlayerManager->updateScore(m_playerID);
 	}
 }
 

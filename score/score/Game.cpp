@@ -13,14 +13,16 @@ Game::Game()
     const std::string ROBOT_NAME = "Hockus Pockus";
 
     // END TODO : Dynamic with ROS 
+    m_playerManager.addAPlayer(PLAYER_NAME);
+    m_playerManager.addAPlayer(ROBOT_NAME);
 
-    GoalBuilder goalBuilder = GoalBuilder();
-    m_vGoals.push_back(goalBuilder.buildASonarGoal(PLAYER_NAME, ECHO_PIN_PLAYER, TRIG_PIN_PLAYER));
-    m_vGoals.push_back(goalBuilder.buildASonarGoal(ROBOT_NAME, ECHO_PIN_ROBOT, TRIG_PIN_ROBOT));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_PLAYER, TRIG_PIN_PLAYER), PLAYER_NAME,& m_playerManager));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_ROBOT, TRIG_PIN_ROBOT), ROBOT_NAME, &m_playerManager));
 
     for (std::vector<Goal*>::iterator it = m_vGoals.begin(); it != m_vGoals.end(); it++)
     {
-        (*it)->doKeepTrackOfScore();
+        std::thread t(&Goal::doKeepTrackOfScore, *it);
+        t.detach();
     }
 }
 
