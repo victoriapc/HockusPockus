@@ -30,6 +30,7 @@ Game::~Game()
 {
     for (std::vector<Goal*>::iterator it = m_vGoals.begin(); it != m_vGoals.end(); it++)
     {
+		(*it)->stopKeepingTrackOfScores();
         delete (*it);
     }
 }
