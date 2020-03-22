@@ -11,7 +11,7 @@
 class Game
 {
 public:
-	Game(std::vector<std::string> * m_playerNames);
+	Game(std::vector<std::string> * i_playerNames, int i_scoreToWin);
 	~Game();
 private:
 	std::vector<Goal*> m_vGoals;
