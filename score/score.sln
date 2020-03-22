@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "score", "score\score.vcxproj", "{86EED837-170C-4C44-962D-98F020CCDDA5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "score", "src\score.vcxproj", "{86EED837-170C-4C44-962D-98F020CCDDA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
