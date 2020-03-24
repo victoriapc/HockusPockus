@@ -1,12 +1,15 @@
 #pragma once
-#include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "ROS_topicNames.h"
+#include <ros/ros.h>
+#include <std_msgs/Bool.h>
+#include <std_msgs/Int32.h>
+#include <std_msgs/String.h>
 
 #include <sstream>
 #include <vector>
 
 #include "Player.h"
-#include "ROS_topicNames.h"
+
 class PlayerManager
 {
 public:

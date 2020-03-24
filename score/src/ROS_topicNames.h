@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
  namespace ROS_topicNames
  {
 	const std::string GAME_STATE = "/game/start_game";
