@@ -1,0 +1,3 @@
+<launch>    
+    <node name="score_node" pkg="score" type="score_node"/>
+</launch>
