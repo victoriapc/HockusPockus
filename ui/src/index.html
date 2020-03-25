@@ -53,9 +53,13 @@
 		<div class="top-row">
 			<div class="card-top">
 				<div class="card-top-header">New Game</div>
+				<span id = "easy" class='start-btn'>EASY</span>
+				<span id = "medium" class='start-btn'>MEDIUM</span>
+				<span id = "hard" class='start-btn'>HARD</span>
 			</div>
 			<div class="card-top">
 				<div class="card-top-header">Manual Control</div>
+				<span class='start-btn' onclick="Activate_manual()">ACTIVATE</span>
 			</div>
 			<div class="card-top">
 				<div class="card-top-header">Current Position</div>
@@ -75,4 +79,17 @@
 		</div>
 	</main>
 </body>
+
+<script>
+	function Activate_manual() {
+			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
+	}
+</script>
+
+<script>
+	function change_difficulty(x) {
+			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
+	}
+</script>
+
 </html>

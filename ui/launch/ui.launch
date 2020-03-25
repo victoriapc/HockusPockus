@@ -1,8 +1,12 @@
 <launch>
+    <!-- Socket allowing communication between UI and ROSMASTER-->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+
     <!-- This node will launch web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server">
         <param name="port" value="7070"/>
     </node>
     
-    <node name="ui" pkg="ui" type="ui.sh"/>
+    <!-- Server node to handle request-->
+    <node name="ui" pkg="ui" type="server.py"/>
 </launch>
