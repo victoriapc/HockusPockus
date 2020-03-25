@@ -9,6 +9,7 @@ public:
 
 protected : 
 	virtual bool isTriggeredCondition() = 0;
+	virtual bool isIdleCondition() = 0;
 
 private:
 	bool isIdleState();
