@@ -54,19 +54,19 @@
 
 	<!-- Page Content -->
 	<main>
-		<h1><center>Dashboard</center></h1>
+		<h1 id="test"><center>Dashboard</center></h1>
 		<div class="top-row">
 			<div class="card-top">
 				<div class="card-top-header">New Game</div>
-				<span class='start-btn'>EASY</span>
-				<span class='start-btn'>MEDIUM</span>
-				<span class='start-btn'>HARD</span>
+				<span id = "easy" class='start-btn'>EASY</span>
+				<span id = "medium" class='start-btn'>MEDIUM</span>
+				<span id = "hard" class='start-btn'>HARD</span>
 			</div>
 			<div class="card-top">
 				<div class="card-top-header">Manual Control</div>
-				<span class='start-btn'>ACTIVATE</span>
+				<span class='start-btn' onclick="Activate_manual()">ACTIVATE</span>
 			</div>
-			<div class="card-top">
+			<div  class="card-top">
 				<div class="card-top-header">Current Position</div>
 			</div>
 			<div class="card-top">
@@ -76,13 +76,28 @@
 		<div class="bottom-row">
 			<div class="card-bottom">
 				<div class="card-bottom-header">Video</div>
-				<img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%"></img>
+				<img id="video_card" src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%"></img>
 			</div>
 			<div class="card-bottom">
-				<div id="game_card" class="card-bottom-header">Game</div>
+				<div class="card-bottom-header">Game</div>
 			</div>
 		</div>
 	</main>
 
 </body>
+
+<script>
+	function Activate_manual() {
+			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
+	}
+</script>
+
+<script>
+	function change_difficulty(x) {
+			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
+	}
+</script>
+
+
+
 </html>
