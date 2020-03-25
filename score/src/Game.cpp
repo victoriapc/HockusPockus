@@ -1,7 +1,6 @@
 #include "Game.h"
 
-Game::Game(std::vector<std::string> * i_playerNames, int i_scoreToWin, ros::Publisher * i_pScorePublisher, ros::Publisher * i_pEndOfGamePublisher):
-m_playerManager(i_scoreToWin, i_pScorePublisher, i_pEndOfGamePublisher)
+Game::Game(std::vector<std::string> * i_playerNames, int i_scoreToWin, ros::Publisher * i_pScorePublisher, ros::Publisher * i_pEndOfGamePublisher)
 {
     // BEGIN TODO : Dynamic with ROS 
     const int ECHO_PIN_PLAYER = 11;
@@ -23,11 +22,13 @@ m_playerManager(i_scoreToWin, i_pScorePublisher, i_pEndOfGamePublisher)
 		nameOfPlayer = "Player";
 	}
 	
-    m_playerManager.addAPlayer(nameOfPlayer);
-    m_playerManager.addAPlayer(ROBOT_NAME);
+	m_spPlayerManager = std::make_shared<PlayerManager>(i_scoreToWin, i_pScorePublisher, i_pEndOfGamePublisher);
+	
+    m_spPlayerManager->addAPlayer(nameOfPlayer);
+    m_spPlayerManager->addAPlayer(ROBOT_NAME);
 
-    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_PLAYER, TRIG_PIN_PLAYER), nameOfPlayer,& m_playerManager));
-    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_ROBOT, TRIG_PIN_ROBOT), ROBOT_NAME, &m_playerManager));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_PLAYER, TRIG_PIN_PLAYER), nameOfPlayer,m_spPlayerManager));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_ROBOT, TRIG_PIN_ROBOT), ROBOT_NAME, m_spPlayerManager));
 
     for (std::vector<Goal*>::iterator it = m_vGoals.begin(); it != m_vGoals.end(); it++)
     {

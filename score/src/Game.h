@@ -15,6 +15,6 @@ public:
 	~Game();
 private:
 	std::vector<Goal*> m_vGoals;
-	PlayerManager m_playerManager;
+	std::shared_ptr<PlayerManager> m_spPlayerManager;
 };
 
