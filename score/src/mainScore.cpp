@@ -26,7 +26,7 @@ public:
 		
 		if(i_msg->data)
 		{
-			m_pCurrentGame = new Game(&m_playerNames,m_scoreToWin,_scorePublisher,_endOfGamePublisher);
+			m_pCurrentGame = new Game(&m_playerNames,m_scoreToWin,&_scorePublisher,&_endOfGamePublisher);
 		}
 	}
 	
@@ -66,8 +66,8 @@ int main(int argc, char*argv[])
 	_nameSubscriber = n.subscribe(ROS_topicNames::PLAYERS_NAMES, 1000, &NewGameListener::callbackPlayersNames, &newGameListener);
 	_scoreSubscriber = n.subscribe(ROS_topicNames::SCORE_TO_WIN, 1000, &NewGameListener::callbackScoreToWin, &newGameListener);
 	
-	_scorePublisher = m_node.advertise<std_msgs::String>(ROS_topicNames::SCORES, 1000);
-	_endOfGamePublisher = m_node.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 1000);
+	_scorePublisher = n.advertise<std_msgs::String>(ROS_topicNames::SCORES, 1000);
+	_endOfGamePublisher = n.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 1000);
 
 	ros::spin();
 }

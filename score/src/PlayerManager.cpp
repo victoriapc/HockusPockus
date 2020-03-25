@@ -48,6 +48,6 @@ void PlayerManager::updateScore(const std::string& i_playerID)
 	{
 		std_msgs::Bool msgEndOfGame;  
 		msgEndOfGame.data = false; // the GAME_STATE topic states if the score management related code should run or not (so we put this to false, as the game is over)
-		i_pEndOfGamePublisher->publish(msgEndOfGame);
+		m_pEndOfGamePublisher->publish(msgEndOfGame);
 	}
 }

@@ -14,7 +14,7 @@ m_playerManager(i_scoreToWin, i_pScorePublisher, i_pEndOfGamePublisher)
 
     // END TODO : Dynamic with ROS 
 	std::string nameOfPlayer;
-	if(i_playerNames.size() > 0)
+	if(i_playerNames->size() > 0)
 	{
 		nameOfPlayer = (*i_playerNames)[0]; // TODO : for now, the table only supports two players, as such, using vectors everywhere may seem weird. However, we want the table to accept more people in the future. As such, for now, we expect to receive only one name (the player's one) and we hardcode it here accordingly : this isn't ideal, but I don't know how we'll manage to link the Pi's pins dynamically to the players. We'll have to discuss this. 		
 	}
