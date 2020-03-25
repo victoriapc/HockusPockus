@@ -49,15 +49,18 @@ private:
 	int m_scoreToWin ; 
 };
 
+ros::Subscriber name;
+ros::Subscriber start;
+ros::Subscriber score;
+
 int main(int argc, char*argv[])
 {
 	ros::init(argc, argv, "score");
 	ros::NodeHandle n;
-	
 	NewGameListener newGameListener = NewGameListener();
-	n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
-	n.subscribe(ROS_topicNames::PLAYERS_NAMES, 1000, &NewGameListener::callbackPlayersNames, &newGameListener);
-	n.subscribe(ROS_topicNames::SCORE_TO_WIN, 1000, &NewGameListener::callbackScoreToWin, &newGameListener);
+	start = n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
+	name = n.subscribe(ROS_topicNames::PLAYERS_NAMES, 1000, &NewGameListener::callbackPlayersNames, &newGameListener);
+	score = n.subscribe(ROS_topicNames::SCORE_TO_WIN, 1000, &NewGameListener::callbackScoreToWin, &newGameListener);
 
 	ros::spin();
 }

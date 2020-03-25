@@ -1,6 +1,6 @@
 #pragma once
 #include "GoalSensorBase.h"
-#include "SR04.h"
+#include "libSonar.h"
 
 class GoalSensorSonar :
 	public GoalSensorBase
@@ -14,6 +14,6 @@ private:
     long getDistance();
 
     static const int DISTANCE_THRESHOLD = 4; 
-    SR04 m_sonar;
+    Sonar m_sonar;
 };
 

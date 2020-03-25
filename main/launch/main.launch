@@ -1,7 +1,8 @@
 <launch>
-    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
-    <include file="$(find webcam)/launch/webcam.launch"/>
-    <include file="$(find vision)/launch/vision.launch"/>
-    <include file="$(find ui)/launch/ui.launch"/>
-    <include file="$(find motor_controls)/launch/motor.launch"/>
+    <!--include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/-->
+    <!--include file="$(find webcam)/launch/webcam.launch"/-->
+    <!--include file="$(find vision)/launch/vision.launch"/-->
+    <!--include file="$(find ui)/launch/ui.launch"/-->
+    <!--include file="$(find motor_controls)/launch/motor.launch"/-->
+    <include file="$(find score)/launch/score.launch"/>
 </launch>

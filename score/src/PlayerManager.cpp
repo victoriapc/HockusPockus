@@ -6,6 +6,7 @@ PlayerManager::PlayerManager(int i_scoreToWin):
 	m_endOfGamePublisher(m_node.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 100)),
 	m_scoreToWin(i_scoreToWin)
 {
+    std::this_thread::sleep_for (std::chrono::seconds(1));
 }
 
 PlayerManager::~PlayerManager()
@@ -40,7 +41,7 @@ void PlayerManager::updateScore(const std::string& i_playerID)
         ss << (*it)->getName() << " : " << currentScore << std::endl;
     }
 
-    std_msgs::String msgScores;  
+    std_msgs::String msgScores; 
     msgScores.data = ss.str();
     m_scorePublisher.publish(msgScores);
 	

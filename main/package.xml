@@ -24,6 +24,9 @@
   <build_depend>motor_controls</build_depend>
   <build_export_depend>motor_controls</build_export_depend>
   <exec_depend>motor_controls</exec_depend>
+  <build_depend>score</build_depend>
+  <build_export_depend>score</build_export_depend>
+  <exec_depend>score</exec_depend>
 
   <export>
 
