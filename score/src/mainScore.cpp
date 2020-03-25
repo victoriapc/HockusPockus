@@ -7,7 +7,7 @@
 class NewGameListener
 {
 public:
-	NewGameListener():m_pCurrentGame(nullptr),m_playerNames(),m_scoreToWin(0){};
+	NewGameListener():m_pCurrentGame(nullptr),m_playerNames(),m_scoreToWin(10){};
 	
 	void callbackStartGame(const std_msgs::Bool::ConstPtr& i_msg)
 	{
@@ -18,6 +18,7 @@ public:
 		
 		if(i_msg->data)
 		{
+			m_playerNames.push_back("francis");
 			m_pCurrentGame = new Game(&m_playerNames,m_scoreToWin);
 		}
 	}
