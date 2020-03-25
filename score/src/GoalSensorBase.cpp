@@ -12,7 +12,7 @@ void GoalSensorBase::checkForNextGoal()
 		if (isTriggeredCondition())
 		{
 			m_state = GoalSensorBase::STATE_TRIGGERED;
-			while (isTriggeredCondition())
+			while (not isIdleCondition())
 			{
 				wait();
 			}
@@ -34,5 +34,5 @@ bool GoalSensorBase::isTriggeredState()
 
 void GoalSensorBase::wait()
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
