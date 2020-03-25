@@ -14,15 +14,14 @@
 class PlayerManager
 {
 public:
-	PlayerManager(int i_scoreToWin);
+	PlayerManager(int i_scoreToWin, ros::Publisher * i_pScorePublisher, ros::Publisher * i_pEndOfGamePublisher);
 	~PlayerManager();
 	void addAPlayer(const std::string& i_playerID);
 	void updateScore(const std::string& i_playerID);
 private:
 	std::vector<Player*> m_vpPlayers;
-	ros::NodeHandle m_node;
-	ros::Publisher m_scorePublisher;
-	ros::Publisher m_endOfGamePublisher;
+	ros::Publisher * m_pScorePublisher;
+	ros::Publisher * m_pEndOfGamePublisher;
 	int m_scoreToWin;
 };
 
