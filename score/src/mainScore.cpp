@@ -4,6 +4,14 @@
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int32.h>
 #include <std_msgs/String.h>
+
+ros::Subscriber _startSubscriber;
+ros::Subscriber _nameSubscriber;
+ros::Subscriber _scoreSubscriber;
+
+ros::Publisher _scorePublisher;
+ros::Publisher _endOfGamePublisher ;
+	
 class NewGameListener
 {
 public:
@@ -18,8 +26,7 @@ public:
 		
 		if(i_msg->data)
 		{
-			m_playerNames.push_back("francis");
-			m_pCurrentGame = new Game(&m_playerNames,m_scoreToWin);
+			m_pCurrentGame = new Game(&m_playerNames,m_scoreToWin,&_scorePublisher,&_endOfGamePublisher);
 		}
 	}
 	
@@ -50,18 +57,17 @@ private:
 	int m_scoreToWin ; 
 };
 
-ros::Subscriber name;
-ros::Subscriber start;
-ros::Subscriber score;
-
 int main(int argc, char*argv[])
 {
 	ros::init(argc, argv, "score");
 	ros::NodeHandle n;
 	NewGameListener newGameListener = NewGameListener();
-	start = n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
-	name = n.subscribe(ROS_topicNames::PLAYERS_NAMES, 1000, &NewGameListener::callbackPlayersNames, &newGameListener);
-	score = n.subscribe(ROS_topicNames::SCORE_TO_WIN, 1000, &NewGameListener::callbackScoreToWin, &newGameListener);
+	_startSubscriber = n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
+	_nameSubscriber = n.subscribe(ROS_topicNames::PLAYERS_NAMES, 1000, &NewGameListener::callbackPlayersNames, &newGameListener);
+	_scoreSubscriber = n.subscribe(ROS_topicNames::SCORE_TO_WIN, 1000, &NewGameListener::callbackScoreToWin, &newGameListener);
+	
+	_scorePublisher = n.advertise<std_msgs::String>(ROS_topicNames::SCORES, 1000);
+	_endOfGamePublisher = n.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 1000);
 
 	ros::spin();
 }

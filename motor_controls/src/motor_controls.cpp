@@ -18,7 +18,7 @@
 #include <unistd.h>
 
 #define STEPROT 200
-#define TIME 500
+#define TIME 750
 #define OFFSET 0.01
 
 float perimeter = 0.068; //6.8 cm per revolution
@@ -176,7 +176,7 @@ void left(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posx += step_length;
+	current_posx -= step_length;
 	point.x = current_posx;
 	pos_pub.publish(point);
 }
@@ -201,7 +201,7 @@ void right(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posx -= step_length;
+	current_posx += step_length;
 	point.x = current_posx;
 	pos_pub.publish(point);
 }

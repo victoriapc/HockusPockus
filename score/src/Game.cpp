@@ -1,7 +1,6 @@
 #include "Game.h"
 
-Game::Game(std::vector<std::string> * i_playerNames, int i_scoreToWin):
-m_playerManager(i_scoreToWin)
+Game::Game(std::vector<std::string> * i_playerNames, int i_scoreToWin, ros::Publisher * i_pScorePublisher, ros::Publisher * i_pEndOfGamePublisher)
 {
     // BEGIN TODO : Dynamic with ROS 
     const int ECHO_PIN_PLAYER = 11;
@@ -13,13 +12,23 @@ m_playerManager(i_scoreToWin)
     const std::string ROBOT_NAME = "Hockus Pockus";
 
     // END TODO : Dynamic with ROS 
-	std::string nameOfPlayer = (*i_playerNames)[0]; // TODO : for now, the table only supports two players, as such, using vectors everywhere may seem weird. However, we want the table to accept more people in the future. As such, for now, we expect to receive only one name (the player's one) and we hardcode it here accordingly : this isn't ideal, but I don't know how we'll manage to link the Pi's pins dynamically to the players. We'll have to discuss this. 
+	std::string nameOfPlayer;
+	if(i_playerNames->size() > 0)
+	{
+		nameOfPlayer = (*i_playerNames)[0]; // TODO : for now, the table only supports two players, as such, using vectors everywhere may seem weird. However, we want the table to accept more people in the future. As such, for now, we expect to receive only one name (the player's one) and we hardcode it here accordingly : this isn't ideal, but I don't know how we'll manage to link the Pi's pins dynamically to the players. We'll have to discuss this. 		
+	}
+	else
+	{
+		nameOfPlayer = "Player";
+	}
 	
-    m_playerManager.addAPlayer(nameOfPlayer);
-    m_playerManager.addAPlayer(ROBOT_NAME);
+	m_spPlayerManager = std::make_shared<PlayerManager>(i_scoreToWin, i_pScorePublisher, i_pEndOfGamePublisher);
+	
+    m_spPlayerManager->addAPlayer(nameOfPlayer);
+    m_spPlayerManager->addAPlayer(ROBOT_NAME);
 
-    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_PLAYER, TRIG_PIN_PLAYER), nameOfPlayer,& m_playerManager));
-    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_ROBOT, TRIG_PIN_ROBOT), ROBOT_NAME, &m_playerManager));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_PLAYER, TRIG_PIN_PLAYER), nameOfPlayer,m_spPlayerManager));
+    m_vGoals.push_back(new Goal(new GoalSensorSonar(ECHO_PIN_ROBOT, TRIG_PIN_ROBOT), ROBOT_NAME, m_spPlayerManager));
 
     for (std::vector<Goal*>::iterator it = m_vGoals.begin(); it != m_vGoals.end(); it++)
     {
@@ -33,6 +42,7 @@ Game::~Game()
     for (std::vector<Goal*>::iterator it = m_vGoals.begin(); it != m_vGoals.end(); it++)
     {
 		(*it)->stopKeepingTrackOfScores();
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
         delete (*it);
     }
 }

@@ -1,9 +1,8 @@
 #include "PlayerManager.h"
 
-PlayerManager::PlayerManager(int i_scoreToWin):
-    m_node(),
-    m_scorePublisher(m_node.advertise<std_msgs::String>(ROS_topicNames::SCORES, 100)),
-	m_endOfGamePublisher(m_node.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 100)),
+PlayerManager::PlayerManager(int i_scoreToWin, ros::Publisher * i_pScorePublisher, ros::Publisher * i_pEndOfGamePublisher):
+    m_pScorePublisher(i_pScorePublisher),
+	m_pEndOfGamePublisher(i_pEndOfGamePublisher),
 	m_scoreToWin(i_scoreToWin)
 {
     std::this_thread::sleep_for (std::chrono::seconds(1));
@@ -43,12 +42,12 @@ void PlayerManager::updateScore(const std::string& i_playerID)
 
     std_msgs::String msgScores; 
     msgScores.data = ss.str();
-    m_scorePublisher.publish(msgScores);
+    m_pScorePublisher->publish(msgScores);
 	
 	if(endOfGame)
 	{
 		std_msgs::Bool msgEndOfGame;  
 		msgEndOfGame.data = false; // the GAME_STATE topic states if the score management related code should run or not (so we put this to false, as the game is over)
-		m_endOfGamePublisher.publish(msgEndOfGame);
+		m_pEndOfGamePublisher->publish(msgEndOfGame);
 	}
 }
