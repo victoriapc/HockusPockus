@@ -23,19 +23,7 @@ var txt_listener = new ROSLIB.Topic({
 txt_listener.subscribe(function (m) {
   document.getElementById("msg").innerHTML = m.data;
 });
-/* 
-var video = document.querySelector("#videoElement");
 
-if (navigator.mediaDevices.getUserMedia) {
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(function (stream) {
-  video.srcObject = stream;
-  })
-  .catch(function (err0r) {
-  console.log("Something went wrong with video!");
-  });
-}
-*/
 var pos_listener = new ROSLIB.Topic({
   ros : ros,
   name : '/puck_pos',

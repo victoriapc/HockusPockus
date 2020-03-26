@@ -5,10 +5,12 @@
     <title>Hockus Pockus</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../resources/shortcut-icon.png">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-    <script type="text/javascript" src="js/ros.js"></script>
+	<script type="text/javascript" src="../js/ros.js"></script>
+	<script type="text/javascript" src="../js/webcam.js"></script>
 </head>
 <body>
 	<!-- Basic WebApp Structure -->
@@ -22,31 +24,26 @@
 			<li class="nav-item">
 				<a href="../index.html" class="nav-link">
 					<img src="https://img.icons8.com/ios/100/000000/home.png">
-					<span class="link-text">Dashboard</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="rules.html" class="nav-link">
 					<img src="https://img.icons8.com/carbon-copy/100/000000/rules.png">
-					<span class="link-text">Rules</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="webcam.html" class="nav-link">
 					<img src="https://img.icons8.com/ios/100/000000/webcam.png">
-					<span class="link-text">Webcam</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="settings.html" class="nav-link">
 					<img src="https://img.icons8.com/ios/100/000000/settings.png">
-					<span class="link-text">Settings</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a target="_blank" href="https://github.com/victoriapc/HockusPockus" class="nav-link">
 					<img src="../resources/github.png">
-					<span class="link-text">Github</span>
 				</a>
 			</li>
 		</ul>
@@ -55,7 +52,55 @@
 	<!-- Page Content -->
 	<main>
 		<h1>Webcam</h1>
-
+		<div class="top-row">
+			<!-- Start the configuration -->
+			<div id="start" class="card-top">
+				<div class="card-top-header">Step 1</div>
+				<p>Reconfigure the vision parameters</p>
+				<button class="btn" onclick="step_2()">START</button>
+			</div>
+			<!-- Adjust the radius -->
+			<div id="radius" class="card-top">
+				<div class="card-top-header">Step 2</div>
+				<p>Adjust the radius to fit the puck</p>
+				<div class="slider-container">
+					<input type="range" min="1" max="100" value="50" oninput="updateR()" class="slider" id="r">
+					<p class="p-slider" id="r_text"></p>
+				</div>
+				<button class="btn" onclick="step_3()">Enter</button>
+			</div>
+			<!-- Adjust the HSV values -->
+			<div id="hsv" class="card-top">
+				<div class="card-top-header">Step 3</div>
+				<p>Adjust the HSV values</p>
+				<div class="slider-container">
+					<input type="range" min="1" max="100" value="50" oninput="updateH()" class="slider" id="h">
+					<p class="p-slider" id="h_text">H:</p>
+				</div>
+				<div class="slider-container">
+					<input type="range" min="1" max="100" value="50" oninput="updateS()" class="slider" id="s">
+					<p class="p-slider" id="s_text">S:</p>
+				</div>
+				<div class="slider-container">
+					<input type="range" min="1" max="100" value="50" oninput="updateV()" class="slider" id="v">
+					<p class="p-slider" id="v_text">V:</p>
+				</div>
+				<button class="btn" onclick="step_4()">Enter</button>
+			</div>
+			<!-- Apply the changes -->
+			<div id="apply" class="card-top">
+				<div class="card-top-header">Step 4</div>
+				<p>Apply the changes</p>
+				<button class="btn" onclick="step_1()">Apply</button>
+			</div>
+		</div>
+		<div class="bottom-row">
+			<div class="card-bottom">
+				<div class="card-bottom-header">Video</div>
+				<!--img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%" height="100%"></img-->
+				<img src="../resources/github.png" width="200px" height="200px"></img>
+			</div>
+		</div>
 	</main>
 
 </body>
