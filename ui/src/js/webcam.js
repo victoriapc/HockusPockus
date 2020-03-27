@@ -18,9 +18,11 @@ var v_text = null;
 // Apply
 var apply = null;
 
+// Varaibles
+var config_started = false;
+
 // Once the DOM is loaded
 document.addEventListener("DOMContentLoaded", function(){
-    console.log("DOM Loaded.")
     loadSection();
     loadSlider();
     step_1();
@@ -41,6 +43,14 @@ function loadSection() {
     apply = $("#apply");
 }
 
+// When window is closing
+window.onbeforeunload = function(){
+    if(config_started) {
+        console.log("Conditon true.")
+        return "Are you sure?";
+    }
+};
+
 // Hidding section for the sequence
 function step_1() {
     start.removeClass("disabled");
@@ -50,6 +60,7 @@ function step_1() {
 };
 
 function step_2() {
+    config_started = true;
     start.addClass("disabled");
     radius.removeClass("disabled");
 }
@@ -62,27 +73,28 @@ function step_3() {
 function step_4() {
     hsv.addClass("disabled");
     apply.removeClass("disabled");
+    config_started = false;
 }
 
 // Slider linked
 function loadSlider() {
-    radius_text.innerHTML = "R: " + radius_slider.value; 
-    h_text.innerHTML = "H: " + h_slider.value;
-    s_text.innerHTML = "S: " + s_slider.value;
-    v_text.innerHTML = "V: " + v_slider.value;
+    radius_text.innerHTML = radius_slider.value; 
+    h_text.innerHTML = h_slider.value;
+    s_text.innerHTML = s_slider.value;
+    v_text.innerHTML = v_slider.value;
 }
 
 // Update the current slider value (each time you drag the slider handle)
 function updateR() {
-    radius_text.innerHTML = "R: " + radius_slider.value;
+    radius_text.innerHTML = radius_slider.value;
 }
 
 function updateH() {
-    h_text.innerHTML = "H: " + h_slider.value;
+    h_text.innerHTML = h_slider.value;
 }
 function updateS() {
-    s_text.innerHTML = "S: " + s_slider.value;
+    s_text.innerHTML = s_slider.value;
 }
 function updateV() {
-    v_text.innerHTML = "V: " + v_slider.value;
+    v_text.innerHTML = v_slider.value;
 }

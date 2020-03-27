@@ -5,10 +5,13 @@
     <title>Hockus Pockus</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="resources/shortcut-icon.png">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-    <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-    <script type="text/javascript" src="js/ros.js"></script>
+	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/joystick.js"></script>
 </head>
 <body>
 	<!-- Basic WebApp Structure -->
@@ -51,18 +54,43 @@
 	<main>
 		<h1>Dashboard</h1>
 		<div class="top-row">
-			<div class="card-top">
+			<div class="card-top" id="new_game">
 				<div class="card-top-header">New Game</div>
+				<p>Choose the difficulty</p>
+				<button class="btn" onclick="easy()">Easy</button>
+				<button class="btn" onclick="medium()">Medium</button>
+				<button class="btn" onclick="hard()">Hard</button>
 			</div>
-			<div class="card-top">
+			<div class="card-top" id="manual">
 				<div class="card-top-header">Manual Control</div>
-				<span class='start-btn' onclick="Activate_manual()">ACTIVATE</span>
+				<p>Control the robot with a joystick</p>
+				<button class="btn manual" onclick="manualStart()">Activate</button>
+				<button class="btn manual" onclick="manualStop()">Stop</button>
 			</div>
 			<div class="card-top">
-				<div class="card-top-header">Current Position</div>
+				<div class="card-top-header">Information</div>
+				<div class="info-container">
+					<h4>Connection:</h4>
+					<p>Status: <span id="status"></span></p>
+				</div>
+				<div class="info-container">
+					<h4>Video:</h4>
+					<p>Topic: <span id="video_topic"></span></p>
+					<p>Rate: <span id="video_fps"></span></p>
+				</div>	
 			</div>
-			<div class="card-top">
-				<div class="card-top-header">Statistics</div>
+			<div class="card-top info">
+				<div class="card-top-header">Position</div>
+				<div class="info-container">
+					<h4>Robot:</h4>
+					<p>X: <span id="robot_x"></span></p>
+					<p>Y: <span id="robot_y"></span></p>
+				</div>
+				<div class="info-container">
+					<h4>Puck:</h4>
+					<p>X: <span id="puck_x"></span></p>
+					<p>Y: <span id="puck_y"></span></p>
+				</div>
 			</div>
 		</div>
 		<div class="bottom-row">
@@ -72,21 +100,11 @@
 			</div>
 			<div class="card-bottom">
 				<div class="card-bottom-header">Game</div>
+				<div class="card-bottom-content" id="game">
+					
+				</div>
 			</div>
 		</div>
 	</main>
 </body>
-
-<script>
-	function Activate_manual() {
-			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
-	}
-</script>
-
-<script>
-	function change_difficulty(x) {
-			document.getElementById("video_card").setAttribute('src','../resources/logo.png')
-	}
-</script>
-
 </html>

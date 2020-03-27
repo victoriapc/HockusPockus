@@ -9,7 +9,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-	<script type="text/javascript" src="../js/ros.js"></script>
 	<script type="text/javascript" src="../js/webcam.js"></script>
 </head>
 <body>
@@ -57,7 +56,7 @@
 			<div id="start" class="card-top">
 				<div class="card-top-header">Step 1</div>
 				<p>Reconfigure the vision parameters</p>
-				<button class="btn" onclick="step_2()">START</button>
+				<button class="btn" onclick="step_2()">Start</button>
 			</div>
 			<!-- Adjust the radius -->
 			<div id="radius" class="card-top">
@@ -65,7 +64,7 @@
 				<p>Adjust the radius to fit the puck</p>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateR()" class="slider" id="r">
-					<p class="p-slider" id="r_text"></p>
+					<p class="p-slider">R: <span id="r_text"></span></p>
 				</div>
 				<button class="btn" onclick="step_3()">Enter</button>
 			</div>
@@ -75,15 +74,15 @@
 				<p>Adjust the HSV values</p>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateH()" class="slider" id="h">
-					<p class="p-slider" id="h_text">H:</p>
+					<p class="p-slider">H: <span id="h_text"></span></p>
 				</div>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateS()" class="slider" id="s">
-					<p class="p-slider" id="s_text">S:</p>
+					<p class="p-slider">S: <span id="s_text"></span></p>
 				</div>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateV()" class="slider" id="v">
-					<p class="p-slider" id="v_text">V:</p>
+					<p class="p-slider">V: <span id="v_text"></span></p>
 				</div>
 				<button class="btn" onclick="step_4()">Enter</button>
 			</div>

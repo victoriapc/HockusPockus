@@ -36,11 +36,11 @@ header img {
 
 /* Navbar */
 .navbar {
-	width: 4rem;
+	width: 5vw;
 	height: 95vh;
 	position: fixed;
 	background-color: var(--bg-secondary);
-	text-align: center;	
+	text-align: center;
 }
 
 .navbar-nav {
@@ -52,26 +52,19 @@ header img {
 	height: 100%;
 }
 
-.nav-item{
-	width: 100%;
+.nav-link img {
+	width: 50%;
+	margin-top: 3vh;
 }
+
 .nav-item:last-child {
 	margin-top: auto;
+	margin-bottom: 1vh;
 }
 
-.nav-link{
-	display: flex;
-	align-items: center;
-	color: black;
-	margin-left: 2px;
-	text-decoration: none;
-}
-
-.nav-link img {
-	width: 30px;
-	margin-top: 1rem;
-	margin-left: 0.75rem;
-	margin-bottom: 3vh;
+.nav-link img:hover {
+	border-radius: 5px;
+	background-color: white;
 }
 
 /* Main */
@@ -148,12 +141,12 @@ main h1 {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-/* Webcam's HTML Specific CSS */
-.disabled {
-    pointer-events: none;
-    opacity: 0.4;
+.card-bottom-content {
+	height: 100%;
+	width: 100%;
 }
 
+/* Buttons Design */
 .btn {
 	font-size: 16px;
 	font-family: 'Raleway';
@@ -166,6 +159,39 @@ main h1 {
 	margin-bottom: 10px;
 }
 
+/* Blur section */
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* Index's HTML Specific CSS */
+.manual {
+	margin-top: 10px;
+}
+
+.info-container {
+	width: 80%;
+	margin-top: 2%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.info-container  h4, p {
+	margin: 1.5%;
+	padding: 0;
+}
+
+.info-container h4 {
+	text-decoration: underline;
+}
+
+.info-container p {
+	margin-left: 10%;
+}
+
+/* Webcam's HTML Specific CSS */
 .slider-container {
 	width: 100%;
 	display: flex;
