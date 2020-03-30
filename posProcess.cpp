@@ -1,4 +1,7 @@
 #include <math.h>
+#include <ros/ros.h>
+#include <geometry_msgs/Point.h>
+#include <std_msgs/Float32MultiArray.h>
 
 const int LEFT = -1;
 const int RIGHT = 1;
@@ -33,15 +36,39 @@ Vector2 pos;
 Vector2 posPrec;
 
 Terrain map; 
-//Calcul murs
-//Calcul buts
 
+void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes)
+{
+	BasGauche.x = 0 ; 
+	BasGauche.y = 0 ; 
+	
+	HautGauche.x = BasGauche.x; 
+	HautGauche.y = i_dimensionsCotes[0];
+	
+	HautDroite.x = i_dimensionsCotes[1];
+	HautDroite.y = HautGauche.y
+	
+	BasDroite.x = HautDroite.x;
+	BasDroite.y = BasGauche.y;
+	
+	//Calcul murs
+	//Calcul buts
+}
 
+const float FIXED_Y_POS = 0 ; 
+void predictionToDesiredPosition(Vector2 i_predictedPosition)
+{
+	geometry_msgs::Point msg;
+	msg.x = i_predictedPosition.X;
+	msg.y = FIXED_Y_POS ; 
+	_publisherPositionDesiree.publish(msg); 
+}
 
 //Fonction réception de données
-void reception()
+void reception(const geometry_msgs::Point i_puckPos)
 {
-	pos = //Réception des données
+	pos.X i_puckPos.x ; 
+	pos.Y i_puckPos.y ; 
 
 	float A = (pos.Y - posPrec.Y)/(pos.X-posPrec.X);
 	float B = pos.Y - A * pos.X;
@@ -59,6 +86,7 @@ void reception()
 
 	Vector3 prediction;
 	prediction = linePredict(A,B,dir,pos,0);
+	predictionToDesiredPosition(prediction.pos);
 	posPrec = pos;
 }
 
@@ -136,3 +164,19 @@ Vector3 linePredict(float A, float B, int dir, Vector2 pos, int iteration)
 		return new Vector3(new Vector2(1000, 1000), iteration);
 }
 
+
+ros::Subscriber _subscriberDimensionsTerrain;
+ros::Subscriber _subscriberPositionActuellePuck;
+ros::Publisher  _publisherPositionDesiree;
+
+int main(int argc, char*argv[])
+{
+	ros::init(argc, argv, "strategy");
+	ros::NodeHandle n;
+	_subscriberDimensionsTerrain = n.subscribe("/table_dimensions", 1000, initTerrain);
+	_subscriberPositionActuellePuck = n.subscribe("/puck_pos", 1000, reception);
+
+	_publisherPositionDesiree = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
+
+	ros::spin();
+}
