@@ -39,20 +39,38 @@ Terrain map;
 
 void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes)
 {
-	BasGauche.x = 0 ; 
-	BasGauche.y = 0 ; 
+	map.BasGauche.X = 0 ; 
+	map.BasGauche.Y = 0 ; 
 	
-	HautGauche.x = BasGauche.x; 
-	HautGauche.y = i_dimensionsCotes[0];
+	map.HautGauche.X = BasGauche.X; 
+	map.HautGauche.Y = i_dimensionsCotes[0];
 	
-	HautDroite.x = i_dimensionsCotes[1];
-	HautDroite.y = HautGauche.y
+	map.HautDroite.X = i_dimensionsCotes[1];
+	map.HautDroite.Y = HautGauche.Y
 	
-	BasDroite.x = HautDroite.x;
-	BasDroite.y = BasGauche.y;
+	map.BasDroite.X = HautDroite.X;
+	map.BasDroite.Y = BasGauche.Y;
 	
-	//Calcul murs
-	//Calcul buts
+	map.butHaut.X = (map.HautDroite.Y-map.HautGauche.Y)/(map.HautDroite.X-map.HautGauche.X);
+	map.butHaut.Y = map.HautDroite.Y - (map.butHaut.X * map.HautDroite.X);
+	
+	map.butBas.X = (map.BasDroite.Y-map.BasGauche.Y)/(map.BasDroite.X-map.BasGauche.X);
+	map.butHaut.Y = map.BasDroite.Y - (map.butBas.X * map.BasDroite.X);
+	
+	if(map.BasGauche.Y == map.HautGauche.Y)
+		map.murGauche.X = 10000;
+	else
+		map.murGauche.X = (map.HautGauche.Y-map.BasGauche.Y)/(map.HautGauche.X-map.BasGauche.X);
+	map.murGauche.Y = map.HautGauche.Y- (map.murGauche.X*map.HautGauche.X);
+	
+	if(map.BasDroite.Y == map.HautDroite.Y)
+		map.murDroite.X = 10000;
+	else
+		map.murDroite.X = (map.HautDroite.Y-map.BasDroite.Y)/(map.HautDroite.X-map.BasDroite.X);
+	map.murDroite.Y = map.HautDroite.Y- (map.murDroite.X*map.HautDroite.X);
+	
+	
+	
 }
 
 const float FIXED_Y_POS = 0 ; 
