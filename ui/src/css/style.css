@@ -133,7 +133,10 @@ main h1 {
 	width: 47.5%;
 	border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
-    background-color: #f8f9fa;
+	background-color: #f8f9fa;
+	
+	display: flex;
+	flex-direction: column;
 }
 
 .card-bottom-header {
@@ -144,7 +147,13 @@ main h1 {
 
 .card-bottom-content {
 	height: 100%;
-	width: 100%;
+	align-items: center;
+}
+
+#zone_joystick {
+	position: absolute;
+	align-self: center;
+	bottom: 27.5vh;
 }
 
 /* Buttons Design */

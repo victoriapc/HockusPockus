@@ -12,6 +12,9 @@ var game = null;
 var modeManual = false;
 var modeGame = false;
 
+// Joystick
+var joystick_manager;
+
 /* ----- ONLOAD ----- */
 // Load ROSLIB library
 var ros = new ROSLIB.Ros({
@@ -61,7 +64,7 @@ function stopGame() {
 
 /* ----- Manual section ----- */
 // Publisher
-cmd_vel_listener = new ROSLIB.Topic({
+cmd_vel_publisher = new ROSLIB.Topic({
   ros : ros,
   name : "/cmd_vel",
   messageType : 'geometry_msgs/Twist'
@@ -80,7 +83,7 @@ move = function (linear, angular) {
       z: angular
     }
   });
-  cmd_vel_listener.publish(twist);
+  cmd_vel_publisher.publish(twist);
 }
 
 function manualStart() {
@@ -88,6 +91,7 @@ function manualStart() {
     modeManual = true;
     game.html(manual_content);
     new_game.addClass("disabled");
+    joystick_manager = createJoystick();
   }
 }
 
@@ -96,6 +100,7 @@ function manualStop() {
     modeManual = false;
     game.html(home_content);
     new_game.removeClass("disabled");
+    joystick_manager.destroy();
   }
 }
 
@@ -154,5 +159,5 @@ const home_content = "<h1>Home</h1>";
 
 const manual_content = "<h1>Manual</h1>"
 
-const game_content = "<h1>Game</h1><button class='btn' onclick='stopGame()' style='background-color: #28a745;;'>Stop</button>";
+const game_content = "<h1>Game</h1><button class='btn' onclick='stopGame()' style='background-color: #28a745;'>Stop</button>";
 
