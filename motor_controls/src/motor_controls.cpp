@@ -87,7 +87,7 @@ void *control(void* argc)
 		    }	
 	    }
 
-	    if (desired_posx != current_posy){
+	    if (desired_posy != current_posy){
 		    
 		    if (desired_posy > current_posy + OFFSET){
 			    forward();
@@ -126,7 +126,7 @@ void forward(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posy += step_length;
+	current_posy += step_length;	
 	point.y = current_posy;
 	pos_pub.publish(point);
 }
