@@ -89,11 +89,11 @@ void *control(void* argc)
 
 	    if (desired_posx != current_posy){
 		    
-		    if (desired_posx > current_posy + OFFSET){
+		    if (desired_posy > current_posy + OFFSET){
 			    forward();
 		    }
 
-		    if (desired_posx < current_posy - OFFSET){
+		    if (desired_posy < current_posy - OFFSET){
 			    backward();
 		    }	
         }
