@@ -106,7 +106,7 @@ void current_pos_callback(const geometry_msgs::Point robot_pos){
 	current_posy = robot_pos.y;
 }
 
-void forward(){
+void backward(){
 	/*4 HIGH = counter-clockwise
 	4 LOW = clockwise
 
@@ -126,12 +126,12 @@ void forward(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posy += step_length;	
+	current_posy -= step_length;	
 	point.y = current_posy;
 	pos_pub.publish(point);
 }
 
-void backward(){
+void forward(){
 	/*4 HIGH = counter-clockwise
 	4 LOW = clockwise
 
@@ -151,12 +151,12 @@ void backward(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posy -= step_length;
+	current_posy += step_length;
 	point.y = current_posy;
 	pos_pub.publish(point);
 }
 
-void left(){
+void right(){
 	/*4 HIGH = counter-clockwise
 	4 LOW = clockwise
 
@@ -176,12 +176,12 @@ void left(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posx -= step_length;
+	current_posx += step_length;
 	point.x = current_posx;
 	pos_pub.publish(point);
 }
 
-void right(){
+void left(){
 	/*4 HIGH = counter-clockwise
 	4 LOW = clockwise
 
@@ -201,7 +201,7 @@ void right(){
 	digitalWrite(5,LOW);
 	digitalWrite(25,LOW);
 
-	current_posx += step_length;
+	current_posx -= step_length;
 	point.x = current_posx;
 	pos_pub.publish(point);
 }
