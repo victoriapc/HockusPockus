@@ -6,6 +6,7 @@
 
 // Pub and Sub
 ros::Publisher puck_pos_pub;
+ros::NodeHandle n;
 
 int main(int argc, char*argv[])
 {	
