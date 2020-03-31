@@ -189,7 +189,7 @@ void left(){
 	4-5 = left motor
 	24-10 = right motor*/
 	
-	/*digitalWrite(4,HIGH);
+	digitalWrite(4,HIGH);
 	digitalWrite(24,HIGH);
 
 	usleep(TIME);
@@ -204,7 +204,7 @@ void left(){
 
 	current_posx -= step_length;
 	point.x = current_posx;
-	pos_pub.publish(point);*/
+	pos_pub.publish(point);
 }
 void control_callback(const geometry_msgs::Point desired_pos){
     desired_posx = desired_pos.x;
@@ -236,7 +236,7 @@ void control_callback(const geometry_msgs::Point desired_pos){
 void puck_pos_callback(const geometry_msgs::Point puck_pos){
 	//temporary "follow X" strategy for quick testing : this will be moved to the strategy package
     desired_posx = puck_pos.x;    
-	desired_posy = 0.05;    
+	desired_posy = puck_pos.y;//0.05;    
     
 }
 
