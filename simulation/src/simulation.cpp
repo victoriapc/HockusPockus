@@ -19,9 +19,13 @@ int main(int argc, char*argv[])
 	point.y = 0;//0.25 ;
 	puck_pos_pub.publish(point); 
 	
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	point.x = 0.25; 
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	point.x = 0.125; 
 	puck_pos_pub.publish(point); 
+	
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	point.x = 0.0; 
+	puck_pos_pub.publish(point);
 	/*
 	for (int t = 0 ; t < 30 ; t++)
 	{
@@ -40,7 +44,7 @@ int main(int argc, char*argv[])
 		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
 	}*/
-
+	
 	ros::spin();
 	
 }
