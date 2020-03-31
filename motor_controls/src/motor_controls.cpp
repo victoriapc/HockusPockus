@@ -189,7 +189,7 @@ void left(){
 	4-5 = left motor
 	24-10 = right motor*/
 	
-	digitalWrite(4,HIGH);
+	/*digitalWrite(4,HIGH);
 	digitalWrite(24,HIGH);
 
 	usleep(TIME);
@@ -204,7 +204,7 @@ void left(){
 
 	current_posx -= step_length;
 	point.x = current_posx;
-	pos_pub.publish(point);
+	pos_pub.publish(point);*/
 }
 void control_callback(const geometry_msgs::Point desired_pos){
     desired_posx = desired_pos.x;
