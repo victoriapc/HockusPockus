@@ -20,18 +20,22 @@ int main(int argc, char*argv[])
 	
 	for (int t = 0 ; t < 30 ; t++)
 	{
-		point.x += 0.25 * (t/30.0);
-		point.y -= 0.125 * (t/30.0);
+		point.x += 0.25 * (1/30.0);
+		point.y -= 0.125 * (1/30.0);
 		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
 	}
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	
 	for (int t = 0 ; t < 30 ; t++)
 	{
-		point.x -= 0.25 * (t/30.0);
-		point.y -= 0.125 * (t/30.0);
+		point.x -= 0.25 * (1/30.0);
+		point.y -= 0.125 * (1/30.0);
 		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
 	}
+
+	ros::spin();
 	
 }
