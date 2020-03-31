@@ -66,7 +66,7 @@ int main(int argc, char*argv[])
 	pos_pub = n.advertise<geometry_msgs::Point>("robot_pos", 1000);
 	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
-	puck_sub = n.subscribe("puck_pos", 1000, puck_pos_callback);
+	puck_sub = n.subscribe("/puck_pos", 1000, puck_pos_callback);
 	
     ros::spin();
     while(1);
