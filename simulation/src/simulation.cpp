@@ -9,7 +9,7 @@ ros::Publisher puck_pos_pub;
 
 int main(int argc, char*argv[])
 {	
-	pos_pub = n.advertise<geometry_msgs::Point>("puck_pos", 1000);
+	puck_pos_pub = n.advertise<geometry_msgs::Point>("puck_pos", 1000);
 
 	geometry_msgs::Point point;
 	point.x = 0 ; 
@@ -19,7 +19,7 @@ int main(int argc, char*argv[])
 	{
 		point.x += 0.25 * (t/30.0);
 		point.y -= 0.125 * (t/30.0);
-		pos_pub.publish(point); 
+		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30.0));
 	}
 	
@@ -27,7 +27,7 @@ int main(int argc, char*argv[])
 	{
 		point.x -= 0.25 * (t/30.0);
 		point.y -= 0.125 * (t/30.0);
-		pos_pub.publish(point); 
+		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30.0));
 	}
 	
