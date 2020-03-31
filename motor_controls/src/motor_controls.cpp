@@ -102,8 +102,9 @@ void *control(void* argc)
 }
 
 void current_pos_callback(const geometry_msgs::Point robot_pos){
-	//current_posx = robot_pos.x;
-	//current_posy = robot_pos.y;
+	//?????
+	current_posx = robot_pos.x;
+	current_posy = robot_pos.y;
 }
 
 void backward(){

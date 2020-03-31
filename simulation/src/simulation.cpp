@@ -15,9 +15,14 @@ int main(int argc, char*argv[])
 	puck_pos_pub = n.advertise<geometry_msgs::Point>("puck_pos", 1000);
 
 	geometry_msgs::Point point;
-	point.x = 0 ; 
-	point.y = 0.25 ;
+	point.x = 0; 
+	point.y = 0;//0.25 ;
+	puck_pos_pub.publish(point); 
 	
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	point.x = 0.25; 
+	puck_pos_pub.publish(point); 
+	/*
 	for (int t = 0 ; t < 30 ; t++)
 	{
 		point.x += 0.25 * (1/30.0);
@@ -34,7 +39,7 @@ int main(int argc, char*argv[])
 		point.y -= 0.125 * (1/30.0);
 		puck_pos_pub.publish(point); 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000/30));
-	}
+	}*/
 
 	ros::spin();
 	
