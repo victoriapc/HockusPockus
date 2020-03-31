@@ -234,6 +234,7 @@ void control_callback(const geometry_msgs::Point desired_pos){
 
 void puck_pos_callback(const geometry_msgs::Point puck_pos){
     desired_posx = puck_pos.x;    
+	desired_posy = puck_pos.y;    
     
 }
 
