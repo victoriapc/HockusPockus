@@ -6,10 +6,12 @@
 
 // Pub and Sub
 ros::Publisher puck_pos_pub;
-ros::NodeHandle n;
 
 int main(int argc, char*argv[])
 {	
+	ros::init(argc, argv, "motor_controls");
+	ros::NodeHandle n;
+
 	puck_pos_pub = n.advertise<geometry_msgs::Point>("puck_pos", 1000);
 
 	geometry_msgs::Point point;

@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   vision
   motor_controls
   score
+  simulation
 )
 
 catkin_package(
