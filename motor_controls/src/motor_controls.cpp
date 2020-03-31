@@ -233,8 +233,9 @@ void control_callback(const geometry_msgs::Point desired_pos){
 }
 
 void puck_pos_callback(const geometry_msgs::Point puck_pos){
+	//temporary "follow X" strategy for quick testing : this will be moved to the strategy package
     desired_posx = puck_pos.x;    
-	desired_posy = puck_pos.y;    
+	desired_posy = 0.05;    
     
 }
 
