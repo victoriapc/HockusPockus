@@ -45,7 +45,7 @@ class Strategy
 	ros::Publisher  m_publisherPositionDesiree;
 };
 
-class ReboundHandler(Strategy)
+class ReboundHandler : public Strategy
 {
   public:
 	ReboundHandler():
@@ -209,7 +209,7 @@ class ReboundHandler(Strategy)
 
 };
 
-class FollowXWithReboundHandler(ReboundHandler)
+class FollowXWithReboundHandler : public ReboundHandler
 {
 public:
 	void predictionToDesiredPosition(Vector2 i_predictedPosition)
@@ -223,7 +223,7 @@ private:
 	static const float FIXED_Y_POS = 0.05 ; 
 };
 
-class FollowX(Strategy)
+class FollowX : public Strategy
 {
 public:
 	FollowX():
@@ -243,7 +243,7 @@ private:
 	static const float FIXED_Y_POS = 0.05 ; 
 };
 
-class NewStartegyListener
+class NewStrategyListener
 {
 public:
 	NewStrategyListener():m_pCurrentStrategy(nullptr){};
