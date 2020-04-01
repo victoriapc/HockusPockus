@@ -49,13 +49,13 @@ class ReboundHandler : public Strategy
 {
   public:
 	ReboundHandler():
-		m_subscriberDimensionsTerrain(n.subscribe("/table_dimensions", 1000, initTerrain)),
-		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000, reception)),
+		m_subscriberDimensionsTerrain(n.subscribe("/table_dimensions", 1000, &ReboundHandler::initTerrain,this)),
+		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this)),
 		m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000))
 	{
 	}
 	
-	void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
+	virtual void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
 	
 	void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes)
 	{

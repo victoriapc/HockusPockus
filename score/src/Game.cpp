@@ -45,4 +45,3 @@ Game::~Game()
         delete (*it);
     }
 }
-}
