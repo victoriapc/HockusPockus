@@ -65,26 +65,20 @@ function stopGame() {
 
 /* ----- Manual section ----- */
 // Publisher
-cmd_vel_publisher = new ROSLIB.Topic({
+
+joy_publisher = new ROSLIB.Topic({
   ros : ros,
-  name : "/cmd_vel",
-  messageType : 'geometry_msgs/Twist'
+  name : "/joy_pos",
+  messageType : 'geometry_msgs/Point'
 });
 
-move = function (linear, angular) {
-  var twist = new ROSLIB.Message({
-    linear: {
-      x: linear,
-      y: 0,
-      z: 0
-    },
-    angular: {
-      x: 0,
-      y: 0,
-      z: angular
-    }
+move = function (posx, posy) {
+  var Point = new ROSLIB.Message({
+      x: posx,
+      y: posy,
+      z: 0,
   });
-  cmd_vel_publisher.publish(twist);
+  joy_publisher.publish(Point);
 }
 
 function manualStart() {
@@ -124,6 +118,7 @@ ros.on('close', function () {
 
 /* ----- Position section ----- */
 // Robot's position listener
+
 var robot_pos_listener = new ROSLIB.Topic({
   ros : ros,
   name : '/robot_pos',
