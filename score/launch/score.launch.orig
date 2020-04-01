@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+<launch>    
+    <node name="score" pkg="score" type="score"/>
+</launch>
+=======
+<launch>    
+    <node name="score" pkg="score" type="score"/>
+</launch>
+>>>>>>> ec8b917e95bda3feaf941e66ed1904842a93e069
