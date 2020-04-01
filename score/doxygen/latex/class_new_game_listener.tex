@@ -1,0 +1,67 @@
+\hypertarget{class_new_game_listener}{}\doxysection{New\+Game\+Listener Class Reference}
+\label{class_new_game_listener}\index{NewGameListener@{NewGameListener}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_new_game_listener_a9820dc61d48cb9b222947f808d99b38e}\label{class_new_game_listener_a9820dc61d48cb9b222947f808d99b38e}} 
+\mbox{\hyperlink{class_new_game_listener_a9820dc61d48cb9b222947f808d99b38e}{New\+Game\+Listener}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_new_game_listener}{New\+Game\+Listener}}\textquotesingle{}s constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_new_game_listener_a1a48021753bd57ac18b32cdc34e69a69}{callback\+Start\+Game}} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&i\+\_\+msg)
+\begin{DoxyCompactList}\small\item\em callback to start a new game, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+G\+A\+M\+E\+\_\+\+S\+T\+A\+TE topic \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_new_game_listener_ac657a62046e9cbaecdefd0b8aec0fb3a}{callback\+Players\+Names}} (const std\+\_\+msgs\+::\+String\+::\+Const\+Ptr \&i\+\_\+msg)
+\begin{DoxyCompactList}\small\item\em callback to refresh the players\textquotesingle{} names, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+P\+L\+A\+Y\+E\+R\+S\+\_\+\+N\+A\+M\+ES topic \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_new_game_listener_ad4922deb7001d251b2d1078010290ccb}{callback\+Score\+To\+Win}} (const std\+\_\+msgs\+::\+Int32\+::\+Const\+Ptr \&i\+\_\+msg)
+\begin{DoxyCompactList}\small\item\em callback to refresh the score to win, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+S\+C\+O\+R\+E\+\_\+\+T\+O\+\_\+\+W\+IN topic \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_new_game_listener_ac657a62046e9cbaecdefd0b8aec0fb3a}\label{class_new_game_listener_ac657a62046e9cbaecdefd0b8aec0fb3a}} 
+\index{NewGameListener@{NewGameListener}!callbackPlayersNames@{callbackPlayersNames}}
+\index{callbackPlayersNames@{callbackPlayersNames}!NewGameListener@{NewGameListener}}
+\doxysubsubsection{\texorpdfstring{callbackPlayersNames()}{callbackPlayersNames()}}
+{\footnotesize\ttfamily void New\+Game\+Listener\+::callback\+Players\+Names (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+String\+::\+Const\+Ptr \&}]{i\+\_\+msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+callback to refresh the players\textquotesingle{} names, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+P\+L\+A\+Y\+E\+R\+S\+\_\+\+N\+A\+M\+ES topic 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+msg} & \+:std\+\_\+msgs\+::\+String that indicates the names of the players \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_new_game_listener_ad4922deb7001d251b2d1078010290ccb}\label{class_new_game_listener_ad4922deb7001d251b2d1078010290ccb}} 
+\index{NewGameListener@{NewGameListener}!callbackScoreToWin@{callbackScoreToWin}}
+\index{callbackScoreToWin@{callbackScoreToWin}!NewGameListener@{NewGameListener}}
+\doxysubsubsection{\texorpdfstring{callbackScoreToWin()}{callbackScoreToWin()}}
+{\footnotesize\ttfamily void New\+Game\+Listener\+::callback\+Score\+To\+Win (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Int32\+::\+Const\+Ptr \&}]{i\+\_\+msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+callback to refresh the score to win, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+S\+C\+O\+R\+E\+\_\+\+T\+O\+\_\+\+W\+IN topic 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+msg} & \+:std\+\_\+msgs\+::\+Int32 that indicates the new score to win \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_new_game_listener_a1a48021753bd57ac18b32cdc34e69a69}\label{class_new_game_listener_a1a48021753bd57ac18b32cdc34e69a69}} 
+\index{NewGameListener@{NewGameListener}!callbackStartGame@{callbackStartGame}}
+\index{callbackStartGame@{callbackStartGame}!NewGameListener@{NewGameListener}}
+\doxysubsubsection{\texorpdfstring{callbackStartGame()}{callbackStartGame()}}
+{\footnotesize\ttfamily void New\+Game\+Listener\+::callback\+Start\+Game (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&}]{i\+\_\+msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+callback to start a new game, this is triggered when a message is publish on the R\+O\+S\+\_\+topic\+Names\+::\+G\+A\+M\+E\+\_\+\+S\+T\+A\+TE topic 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+msg} & \+:std\+\_\+msgs\+::\+Bool that indicates if we should start a new game or stop the current one \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/score/src/main\+Score.\+cpp\end{DoxyCompactItemize}
