@@ -38,11 +38,6 @@ class Strategy
   public:
     static const int FOLLOW_X = 0 ;
 	static const int FOLLOW_X_WITH_REBOUND = 1 ;
-
-  protected:
-  	ros::NodeHandle n;
-	ros::Subscriber m_subscriberPositionActuellePuck;
-	ros::Publisher  m_publisherPositionDesiree;
 };
 
 class ReboundHandler : public Strategy
@@ -206,6 +201,10 @@ class ReboundHandler : public Strategy
 	Vector2 posPrec;
 
 	Terrain map; 
+	
+	ros::NodeHandle n;
+	ros::Subscriber m_subscriberPositionActuellePuck;
+	ros::Publisher  m_publisherPositionDesiree;
 
 };
 
@@ -241,6 +240,9 @@ public:
 	}
 private:
 	const float FIXED_Y_POS = 0.05 ; 
+	ros::NodeHandle n;
+	ros::Subscriber m_subscriberPositionActuellePuck;
+	ros::Publisher  m_publisherPositionDesiree;
 };
 
 class NewStrategyListener
