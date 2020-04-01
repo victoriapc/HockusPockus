@@ -43,7 +43,7 @@ class Strategy()
   	ros::NodeHandle n;
 	ros::Subscriber m_subscriberPositionActuellePuck;
 	ros::Publisher  m_publisherPositionDesiree;
-}
+};
 
 class ReboundHandler(Strategy)
 {
@@ -207,7 +207,7 @@ class ReboundHandler(Strategy)
 
 	Terrain map; 
 
-}
+};
 
 class FollowXWithReboundHandler(ReboundHandler)
 {
@@ -221,7 +221,7 @@ public:
 	}
 private:
 	static const float FIXED_Y_POS = 0.05 ; 
-}
+};
 
 class FollowX(Strategy)
 {
@@ -241,7 +241,7 @@ public:
 	}
 private:
 	static const float FIXED_Y_POS = 0.05 ; 
-}
+};
 
 class NewStartegyListener
 {
