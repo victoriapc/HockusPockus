@@ -36,7 +36,6 @@ ros::Subscriber desired_sub;
 ros::Subscriber robot_sub;
 ros::Publisher desired_pub;
 ros::Subscriber joy_sub;
-ros::Subscriber puck_sub;
 
 void current_pos_callback(const geometry_msgs::Point robot_pos);
 void forward();
@@ -44,7 +43,6 @@ void backward();
 void right();
 void left();
 void *control(void* argc);
-void puck_pos_callback(const geometry_msgs::Point puck_pos);
 
 geometry_msgs::Point point;
 geometry_msgs::Point des_point;
@@ -72,7 +70,6 @@ int main(int argc, char*argv[])
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
 	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
 	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
-	puck_sub = n.subscribe("/puck_pos", 1000, puck_pos_callback);
 	
     ros::spin();
     while(1);
@@ -246,12 +243,5 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 	des_point.y = desired_posy;
 	desired_pub.publish(des_point);
 }
-void puck_pos_callback(const geometry_msgs::Point puck_pos){
-	//temporary "follow X" strategy for quick testing : this will be moved to the strategy package
-    desired_posx = puck_pos.x;    
-	desired_posy = puck_pos.y;//0.05;    
-    
-}
-
 
 
