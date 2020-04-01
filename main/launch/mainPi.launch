@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find motor_controls)/launch/motor.launch"/>
+    <include file="$(find score)/launch/score.launch"/>
+</launch>
