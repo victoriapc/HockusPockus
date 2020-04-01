@@ -26,10 +26,15 @@ float step_length = perimeter/STEPROT;
 float current_posx = 0;
 float current_posy = 0;
 
+float desired_posx = 0;
+float desired_posy = 0;
+
 // Pub and Sub
 ros::Publisher pos_pub;
 ros::Subscriber desired_sub;
 ros::Subscriber robot_sub;
+ros::Publisher desired_pub;
+ros::Subscriber joy_sub;
 
 void current_pos_callback(const geometry_msgs::Point robot_pos);
 void forward();
@@ -38,8 +43,10 @@ void right();
 void left();
 
 geometry_msgs::Point point;
+geometry_msgs::Point des_point;
 
 void control_callback(const geometry_msgs::Point desired_pos);
+void joy_callback(const geometry_msgs::Point joy_pos);
 
 
 int main(int argc, char*argv[])
@@ -60,6 +67,8 @@ int main(int argc, char*argv[])
 	pos_pub = n.advertise<geometry_msgs::Point>("robot_pos", 1000);
 	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
+	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
+	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
 	
 	 ros::spin();
 }
@@ -190,4 +199,12 @@ void control_callback(const geometry_msgs::Point desired_pos){
 			backward();
 		}	
 	} 
+}
+
+void joy_callback(const geometry_msgs::Point joy_pos){
+	desired_posx = joy_pos.x + current_posx;	
+	desired_posy = joy_pos.y + current_posy;
+	des_point.x = desired_posx;
+	des_point.y = desired_posy;
+	desired_pub.publish(des_point);
 }
