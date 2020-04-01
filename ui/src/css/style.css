@@ -15,6 +15,10 @@ body {
 	padding: 0;
 }
 
+/* ----------------------------------------- */
+/* ----------- COMMON LAYOUT CSS ----------- */
+/* ----------------------------------------- */
+
 /* Header */
 header {
 	height: 5vh;
@@ -114,7 +118,6 @@ main h1 {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-
 /* Bottom Dashboard Row */
 .bottom-row {
 	height: 55vh;
@@ -145,18 +148,7 @@ main h1 {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.card-bottom-content {
-	height: 100%;
-	align-items: center;
-}
-
-#zone_joystick {
-	position: absolute;
-	align-self: center;
-	bottom: 27.5vh;
-}
-
-/* Buttons Design */
+/* Button */
 .btn {
 	font-size: 16px;
 	font-family: 'Raleway';
@@ -169,13 +161,17 @@ main h1 {
 	margin-bottom: 10px;
 }
 
-/* Blur section */
+/* Blur */
 .disabled {
     pointer-events: none;
     opacity: 0.4;
 }
 
-/* Index's HTML Specific CSS */
+/* ----------------------------------------- */
+/* -------- INDEX.HTML SPECIFIC CSS -------- */
+/* ----------------------------------------- */
+
+/* Top-row content */
 .manual {
 	margin-top: 10px;
 }
@@ -201,7 +197,83 @@ main h1 {
 	margin-left: 10%;
 }
 
-/* Webcam's HTML Specific CSS */
+/* Bottom-row content */
+.card-bottom-content {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.card-bottom-content p {
+	text-align: justify;
+	align-self: flex-start;
+}
+
+/* Game card content */
+/* Home */
+.nav-content {
+	list-style: none;
+	padding: 0;
+	margin:0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.nav-content-item {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	padding-left: 2vh;
+}
+
+.nav-content-item img {
+	height: 4vh;
+	margin-left: 1vh;
+}
+
+.nav-content-item p {
+	align-self: center;
+	padding-left: 2vh;
+}
+
+#zone_joystick {
+	position: absolute;
+	align-self: center;
+	bottom: 27.5vh;
+}
+
+/* Manual */
+.manual-info {
+	width: 40%;
+	height: 10%;
+	display: flex;
+	margin-top: auto;
+	align-items: center;
+	justify-items: center;
+	margin-bottom: 3vh;
+}
+
+.manual-info-title p {
+	margin: 0;
+	font-weight: bold;
+}
+
+.manual-info-coordinate {
+	width: 20%;
+	margin-left: auto;
+}
+
+/* Game */
+
+
+/* ----------------------------------------- */
+/* -------- WEBCAM.HTML SPECIFIC CSS ------- */
+/* ----------------------------------------- */
+
+/* Slider design */
 .slider-container {
 	width: 100%;
 	display: flex;
@@ -245,4 +317,6 @@ main h1 {
 	padding: 0;
 }
 
-/* Settings' HTML Specific CSS */
+/* ----------------------------------------- */
+/* ------- SETTINGS.HTML SPECIFIC CSS ------ */
+/* ----------------------------------------- */
