@@ -33,7 +33,7 @@ struct Terrain
 	Vector2 murDroite;
 };
 
-class Strategy()
+class Strategy
 {
   public:
     static const int FOLLOW_X = 0 ;
