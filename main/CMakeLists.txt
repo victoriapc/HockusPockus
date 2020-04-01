@@ -6,6 +6,8 @@ find_package(catkin REQUIRED COMPONENTS
   ui
   vision
   motor_controls
+  score
+  simulation
 )
 
 catkin_package(

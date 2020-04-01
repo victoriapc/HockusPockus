@@ -18,7 +18,8 @@
 #include <unistd.h>
 
 #define STEPROT 200
-#define TIME 500
+#define TIME 750
+#define OFFSET 0.01
 
 float perimeter = 0.068; //6.8 cm per revolution
 float step_length = perimeter/STEPROT;
@@ -35,12 +36,15 @@ ros::Subscriber desired_sub;
 ros::Subscriber robot_sub;
 ros::Publisher desired_pub;
 ros::Subscriber joy_sub;
+ros::Subscriber puck_sub;
 
 void current_pos_callback(const geometry_msgs::Point robot_pos);
 void forward();
 void backward();
 void right();
 void left();
+void *control(void* argc);
+void puck_pos_callback(const geometry_msgs::Point puck_pos);
 
 geometry_msgs::Point point;
 geometry_msgs::Point des_point;
@@ -51,16 +55,15 @@ void joy_callback(const geometry_msgs::Point joy_pos);
 
 int main(int argc, char*argv[])
 {	
-	
-	// pthread_create(&thread_Control, NULL, control,NULL);	
-
+	pthread_t thread_Control;
+	pthread_create(&thread_Control, NULL, control,&argc);	
 	wiringPiSetup();
 	// pin 4 and 5 for left motor
 	pinMode(5, OUTPUT);
 	pinMode(4, OUTPUT);
-	// pin 6 and 7 for right motor
-	pinMode(6, OUTPUT);
-	pinMode(7, OUTPUT);
+	// pin 6 and 10 for right motor
+	pinMode(24, OUTPUT);
+	pinMode(25, OUTPUT);
 	
 	ros::init(argc, argv, "motor_controls");
 	ros::NodeHandle n;
@@ -69,37 +72,45 @@ int main(int argc, char*argv[])
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
 	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
 	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
+	puck_sub = n.subscribe("/puck_pos", 1000, puck_pos_callback);
 	
-	 ros::spin();
+    ros::spin();
+    while(1);
 }
+
+void *control(void* argc)
+{
+    while(1){
+        
+        if (desired_posx != current_posx){
+        
+		    if (desired_posx > current_posx + OFFSET){
+			    right();
+		    }
+
+		    if (desired_posx < current_posx - OFFSET){
+			    left();
+		    }	
+	    }
+
+	    if (desired_posy != current_posy){
+		    
+		    if (desired_posy > current_posy + OFFSET){
+			    forward();
+		    }
+
+		    if (desired_posy < current_posy - OFFSET){
+			    backward();
+		    }	
+        }
+    }
+    return NULL;
+}
+
 void current_pos_callback(const geometry_msgs::Point robot_pos){
+	//?????
 	current_posx = robot_pos.x;
 	current_posy = robot_pos.y;
-}
-
-void forward(){
-	/*4 HIGH = counter-clockwise
-	4 LOW = clockwise
-
-	4-5 = left motor
-	6-7 = right motor*/
-	
-	digitalWrite(4,LOW);
-	digitalWrite(6,HIGH);
-
-	usleep(TIME);
-
-	digitalWrite(5,HIGH);
-	digitalWrite(7,HIGH);
-
-	usleep(TIME);
-
-	digitalWrite(5,LOW);
-	digitalWrite(7,LOW);
-
-	current_posy += step_length;
-	point.y = current_posy;
-	pos_pub.publish(point);
 }
 
 void backward(){
@@ -107,22 +118,47 @@ void backward(){
 	4 LOW = clockwise
 
 	4-5 = left motor
-	6-7 = right motor*/
+	24-25 = right motor*/
 	
 	digitalWrite(4,HIGH);
-	digitalWrite(6,LOW);
+	digitalWrite(24,LOW);
 
 	usleep(TIME);
 
 	digitalWrite(5,HIGH);
-	digitalWrite(7,HIGH);
+	digitalWrite(25,HIGH);
 
 	usleep(TIME);
 
 	digitalWrite(5,LOW);
-	digitalWrite(7,LOW);
+	digitalWrite(25,LOW);
 
-	current_posy -= step_length;
+	current_posy -= step_length;	
+	point.y = current_posy;
+	pos_pub.publish(point);
+}
+
+void forward(){
+	/*4 HIGH = counter-clockwise
+	4 LOW = clockwise
+
+	4-5 = left motor
+	24-10 = right motor*/
+	
+	digitalWrite(4,LOW);
+	digitalWrite(24,HIGH);
+
+	usleep(TIME);
+
+	digitalWrite(5,HIGH);
+	digitalWrite(25,HIGH);
+
+	usleep(TIME);
+
+	digitalWrite(5,LOW);
+	digitalWrite(25,LOW);
+
+	current_posy += step_length;
 	point.y = current_posy;
 	pos_pub.publish(point);
 }
@@ -132,20 +168,20 @@ void right(){
 	4 LOW = clockwise
 
 	4-5 = left motor
-	6-7 = right motor*/
+	24-10 = right motor*/
 	
 	digitalWrite(4,LOW);
-	digitalWrite(6,LOW);
+	digitalWrite(24,LOW);
 
 	usleep(TIME);
 
 	digitalWrite(5,HIGH);
-	digitalWrite(7,HIGH);
+	digitalWrite(25,HIGH);
 
 	usleep(TIME);
 
 	digitalWrite(5,LOW);
-	digitalWrite(7,LOW);
+	digitalWrite(25,LOW);
 
 	current_posx += step_length;
 	point.x = current_posx;
@@ -157,29 +193,31 @@ void left(){
 	4 LOW = clockwise
 
 	4-5 = left motor
-	6-7 = right motor*/
+	24-10 = right motor*/
 	
 	digitalWrite(4,HIGH);
-	digitalWrite(6,HIGH);
+	digitalWrite(24,HIGH);
 
 	usleep(TIME);
 
 	digitalWrite(5,HIGH);
-	digitalWrite(7,HIGH);
+	digitalWrite(25,HIGH);
 
 	usleep(TIME);
 
 	digitalWrite(5,LOW);
-	digitalWrite(7,LOW);
+	digitalWrite(25,LOW);
 
 	current_posx -= step_length;
 	point.x = current_posx;
 	pos_pub.publish(point);
 }
 void control_callback(const geometry_msgs::Point desired_pos){
+    desired_posx = desired_pos.x;
+    desired_posy = desired_pos.y;
 
-
-	if (desired_pos.x != current_posx){
+	/*if (desired_pos.x != current_posx){
+    
 		if (desired_pos.x > current_posx){
 			right();
 		}
@@ -198,7 +236,7 @@ void control_callback(const geometry_msgs::Point desired_pos){
 		if (desired_pos.y < current_posy){
 			backward();
 		}	
-	} 
+	}*/ 
 }
 
 void joy_callback(const geometry_msgs::Point joy_pos){
@@ -208,3 +246,12 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 	des_point.y = desired_posy;
 	desired_pub.publish(des_point);
 }
+void puck_pos_callback(const geometry_msgs::Point puck_pos){
+	//temporary "follow X" strategy for quick testing : this will be moved to the strategy package
+    desired_posx = puck_pos.x;    
+	desired_posy = puck_pos.y;//0.05;    
+    
+}
+
+
+

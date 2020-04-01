@@ -1,0 +1,75 @@
+\hypertarget{class_player_manager}{}\doxysection{Player\+Manager Class Reference}
+\label{class_player_manager}\index{PlayerManager@{PlayerManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_manager_a40fe5ee417cb61386633b21521e5e72f}{Player\+Manager}} (int i\+\_\+score\+To\+Win, ros\+::\+Publisher $\ast$i\+\_\+p\+Score\+Publisher, ros\+::\+Publisher $\ast$i\+\_\+p\+End\+Of\+Game\+Publisher)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player_manager}{Player\+Manager}}\textquotesingle{}s constructor,. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_manager_ab53de6b16914b7591fc2bd3038069ac7}\label{class_player_manager_ab53de6b16914b7591fc2bd3038069ac7}} 
+\mbox{\hyperlink{class_player_manager_ab53de6b16914b7591fc2bd3038069ac7}{$\sim$\+Player\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player_manager}{Player\+Manager}}\textquotesingle{}s destructor, frees the dynamically allocated memory related to the \mbox{\hyperlink{class_player}{Player}} objects that were created. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_ad7a1433a103e6ed204a0f50ab324f5e0}{add\+A\+Player}} (const std\+::string \&i\+\_\+player\+ID)
+\begin{DoxyCompactList}\small\item\em Method to add a player, this creates a new \mbox{\hyperlink{class_player}{Player}} object dynamically, which must be freed by the destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_manager_af2da3e19081753c3348029eb1d2edee9}{update\+Score}} (const std\+::string \&i\+\_\+player\+ID)
+\begin{DoxyCompactList}\small\item\em Method to update the scores of player, the score system follows the rules of Omnikin, i.\+e, when the puck enters the goal of a player, everyone else gets a point ; this publish updates related to the scores and, possibly, a message that signals the end of the game (if final score has been reached) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_player_manager_a40fe5ee417cb61386633b21521e5e72f}\label{class_player_manager_a40fe5ee417cb61386633b21521e5e72f}} 
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{PlayerManager()}{PlayerManager()}}
+{\footnotesize\ttfamily Player\+Manager\+::\+Player\+Manager (\begin{DoxyParamCaption}\item[{int}]{i\+\_\+score\+To\+Win,  }\item[{ros\+::\+Publisher $\ast$}]{i\+\_\+p\+Score\+Publisher,  }\item[{ros\+::\+Publisher $\ast$}]{i\+\_\+p\+End\+Of\+Game\+Publisher }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_player_manager}{Player\+Manager}}\textquotesingle{}s constructor,. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+score\+To\+Win} & \+: Integer that represents the score to win \\
+\hline
+{\em i\+\_\+p\+Score\+Publisher} & \+: ros\+::\+Publisher that is used to publish updates related to the scores \\
+\hline
+{\em i\+\_\+p\+End\+Of\+Game\+Publisher} & \+: ros\+::\+Publisher that is used to publish a message that tells everyone that the game is over (i\+\_\+score\+To\+Win has been reached by a player) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_manager_ad7a1433a103e6ed204a0f50ab324f5e0}\label{class_player_manager_ad7a1433a103e6ed204a0f50ab324f5e0}} 
+\index{PlayerManager@{PlayerManager}!addAPlayer@{addAPlayer}}
+\index{addAPlayer@{addAPlayer}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{addAPlayer()}{addAPlayer()}}
+{\footnotesize\ttfamily void Player\+Manager\+::add\+A\+Player (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{i\+\_\+player\+ID }\end{DoxyParamCaption})}
+
+
+
+Method to add a player, this creates a new \mbox{\hyperlink{class_player}{Player}} object dynamically, which must be freed by the destructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+player\+ID} & \+: std\+::string that represents the name of the player \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_manager_af2da3e19081753c3348029eb1d2edee9}\label{class_player_manager_af2da3e19081753c3348029eb1d2edee9}} 
+\index{PlayerManager@{PlayerManager}!updateScore@{updateScore}}
+\index{updateScore@{updateScore}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{updateScore()}{updateScore()}}
+{\footnotesize\ttfamily void Player\+Manager\+::update\+Score (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{i\+\_\+player\+ID }\end{DoxyParamCaption})}
+
+
+
+Method to update the scores of player, the score system follows the rules of Omnikin, i.\+e, when the puck enters the goal of a player, everyone else gets a point ; this publish updates related to the scores and, possibly, a message that signals the end of the game (if final score has been reached) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+\_\+player\+ID} & \+: std\+::string that represents the name of the player \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/score/src/Player\+Manager.\+h\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/score/src/Player\+Manager.\+cpp\end{DoxyCompactItemize}

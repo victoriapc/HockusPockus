@@ -3,7 +3,7 @@ createJoystick = function () {
   var options = {
     zone: document.getElementById('zone_joystick'),
     threshold: 0.1,
-    position: { left: 50 + '%' },
+    position: { left: 0 + 'px' },         // necessary in order for the joystick to move
     mode: 'static',
     size: 200,
     color: '#28a745'
@@ -31,9 +31,6 @@ createJoystick = function () {
     }
     self.move(0, 0);
   });
-  // window.onload = function () {
-  //   createJoystick();
-  // }
   return manager;
 }
 

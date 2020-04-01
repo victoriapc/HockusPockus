@@ -15,8 +15,13 @@ ros::Publisher _endOfGamePublisher ;
 class NewGameListener
 {
 public:
+	//! NewGameListener's constructor 
 	NewGameListener():m_pCurrentGame(nullptr),m_playerNames(),m_scoreToWin(10){};
 	
+	//! callback to start a new game, this is triggered when a message is publish on the ROS_topicNames::GAME_STATE topic 
+    /*!
+      \param i_msg :std_msgs::Bool that indicates if we should start a new game or stop the current one 
+    */
 	void callbackStartGame(const std_msgs::Bool::ConstPtr& i_msg)
 	{
 		if(m_pCurrentGame != nullptr) //stop score keeping of the current game, if there's one
@@ -30,6 +35,10 @@ public:
 		}
 	}
 	
+	//! callback to refresh the players' names, this is triggered when a message is publish on the ROS_topicNames::PLAYERS_NAMES topic 
+    /*!
+      \param i_msg :std_msgs::String that indicates the names of the players
+    */
 	void callbackPlayersNames(const std_msgs::String::ConstPtr& i_msg)
 	{
 		std::string names = i_msg->data;
@@ -45,7 +54,11 @@ public:
 		}
 
 	}
-	
+
+	//! callback to refresh the score to win, this is triggered when a message is publish on the ROS_topicNames::SCORE_TO_WIN topic 
+    /*!
+      \param i_msg :std_msgs::Int32 that indicates the new score to win 
+    */	
 	void callbackScoreToWin(const std_msgs::Int32::ConstPtr& i_msg)
 	{
 		m_scoreToWin = i_msg->data;

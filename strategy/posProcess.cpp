@@ -33,29 +33,24 @@ struct Terrain
 	Vector2 murDroite;
 };
 
-class Strategy()
+class Strategy
 {
   public:
     static const int FOLLOW_X = 0 ;
 	static const int FOLLOW_X_WITH_REBOUND = 1 ;
+};
 
-  protected:
-  	ros::NodeHandle n;
-	ros::Subscriber m_subscriberPositionActuellePuck;
-	ros::Publisher  m_publisherPositionDesiree;
-}
-
-class ReboundHandler(Strategy)
+class ReboundHandler : public Strategy
 {
   public:
 	ReboundHandler():
-		m_subscriberDimensionsTerrain(n.subscribe("/table_dimensions", 1000, initTerrain)),
-		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000, reception)),
+		m_subscriberDimensionsTerrain(n.subscribe("/table_dimensions", 1000, &ReboundHandler::initTerrain,this)),
+		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this)),
 		m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000))
 	{
 	}
 	
-	void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
+	virtual void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
 	
 	void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes)
 	{
@@ -195,6 +190,9 @@ class ReboundHandler(Strategy)
 	}
 	
   protected:
+  	ros::NodeHandle n;
+	ros::Subscriber m_subscriberPositionActuellePuck;
+	ros::Publisher  m_publisherPositionDesiree;
 	ros::Subscriber m_subscriberDimensionsTerrain;
 	
   private:
@@ -206,28 +204,29 @@ class ReboundHandler(Strategy)
 	Vector2 posPrec;
 
 	Terrain map; 
+	
 
-}
+};
 
-class FollowXWithReboundHandler(ReboundHandler)
+class FollowXWithReboundHandler : public ReboundHandler
 {
 public:
 	void predictionToDesiredPosition(Vector2 i_predictedPosition)
 	{
 		geometry_msgs::Point msg;
 		msg.x = i_predictedPosition.X;
-		msg.y = FollowXWithReboundHandler::FIXED_Y_POS ; 
+		msg.y = FIXED_Y_POS ; 
 		m_publisherPositionDesiree.publish(msg); 
 	}
 private:
-	static const float FIXED_Y_POS = 0.05 ; 
-}
+	const float FIXED_Y_POS = 0.05 ; 
+};
 
-class FollowX(Strategy)
+class FollowX : public Strategy
 {
 public:
 	FollowX():
-		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000, reception)),
+		m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000, &FollowX::reception,this)),
 		m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000))
 	{
 	}
@@ -236,14 +235,17 @@ public:
 	{
 		geometry_msgs::Point msg;
 		msg.x = i_puckPos.x;
-		msg.y = FollowX::FIXED_Y_POS ; 
+		msg.y = FIXED_Y_POS ; 
 		m_publisherPositionDesiree.publish(msg); 
 	}
 private:
-	static const float FIXED_Y_POS = 0.05 ; 
-}
+	const float FIXED_Y_POS = 0.05 ; 
+	ros::NodeHandle n;
+	ros::Subscriber m_subscriberPositionActuellePuck;
+	ros::Publisher  m_publisherPositionDesiree;
+};
 
-class NewStartegyListener
+class NewStrategyListener
 {
 public:
 	NewStrategyListener():m_pCurrentStrategy(nullptr){};
@@ -275,6 +277,7 @@ ros::Subscriber _startSubscriber;
 int main(int argc, char*argv[])
 {
 	ros::init(argc, argv, "strategy");
+	ros::NodeHandle n;
 	
 	NewStrategyListener newStrategyListener = NewStrategyListener();
 	_startSubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);

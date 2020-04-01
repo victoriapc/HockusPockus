@@ -4,11 +4,12 @@ const EASY = 0;
 const MEDIUM = 1;
 const HARD = 2;
 
-// Section
+// Sections
 var new_game = null;
 var manual = null;
 var game = null;
 
+// Mode state
 var modeManual = false;
 var modeGame = false;
 
@@ -125,8 +126,8 @@ var robot_pos_listener = new ROSLIB.Topic({
 });
 
 function updateRobotPosition(m) {
-  document.getElementById("robot_x").innerHTML = 'X: ' + m.x;
-  document.getElementById("robot_y").innerHTML = 'Y: ' + m.y;
+  document.getElementById("robot_x").innerHTML = m.x;
+  document.getElementById("robot_y").innerHTML = m.y;
 }
 
 robot_pos_listener.subscribe(function(message) {
@@ -141,8 +142,8 @@ var puck_pos_listener = new ROSLIB.Topic({
 });
 
 function updatePuckPosition(m) {
-  document.getElementById("puck_x").innerHTML = 'X: ' + m.x;
-  document.getElementById("puck_y").innerHTML = 'Y: ' + m.y;
+  document.getElementById("puck_x").innerHTML = m.x;
+  document.getElementById("puck_y").innerHTML = m.y;
 }
 
 puck_pos_listener.subscribe(function(message) {
@@ -150,9 +151,11 @@ puck_pos_listener.subscribe(function(message) {
 });
 
 /* Game Section various content */
-const home_content = "<h1>Home</h1>";
-
-const manual_content = "<h1>Manual</h1>"
-
+const home_content = "<h3>Welcome to the Hockus Pockus User Interface!</h3><p>The UI allows you to control the robot, start a game, configure the webcam's parameters and more. You can navigate through the different pages with the navbar :</p><ul class='nav-content'><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/home.png'><p>-</p><p>Home page to start a game or to control the robot manually</p></li><li class='nav-content-item'><img src='https://img.icons8.com/carbon-copy/100/000000/rules.png'><p>-</p><p>General rules on how to play depending on the number of players</p></li><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/webcam.png'><p>-</p><p>Configure the webcam to optimize the puck finding algorithm</p></li><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/settings.png'><p>-</p><p>Configure the user's and table's parameters</p></li><li class='nav-content-item'><img src='resources/github.png'><p>-</p><p>Access the project source code and the Wiki on Github</p></li></ul>";
+const manual_content = "<h3>Manual Control</h3><p>The joystick can be used to move the robot. The desired position is published on a ROS topic and the robot moves accordingly.</p><div class='manual-info'><div class='manual-info-title'><p>Desired position</p></div><div class='manual-info-coordinate'><p>X:<span id='manual_x'></span></p><p>Y:<span id='manual_y'></span></p></div></div>";
 const game_content = "<h1>Game</h1><button class='btn' onclick='stopGame()' style='background-color: #28a745;'>Stop</button>";
 
+function updateManualPosition(m) {
+  document.getElementById("manual_x").innerHTML = m.x;
+  document.getElementById("manual_y").innerHTML = m.y;
+}

@@ -1,0 +1,67 @@
+\hypertarget{class_goal_sensor_base}{}\doxysection{Goal\+Sensor\+Base Class Reference}
+\label{class_goal_sensor_base}\index{GoalSensorBase@{GoalSensorBase}}
+Inheritance diagram for Goal\+Sensor\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_goal_sensor_base}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_goal_sensor_base_a908f1154e4e28f12ba27057a7e746d65}\label{class_goal_sensor_base_a908f1154e4e28f12ba27057a7e746d65}} 
+\mbox{\hyperlink{class_goal_sensor_base_a908f1154e4e28f12ba27057a7e746d65}{Goal\+Sensor\+Base}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_goal_sensor_base}{Goal\+Sensor\+Base}}\textquotesingle{}s constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_goal_sensor_base_a35490fb74772d05053822722ce9ba1e9}\label{class_goal_sensor_base_a35490fb74772d05053822722ce9ba1e9}} 
+void \mbox{\hyperlink{class_goal_sensor_base_a35490fb74772d05053822722ce9ba1e9}{check\+For\+Next\+Goal}} ()
+\begin{DoxyCompactList}\small\item\em This method blocks until a goal is scored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_goal_sensor_base_a74f8178de2e13f725a8885d2b8b9a642}{is\+Triggered\+Condition}} ()=0
+\begin{DoxyCompactList}\small\item\em Abstract method that indicates if the sensor is triggered or not. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_goal_sensor_base_a4cb6d6a625c0cab8c118851e7f53bda7}{is\+Idle\+Condition}} ()=0
+\begin{DoxyCompactList}\small\item\em Abstract method that indicates if the sensor is iddle or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_goal_sensor_base_a4cb6d6a625c0cab8c118851e7f53bda7}\label{class_goal_sensor_base_a4cb6d6a625c0cab8c118851e7f53bda7}} 
+\index{GoalSensorBase@{GoalSensorBase}!isIdleCondition@{isIdleCondition}}
+\index{isIdleCondition@{isIdleCondition}!GoalSensorBase@{GoalSensorBase}}
+\doxysubsubsection{\texorpdfstring{isIdleCondition()}{isIdleCondition()}}
+{\footnotesize\ttfamily virtual bool Goal\+Sensor\+Base\+::is\+Idle\+Condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Abstract method that indicates if the sensor is iddle or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the iddle condition is met, False if it isn\textquotesingle{}t 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_goal_sensor_sonar_a60283df23d65070de4b50078ffc3530b}{Goal\+Sensor\+Sonar}}.
+
+\mbox{\Hypertarget{class_goal_sensor_base_a74f8178de2e13f725a8885d2b8b9a642}\label{class_goal_sensor_base_a74f8178de2e13f725a8885d2b8b9a642}} 
+\index{GoalSensorBase@{GoalSensorBase}!isTriggeredCondition@{isTriggeredCondition}}
+\index{isTriggeredCondition@{isTriggeredCondition}!GoalSensorBase@{GoalSensorBase}}
+\doxysubsubsection{\texorpdfstring{isTriggeredCondition()}{isTriggeredCondition()}}
+{\footnotesize\ttfamily virtual bool Goal\+Sensor\+Base\+::is\+Triggered\+Condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Abstract method that indicates if the sensor is triggered or not. 
+
+\begin{DoxyReturn}{Returns}
+True if the triggered condition is met, False if it isn\textquotesingle{}t 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_goal_sensor_sonar_a454506fd5dc0350310ebb0915e8c4161}{Goal\+Sensor\+Sonar}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/score/src/Goal\+Sensor\+Base.\+h\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/score/src/Goal\+Sensor\+Base.\+cpp\end{DoxyCompactItemize}
