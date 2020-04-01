@@ -1,4 +1,9 @@
+#ifndef REBOUND_HANDLER_H  
+#define REBOUND_HANDLER_H
+
+
 #include "Strategy.h"
+#include "Terrain.h"
 
 class ReboundHandler : public Strategy
 {
@@ -26,3 +31,5 @@ class ReboundHandler : public Strategy
 
 	Terrain map; 
 };
+
+#endif

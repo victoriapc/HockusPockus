@@ -1,3 +1,6 @@
+#ifndef FOLLOW_X_H  
+#define FOLLOW_X_H
+
 #include "Strategy.h"
 
 class FollowX : public Strategy
@@ -11,3 +14,5 @@ private:
 	ros::Subscriber m_subscriberPositionActuellePuck;
 	ros::Publisher  m_publisherPositionDesiree;
 };
+
+#endif

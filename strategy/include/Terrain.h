@@ -1,3 +1,6 @@
+#ifndef TERRAIN_H  
+#define TERRAIN_H
+
 #include "Vector3.h"
 
 struct Terrain
@@ -12,3 +15,5 @@ struct Terrain
 	Vector2 murGauche;
 	Vector2 murDroite;
 };
+
+#endif

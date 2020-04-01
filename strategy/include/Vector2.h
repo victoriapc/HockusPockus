@@ -1,3 +1,6 @@
+#ifndef VECTOR_2_H  
+#define VECTOR_2_H
+
 struct Vector2
 {
 	Vector2():X(0),Y(0) {}
@@ -5,3 +8,5 @@ struct Vector2
 	float X;
 	float Y;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef VECTOR_3_H  
+#define VECTOR_3_H
+
 #include "Vector2.h"
 
 struct Vector3
@@ -7,3 +10,5 @@ struct Vector3
 	Vector2 pos;
 	int iter;
 };
+
+#endif

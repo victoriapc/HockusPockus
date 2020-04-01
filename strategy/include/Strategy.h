@@ -1,3 +1,6 @@
+#ifndef STRATEGY_H  
+#define STRATEGY_H
+
 #include <math.h>
 #include <ros/ros.h>
 #include <geometry_msgs/Point.h>
@@ -10,3 +13,5 @@ class Strategy
     static const int FOLLOW_X = 0 ;
 	static const int FOLLOW_X_WITH_REBOUND = 1 ;
 };
+
+#endif
