@@ -185,7 +185,7 @@ main h1 {
 }
 
 .info-container  h4, p {
-	margin: 1.5%;
+	margin: 1%;
 	padding: 0;
 }
 
@@ -320,3 +320,21 @@ main h1 {
 /* ----------------------------------------- */
 /* ------- SETTINGS.HTML SPECIFIC CSS ------ */
 /* ----------------------------------------- */
+
+
+/* ----------------------------------------- */
+/* ------- RULES.HTML SPECIFIC CSS ------ */
+/* ----------------------------------------- */
+
+centertext {
+	
+	height: 400px;
+    width: 900px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -450px;
+
+}
