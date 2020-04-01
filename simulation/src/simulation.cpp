@@ -9,10 +9,10 @@ ros::Publisher puck_pos_pub;
 
 int main(int argc, char*argv[])
 {	
-	ros::init(argc, argv, "motor_controls");
+	ros::init(argc, argv, "simulation");
 	ros::NodeHandle n;
 
-	puck_pos_pub = n.advertise<geometry_msgs::Point>("puck_pos", 1000);
+	puck_pos_pub = n.advertise<geometry_msgs::Point>("/puck_pos", 1000);
 
 	geometry_msgs::Point point;
 	point.x = 0; 
