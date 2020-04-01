@@ -190,6 +190,9 @@ class ReboundHandler : public Strategy
 	}
 	
   protected:
+  	ros::NodeHandle n;
+	ros::Subscriber m_subscriberPositionActuellePuck;
+	ros::Publisher  m_publisherPositionDesiree;
 	ros::Subscriber m_subscriberDimensionsTerrain;
 	
   private:
@@ -202,9 +205,6 @@ class ReboundHandler : public Strategy
 
 	Terrain map; 
 	
-	ros::NodeHandle n;
-	ros::Subscriber m_subscriberPositionActuellePuck;
-	ros::Publisher  m_publisherPositionDesiree;
 
 };
 
