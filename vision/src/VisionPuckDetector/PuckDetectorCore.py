@@ -97,7 +97,14 @@ class PuckDetectorCore(object) :
             The circles that were found
         """
         processedFrame = self.ProcessFrames(i_frame)
-        return cv2.HoughCircles(processedFrame, cv2.HOUGH_GRADIENT, 1, 100, param1=200, param2=15, minRadius=self.m_radius-PuckDetectorCore.RADIUS_TOLERANCE, maxRadius=self.m_radius+PuckDetectorCore.RADIUS_TOLERANCE)
+        circles = cv2.HoughCircles(processedFrame, cv2.HOUGH_GRADIENT, 1, 100, param1=200, param2=15, minRadius=self.m_radius-PuckDetectorCore.RADIUS_TOLERANCE, maxRadius=self.m_radius+PuckDetectorCore.RADIUS_TOLERANCE)
+        
+        if circles is not None:
+            return circles
+        else :
+            edges = cv2.canny(processedFrame, sigma=2.0,low_threshold=0.55, high_threshold=0.8)
+            result = cv2.hough_ellipse(edges, accuracy=20, threshold=250, min_size=self.m_radius/2, max_size=self.m_radius*2)
+            result.sort(order='accumulator',reverse=True) 
 
     def findPuckInAllCircles(self,i_circles):
         """
