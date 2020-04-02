@@ -115,7 +115,7 @@ Vector3 ReboundHandler::linePredict(float A, float B, int dir, Vector2 pos, int 
 		return linePredict(A2,B2,dir2, Vector2(tempXMur2,tempYMur2),iteration);
 	}
 	else
-		return Vector3(Vector2(1000, 1000), iteration);
+		return Vector3(Vector2(pos.X, 0.05), iteration);
 }
 
 void ReboundHandler::reception(const geometry_msgs::Point i_puckPos)
