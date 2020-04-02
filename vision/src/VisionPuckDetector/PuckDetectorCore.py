@@ -44,6 +44,7 @@ class PuckDetectorCore(object) :
         params.minConvexity = 0.2
         params.filterByInertia = True
         params.minInertiaRatio = 0.01
+        params.filterByColor = False
           
         self.m_blobDetector = cv2.SimpleBlobDetector_create(params) 
 
@@ -109,12 +110,7 @@ class PuckDetectorCore(object) :
             The circles that were found
         """
         processedFrame = self.ProcessFrames(i_frame)
-        circles = cv2.HoughCircles(processedFrame, cv2.HOUGH_GRADIENT, 1, 100, param1=200, param2=15, minRadius=self.m_radius-PuckDetectorCore.RADIUS_TOLERANCE, maxRadius=self.m_radius+PuckDetectorCore.RADIUS_TOLERANCE)
-        
-        if circles is not None:
-            return circles
-        else :
-            return self.m_blobDetector.detect(processedFrame) 
+        return cv2.HoughCircles(processedFrame, cv2.HOUGH_GRADIENT, 1, 100, param1=200, param2=15, minRadius=self.m_radius-PuckDetectorCore.RADIUS_TOLERANCE, maxRadius=self.m_radius+PuckDetectorCore.RADIUS_TOLERANCE)
 
     def findPuckInAllCircles(self,i_circles):
         """

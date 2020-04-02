@@ -42,8 +42,8 @@ class PuckDetector(PuckDetectorCore) :
             self.radius = circle[2]
             self.newInfo = True
 
-        self.xPosInMeters, self.yPosInMeters = self.m_dimensionsConverter.getCoordinatesInMeters((self.xPosInPixels, self.yPosInPixels))
-        self.m_broadcaster.broadcastCoordinatesOfPuck(self.xPosInMeters, self.yPosInMeters)
+            self.xPosInMeters, self.yPosInMeters = self.m_dimensionsConverter.getCoordinatesInMeters((self.xPosInPixels, self.yPosInPixels))
+            self.m_broadcaster.broadcastCoordinatesOfPuck(self.xPosInMeters, self.yPosInMeters)
 
     def displayFeed(self,i_frame):
         """
