@@ -34,6 +34,18 @@ class PuckDetectorCore(object) :
         self.m_upperColor = np.array(i_upperColor)
         self.m_camera = i_camera
         self.m_broadcaster = i_broadcaster
+        
+        params = cv2.SimpleBlobDetector_Params() 
+        params.filterByArea = True
+        params.minArea = 3.14159*i_radius*i_radius*0.80 # area of the puck with a 80% tolerance
+        params.filterByCircularity = True 
+        params.minCircularity = 0.9
+        params.filterByConvexity = True
+        params.minConvexity = 0.2
+        params.filterByInertia = True
+        params.minInertiaRatio = 0.01
+          
+        self.m_blobDetector = cv2.SimpleBlobDetector_create(params) 
 
     def __del__(self):
         """
@@ -102,10 +114,7 @@ class PuckDetectorCore(object) :
         if circles is not None:
             return circles
         else :
-            edges = cv2.canny(processedFrame, sigma=2.0,low_threshold=0.55, high_threshold=0.8)
-            result = cv2.hough_ellipse(edges, accuracy=20, threshold=250, min_size=self.m_radius/2, max_size=self.m_radius*2)
-            result.sort(order='accumulator',reverse=True) 
-            return result
+            return self.m_blobDetector.detect(processedFrame) 
 
     def findPuckInAllCircles(self,i_circles):
         """
