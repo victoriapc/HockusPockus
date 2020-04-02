@@ -2,5 +2,10 @@
     <include file="$(find webcam)/launch/webcam.launch"/>
     <include file="$(find vision)/launch/vision.launch"/>
     <include file="$(find ui)/launch/ui.launch"/>
+<<<<<<< Updated upstream
 	<include file="$(find strategy)/launch/strategy.launch"/>
+=======
+    <!--include file="$(find simulation)/launch/simulation.launch"/-->
+    <include file="$(find strategy)/launch/strategy.launch"/>
+>>>>>>> Stashed changes
 </launch>
