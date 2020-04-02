@@ -105,6 +105,7 @@ class PuckDetectorCore(object) :
             edges = cv2.canny(processedFrame, sigma=2.0,low_threshold=0.55, high_threshold=0.8)
             result = cv2.hough_ellipse(edges, accuracy=20, threshold=250, min_size=self.m_radius/2, max_size=self.m_radius*2)
             result.sort(order='accumulator',reverse=True) 
+            return result
 
     def findPuckInAllCircles(self,i_circles):
         """
