@@ -34,6 +34,19 @@ class PuckDetectorCore(object) :
         self.m_upperColor = np.array(i_upperColor)
         self.m_camera = i_camera
         self.m_broadcaster = i_broadcaster
+        
+        params = cv2.SimpleBlobDetector_Params() 
+        params.filterByArea = True
+        params.minArea = 3.14159*i_radius*i_radius*0.80 # area of the puck with a 80% tolerance
+        params.filterByCircularity = True 
+        params.minCircularity = 0.9
+        params.filterByConvexity = True
+        params.minConvexity = 0.2
+        params.filterByInertia = True
+        params.minInertiaRatio = 0.01
+        params.filterByColor = False
+          
+        self.m_blobDetector = cv2.SimpleBlobDetector_create(params) 
 
     def __del__(self):
         """

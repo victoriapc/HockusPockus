@@ -6,7 +6,7 @@ COMPONENTS message_generation roscpp std_msgs)
 generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(
-   INCLUDE_DIRS src
+   INCLUDE_DIRS include
    CATKIN_DEPENDS roscpp  message_runtime std_msgs)
    
 include_directories(include ${catkin_INCLUDE_DIRS})
