@@ -18,7 +18,7 @@ createJoystick = function () {
   });
 
   self.manager.on('move', function (event, nipple) {
-    max_x = 5.0; // m/s
+    max_x = 0.05; // m/s
     max_y = 5.0; // m/s
     max_distance = 75.0; // pixels;
     joyx = (Math.sin(nipple.angle.radian) * max_x * nipple.distance/max_distance);

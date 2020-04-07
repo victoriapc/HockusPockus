@@ -30,6 +30,9 @@ float current_posy = 0;
 float desired_posx = 0;
 float desired_posy = 0;
 
+float joyx = 0;
+float joyy = 0;
+
 // Pub and Sub
 ros::Publisher pos_pub;
 ros::Subscriber desired_sub;
@@ -81,7 +84,9 @@ int main(int argc, char*argv[])
 void *control(void* argc)
 {
     while(1){
-        
+        desired_posx = joyx + current_posx;	
+		desired_posy = joyy + current_posy;
+
         if (desired_posx != current_posx){
         
 		    if (desired_posx > current_posx + OFFSET){
@@ -240,11 +245,13 @@ void control_callback(const geometry_msgs::Point desired_pos){
 }
 
 void joy_callback(const geometry_msgs::Point joy_pos){
-	desired_posx = joy_pos.x + current_posx;	
-	desired_posy = joy_pos.y + current_posy;
-	des_point.x = desired_posx;
-	des_point.y = desired_posy;
-	desired_pub.publish(des_point);
+	joyx = joy_pos.x;
+	joyy = joy_pos.y;
+	// desired_posx = joy_pos.x + current_posx;	
+	// desired_posy = joy_pos.y + current_posy;
+	// des_point.x = desired_posx;
+	// des_point.y = desired_posy;
+	// desired_pub.publish(des_point);
 }
 void puck_pos_callback(const geometry_msgs::Point puck_pos){
 	//temporary "follow X" strategy for quick testing : this will be moved to the strategy package
