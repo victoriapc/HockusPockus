@@ -25,7 +25,7 @@ class CameraROS(Camera) :
         self.m_buffer = None
         self.m_bridge = CvBridge()
         timeBetweenFrames = 1000 / i_FPS  # The time between two frames is : 1000 ms/s * (1s/Number of frames per second)
-        self.waitTime = int(timeBetweenFrames/4)
+        self.waitTime = int(timeBetweenFrames/10)
         self.hasNewFrame = False
         self.hasNewFrameLock = threading.Lock()
 
