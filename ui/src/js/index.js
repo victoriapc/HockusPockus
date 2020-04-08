@@ -72,7 +72,9 @@ joy_publisher = new ROSLIB.Topic({
   messageType : 'geometry_msgs/Point'
 });
 
-move = function (posx, posy) {
+var max_speed = document.getElementById("speed_val");
+
+move = function (posx, posy,max_speed) {
   var Point = new ROSLIB.Message({
       x: posx,
       y: posy,
@@ -150,10 +152,20 @@ puck_pos_listener.subscribe(function(message) {
   updatePuckPosition(message);
 });
 
+var slider = document.getElementById("speed_range");
+// output.innerHTML = slider.value;
+
+// slider.oninput = function() {
+//   output.innerHTML = this.value;
+// }
+
 /* Game Section various content */
 const home_content = "<h3>Welcome to the Hockus Pockus User Interface!</h3><p>The UI allows you to control the robot, start a game, configure the webcam's parameters and more. You can navigate through the different pages with the navbar :</p><ul class='nav-content'><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/home.png'><p>-</p><p>Home page to start a game or to control the robot manually</p></li><li class='nav-content-item'><img src='https://img.icons8.com/carbon-copy/100/000000/rules.png'><p>-</p><p>General rules on how to play depending on the number of players</p></li><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/webcam.png'><p>-</p><p>Configure the webcam to optimize the puck finding algorithm</p></li><li class='nav-content-item'><img src='https://img.icons8.com/ios/100/000000/settings.png'><p>-</p><p>Configure the user's and table's parameters</p></li><li class='nav-content-item'><img src='resources/github.png'><p>-</p><p>Access the project source code and the Wiki on Github</p></li></ul>";
-const manual_content = "<h3>Manual Control</h3><p>The joystick can be used to move the robot. The desired position is published on a ROS topic and the robot moves accordingly.</p><div class='manual-info'><div class='manual-info-title'><p>Desired position</p></div><div class='manual-info-coordinate'><p>X:<span id='manual_x'></span></p><p>Y:<span id='manual_y'></span></p></div></div>";
+const manual_content = "<h3>Manual Control</h3><p>The joystick can be used to move the robot. The desired position is published on a ROS topic and the robot moves accordingly.</p><div class='slider-container'><div class='slider_text'><p>Robot Speed:</p></div><input type='range' min='1' max='9' step='1' value='5' class='slider_manual'id='speed_range'></div><div class='manual-info'><div class='manual-info-title'><p>Desired position</p></div><div class='manual-info-coordinate'><p>X:<span id='manual_x'></span></p><p>Y:<span id='manual_y'></span></p></div></div>";
+// <div class='slidecontainer'><input type='range' min='0.01' max='0.09' value='0.05' class='slider' id='speed'><p>Robot Speed: <span id='speedvalue'></span></p></div>"";
+// <div class='manual-info'><div class='manual-info-title'><p>Desired position</p></div><div class='manual-info-coordinate'><p>X:<span id='manual_x'></span></p><p>Y:<span id='manual_y'></span></p></div></div>";
 const game_content = "<h1>Game</h1><button class='btn' onclick='stopGame()' style='background-color: #28a745;'>Stop</button>";
+
 
 function updateManualPosition(m) {
   document.getElementById("manual_x").innerHTML = m.x;

@@ -13,16 +13,14 @@ createJoystick = function () {
 
   self.manager.on('start', function (event, nipple) {
     timer = setInterval(function () {
-      move(joyx, joyy);
+      move(joyx, joyy,max_speed);
     }, 25);
   });
 
   self.manager.on('move', function (event, nipple) {
-    max_x = 0.05; // m/s
-    max_y = 5.0; // m/s
     max_distance = 75.0; // pixels;
-    joyx = (Math.sin(nipple.angle.radian) * max_x * nipple.distance/max_distance);
-    joyy = (-Math.cos(nipple.angle.radian) * max_y * nipple.distance/max_distance);
+    joyx = (Math.sin(nipple.angle.radian) * max_speed * nipple.distance/max_distance);
+    joyy = (-Math.cos(nipple.angle.radian) * max_speed * nipple.distance/max_distance);
   });
 
   self.manager.on('end', function () {
