@@ -115,10 +115,10 @@ class PuckDetectorCore(object) :
             biggestCountour = max(contours, key=cv2.contourArea)
             centerOfMass = cv2.moments(biggestCountour,True)
 
-            if centerOfMass['m00'] != 0 :
+            if centerOfMass['m00'] != 0 : #To prevent a division by 0
                 return (int(centerOfMass['m10'] / centerOfMass['m00']), int(centerOfMass['m01'] / centerOfMass['m00']))
             else:
-                x, y, width, height = cv2.boundingRect(biggestCountour)
+                x, y, width, height = cv2.boundingRect(biggestCountour) # fallback algorithm if centerOfMass would create a division by 0
                 return (int(x + width/2) , int(y + height/2))
         else :
             return None
