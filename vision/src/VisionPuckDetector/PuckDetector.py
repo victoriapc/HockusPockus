@@ -61,10 +61,10 @@ class PuckDetector(PuckDetectorCore) :
         This is the main method of the PuckDetector class. This method iterates indefinitely (or
         until the camera fails) and finds the puck in every new frame
         """
-        isReceivingFeed = True
         userWantsToQuit = False
+        isReceivingFeed, frame = self.m_camera.getNextFrame()
         while (isReceivingFeed and not userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.getNextFrame()
+
             if frame.size > 0 :
                 puck = self.findPuckInFrame(frame)
 
@@ -72,3 +72,5 @@ class PuckDetector(PuckDetectorCore) :
 
                 if(self.m_displayOutput) :
                     self.displayFeed(frame)
+
+            isReceivingFeed, frame = self.m_camera.getNextFrame()

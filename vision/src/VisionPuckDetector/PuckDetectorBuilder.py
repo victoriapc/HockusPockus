@@ -11,9 +11,13 @@ except :
 
 from VisionROS.CameraROS import  CameraROS
 from VisionUSB.CameraUSB import  CameraUSB
+from VisionTest.CameraTEST import  CameraTEST
+
 from VisionROS.BroadcasterROS import BroadcasterROS
 from VisionUSB.BroadcasterUSB import BroadcasterUSB
+from VisionTest.BroadcasterTEST import BroadcasterTEST
 from VisionROS.MinimalistBroadcasterROS import MinimalistBroadcasterROS
+
 from VisionROS.MouseEventHandlerROS import MouseEventHandlerROS
 from VisionUSB.MouseEventHandlerUSB import MouseEventHandlerUSB
 from VisionROS.ROS_CONSTANTS import *
@@ -32,6 +36,7 @@ class PuckDetectorBuilder(object):
     ROS = 0
     USB = 1
     MINIMALIST_ROS = 2
+    TEST = 3
 
     def __init__(self, i_mode,i_FPS):
         """
@@ -63,7 +68,7 @@ class PuckDetectorBuilder(object):
 
         elif self.m_mode == PuckDetectorBuilder.USB:
             USB_OUTPUT_NAME = 'Output'
-            self.m_camera = CameraUSB(1, i_FPS)
+            self.m_camera = CameraUSB(0, i_FPS)
             self.m_broadcaster = BroadcasterUSB(USB_OUTPUT_NAME)
             self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
             self.m_mouseEventHandler = MouseEventHandlerUSB(self.dimensionsConverterConfigurator,USB_OUTPUT_NAME)
@@ -77,7 +82,14 @@ class PuckDetectorBuilder(object):
             self.m_mouseEventHandler = MouseEventHandlerUSB(self.dimensionsConverterConfigurator,USB_OUTPUT_NAME)
             self.m_path = os.getcwd()
 
+        elif self.m_mode == PuckDetectorBuilder.TEST:
+            self.m_camera = CameraTEST()
+            self.m_broadcaster = BroadcasterTEST()
+            self.m_path = os.getcwd()
+            self.m_path = self.m_path + '/VisionTest'
+
         self.m_path = self.m_path + '/config.json'
+
 
     def build(self):
         """
