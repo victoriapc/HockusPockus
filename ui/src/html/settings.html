@@ -5,9 +5,12 @@
     <title>Hockus Pockus</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../resources/shortcut-icon.png">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-    <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="../js/storage.js"></script>
+	<script type="text/javascript" src="../js/settings.js"></script>
 </head>
 <body>
 	<!-- Basic WebApp Structure -->
@@ -49,8 +52,41 @@
 	<!-- Page Content -->
 	<main>
 		<h1>Settings</h1>
-
+		<p>Adjust the game parameters, like the score limit or the number of players. You can also choose the name of each player.</p>
+		<form class="inputs">
+			<div class="goals">
+				<label>Max goals :</label>
+				<input id="ngoals" type="number" min="1" max="10">
+			</div>
+			<div class="players">
+				<label>Number of players (excluding the robot) :</label>
+				<input id="nplayers" type="number" min="1" max="4">
+				<div class="players-names">
+					<div class="players-names-item">
+						<label>Player 1's name:</label>
+						<input type="text" id="name_1">
+					</div>
+					<div class="players-names-item">
+						<label>Player 2's name:</label>
+						<input type="text" id="name_2">
+					</div>
+					<div class="players-names-item">
+						<label>Player 3's name:</label>
+						<input type="text" id="name_3">
+					</div>
+					<div class="players-names-item">
+						<label>Player 4's name:</label>
+						<input type="text" id="name_4">
+					</div>
+				</div>
+			</div>
+			<div class="joystick-slider">
+				<label>Joystick control maximum speed (10 being the fastest) :</label>
+				<input type="number" min="1" max="10" value="5" id="joystick-speed">
+			</div>
+			<button class="btn" onclick="onSubmit()">Apply changes</button>
+			<button class="btn" onclick="onReset()">Reset to default</button>
+		</form>
 	</main>
-
 </body>
 </html>
