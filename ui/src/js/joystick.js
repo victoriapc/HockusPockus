@@ -5,7 +5,7 @@ createJoystick = function () {
     threshold: 0.1,
     position: { left: 0 + 'px' },         // necessary in order for the joystick to move
     mode: 'static',
-    size: 200,
+    size: 150,
     color: '#28a745'
   };
 

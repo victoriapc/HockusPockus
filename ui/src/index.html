@@ -10,9 +10,12 @@
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
+	<script type="text/javascript" src="js/storage.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/joystick.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
 </head>
+
 <body>
 	<!-- Basic WebApp Structure -->
 	<header>
@@ -96,7 +99,7 @@
 		<div class="bottom-row">
 			<div class="card-bottom">
 				<div class="card-bottom-header">Video</div>
-				<img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%"></img>
+				<img id="video" src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_raw"></img>
 			</div>
 			<div class="card-bottom">
 				<div class="card-bottom-header">Game</div>
