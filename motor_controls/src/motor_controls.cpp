@@ -12,8 +12,12 @@
 #include <sys/un.h>
 #include <sstream>
 #include <string.h>
+
 #include "ros/ros.h"
 #include <geometry_msgs/Point.h>
+
+#include <dynamic_reconfigure/server.h>
+#include <motor_controls/motorConfig.h>
 
 #include <unistd.h>
 
@@ -53,6 +57,7 @@ geometry_msgs::Point des_point;
 void control_callback(const geometry_msgs::Point desired_pos);
 void joy_callback(const geometry_msgs::Point joy_pos);
 
+void param_callback(motor_controls::motorConfig &cfg, uint32_t level);
 
 int main(int argc, char*argv[])
 {	
@@ -67,6 +72,10 @@ int main(int argc, char*argv[])
 	pinMode(25, OUTPUT);
 	
 	ros::init(argc, argv, "motor_controls");
+
+	dynamic_reconfigure::Server<motor_controls::motorConfig> server;
+  	dynamic_reconfigure::Server<motor_controls::motorConfig>::CallbackType f;
+
 	ros::NodeHandle n;
 	pos_pub = n.advertise<geometry_msgs::Point>("robot_pos", 1000);
 	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
@@ -74,6 +83,9 @@ int main(int argc, char*argv[])
 	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
 	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
 	
+	f = boost::bind(&param_callback, _1, _2);
+  	server.setCallback(f);
+
     ros::spin();
     while(1);
 }
@@ -251,4 +263,6 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 	// desired_pub.publish(des_point);
 }
 
-
+void param_callback(motor_controls::motorConfig &config, uint32_t level) {
+  ROS_INFO("Reconfigure Request: %d", config.manual_speed_ratio);
+}
