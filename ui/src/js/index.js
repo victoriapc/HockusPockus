@@ -68,7 +68,9 @@ var joy_publisher = new ROSLIB.Topic({
   messageType : 'geometry_msgs/Point'
 });
 
-move = function (posx, posy) {
+var max_speed = document.getElementById("speed_val");
+
+move = function (posx, posy,max_speed) {
   var Point = new ROSLIB.Message({
       x: posx,
       y: posy,
@@ -159,7 +161,6 @@ const home_content = "<h3>Welcome to the Hockus Pockus User Interface!</h3><p>Th
 const manual_content = "<h3 id='manual-title'>Manual Control</h3><p>The joystick can be used to move the robot. The desired position is published on a ROS topic and the robot moves accordingly.</p><div class='manual-info'><div class='manual-info-title'><p>Desired position</p></div><div class='manual-info-coordinate'><p>X:<span id='manual_x'></span></p><p>Y:<span id='manual_y'></span></p></div></div>";
 const game_content = "<h2> First to <span id='goal_limit'></span> wins!</h2><ul class='score'><li class='score-item'><div class='score-item-content'><img id='robot-img' src='https://img.icons8.com/ios/50/000000/bot.png'/></div><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/><span class='score-item-content' id='score-robot'>0</span></li><li id='player_1' class='score-item'><div id='name_player_1' class='score-item-content'></div><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/><div class='score-item-content' id='score-player-1'>0</div></li><li id='player_2' class='score-item'><span id='name_player_2' class='score-item-content'></span><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/><span class='score-item-content' id='score-player-2'>0</span></li><li id='player_3' class='score-item'><span id='name_player_3' class='score-item-content'></span><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/><span class='score-item-content' id='score-player-3'>0</span></li><li id='player_4' class='score-item'><span id='name_player_4' class='score-item-content'></span><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/><span class='score-item-content' id='score-player-4'>0</span></li></ul><p class='difficulty-info'>Difficulty: <span id='difficulty'></span></p><div class='game-btn'><button class='btn' id='stop_game' onclick='stopGame()'><img src='https://img.icons8.com/ios-filled/24/000000/stop.png'/></button><button class='btn disabled' id='pause_game' onclick='pauseGame()'><img src='https://img.icons8.com/ios-filled/24/000000/pause.png'/></button><button class='btn' id='start_game' onclick='startGame()'><img src='https://img.icons8.com/ios-filled/24/000000/play.png'/></button></div>";
 
-// Desired Joystick Position
 function updateManualPosition(m) {
   document.getElementById("manual_x").innerHTML = m.x;
   document.getElementById("manual_y").innerHTML = m.y;

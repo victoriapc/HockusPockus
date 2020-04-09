@@ -281,6 +281,47 @@ main h1 {
 	margin-left: auto;
 }
 
+.slidecontainer {
+	width: 100%;
+}
+.slider_text{
+	width: 30%;
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+}
+.slider_manual {
+	-webkit-appearance: none;
+	width: 40%;
+	height: 15px;
+	border-radius: 5px;
+	background: #d6d2d2;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+	/* margin-left: auto; */
+	margin-right: auto;
+}
+  
+.slider_manual::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%; 
+	background: #28a745;
+	cursor: pointer;
+}
+.slider_manual:hover {
+	opacity: 1;
+}
+.slider_manual::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background: #28a745;
+	cursor: pointer;
+}
 /* Game */
 .score {
 	list-style: none;

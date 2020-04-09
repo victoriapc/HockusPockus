@@ -101,27 +101,24 @@ class PuckDetectorCore(object) :
         processedFrame = cv2.medianBlur(grayedFrame, 5)
         return processedFrame
 
-    def findCircles(self,i_frame):
+    def findPuckInFrame(self,i_frame):
         """
-        Finds the circles in the provided frame
+        Finds the puck in the provided frame
         Args:
             i_frame:   The frame in which we need to find the circles
         Returns:
-            The circles that were found
+            The (x,y) coordinates of the puck
         """
         processedFrame = self.ProcessFrames(i_frame)
-        return cv2.HoughCircles(processedFrame, cv2.HOUGH_GRADIENT, 1, 100, param1=200, param2=15, minRadius=self.m_radius-PuckDetectorCore.RADIUS_TOLERANCE, maxRadius=self.m_radius+PuckDetectorCore.RADIUS_TOLERANCE)
+        contours, hierarchy = cv2.findContours(processedFrame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        if len(contours) > 0 :
+            biggestCountour = max(contours, key=cv2.contourArea)
+            centerOfMass = cv2.moments(biggestCountour,True)
 
-    def findPuckInAllCircles(self,i_circles):
-        """
-        Finds the puck in a group of circles
-        Args:
-            i_circles:   The group of circles
-        Returns:
-            The circle that corresponds to the puck
-        """
-        if i_circles is not None:
-            #For now, let's assume that only one circle is found, and that it is the puck
-            circles = np.uint16(np.around(i_circles))
-            return circles[0, 0]
-        return None
+            if centerOfMass['m00'] != 0 : #To prevent a division by 0
+                return (int(centerOfMass['m10'] / centerOfMass['m00']), int(centerOfMass['m01'] / centerOfMass['m00']))
+            else:
+                x, y, width, height = cv2.boundingRect(biggestCountour) # fallback algorithm if centerOfMass would create a division by 0
+                return (int(x + width/2) , int(y + height/2))
+        else :
+            return None

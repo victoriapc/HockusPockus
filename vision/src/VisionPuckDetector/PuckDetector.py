@@ -29,17 +29,15 @@ class PuckDetector(PuckDetectorCore) :
 
         self.m_dimensionsConverter = i_dimensionsConverter
 
-    def updatePosition(self,i_circles):
+    def updatePosition(self,i_puck):
         """
         Updates the position of the puck
         Args:
-            i_circles:   All known circles in a specific frame
+            i_puck: (x,y) coordinates of the puck in pixels
         """
-        circle = self.findPuckInAllCircles(i_circles)
-        if circle is not None:
-            self.xPosInPixels = circle[0]
-            self.yPosInPixels = circle[1]
-            self.radius = circle[2]
+        if i_puck is not None:
+            self.xPosInPixels = i_puck[0]
+            self.yPosInPixels = i_puck[1]
             self.newInfo = True
 
             self.xPosInMeters, self.yPosInMeters = self.m_dimensionsConverter.getCoordinatesInMeters((self.xPosInPixels, self.yPosInPixels))
@@ -53,7 +51,7 @@ class PuckDetector(PuckDetectorCore) :
             i_frame: The orginal frame
         """
         if self.newInfo :
-            self.displayCirclesOnFrame(i_frame,self.xPosInPixels, self.yPosInPixels,self.radius)
+            self.displayCirclesOnFrame(i_frame,self.xPosInPixels, self.yPosInPixels,self.m_radius)
             self.displayCirclesPositionOnFrame(i_frame,self.xPosInMeters, self.yPosInMeters)
             self.newInfo = False
         self.m_broadcaster.broadcastVideoOfPuck(i_frame)
@@ -63,14 +61,16 @@ class PuckDetector(PuckDetectorCore) :
         This is the main method of the PuckDetector class. This method iterates indefinitely (or
         until the camera fails) and finds the puck in every new frame
         """
-        isReceivingFeed = True
         userWantsToQuit = False
+        isReceivingFeed, frame = self.m_camera.getNextFrame()
         while (isReceivingFeed and not userWantsToQuit):
-            isReceivingFeed, frame = self.m_camera.getNextFrame()
-            if frame.size > 0 :
-                circles = self.findCircles(frame)
 
-                self.updatePosition(circles)
+            if frame.size > 0 :
+                puck = self.findPuckInFrame(frame)
+
+                self.updatePosition(puck)
 
                 if(self.m_displayOutput) :
                     self.displayFeed(frame)
+
+            isReceivingFeed, frame = self.m_camera.getNextFrame()
