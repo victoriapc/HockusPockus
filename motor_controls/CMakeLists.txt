@@ -20,16 +20,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(${PROJECT_NAME}_node src/motor_controls.cpp)
-
-
-target_link_libraries( ${PROJECT_NAME}_node ${catkin_LIBRARIES} -lwiringPi )
-
-#add dynamic reconfigure api
-#find_package(catkin REQUIRED dynamic_reconfigure)
 generate_dynamic_reconfigure_options(
   config/motor.cfg
   #...
 )
 
+add_executable(${PROJECT_NAME}_node src/motor_controls.cpp)
 add_dependencies(${PROJECT_NAME}_node ${PROJECT_NAME}_gencfg)
+target_link_libraries( ${PROJECT_NAME}_node ${catkin_LIBRARIES} -lwiringPi )

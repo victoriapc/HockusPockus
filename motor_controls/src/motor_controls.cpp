@@ -62,7 +62,7 @@ void param_callback(motor_controls::motorConfig &cfg, uint32_t level);
 int main(int argc, char*argv[])
 {	
 	pthread_t thread_Control;
-	pthread_create(&thread_Control, NULL, control,&argc);	
+	pthread_create(&thread_Control, NULL, control,&argc);
 	wiringPiSetup();
 	// pin 4 and 5 for left motor
 	pinMode(5, OUTPUT);
