@@ -73,7 +73,7 @@ function createInt32Msg(val) {
 // Once the DOM is loaded
 document.addEventListener("DOMContentLoaded", function(){
     loadSection();
-    loadSlider();
+    initSlider();
     step_1();
 });
 
@@ -90,6 +90,13 @@ function loadSection() {
     v_slider = document.getElementById("v");
     v_text = document.getElementById("v_text");
     apply = $("#apply");
+}
+
+function initSlider() {
+    radius_text.innerHTML = radius_slider.value; 
+    h_text.innerHTML = h_slider.value;
+    s_text.innerHTML = s_slider.value;
+    v_text.innerHTML = v_slider.value;
 }
 
 // When window is closing
@@ -128,14 +135,6 @@ function step_4() {
     hsv.addClass("disabled");
     apply.removeClass("disabled");
     config_started = false;
-}
-
-// Slider linked
-function loadSlider() {
-    radius_text.innerHTML = radius_slider.value; 
-    h_text.innerHTML = h_slider.value;
-    s_text.innerHTML = s_slider.value;
-    v_text.innerHTML = v_slider.value;
 }
 
 // Update the current slider value (each time you drag the slider handle)
