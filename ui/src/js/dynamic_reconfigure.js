@@ -1,5 +1,4 @@
-// Connecting to ROS
-// -----------------
+// Establish ROS connection
 
 var ros = new ROSLIB.Ros({
     url : 'ws://localhost:9090'
@@ -17,44 +16,61 @@ ros.on('close', function() {
     console.log('Connection to websocket server closed.');
 });
 
-// Setting dynamic_reconfigurable parameters using ROS services
-// -----------------
+// Motor node dynamic reconfigure client
 
-var dynaRecClient = new ROSLIB.Service({
+var motor_client = new ROSLIB.Service({
     ros : ros,
     name : '/motor_controls_node/set_parameters',
     serviceType : 'dynamic_reconfigure/Reconfigure'
 });
 
-function createRequest(val) {
+function createMotorRequest() {
     var request = new ROSLIB.ServiceRequest({
         config: {
-            bools: [
-                // {name: '', value: false}
-            ],
             ints: [
-                {name: 'manual_speed_ratio', value: val}
-            ],
-            strs: [
-                // {name: '', value: ''}
-            ],
-            doubles: [
-                // {name: '', value: ''}
-            ],
-            groups: [
-                // {name: '', state: false, id: 0, parent: 0}
+                {name: 'manual_speed_ratio', value: Number($("#joystick-speed").val())}
             ]
         }
     });
     return request;
 }
 
-function updateValue(val) {
-    var param = createRequest(val);
-    dynaRecClient.callService(request, function(result) {
-    console.log('Result for service call on '
-        + dynaRecClient.name
-        + ': '
-        + JSON.stringify(result, null, 2));
+function updateMotorConfig() {
+    var request = createRequest();
+    motor_client.callService(request, function(result) {
+        console.log(dynaRecClient.name + "parameters were updated.")
+    });
+}
+
+// Score node dynamic reconfigure client
+
+var score_client = new ROSLIB.Service({
+    ros : ros,
+    name : '/score/set_parameters',
+    serviceType : 'dynamic_reconfigure/Reconfigure'
+});
+
+function createScoreRequest() {
+    var request = new ROSLIB.ServiceRequest({
+        config: {
+            ints: [
+                {name: 'player_limit', value: Number($("#nplayers").val())},
+                {name: 'goal_limit', value: Number($("#ngoals").val())}
+            ],
+            strs: [
+                {name: 'name_player_1', value: $("#name_1").val()},
+                {name: 'name_player_2', value: $("#name_2").val()},
+                {name: 'name_player_3', value: $("#name_3").val()},
+                {name: 'name_player_4', value: $("#name_4").val()}
+            ]
+        }
+    });
+    return request;
+}
+
+function updateScoreConfig() {
+    var request = createRequest();
+    score_client.callService(request, function(result) {
+        console.log(dynaRecClient.name + "parameters were updated.")
     });
 }

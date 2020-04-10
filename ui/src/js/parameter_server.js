@@ -1,21 +1,13 @@
 // Game Parameters Constants 
-const MAX_NUMBER_GOALS = 10;
+const MAX_NUMBER_GOALS = 15;
 const DEFAULT_NUMBER_GOALS = 5;
 const MAX_NUMBER_PLAYERS = 4;
 const DEFAULT_NUMBER_PLAYERS = 1;
-
-const GOAL_STORAGE_NAME = "ngoal";
-const PLAYER_STORAGE_NAME = "nplayer";
 
 const DEFAULT_NAME_1 = "Blue";
 const DEFAULT_NAME_2 = "Red";
 const DEFAULT_NAME_3 = "Green";
 const DEFAULT_NAME_4 = "Yellow";
-
-const NAME_1_STORAGE_NAME = "name_1";
-const NAME_2_STORAGE_NAME = "name_2";
-const NAME_3_STORAGE_NAME = "name_3";
-const NAME_4_STORAGE_NAME = "name_4";
 
 // Current values variables
 var number_goals = null;

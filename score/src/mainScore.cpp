@@ -5,13 +5,18 @@
 #include <std_msgs/Int32.h>
 #include <std_msgs/String.h>
 
+#include <dynamic_reconfigure/server.h>
+#include <score/scoreConfig.h>
+
 ros::Subscriber _startSubscriber;
 ros::Subscriber _nameSubscriber;
 ros::Subscriber _scoreSubscriber;
 
 ros::Publisher _scorePublisher;
 ros::Publisher _endOfGamePublisher ;
-	
+
+void param_callback(score::scoreConfig &cfg, uint32_t level);
+
 class NewGameListener
 {
 public:
@@ -73,6 +78,13 @@ private:
 int main(int argc, char*argv[])
 {
 	ros::init(argc, argv, "score");
+
+	dynamic_reconfigure::Server<score::scoreConfig> server;
+	dynamic_reconfigure::Server<score::scoreConfig>::CallbackType f;
+
+	f = boost::bind(&param_callback, _1, _2);
+	server.setCallback(f);
+
 	ros::NodeHandle n;
 	NewGameListener newGameListener = NewGameListener();
 	_startSubscriber = n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
@@ -82,5 +94,17 @@ int main(int argc, char*argv[])
 	_scorePublisher = n.advertise<std_msgs::String>(ROS_topicNames::SCORES, 1000);
 	_endOfGamePublisher = n.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 1000);
 
+
+
 	ros::spin();
+}
+
+void param_callback(score::scoreConfig &config, uint32_t level) {
+  ROS_INFO("----- Score Parameters Callback -----");
+  ROS_INFO("Reconfigure Request: %d %d %s %s %s %s", 
+  	config.player_limit, config.goal_limit,
+	config.name_player_1.c_str(),
+	config.name_player_2.c_str(),
+	config.name_player_3.c_str(),
+	config.name_player_4.c_str());
 }
