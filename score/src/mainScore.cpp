@@ -100,7 +100,6 @@ int main(int argc, char*argv[])
 }
 
 void param_callback(score::scoreConfig &config, uint32_t level) {
-  ROS_INFO("----- Score Parameters Callback -----");
   ROS_INFO("Reconfigure Request: %d %d %s %s %s %s", 
   	config.player_limit, config.goal_limit,
 	config.name_player_1.c_str(),

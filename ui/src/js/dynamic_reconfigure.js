@@ -8,14 +8,6 @@ ros.on('connection', function() {
     console.log('Connected to websocket server.');
 });
 
-ros.on('error', function(error) {
-    console.log('Error connecting to websocket server: ', error);
-});
-
-ros.on('close', function() {
-    console.log('Connection to websocket server closed.');
-});
-
 // Motor node dynamic reconfigure client
 
 var motor_client = new ROSLIB.Service({
@@ -36,9 +28,9 @@ function createMotorRequest() {
 }
 
 function updateMotorConfig() {
-    var request = createRequest();
+    var request = createMotorRequest();
     motor_client.callService(request, function(result) {
-        console.log(dynaRecClient.name + "parameters were updated.")
+        console.log(motor_client.name + "parameters were updated.")
     });
 }
 
@@ -69,8 +61,8 @@ function createScoreRequest() {
 }
 
 function updateScoreConfig() {
-    var request = createRequest();
+    var request = createScoreRequest();
     score_client.callService(request, function(result) {
-        console.log(dynaRecClient.name + "parameters were updated.")
+        console.log(score_client.name + "parameters were updated.")
     });
 }

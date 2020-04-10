@@ -1,11 +1,11 @@
-function displayGoalLimit() {
+function displayCurrentGoalLimit() {
     $("#ngoals").prop("value", number_goals);
 }
-function displayPlayerLimit() {
+function displayCurrentPlayerLimit() {
     $("#nplayers").prop("value", number_players);
 }
 function displayCurrentPlayerName(id, current_name) {
-    $(id).prop("placeholder", current_name);
+    $(id).prop("value", current_name);
 }
 
 function updateEnabledNameInputs(nplayer) {
