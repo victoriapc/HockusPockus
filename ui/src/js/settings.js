@@ -47,6 +47,7 @@ function onSubmit() {
     updateStringValue(NAME_2_STORAGE_NAME, $("#name_2").val());
     updateStringValue(NAME_3_STORAGE_NAME, $("#name_3").val());
     updateStringValue(NAME_4_STORAGE_NAME, $("#name_4").val());
+    updateValue($("#joystick-speed").val());
 }
 
 function onReset() {
