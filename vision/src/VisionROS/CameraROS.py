@@ -19,7 +19,6 @@ class CameraROS(Camera) :
         Args:
             i_FPS: The number of frames per second of the camera
         """
-        rospy.init_node(ROS_VISION_NODE_NAME)
         self.m_webcam = rospy.Subscriber(ROS_SUBSCRIBER_WEBCAM_TOPIC_NAME, Image, self.updateFrame)
         self.m_frame = None
         self.m_buffer = None

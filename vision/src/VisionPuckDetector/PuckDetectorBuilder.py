@@ -41,7 +41,7 @@ class PuckDetectorBuilder(object):
     MINIMALIST_ROS = 2
     TEST = 3
 
-    def __init__(self, i_mode,i_FPS):
+    def __init__(self, i_mode,i_FPS, i_reconfigure = False):
         """
         PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
         pointer to a concrete implementation of the abstract base class Camera
@@ -54,7 +54,7 @@ class PuckDetectorBuilder(object):
         self.m_mouseEventHandler = None
         self.m_mode = i_mode
         self.m_path = ""
-        self.m_reconfigure = False
+        self.m_reconfigure = i_reconfigure
 
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
@@ -67,7 +67,6 @@ class PuckDetectorBuilder(object):
             self.m_mouseEventHandler = MouseEventHandlerUSB(self.dimensionsConverterConfigurator,USB_OUTPUT_NAME)
             # END TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
             self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
-            self.m_reconfigure = rospy.get_param(ROS_IS_RECONFIGURE)
 
         elif self.m_mode == PuckDetectorBuilder.USB:
             USB_OUTPUT_NAME = 'Output'
