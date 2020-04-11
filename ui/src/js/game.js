@@ -18,7 +18,6 @@ function hard() {
 function newGame(mode) {
     game.html(game_content);
     loadGameContent();
-    adjustViewedPlayers(number_players);
     manual.addClass("disabled");
     new_game.addClass("disabled");
 }
@@ -42,15 +41,16 @@ function stopGame() {
 
 // Load game goal and players content
 function loadGameContent() {
-    document.getElementById("goal_limit").innerHTML = number_goals;
-    document.getElementById("name_player_1").innerHTML = name_1;
-    document.getElementById("name_player_2").innerHTML = name_2;
-    document.getElementById("name_player_3").innerHTML = name_3;
-    document.getElementById("name_player_4").innerHTML = name_4;
+    getParamValue(score_goal_limit, displayGoalLimit);
+    getParamValue(score_name_1, displayPlayerName, "name_player_1");
+    getParamValue(score_name_2, displayPlayerName, "name_player_2");
+    getParamValue(score_name_3, displayPlayerName, "name_player_3");
+    getParamValue(score_name_4, displayPlayerName, "name_player_4");
+    getParamValue(score_player_limit, adjustViewedPlayers);
 }
 
 function adjustViewedPlayers(nplayer) {
-    for(i = nplayer; i <= MAX_NUMBER_PLAYERS; i++) {
+    for(i = 1; i <= MAX_NUMBER_PLAYERS; i++) {
         var id = "#player_" + String(i);
         if(i <= nplayer) {
             $(id).css("visibility", "visible");
@@ -59,6 +59,14 @@ function adjustViewedPlayers(nplayer) {
             $(id).css("visibility", "hidden");
         }
     }
+}
+
+function displayGoalLimit(value) {
+    document.getElementById("goal_limit").innerHTML = value;
+}
+
+function displayPlayerName(value, id) {
+    document.getElementById(id).innerHTML = value;
 }
 
 

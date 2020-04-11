@@ -4,6 +4,15 @@ const DEFAULT_NUMBER_GOALS = 5;
 const MAX_NUMBER_PLAYERS = 4;
 const DEFAULT_NUMBER_PLAYERS = 1;
 
+var score_goal_limit = "/score/goal_limit";
+var score_player_limit = "/score/player_limit";
+var score_name_1 = "/score/name_player_1";
+var score_name_2 = "/score/name_player_2";
+var score_name_3 = "/score/name_player_3";
+var score_name_4 = "/score/name_player_4";
+
+var motor_manual_speed = "/motor_controls_node/manual_speed_ratio";
+
 // Establish ROS connection
 var ros = new ROSLIB.Ros({
     url : 'ws://localhost:9090'
@@ -14,6 +23,14 @@ ros.on('connection', function() {
 });
 
 // Parameter server interaction
+function getParamValue(name, callback) {
+    var param = createParamObject(name);
+    var arg = arguments[2];         // In case an other argument is needed for the callback function
+    param.get(function(value) {
+        callback(value, arg);
+    });
+}
+
 function createParamObject(name) {
     var param = new ROSLIB.Param({
         ros : ros,
@@ -21,28 +38,3 @@ function createParamObject(name) {
       });
     return param;
 }
-
-function getScoreParamValue(name) {
-    var param = createParamObject("/score/" + name);
-    param.get(function(value) {
-        return value;
-    });
-}
-
-function getMotorParamValue(name) {
-    var param = createParamObject("/motor_controls_node/"+ name);
-    param.get(function(value) {
-        return value;
-    });
-}
-
-// scoreConfig Parameters
-var number_goals = getScoreParamValue("goal_limit");
-var number_players = getScoreParamValue("player_limit");
-var name_1 = getScoreParamValue("name_player_1");
-var name_2 = getScoreParamValue("name_player_2");
-var name_3 = getScoreParamValue("name_player_3");
-var name_4 = getScoreParamValue("name_player_4");
-
-// motorConfig Parameter
-var joystick_speed = getMotorParamValue("manual_speed_ratio");

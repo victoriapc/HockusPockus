@@ -9,10 +9,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-	<script type="text/javascript" src="../js/dynamic_reconfigure.js"></script>
 	<script type="text/javascript" src="../js/parameter_server.js"></script>
+	<script type="text/javascript" src="../js/dynamic_reconfigure.js"></script>
 	<script type="text/javascript" src="../js/settings.js"></script>
-	
 </head>
 <body>
 	<!-- Basic WebApp Structure -->
@@ -58,7 +57,7 @@
 		<div class="inputs">
 			<div class="goals">
 				<label>Max goals :</label>
-				<input id="ngoals" type="number" min="1" max="10">
+				<input id="ngoals" type="number" min="1" max="15">
 			</div>
 			<div class="players">
 				<label>Number of players (excluding the robot) :</label>
@@ -86,7 +85,7 @@
 				<label>Joystick control maximum speed (10 being the fastest) :</label>
 				<input id="joystick-speed" type="number" min="1" max="10">
 			</div>
-			<button class="btn" onclick="onSubmit()">Apply changes</button>
+			<button id="submit" class="btn" onclick="onSubmit()">Apply changes</button>
 		</div>
 	</main>
 </body>

@@ -1,15 +1,29 @@
-function displayCurrentGoalLimit() {
-    $("#ngoals").prop("value", number_goals);
+// Load page with current settings
+window.onload = function() {
+    getParamValue(score_goal_limit, displayCurrentGoalLimit);
+    getParamValue(score_player_limit, updatePlayerRelatedFormInputs);
+    getParamValue(score_name_1, displayCurrentPlayerName, "#name_1");
+    getParamValue(score_name_2, displayCurrentPlayerName, "#name_2");
+    getParamValue(score_name_3, displayCurrentPlayerName, "#name_3");
+    getParamValue(score_name_4, displayCurrentPlayerName, "#name_4");
+    getParamValue(motor_manual_speed, displayCurrentJoystickSpeed);
 }
-function displayCurrentPlayerLimit() {
-    $("#nplayers").prop("value", number_players);
+
+function displayCurrentGoalLimit(value) {
+    $("#ngoals").prop("value", value);
 }
-function displayCurrentPlayerName(id, current_name) {
-    $(id).prop("value", current_name);
+
+function updatePlayerRelatedFormInputs(value) {
+    displayCurrentPlayerLimit(value);
+    updateEnabledNameInputs(value);
+}
+
+function displayCurrentPlayerLimit(value) {
+    $("#nplayers").prop("value", value);
 }
 
 function updateEnabledNameInputs(nplayer) {
-    for(i = nplayer; i <= MAX_NUMBER_PLAYERS; i++) {
+    for(i = 1; i <= MAX_NUMBER_PLAYERS; i++) {
         var id = "#name_" + String(i);
         if(i <= nplayer) {
             $(id).prop("disabled", false);
@@ -20,24 +34,22 @@ function updateEnabledNameInputs(nplayer) {
     }
 }
 
-// Load page with current settings
-window.onload = function() {
-    displayCurrentGoalLimit();
-    displayCurrentPlayerLimit();
-    displayCurrentPlayerName("#name_1", name_1);
-    displayCurrentPlayerName("#name_2", name_2);
-    displayCurrentPlayerName("#name_3", name_3);
-    displayCurrentPlayerName("#name_4", name_4);
-    updateEnabledNameInputs(Number($("#nplayers").val()));
+function displayCurrentPlayerName(value, id) {
+    $(id).prop("value", value);
 }
 
-// Update values when input changes
+function displayCurrentJoystickSpeed(value) {
+    $("#joystick-speed").prop("value", value);
+}
+
+// Update when the number of players changes
 $(document).on('input', '#nplayers', function() {
     updateEnabledNameInputs(Number($("#nplayers").val()));
 })
 
-// Update storage values on submit
+// Update dynamic reconfigure values on submit
 function onSubmit() {
     updateMotorConfig();
     updateScoreConfig();
+    alert("Parameters were updated.")
 }
