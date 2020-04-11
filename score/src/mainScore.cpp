@@ -3,7 +3,7 @@
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
 #include <iostream>
-#include <sstream>
+#include <vector>
 
 #include <dynamic_reconfigure/server.h>
 #include <score/scoreConfig.h>
@@ -51,7 +51,10 @@ public:
 
 			while (std::getline(ss, buffer, ';'))
 			{
-				m_playerNames.push_back(buffer);
+				if(buffer.size() >0)
+				{
+					m_playerNames.push_back(buffer);
+				}
 			}
 		}
 	}
