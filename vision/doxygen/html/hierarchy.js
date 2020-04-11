@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "src.VisionROS.dialogConfigROS.HSVConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber.html", null ],
+    [ "src.mainVision.MainVision", "classsrc_1_1main_vision_1_1_main_vision.html", null ],
     [ "object", null, [
       [ "src.VisionDialog.dialog_DimensionsConverter.Ui_Dialog_DimensionsConverter", "classsrc_1_1_vision_dialog_1_1dialog___dimensions_converter_1_1_ui___dialog___dimensions_converter.html", [
         [ "src.VisionDialog.dialogConfig.dialog_config_DimensionsConverter", "classsrc_1_1_vision_dialog_1_1dialog_config_1_1dialog__config___dimensions_converter.html", null ]

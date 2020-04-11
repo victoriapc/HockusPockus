@@ -1,0 +1,72 @@
+\hypertarget{classsrc_1_1main_vision_1_1_main_vision}{}\doxysection{src.\+main\+Vision.\+Main\+Vision Class Reference}
+\label{classsrc_1_1main_vision_1_1_main_vision}\index{src.mainVision.MainVision@{src.mainVision.MainVision}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1main_vision_1_1_main_vision_a3161b9f3dd102afd0def8412a2709905}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1main_vision_1_1_main_vision_a193c265da7359780549b62f5c99dd1c7}{stop\+Current\+Puck\+Detector}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1main_vision_1_1_main_vision_a3838eb0bfdfecd5a8168234f47871075}{reconfigure\+Call\+Back}} (self, i\+\_\+reconfigure)
+\item 
+def \mbox{\hyperlink{classsrc_1_1main_vision_1_1_main_vision_aeb62ddff81c628d5728bd5e2b9c930b1}{start\+Puck\+Detector}} (self, i\+\_\+reconfigure)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a195e87d6ef8607821e63383bfcc9833e}\label{classsrc_1_1main_vision_1_1_main_vision_a195e87d6ef8607821e63383bfcc9833e}} 
+{\bfseries puck\+Detector}
+\item 
+\mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a29717fde726bc2416cd24fe7da42942f}\label{classsrc_1_1main_vision_1_1_main_vision_a29717fde726bc2416cd24fe7da42942f}} 
+{\bfseries M\+O\+DE}
+\item 
+\mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a648770b83da35c6449ce279039217590}\label{classsrc_1_1main_vision_1_1_main_vision_a648770b83da35c6449ce279039217590}} 
+{\bfseries m\+\_\+reconfigure\+Subscriber}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a3161b9f3dd102afd0def8412a2709905}\label{classsrc_1_1main_vision_1_1_main_vision_a3161b9f3dd102afd0def8412a2709905}} 
+\index{src.mainVision.MainVision@{src.mainVision.MainVision}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.mainVision.MainVision@{src.mainVision.MainVision}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+main\+Vision.\+Main\+Vision.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}MainVision class's constructor. Initializes, notably, the various ROS callbacks and starts the puck detection
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a3838eb0bfdfecd5a8168234f47871075}\label{classsrc_1_1main_vision_1_1_main_vision_a3838eb0bfdfecd5a8168234f47871075}} 
+\index{src.mainVision.MainVision@{src.mainVision.MainVision}!reconfigureCallBack@{reconfigureCallBack}}
+\index{reconfigureCallBack@{reconfigureCallBack}!src.mainVision.MainVision@{src.mainVision.MainVision}}
+\doxysubsubsection{\texorpdfstring{reconfigureCallBack()}{reconfigureCallBack()}}
+{\footnotesize\ttfamily def src.\+main\+Vision.\+Main\+Vision.\+reconfigure\+Call\+Back (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+reconfigure }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Called on a reconfigure request by the webApp
+Args:
+    i_reconfigure: std_msgs/Bool that specifies if we should reconfigure or not
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_aeb62ddff81c628d5728bd5e2b9c930b1}\label{classsrc_1_1main_vision_1_1_main_vision_aeb62ddff81c628d5728bd5e2b9c930b1}} 
+\index{src.mainVision.MainVision@{src.mainVision.MainVision}!startPuckDetector@{startPuckDetector}}
+\index{startPuckDetector@{startPuckDetector}!src.mainVision.MainVision@{src.mainVision.MainVision}}
+\doxysubsubsection{\texorpdfstring{startPuckDetector()}{startPuckDetector()}}
+{\footnotesize\ttfamily def src.\+main\+Vision.\+Main\+Vision.\+start\+Puck\+Detector (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+reconfigure }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Called to start a new PuckDetector
+Args:
+    i_reconfigure: Bool that specifies if we should reconfigure or not
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1main_vision_1_1_main_vision_a193c265da7359780549b62f5c99dd1c7}\label{classsrc_1_1main_vision_1_1_main_vision_a193c265da7359780549b62f5c99dd1c7}} 
+\index{src.mainVision.MainVision@{src.mainVision.MainVision}!stopCurrentPuckDetector@{stopCurrentPuckDetector}}
+\index{stopCurrentPuckDetector@{stopCurrentPuckDetector}!src.mainVision.MainVision@{src.mainVision.MainVision}}
+\doxysubsubsection{\texorpdfstring{stopCurrentPuckDetector()}{stopCurrentPuckDetector()}}
+{\footnotesize\ttfamily def src.\+main\+Vision.\+Main\+Vision.\+stop\+Current\+Puck\+Detector (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Called to stop the puck detection done by the current PuckDetector
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/main\+Vision.\+py\end{DoxyCompactItemize}

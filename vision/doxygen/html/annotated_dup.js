@@ -1,6 +1,9 @@
 var annotated_dup =
 [
     [ "src", null, [
+      [ "mainVision", null, [
+        [ "MainVision", "classsrc_1_1main_vision_1_1_main_vision.html", "classsrc_1_1main_vision_1_1_main_vision" ]
+      ] ],
       [ "VisionDialog", null, [
         [ "dialog_DimensionsConverter", null, [
           [ "Ui_Dialog_DimensionsConverter", "classsrc_1_1_vision_dialog_1_1dialog___dimensions_converter_1_1_ui___dialog___dimensions_converter.html", "classsrc_1_1_vision_dialog_1_1dialog___dimensions_converter_1_1_ui___dialog___dimensions_converter" ]
