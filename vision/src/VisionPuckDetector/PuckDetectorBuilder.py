@@ -32,6 +32,9 @@ from VisionDialog.dialogConfig import dialog_config_Radius
 from VisionDialog.dialogConfig import dialog_config_HSV
 from VisionDialog.dialogConfig import dialog_config_DimensionsConverter
 
+from VisionROS.dialogConfigROS import RadiusConfigSubscriber
+from VisionROS.dialogConfigROS import HSVConfigSubscriber
+
 class PuckDetectorBuilder(object):
     ROS = 0
     USB = 1
@@ -105,15 +108,10 @@ class PuckDetectorBuilder(object):
         else:
             puckDetectorConfigurator = PuckDetectorConfiguration([0, 0, 0], [0, 0, 0], 0, self.m_camera,self.m_broadcaster)
 
-            app = QApplication(sys.argv)
-
-            self.m_mouseEventHandler.start()
-            w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)
-            self.m_mouseEventHandler.stop()
-
-            w = dialog_config_Radius(puckDetectorConfigurator)
-            puckDetectorConfigurator.autoConfiguration()  # TODO: add progress bar
-            w = dialog_config_HSV(puckDetectorConfigurator)
+            if self.m_mode == PuckDetectorBuilder.ROS:
+                self.executeROSConfigGUI(puckDetectorConfigurator)
+            else:
+                self.executeLocalConfigGUI(puckDetectorConfigurator)
 
             with open(self.m_path, 'wb') as file:
                 configData = {}
@@ -130,3 +128,37 @@ class PuckDetectorBuilder(object):
         dimensionsConverter = DimensionsConverter(configData['pixelToMetersRatio'],configData['edges'])
 
         return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,self.m_broadcaster,dimensionsConverter)
+
+    def executeROSConfigGUI(self,i_puckDetectorConfigurator):
+        """
+        Handles the various values received from the rosTopics that are linked to PuckDetector and DimensionsConverter configuration GUIs
+        Args:
+            i_puckDetectorConfigurator: puckDetectorConfigurator object, use to keep track of the various parameters
+        """
+        # BEGIN TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
+        app = QApplication(sys.argv)
+
+        self.m_mouseEventHandler.start()
+        w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)
+        self.m_mouseEventHandler.stop()
+        # END TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
+
+        w = RadiusConfigSubscriber(i_puckDetectorConfigurator)
+        i_puckDetectorConfigurator.autoConfiguration()
+        w = HSVConfigSubscriber(i_puckDetectorConfigurator)
+
+    def executeLocalConfigGUI(self,i_puckDetectorConfigurator):
+        """
+        Displays the various GUI linked to the configuration of the PuckDetector and DimensionsConverter objects
+        Args:
+            i_puckDetectorConfigurator: puckDetectorConfigurator object, use to keep track of the various parameters
+        """
+        app = QApplication(sys.argv)
+
+        self.m_mouseEventHandler.start()
+        w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)
+        self.m_mouseEventHandler.stop()
+
+        w = dialog_config_Radius(i_puckDetectorConfigurator)
+        i_puckDetectorConfigurator.autoConfiguration()
+        w = dialog_config_HSV(i_puckDetectorConfigurator)

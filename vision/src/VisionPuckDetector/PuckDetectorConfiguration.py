@@ -19,7 +19,7 @@ class PuckDetectorConfiguration(PuckDetectorCore):
 
     def SetConfiguration(self):
         """
-         This is the main method of the PuckDetector class. This method iterates until the camera fails or until
+         This is the main method of the PuckDetectorConfiguration class. This method iterates until the camera fails or until
          the user is satisfied with the settings. It displays the ProcessedFrame as calculated with the current
          settings at every loop. This method is designed to be launched in a thread, while another thread changes
          the configuration values (HSV values).
