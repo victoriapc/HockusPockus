@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['okpressed_81',['okPressed',['../classdialog_config_1_1dialog__config___radius.html#ab5b4c38fcdd5de9765857c2053c9e2a0',1,'dialogConfig.dialog_config_Radius.okPressed()'],['../classdialog_config_1_1dialog__config___h_s_v.html#a158174c1885b3a886d2ccb99885ba46c',1,'dialogConfig.dialog_config_HSV.okPressed()']]]
+  ['findpuck_126',['findPuck',['../classsrc_1_1_vision_puck_detector_1_1_puck_detector_1_1_puck_detector.html#a217dd4d544c07cc926f3ef2f62c78b59',1,'src::VisionPuckDetector::PuckDetector::PuckDetector']]],
+  ['findpuckinframe_127',['findPuckInFrame',['../classsrc_1_1_vision_puck_detector_1_1_puck_detector_core_1_1_puck_detector_core.html#a57ba2a31c69a851d6d6dee219a2aa72a',1,'src::VisionPuckDetector::PuckDetectorCore::PuckDetectorCore']]]
 ];

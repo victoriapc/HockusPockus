@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['gethvalue_76',['GetHValue',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html#a7011bc90e430bed5917ee93469b6098c',1,'PuckDetectorConfiguration::PuckDetectorConfiguration']]],
-  ['getnextframe_77',['getNextFrame',['../class_camera_1_1_camera.html#a985716927934217ae2c4237bf92c774d',1,'Camera.Camera.getNextFrame()'],['../class_camera_r_o_s_1_1_camera_r_o_s.html#af43c97cbdca553afc5361a95ee56767c',1,'CameraROS.CameraROS.getNextFrame()'],['../class_camera_u_s_b_1_1_camera_u_s_b.html#a4d4b0ccfe5171938e4969f64a21d934a',1,'CameraUSB.CameraUSB.getNextFrame()']]],
-  ['getscoreofframe_78',['getScoreOfFrame',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html#a8f0e32dffa4c976e8d89cd36734cc15e',1,'PuckDetectorConfiguration::PuckDetectorConfiguration']]],
-  ['getsvalue_79',['GetSValue',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html#aa91435e0422575687b7933573ab32145',1,'PuckDetectorConfiguration::PuckDetectorConfiguration']]],
-  ['getvvalue_80',['GetVValue',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html#ab203014a029834b7025239b8b2c256a2',1,'PuckDetectorConfiguration::PuckDetectorConfiguration']]]
+  ['executelocalconfiggui_124',['executeLocalConfigGUI',['../classsrc_1_1_vision_puck_detector_1_1_puck_detector_builder_1_1_puck_detector_builder.html#a0473d73137d4006cbd5d2e3e1306c3b8',1,'src::VisionPuckDetector::PuckDetectorBuilder::PuckDetectorBuilder']]],
+  ['executerosconfiggui_125',['executeROSConfigGUI',['../classsrc_1_1_vision_puck_detector_1_1_puck_detector_builder_1_1_puck_detector_builder.html#acc3928c714b62f7c056fa5eb40232217',1,'src::VisionPuckDetector::PuckDetectorBuilder::PuckDetectorBuilder']]]
 ];

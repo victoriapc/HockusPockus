@@ -1,0 +1,72 @@
+\hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b}{}\doxysection{src.\+Vision\+U\+S\+B.\+Camera\+U\+S\+B.\+Camera\+U\+SB Class Reference}
+\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b}\index{src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}}
+Inheritance diagram for src.\+Vision\+U\+S\+B.\+Camera\+U\+S\+B.\+Camera\+U\+SB\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a84962ab74c6fdd9457f588142b6682d7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, i\+\_\+video\+Capture\+Index=0, i\+\_\+\+F\+PS=30)
+\item 
+def \mbox{\hyperlink{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a8906cc1a3f304995943e8c03f229493f}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a819a8fdb22b16fd5a6b708b624da6609}{get\+Next\+Frame}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a59964071b17c4e65fdfba3ee78109aca}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a59964071b17c4e65fdfba3ee78109aca}} 
+{\bfseries m\+\_\+camera}
+\item 
+\mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a92a2476e63ea7abda9734dd40c3a5b12}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a92a2476e63ea7abda9734dd40c3a5b12}} 
+{\bfseries time\+Between\+Frames}
+\item 
+\mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a23cc85fa00eb1075ade10d4c7f3f49a5}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a23cc85fa00eb1075ade10d4c7f3f49a5}} 
+{\bfseries m\+\_\+last\+Time\+Frame\+Was\+Accessed}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a84962ab74c6fdd9457f588142b6682d7}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a84962ab74c6fdd9457f588142b6682d7}} 
+\index{src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+Vision\+U\+S\+B.\+Camera\+U\+S\+B.\+Camera\+U\+S\+B.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{i\+\_\+video\+Capture\+Index = {\ttfamily 0},  }\item[{}]{i\+\_\+\+F\+PS = {\ttfamily 30} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}CameraUSB class's constructor. Initializes, notably, a self.m_camera attribute, which is a cv2.VideoCapture object
+Args:
+    i_FPS: The number of frames per second of the camera
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a8906cc1a3f304995943e8c03f229493f}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a8906cc1a3f304995943e8c03f229493f}} 
+\index{src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}!\_\_del\_\_@{\_\_del\_\_}}
+\index{\_\_del\_\_@{\_\_del\_\_}!src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}}
+\doxysubsubsection{\texorpdfstring{\_\_del\_\_()}{\_\_del\_\_()}}
+{\footnotesize\ttfamily def src.\+Vision\+U\+S\+B.\+Camera\+U\+S\+B.\+Camera\+U\+S\+B.\+\_\+\+\_\+del\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}CameraUSB class's destructor. Releases the dynamic ressources linked to the cv2.VideoCapture object
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a819a8fdb22b16fd5a6b708b624da6609}\label{classsrc_1_1_vision_u_s_b_1_1_camera_u_s_b_1_1_camera_u_s_b_a819a8fdb22b16fd5a6b708b624da6609}} 
+\index{src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}!getNextFrame@{getNextFrame}}
+\index{getNextFrame@{getNextFrame}!src.VisionUSB.CameraUSB.CameraUSB@{src.VisionUSB.CameraUSB.CameraUSB}}
+\doxysubsubsection{\texorpdfstring{getNextFrame()}{getNextFrame()}}
+{\footnotesize\ttfamily def src.\+Vision\+U\+S\+B.\+Camera\+U\+S\+B.\+Camera\+U\+S\+B.\+get\+Next\+Frame (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Grabs the next frame
+Returns:
+    A tupple, whose first term is a boolean that says if getting the next frame was succesful or not, and whose second term is the actual frame
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1_vision_interfaces_1_1_camera_1_1_camera_a3165bbd953ca9765b6940ae5c69c3947}{src.\+Vision\+Interfaces.\+Camera.\+Camera}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/école/\+Université/\+U\+D\+E\+S/\+Session 4/\+P\+R\+O\+J\+E\+T/\+Hockus\+Pockus/\+Vision/src/\+Vision\+U\+S\+B/Camera\+U\+S\+B.\+py\end{DoxyCompactItemize}

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['displaycirclesonframe_69',['displayCirclesOnFrame',['../class_puck_detector_core_1_1_puck_detector_core.html#a66e54c9d412caefde4d0a9e2741b3757',1,'PuckDetectorCore::PuckDetectorCore']]],
-  ['displaycirclespositiononframe_70',['displayCirclesPositionOnFrame',['../class_puck_detector_core_1_1_puck_detector_core.html#adc83ae5cc0f40f3fee09dec68de52ed9',1,'PuckDetectorCore::PuckDetectorCore']]],
-  ['displayfeed_71',['displayFeed',['../class_puck_detector_1_1_puck_detector.html#a948fcf8aba44514fbb011a0c1baff427',1,'PuckDetector::PuckDetector']]],
-  ['displayradius_72',['DisplayRadius',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html#add0ab1ce777afa05c7bc78d11a2d7891',1,'PuckDetectorConfiguration::PuckDetectorConfiguration']]]
+  ['callback_116',['callBack',['../classsrc_1_1_vision_r_o_s_1_1_mouse_event_handler_r_o_s_1_1_mouse_event_handler_r_o_s.html#ada03329be4aa84263fd110fb84b2604f',1,'src.VisionROS.MouseEventHandlerROS.MouseEventHandlerROS.callBack()'],['../classsrc_1_1_vision_u_s_b_1_1_mouse_event_handler_u_s_b_1_1_mouse_event_handler_u_s_b.html#a85d3db1b41af887f1728e10374041852',1,'src.VisionUSB.MouseEventHandlerUSB.MouseEventHandlerUSB.callBack()']]],
+  ['computepixeltometersratio_117',['computePixelToMetersRatio',['../classsrc_1_1_vision_dimensions_converter_1_1_dimensions_converter_configuration_1_1_dimensions_converter_configuration.html#a1b69b71e7dcb78970c7a8528bb142279',1,'src::VisionDimensionsConverter::DimensionsConverterConfiguration::DimensionsConverterConfiguration']]]
 ];

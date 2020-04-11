@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['puckdetector_57',['PuckDetector',['../class_puck_detector_1_1_puck_detector.html',1,'PuckDetector']]],
-  ['puckdetectorbuilder_58',['PuckDetectorBuilder',['../class_puck_detector_builder_1_1_puck_detector_builder.html',1,'PuckDetectorBuilder']]],
-  ['puckdetectorconfiguration_59',['PuckDetectorConfiguration',['../class_puck_detector_configuration_1_1_puck_detector_configuration.html',1,'PuckDetectorConfiguration']]],
-  ['puckdetectorcore_60',['PuckDetectorCore',['../class_puck_detector_core_1_1_puck_detector_core.html',1,'PuckDetectorCore']]]
+  ['hsvconfigsubscriber_94',['HSVConfigSubscriber',['../classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber.html',1,'src::VisionROS::dialogConfigROS']]]
 ];

@@ -22,12 +22,23 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "HockusPockusVision", "index.html", ]
+  [ "HockusPockusVision", "index.html", [
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ]
+      ] ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+".html",
+"classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber.html#ac5023b75cc2a2738af99873889a07508"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
