@@ -33,7 +33,18 @@ function createParamObject(name) {
     return param;
 }
 
-function getNames(string) {
+function splitNames(string) {
     var names = string.split(";");
     return names;
+}
+
+function concatenateNames(names) {
+    var string = "";
+
+    for(i = 0; i < (names.length - 1); i++) {
+        string += (names[i] + ";");
+    }
+    string += names[names.length - 1];
+
+    return string;
 }
