@@ -87,9 +87,6 @@ int main(int argc, char*argv[])
 	dynamic_reconfigure::Server<score::scoreConfig> server;
 	dynamic_reconfigure::Server<score::scoreConfig>::CallbackType f;
 
-	f = boost::bind(&NewGameListener::param_callback, _1, _2);
-	server.setCallback(f);
-
 	ros::NodeHandle n;
 	NewGameListener newGameListener = NewGameListener();
 	_startSubscriber = n.subscribe(ROS_topicNames::GAME_STATE, 1000, &NewGameListener::callbackStartGame, &newGameListener);
@@ -97,7 +94,8 @@ int main(int argc, char*argv[])
 	_scorePublisher = n.advertise<std_msgs::String>(ROS_topicNames::SCORES, 1000);
 	_endOfGamePublisher = n.advertise<std_msgs::Bool>(ROS_topicNames::GAME_STATE, 1000);
 
-
+	f = boost::bind(&NewGameListener::param_callback, newGameListener, _1, _2);
+	server.setCallback(f);
 
 	ros::spin();
 }

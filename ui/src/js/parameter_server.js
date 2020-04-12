@@ -5,12 +5,7 @@ const MAX_NUMBER_PLAYERS = 4;
 const DEFAULT_NUMBER_PLAYERS = 1;
 
 var score_goal_limit = "/score/goal_limit";
-var score_player_limit = "/score/player_limit";
-var score_name_1 = "/score/name_player_1";
-var score_name_2 = "/score/name_player_2";
-var score_name_3 = "/score/name_player_3";
-var score_name_4 = "/score/name_player_4";
-
+var score_names = "/score/name_players";
 var motor_manual_speed = "/motor_controls_node/manual_speed_ratio";
 
 // Establish ROS connection
@@ -25,9 +20,8 @@ ros.on('connection', function() {
 // Parameter server interaction
 function getParamValue(name, callback) {
     var param = createParamObject(name);
-    var arg = arguments[2];         // In case an other argument is needed for the callback function
     param.get(function(value) {
-        callback(value, arg);
+        callback(value);
     });
 }
 
@@ -37,4 +31,9 @@ function createParamObject(name) {
         name : name
       });
     return param;
+}
+
+function getNames(string) {
+    var names = string.split(";");
+    return names;
 }

@@ -1,11 +1,9 @@
+var number_of_players = 1;
+
 // Load page with current settings
 window.onload = function() {
     getParamValue(score_goal_limit, displayCurrentGoalLimit);
-    getParamValue(score_player_limit, updatePlayerRelatedFormInputs);
-    getParamValue(score_name_1, displayCurrentPlayerName, "#name_1");
-    getParamValue(score_name_2, displayCurrentPlayerName, "#name_2");
-    getParamValue(score_name_3, displayCurrentPlayerName, "#name_3");
-    getParamValue(score_name_4, displayCurrentPlayerName, "#name_4");
+    //getParamValue(score_names, updatePlayerRelatedFormInputs);
     getParamValue(motor_manual_speed, displayCurrentJoystickSpeed);
 }
 
@@ -13,25 +11,14 @@ function displayCurrentGoalLimit(value) {
     $("#ngoals").prop("value", value);
 }
 
-function updatePlayerRelatedFormInputs(value) {
-    displayCurrentPlayerLimit(value);
-    updateEnabledNameInputs(value);
+function displayPlayerRelatedFormInputs(value) {
+    var name_array = getNames(value);
+    number_of_players = name_array.length;
+    displayCurrentPlayerLimit(number_of_players);
 }
 
 function displayCurrentPlayerLimit(value) {
     $("#nplayers").prop("value", value);
-}
-
-function updateEnabledNameInputs(nplayer) {
-    for(i = 1; i <= MAX_NUMBER_PLAYERS; i++) {
-        var id = "#name_" + String(i);
-        if(i <= nplayer) {
-            $(id).prop("disabled", false);
-        }
-        else {
-            $(id).prop("disabled", true);
-        }
-    }
 }
 
 function displayCurrentPlayerName(value, id) {
@@ -43,9 +30,34 @@ function displayCurrentJoystickSpeed(value) {
 }
 
 // Update when the number of players changes
-$(document).on('input', '#nplayers', function() {
-    updateEnabledNameInputs(Number($("#nplayers").val()));
+$(document).on('change', '#nplayers', function() {
+    if($("#nplayers").val() > number_of_players) {
+        number_of_players++;
+        addPlayerInputName(number_of_players);
+    }  
+    else if($("#nplayers").val() < number_of_players) {
+        removePlayerInputName(number_of_players);
+        number_of_players--;
+    }
 })
+
+// Name input interaction
+function addPlayerInputName(index) {
+    var html = createPlayerNameHTML(index);
+    $("#name-container").append(html);
+}
+
+function createPlayerNameHTML(index) {
+    var id = "name_" + index;
+    var html = "<div id='" + id + "' class='players-names-item'><label>Player " 
+    + index + "'s name:</label> <input type='text' id='"+ id +"_input'></input></div>";
+    return html;
+}
+
+function removePlayerInputName(index) {
+    var id = "#name_" + index;
+    $(id).remove();
+}
 
 // Update dynamic reconfigure values on submit
 function onSubmit() {

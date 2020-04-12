@@ -35,26 +35,22 @@ var score_client = new ROSLIB.Service({
     serviceType : 'dynamic_reconfigure/Reconfigure'
 });
 
-function createScoreRequest() {
+function createScoreRequest(names) {
     var request = new ROSLIB.ServiceRequest({
         config: {
             ints: [
-                {name: 'player_limit', value: Number($("#nplayers").val())},
                 {name: 'goal_limit', value: Number($("#ngoals").val())}
             ],
             strs: [
-                {name: 'name_player_1', value: $("#name_1").val()},
-                {name: 'name_player_2', value: $("#name_2").val()},
-                {name: 'name_player_3', value: $("#name_3").val()},
-                {name: 'name_player_4', value: $("#name_4").val()}
+                {name: 'name_players', value: names},
             ]
         }
     });
     return request;
 }
 
-function updateScoreConfig() {
-    var request = createScoreRequest();
+function updateScoreConfig(names) {
+    var request = createScoreRequest(names);
     score_client.callService(request, function(result) {
         console.log(score_client.name + " was called.")
     });
