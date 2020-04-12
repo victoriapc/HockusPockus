@@ -29,6 +29,7 @@ createJoystick = function () {
     }
     self.move(0, 0);
   });
+  
   return manager;
 }
 

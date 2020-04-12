@@ -20,12 +20,12 @@ window.onload = function() {
 /* ----------------------------------------- */
 
 $(document).on('change', '#nplayers', function() {
-    if($("#nplayers").val() > n_players) {
+    while($("#nplayers").val() > n_players) {
         n_players++;
         addPlayerNameDiv(n_players);
         displayCurrentPlayerName(getPlayerInputID(n_players), names[n_players - 1]);
     }
-    else if($("#nplayers").val() < n_players) {
+    while($("#nplayers").val() < n_players) {
         removePlayerNameDiv(n_players);
         n_players--;
     }
@@ -41,6 +41,15 @@ function onSubmit() {
     
     updateMotorConfig();
     alert("Parameters were updated.")
+}
+
+function createNamesArray(n_players) {
+    var names = [];
+    for(i = 1; i <= n_players; i++) {
+        var id = getPlayerInputID(i);
+        names[i - 1] = document.getElementById(id).value;
+    }
+    return names;
 }
 
 /* ----------------------------------------- */
@@ -82,7 +91,6 @@ function displayCurrentPlayerName(id, value) {
     }
 }
 
-
 /* ----------------------------------------- */
 /* -------------  NAME INPUTS  ------------- */
 /* ----------------------------------------- */
@@ -116,11 +124,3 @@ function getPlayerInputID(index) {
     return "name_" + index + "_input";
 }
 
-function createNamesArray(n_players) {
-    var names = [];
-    for(i = 1; i <= n_players; i++) {
-        var id = getPlayerInputID(i);
-        names[i - 1] = document.getElementById(id).value;
-    }
-    return names;
-}

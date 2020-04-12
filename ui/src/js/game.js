@@ -1,36 +1,77 @@
-// Difficulty
-function easy() {
-    newGame(EASY);
-    document.getElementById("difficulty").innerHTML = "Easy";
-}
+// Game Difficulty
+const EASY = "Easy";
+const MEDIUM = "Medium";
+const HARD = "Hard";
 
-function medium() {
-    newGame(MEDIUM);
-    document.getElementById("difficulty").innerHTML = "Medium";
-}
+// Game parameters
+var names;
 
-function hard() {
-    newGame(HARD);
-    document.getElementById("difficulty").innerHTML = "Hard";
-}
-
-// Show Game Content
+// Create game
 function newGame(mode) {
     game.html(game_content);
+
     loadGameContent();
+    document.getElementById("difficulty").innerHTML = mode;
+
     manual.addClass("disabled");
     new_game.addClass("disabled");
 }
 
+// Load game goal and players content
+function loadGameContent() {
+    getParamValue(score_goal_limit, displayGoalLimit);
+    getParamValue(score_names, displayAllPlayers);
+}
+
+function displayGoalLimit(value) {
+    document.getElementById("goal_limit").innerHTML = value;
+}
+
+function displayAllPlayers(value) {
+    names = splitNames(value);
+
+    for(i = 0; i < names.length; i++) {
+        displayPlayer(i + 1, names[i]);
+    }
+}
+
+function displayPlayer(index, name) {
+    addPlayerDiv(index, name);
+}
+
+function addPlayerDiv(index, name) {
+    var html = createPlayerDivHTML(index, name);
+    $("#player-container").append(html);
+}
+
+function createPlayerDivHTML(index, name) {
+    var div_id = getPlayerDivID(index);
+    var score_id = getPlayerScoreID(index);
+
+    var html = "<li id='" + div_id + "' class='score-item'><div class='score-item-content'>" 
+        + name + "</div><img id='equal' src='https://img.icons8.com/ios-filled/50/000000/equal-sign.png'/>"
+        + "<div class='score-item-content' id='" + score_id + "'>0</div></li>";
+
+    return html;
+}
+
+function getPlayerDivID(index) {
+    return "player_" + index;
+}
+
+function getPlayerScoreID(index) {
+    return "player_" + index + "_score";
+}
+
 // Game Control
 function startGame() {
-    start_game_btn.addClass("disabled");
-    pause_game_btn.removeClass("disabled");
+    $("#start_game").addClass("disabled");
+    $("#pause_game").removeClass("disabled");
 }
 
 function pauseGame() {
-    start_game_btn.removeClass("disabled");
-    pause_game_btn.addClass("disabled");
+    $("#start_game").removeClass("disabled");
+    $("#pause_game").addClass("disabled");
 }
 
 function stopGame() {
@@ -38,36 +79,5 @@ function stopGame() {
     manual.removeClass("disabled");
     new_game.removeClass("disabled");
 }
-
-// Load game goal and players content
-function loadGameContent() {
-    getParamValue(score_goal_limit, displayGoalLimit);
-    getParamValue(score_name_1, displayPlayerName, "name_player_1");
-    getParamValue(score_name_2, displayPlayerName, "name_player_2");
-    getParamValue(score_name_3, displayPlayerName, "name_player_3");
-    getParamValue(score_name_4, displayPlayerName, "name_player_4");
-    getParamValue(score_player_limit, adjustViewedPlayers);
-}
-
-function adjustViewedPlayers(nplayer) {
-    for(i = 1; i <= MAX_NUMBER_PLAYERS; i++) {
-        var id = "#player_" + String(i);
-        if(i <= nplayer) {
-            $(id).css("visibility", "visible");
-        }
-        else {
-            $(id).css("visibility", "hidden");
-        }
-    }
-}
-
-function displayGoalLimit(value) {
-    document.getElementById("goal_limit").innerHTML = value;
-}
-
-function displayPlayerName(value, id) {
-    document.getElementById(id).innerHTML = value;
-}
-
 
 // Update Score

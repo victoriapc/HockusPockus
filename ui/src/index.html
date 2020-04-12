@@ -11,9 +11,10 @@
 	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.7.3/nipplejs.js"></script>
 	<script type="text/javascript" src="js/parameter_server.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/joystick.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+	
 </head>
 
 <body>
@@ -60,9 +61,9 @@
 			<div class="card-top" id="new_game">
 				<div class="card-top-header">New Game</div>
 				<p>Choose the difficulty</p>
-				<button class="btn" onclick="easy()">Easy</button>
-				<button class="btn" onclick="medium()">Medium</button>
-				<button class="btn" onclick="hard()">Hard</button>
+				<button class="btn" onclick="newGame(EASY)">Easy</button>
+				<button class="btn" onclick="newGame(MEDIUM)">Medium</button>
+				<button class="btn" onclick="newGame(HARD)">Hard</button>
 			</div>
 			<div class="card-top" id="manual">
 				<div class="card-top-header">Manual Control</div>
