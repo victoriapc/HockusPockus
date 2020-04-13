@@ -110,7 +110,7 @@ class PuckDetectorCore(object) :
             The (x,y) coordinates of the puck
         """
         processedFrame = self.ProcessFrames(i_frame)
-        contours, hierarchy = cv2.findContours(processedFrame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        _, contours, hierarchy = cv2.findContours(processedFrame, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         if len(contours) > 0 :
             biggestCountour = max(contours, key=cv2.contourArea)
             centerOfMass = cv2.moments(biggestCountour,True)

@@ -22,21 +22,12 @@ var apply = null;
 var config_started = false;
 
 // Connecting to ROS
-
 var ros = new ROSLIB.Ros({
     url : 'ws://localhost:9090'
 });
 
 ros.on('connection', function() {
     console.log('Connected to websocket server.');
-});
-
-ros.on('error', function(error) {
-    console.log('Error connecting to websocket server: ', error);
-});
-
-ros.on('close', function() {
-    console.log('Connection to websocket server closed.');
 });
 
 // ----- Publishers -----
@@ -66,7 +57,6 @@ function createInt32Msg(val) {
     var msg = new ROSLIB.Message({
         data : Number(val)
     });
-    console.log(msg);
     return msg;
 }
 
@@ -108,6 +98,9 @@ window.onbeforeunload = function(){
 
 // Hidding section for the sequence
 function step_1() {
+    var apply_msg = createBoolMsg(true);
+    apply_pub.publish(apply_msg);
+
     start.removeClass("disabled");
     radius.addClass("disabled");
     hsv.addClass("disabled");
@@ -124,6 +117,9 @@ function step_2() {
 }
 
 function step_3() {
+    var apply_msg = createBoolMsg(true);
+    apply_pub.publish(apply_msg);
+
     radius.addClass("disabled");
     hsv.removeClass("disabled");
 }

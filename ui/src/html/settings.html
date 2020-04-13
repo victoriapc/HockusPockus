@@ -54,23 +54,23 @@
 	<main>
 		<h1>Settings</h1>
 		<p>Adjust the game parameters, like the score limit or the number of players. You can also choose the name of each player.</p>
-		<form class="inputs">
+		<form class="inputs" onsubmit="updateParameters()">
 			<div class="goals">
 				<label>Max goals :</label>
-				<input id="ngoals" type="number" min="1" max="15">
+				<input id="ngoals" type="number" min="1" max="15" required>
 			</div>
 			<div class="players">
 				<label>Number of players (excluding the robot) :</label>
-				<input id="nplayers" type="number" min="1" max="4">
+				<input id="nplayers" type="number" min="1" max="4" required>
 				<div id="name-container" class="players-names">
 					
 				</div>
 			</div>
 			<div class="joystick">
 				<label>Joystick control maximum speed (10 being the fastest) :</label>
-				<input id="joystick-speed" type="number" min="1" max="10">
+				<input id="joystick-speed" type="number" min="1" max="10" required>
 			</div>
-			<input type="submit" id="submit" class="btn" value="Apply changes" onclick="onSubmit()"></input>
+			<input type="submit" id="submit" class="btn" value="Apply changes"></input>
 		</form>
 	</main>
 </body>

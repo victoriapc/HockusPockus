@@ -135,7 +135,7 @@ class PuckDetectorBuilder(object):
             i_puckDetectorConfigurator: puckDetectorConfigurator object, use to keep track of the various parameters
         """
         # BEGIN TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
-        app = QApplication(sys.argv)
+        
 
         self.m_mouseEventHandler.start()
         w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)

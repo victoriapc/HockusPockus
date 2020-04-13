@@ -35,7 +35,7 @@ $(document).on('change', '#nplayers', function() {
 /* --------------- ON SUBMIT --------------- */
 /* ----------------------------------------- */
 
-function onSubmit() {
+function updateParameters() {
     var new_names = createNamesArray(n_players);
     updateScoreConfig(concatenateNames(new_names));
     

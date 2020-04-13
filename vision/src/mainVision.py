@@ -4,6 +4,9 @@ from std_msgs.msg import Bool
 from VisionPuckDetector.PuckDetectorBuilder import PuckDetectorBuilder
 from VisionROS.ROS_CONSTANTS import *
 
+from PyQt5.QtWidgets import QApplication
+import sys
+
 class MainVision():
     def __init__(self):
         """
@@ -46,5 +49,6 @@ class MainVision():
 
 # Main
 if __name__ == "__main__" :
+    app = QApplication(sys.argv)
     mainV = MainVision()
     rospy.spin()
