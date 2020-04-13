@@ -131,8 +131,8 @@ puck_pos_listener.subscribe(function(message) {
 });
 
 function updatePuckPosition(m) {
-  document.getElementById("puck_x").innerHTML = m.x;
-  document.getElementById("puck_y").innerHTML = m.y;
+  document.getElementById("puck_x").innerHTML = m.x.toFixed(3);     // Show only 3 number of precision
+  document.getElementById("puck_y").innerHTML = m.y.toFixed(3);
 }
 
 /* ----------------------------------------- */
