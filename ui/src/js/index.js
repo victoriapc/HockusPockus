@@ -52,7 +52,7 @@ var joy_publisher = new ROSLIB.Topic({
   messageType : 'geometry_msgs/Point'
 });
 
-move = function (posx, posy,max_speed) {
+move = function (posx, posy) {
   var Point = new ROSLIB.Message({
       x: posx,
       y: posy,

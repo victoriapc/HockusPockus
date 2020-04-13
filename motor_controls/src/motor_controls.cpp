@@ -37,6 +37,8 @@ float desired_posy = 0;
 float joyx = 0;
 float joyy = 0;
 
+int speed_ratio = 5;
+
 // Pub and Sub
 ros::Publisher pos_pub;
 ros::Subscriber desired_sub;
@@ -254,8 +256,8 @@ void control_callback(const geometry_msgs::Point desired_pos){
 }
 
 void joy_callback(const geometry_msgs::Point joy_pos){
-	joyx = joy_pos.x;
-	joyy = joy_pos.y;
+	joyx = speed_ratio*joy_pos.x;
+	joyy = speed_ratio*joy_pos.y;
 	// desired_posx = joy_pos.x + current_posx;	
 	// desired_posy = joy_pos.y + current_posy;
 	// des_point.x = desired_posx;
@@ -265,4 +267,5 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 
 void param_callback(motor_controls::motorConfig &config, uint32_t level) {
   ROS_INFO("Reconfigure Request: %d", config.manual_speed_ratio);
+  speed_ratio = config.manual_speed_ratio;
 }
