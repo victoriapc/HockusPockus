@@ -136,10 +136,23 @@ class DimensionsConverterConfigSubscriber:
 
         self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
         self.m_resetSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_RESET_TOPIC_NAME, Bool, self.retryPressed)
+        self.m_tableDimensionsSubscriber = rospy.Subscriber(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, self.onTableDimensionsChanges)
 
         thread = threading.Thread(target=self.m_DimensionsConverterConfiguration.DisplayEdges)
         thread.daemon = True
         thread.start()
+
+    def onTableDimensionsChanges(self, i_msg):
+        """
+        Specifies what should happen when the table dimensions are changed : setSidesDimensions() and computePixelToMetersRatio()
+        should be called with the new values
+        """
+        tableDimensions = TableDimensions()
+        tableDimensions.setHeight(i_msg.data[0])
+        tableDimensions.setWidth(i_msg.data[1])
+
+        self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
+        self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
 
     def retryPressed(self):
         """
@@ -150,14 +163,7 @@ class DimensionsConverterConfigSubscriber:
 
     def okPressed(self, i_apply):
         """
-        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayRadius() thread dies
+        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayEdges() thread dies
         """
         if i_apply.data:
             self.m_DimensionsConverterConfiguration.userWantsToQuit()
-
-            tableDimensions = TableDimensions()
-            tableDimensions.setHeight(self.doubleSpinBox_Height.value())
-            tableDimensions.setWidth(self.doubleSpinBox_Width.value())
-
-            self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
-            self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
