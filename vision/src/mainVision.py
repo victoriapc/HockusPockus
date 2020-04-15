@@ -27,7 +27,8 @@ class MainVision():
         """
         if self.puckDetector != None:
             self.puckDetector.userWantsToQuit()
-
+            self.puckDetector = None
+            
     def reconfigureCallBack(self, i_reconfigure):
         """
         Called on a reconfigure request by the webApp
