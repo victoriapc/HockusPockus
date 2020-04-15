@@ -64,6 +64,7 @@ var annotated_dup =
           [ "CameraROS", "classsrc_1_1_vision_r_o_s_1_1_camera_r_o_s_1_1_camera_r_o_s.html", "classsrc_1_1_vision_r_o_s_1_1_camera_r_o_s_1_1_camera_r_o_s" ]
         ] ],
         [ "dialogConfigROS", null, [
+          [ "DimensionsConverterConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_dimensions_converter_config_subscriber.html", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_dimensions_converter_config_subscriber" ],
           [ "HSVConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber.html", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber" ],
           [ "RadiusConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_radius_config_subscriber.html", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_radius_config_subscriber" ]
         ] ],
