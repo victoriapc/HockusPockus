@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "src.VisionROS.dialogConfigROS.DimensionsConverterConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_dimensions_converter_config_subscriber.html", null ],
     [ "src.VisionROS.dialogConfigROS.HSVConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_h_s_v_config_subscriber.html", null ],
     [ "src.mainVision.MainVision", "classsrc_1_1main_vision_1_1_main_vision.html", null ],
     [ "object", null, [
@@ -39,13 +40,9 @@ var hierarchy =
       [ "src.VisionUtils.TableDimensions.TableDimensions", "classsrc_1_1_vision_utils_1_1_table_dimensions_1_1_table_dimensions.html", null ]
     ] ],
     [ "src.VisionROS.dialogConfigROS.RadiusConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_radius_config_subscriber.html", null ],
-    [ "Ui_Dialog_DimensionsConverter", null, [
-      [ "src.VisionROS.dialogConfigROS.DimensionsConverterConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_dimensions_converter_config_subscriber.html", null ]
-    ] ],
     [ "QDialog", null, [
       [ "src.VisionDialog.dialogConfig.dialog_config_DimensionsConverter", "classsrc_1_1_vision_dialog_1_1dialog_config_1_1dialog__config___dimensions_converter.html", null ],
       [ "src.VisionDialog.dialogConfig.dialog_config_HSV", "classsrc_1_1_vision_dialog_1_1dialog_config_1_1dialog__config___h_s_v.html", null ],
-      [ "src.VisionDialog.dialogConfig.dialog_config_Radius", "classsrc_1_1_vision_dialog_1_1dialog_config_1_1dialog__config___radius.html", null ],
-      [ "src.VisionROS.dialogConfigROS.DimensionsConverterConfigSubscriber", "classsrc_1_1_vision_r_o_s_1_1dialog_config_r_o_s_1_1_dimensions_converter_config_subscriber.html", null ]
+      [ "src.VisionDialog.dialogConfig.dialog_config_Radius", "classsrc_1_1_vision_dialog_1_1dialog_config_1_1dialog__config___radius.html", null ]
     ] ]
 ];
