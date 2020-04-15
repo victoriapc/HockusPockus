@@ -1,8 +1,3 @@
-// Establish ROS connection
-var ros = new ROSLIB.Ros({
-    url : 'ws://localhost:9090'
-});
-
 // Motor node dynamic reconfigure client
 var motor_client = new ROSLIB.Service({
     ros : ros,

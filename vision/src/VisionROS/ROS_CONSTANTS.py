@@ -6,7 +6,7 @@ ROS_CONFIG_FILE_PATH = '/vision/config_folder'
 ROS_IS_RECONFIGURE = '/vision/reconfigure'
 
 ROS_SUBSCRIBER_WEBCAM_TOPIC_NAME = "/usb_cam/image_raw"
-ROS_SUBSCRIBER_MOUSE_EVENT_TOPIC_NAME = "/usb_cam/mouse_event"
+ROS_SUBSCRIBER_MOUSE_EVENT_TOPIC_NAME = "/ui/mouse_event"
 
 ROS_SUBSCRIBER_CONFIG_START_TOPIC_NAME = "/vision/reconfigure/start"
 ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME = "/vision/reconfigure/apply"
