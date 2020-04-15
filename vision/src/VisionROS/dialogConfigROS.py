@@ -25,9 +25,7 @@ class RadiusConfigSubscriber:
         self.m_radiusSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_RADIUS_TOPIC_NAME, Int32, self.update_Radius)
         self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
 
-        thread = threading.Thread(target=self.m_config.DisplayRadius)
-        thread.daemon = True
-        thread.start()
+        self.m_config.DisplayRadius()
 
     def okPressed(self, i_apply):
         """
@@ -69,9 +67,7 @@ class HSVConfigSubscriber:
         self.m_SSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_S_TOPIC_NAME, Int32, self.update_S)
         self.m_VSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_V_TOPIC_NAME, Int32, self.update_V)
 
-        thread = threading.Thread(target=self.m_config.SetConfiguration)
-        thread.daemon = True
-        thread.start()
+        self.m_config.SetConfiguration()
 
     def publishCurrentValues(self):
         msg = Int32()
@@ -138,9 +134,7 @@ class DimensionsConverterConfigSubscriber:
         self.m_resetSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_RESET_TOPIC_NAME, Bool, self.retryPressed)
         self.m_tableDimensionsSubscriber = rospy.Subscriber(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, self.onTableDimensionsChanges)
 
-        thread = threading.Thread(target=self.m_DimensionsConverterConfiguration.DisplayEdges)
-        thread.daemon = True
-        thread.start()
+        self.m_DimensionsConverterConfiguration.DisplayEdges()
 
     def onTableDimensionsChanges(self, i_msg):
         """
