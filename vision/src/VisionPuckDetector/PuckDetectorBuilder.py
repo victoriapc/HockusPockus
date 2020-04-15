@@ -34,6 +34,7 @@ from VisionDialog.dialogConfig import dialog_config_DimensionsConverter
 
 from VisionROS.dialogConfigROS import RadiusConfigSubscriber
 from VisionROS.dialogConfigROS import HSVConfigSubscriber
+from VisionROS.dialogConfigROS import DimensionsConverterConfigSubscriber
 
 class PuckDetectorBuilder(object):
     ROS = 0
@@ -59,13 +60,8 @@ class PuckDetectorBuilder(object):
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
             self.m_broadcaster = BroadcasterROS()
-            # BEGIN TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
-            #self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
-            #self.m_mouseEventHandler = MouseEventHandlerROS(self.dimensionsConverterConfigurator)
-            USB_OUTPUT_NAME = 'Output'
-            self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,BroadcasterUSB(USB_OUTPUT_NAME))
-            self.m_mouseEventHandler = MouseEventHandlerUSB(self.dimensionsConverterConfigurator,USB_OUTPUT_NAME)
-            # END TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
+            self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
+            self.m_mouseEventHandler = MouseEventHandlerROS(self.dimensionsConverterConfigurator)
             self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
 
         elif self.m_mode == PuckDetectorBuilder.USB:
@@ -134,13 +130,9 @@ class PuckDetectorBuilder(object):
         Args:
             i_puckDetectorConfigurator: puckDetectorConfigurator object, use to keep track of the various parameters
         """
-        # BEGIN TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
-        
-
         self.m_mouseEventHandler.start()
-        w = dialog_config_DimensionsConverter(self.dimensionsConverterConfigurator)
+        w = DimensionsConverterConfigSubscriber(self.dimensionsConverterConfigurator)
         self.m_mouseEventHandler.stop()
-        # END TODO : REMOVE, This is only temporary while the MouseEventHandlerROS is being implemented
 
         w = RadiusConfigSubscriber(i_puckDetectorConfigurator)
         i_puckDetectorConfigurator.autoConfiguration()

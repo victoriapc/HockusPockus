@@ -122,3 +122,42 @@ class HSVConfigSubscriber:
         V value in the PuckDetectorConfiguration object
         """
         self.m_config.SetHValue(i_V.data)
+
+class DimensionsConverterConfigSubscriber(QDialog, Ui_Dialog_DimensionsConverter):
+    def __init__(self,i_DimensionsConverterConfiguration):
+        """
+        dialog_config_DimensionsConverter class's constructor. Initializes, notably, the ROS subscriber that is used to get the values
+        of the edges (in pixels and in meters)
+        Args:
+            i_config: A pointer to a PuckDetectorConfiguration object
+        """
+
+        self.m_DimensionsConverterConfiguration = i_DimensionsConverterConfiguration
+
+        self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
+        self.m_resetSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_RESET_TOPIC_NAME, Bool, self.retryPressed)
+
+        thread = threading.Thread(target=self.m_DimensionsConverterConfiguration.DisplayEdges)
+        thread.daemon = True
+        thread.start()
+
+    def retryPressed(self):
+        """
+        Specifies what should happen when the "Retry" button of the GUI is pressed : it should remove all edges that
+        were selected
+        """
+        self.m_DimensionsConverterConfiguration.resetEdges()
+
+    def okPressed(self, i_apply):
+        """
+        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayRadius() thread dies
+        """
+        if i_apply.data:
+            self.m_DimensionsConverterConfiguration.userWantsToQuit()
+
+            tableDimensions = TableDimensions()
+            tableDimensions.setHeight(self.doubleSpinBox_Height.value())
+            tableDimensions.setWidth(self.doubleSpinBox_Width.value())
+
+            self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
+            self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()

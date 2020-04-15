@@ -60,5 +60,5 @@ class BroadcasterROS(Broadcaster) :
             i_tableDimensions: The table dimensions
         """
         msg = Float32MultiArray()
-        msg.data = [i_tableDimensions.getLeft(),i_tableDimensions.getTop(),i_tableDimensions.getRight(),i_tableDimensions.getBottom()]
+        msg.data = [i_tableDimensions.getHeight(),i_tableDimensions.getWidth()]
         self.m_tableDimensionsPublisher.publish(msg)
