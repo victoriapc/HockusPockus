@@ -6,7 +6,7 @@ try:
     from sensor_msgs.msg import Image
     from cv_bridge import CvBridge, CvBridgeError
     from geometry_msgs.msg import Point
-    from std_msgs.msg import Int32
+    from std_msgs.msg import Int32, Float32MultiArray
     from std_msgs.msg import Bool
 
 except ImportError:

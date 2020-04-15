@@ -7,6 +7,9 @@ var webcam_framerate = "/usb_cam/framerate";
 var webcam_height = "/usb_cam/image_height";
 var webcam_width = "/usb_cam/image_width";
 
+var strategy_table_height = "/strategy/table_height";
+var strategy_table_width = "/strategy/table_width";
+
 // Parameter server interaction
 function getParamValue(name, callback) {
     var param = createParamObject(name);

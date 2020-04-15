@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function(){
     loadSection();
     initSlider();
     loadRatios();
+    loadTableDimensions();
     step_1();
 });
 
@@ -76,11 +77,12 @@ function step_2() {
     config_started = true;
     $("#start").addClass("disabled");
     $("#corners").removeClass("disabled");
+
+    alert("Click on the bottom left corner.")
 }
 
 function step_3() {
-    var apply_msg = createBoolMsg(true);
-    apply_pub.publish(apply_msg);
+    updateStrategyConfig();
 
     $("#corners").addClass("disabled");
     $("#radius").removeClass("disabled");
@@ -148,19 +150,34 @@ function loadRatios() {
     getParamValue(webcam_width, setWidthRatio);
 }
 
+// Table dimensions interaction
+var table_height;
+var table_width;
+
+function displayTableWidth(value) {
+    $("#width").prop("value", value);
+}
+
+function displayTableHeight(value) {
+    $("#height").prop("value", value);
+}
+
+function loadTableDimensions() {
+    getParamValue(strategy_table_height, displayTableHeight);
+    getParamValue(strategy_table_width, displayTableWidth);
+}
+
 // Mouse event interaction
 var nclicks = 0;
 var point_pub = createPublisher("/ui/mouse_event", "geometry_msgs/Point");
 
 function startListeningToClicks() {
-    console.log("Listening");
     $("#video").on('click', function(event) {
         manageCoordinate(event, this);
     });
 }
 
 function stopListeningToClicks() {
-    console.log("Stopped listening");
     $("#video").off('click');
 }
 
@@ -170,8 +187,13 @@ function manageCoordinate(event, obj) {
     publishCoordinate(x, y);
     nclicks++;
 
-    if(nclicks == 4) {
+    if(nclicks == 1) {
+        alert("Click on the top-rigth corner.");
+    }
+
+    if(nclicks == 2) {
         stopListeningToClicks();
+        alert("Corners position sent. You can adjust the size the table dimensions.")
     }
 }
 

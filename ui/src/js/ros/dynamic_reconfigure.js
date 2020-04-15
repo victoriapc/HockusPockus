@@ -50,3 +50,29 @@ function updateScoreConfig(names) {
         console.log(score_client.name + " was called.")
     });
 }
+
+// Strategy node dynamic reconfigure client
+var strategy_client = new ROSLIB.Service({
+    ros : ros,
+    name : '/strategy/set_parameters',
+    serviceType : 'dynamic_reconfigure/Reconfigure'
+});
+
+function createStrategyRequest() {
+    var request = new ROSLIB.ServiceRequest({
+        config: {
+            doubles: [
+                {name: 'table_height', value: Number($("#height").val())},
+                {name: 'table_width', value: Number($("#width").val())}
+            ]
+        }
+    });
+    return request;
+}
+
+function updateStrategyConfig() {
+    var request = createStrategyRequest();
+    strategy_client.callService(request, function(result) {
+        console.log(strategy_client.name + " was called.")
+    });
+}
