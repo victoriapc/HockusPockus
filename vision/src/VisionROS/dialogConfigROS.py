@@ -123,7 +123,7 @@ class HSVConfigSubscriber:
         """
         self.m_config.SetHValue(i_V.data)
 
-class DimensionsConverterConfigSubscriber(QDialog, Ui_Dialog_DimensionsConverter):
+class DimensionsConverterConfigSubscriber:
     def __init__(self,i_DimensionsConverterConfiguration):
         """
         dialog_config_DimensionsConverter class's constructor. Initializes, notably, the ROS subscriber that is used to get the values
