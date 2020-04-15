@@ -15,14 +15,20 @@ except ImportError:
 
 class BroadcasterROS(Broadcaster) :
 
-    def __init__(self):
+    def __init__(self, i_videoTopic = None):
         """
         PuckDetector class's constructor. Initializes, notably, self.positionPublisher and self.m_videoFeedPublisher, that are attributes that
         are used to publish position and video information, respectively
         """
         self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
         self.m_bridge = CvBridge()
-        self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
+        # BEGIN TEMP, for debug
+        if (i_videoTopic == None):
+            videoTopicName = ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME
+        else :
+            videoTopicName = i_videoTopic
+        self.m_videoFeedPublisher = rospy.Publisher(videoTopicName, Image, queue_size=10)
+        #END TEMP, for debug
         self.m_tableDimensionsPublisher = rospy.Publisher(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, queue_size=10)
         
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
