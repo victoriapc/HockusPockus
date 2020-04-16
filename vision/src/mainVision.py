@@ -50,6 +50,6 @@ class MainVision():
 
 # Main
 if __name__ == "__main__" :
-    app = QApplication(sys.argv)
     mainV = MainVision()
-    rospy.spin()
+    while not rospy.is_shutdown():
+        continue

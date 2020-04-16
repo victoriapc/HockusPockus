@@ -1,6 +1,7 @@
 import threading
 import copy
 from VisionROS.ROS_CONSTANTS import *
+from VisionUtils.TableDimensions import  TableDimensions
 try:
     import rospy
     from sensor_msgs.msg import Image

@@ -27,7 +27,7 @@ class MouseEventHandlerROS(MouseEventHandler):
         """
         This method is called when a mouse event is generated. This assumes m_callBackObject has a onMouseEvent() method
         """
-        self.m_callBackObject.onMouseEvent((i_point.x, i_point.y))
+        self.m_callBackObject.onMouseEvent((int(i_point.x), int(i_point.y)))
 
     def stop(self):
         """

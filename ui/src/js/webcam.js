@@ -59,8 +59,8 @@ window.onbeforeunload = function(){
 
 // Hidding section for the sequence
 function step_1() {
-    var apply_msg = createBoolMsg(true);
-    apply_pub.publish(apply_msg);
+    //var apply_msg = createBoolMsg(true);
+    //apply_pub.publish(apply_msg);
 
     $("#start").removeClass("disabled");
     $("#corners").addClass("disabled");
@@ -184,7 +184,10 @@ function stopListeningToClicks() {
 function manageCoordinate(event, obj) {
     var x = (event.pageX - obj.offsetLeft)*width_ratio;
     var y = (event.pageY - obj.offsetTop)*height_ratio;
-    publishCoordinate(x, y);
+
+    console.log(y);
+    
+    publishCoordinate(x, nclicks*50);
     nclicks++;
 
     if(nclicks == 1) {
