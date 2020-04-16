@@ -1,4 +1,24 @@
 // Joystick
+
+// Publisher
+var joy_publisher = new ROSLIB.Topic({
+  ros : ros,
+  name : "/joy_pos",
+  messageType : 'geometry_msgs/Point'
+});
+
+// Function
+move = function (posx, posy) {
+  var Point = new ROSLIB.Message({
+      x: posx,
+      y: posy,
+      z: 0,
+  });
+  joy_publisher.publish(Point);
+}
+
+// Creating joystick
+
 createJoystick = function () {
   var options = {
     zone: document.getElementById('zone_joystick'),

@@ -45,22 +45,6 @@ function loadVar() {
 /* ------------- Manual Control ------------ */
 /* ----------------------------------------- */
 
-// Publisher
-var joy_publisher = new ROSLIB.Topic({
-  ros : ros,
-  name : "/joy_pos",
-  messageType : 'geometry_msgs/Point'
-});
-
-move = function (posx, posy) {
-  var Point = new ROSLIB.Message({
-      x: posx,
-      y: posy,
-      z: 0,
-  });
-  joy_publisher.publish(Point);
-}
-
 function manualStart() {
   if(!modeManual) {
     modeManual = true;
