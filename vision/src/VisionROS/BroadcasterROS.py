@@ -15,15 +15,14 @@ except ImportError:
 
 class BroadcasterROS(Broadcaster) :
 
-    positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
-    m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
-
     def __init__(self):
         """
         PuckDetector class's constructor. Initializes, notably, self.positionPublisher and self.m_videoFeedPublisher, that are attributes that
         are used to publish position and video information, respectively
         """
+        self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
         self.m_bridge = CvBridge()
+        self.m_videoFeedPublisher = rospy.Publisher(ROS_PUBLISHER_VIDEO_FEED_TOPIC_NAME, Image, queue_size=10)
 
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
@@ -36,7 +35,7 @@ class BroadcasterROS(Broadcaster) :
         msg.x = i_xPos
         msg.y = i_Ypos
 
-        BroadcasterROS.positionPublisher.publish(msg)
+        self.positionPublisher.publish(msg)
 
     def broadcastVideoOfPuck(self,i_frame):
         """
@@ -46,8 +45,8 @@ class BroadcasterROS(Broadcaster) :
         """
         try:
             frame = self.m_bridge.cv2_to_imgmsg(i_frame, ROS_BRIDGE_ENCODING)
-            BroadcasterROS.m_videoFeedPublisher.publish(frame)
+            self.m_videoFeedPublisher.publish(frame)
 
         except CvBridgeError as e:
             frame = self.m_bridge.cv2_to_imgmsg(i_frame, "mono8")
-            BroadcasterROS.m_videoFeedPublisher.publish(frame)
+            self.m_videoFeedPublisher.publish(frame)

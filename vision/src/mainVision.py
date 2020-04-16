@@ -43,8 +43,8 @@ class MainVision():
         Args:
             i_reconfigure: Bool that specifies if we should reconfigure or not
         """
-        self.stopCurrentPuckDetector()
         builder = PuckDetectorBuilder(self.MODE, 30, i_reconfigure)
+        self.stopCurrentPuckDetector()
         self.puckDetector = builder.build()
         self.puckDetector.findPuck()
 
