@@ -47,7 +47,7 @@ public:
 private: 
 	Strategy * m_pCurrentStrategy;
 	float m_width;
-	float m_height
+	float m_height;
 };
 
 ros::Subscriber _startSubscriber;
@@ -64,7 +64,7 @@ int main(int argc, char*argv[])
 	NewStrategyListener newStrategyListener = NewStrategyListener();
 	_startSubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
 
-	_dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsUpdated", 1000);
+	newStrategyListener._dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsChanged", 1000);
 
 	f = boost::bind(&NewStrategyListener::param_callback, newStrategyListener, _1, _2);
   	server.setCallback(f);

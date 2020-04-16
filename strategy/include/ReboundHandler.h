@@ -11,7 +11,7 @@ class ReboundHandler : public Strategy
 	ReboundHandler(float i_width, float i_height);
 	
 	virtual void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
-	void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes);
+	void initTerrain(float i_width, float i_height);
 	Vector3 linePredict(float A, float B, int dir, Vector2 pos, int iteration);
 	void reception(const geometry_msgs::Point i_puckPos);
 	
