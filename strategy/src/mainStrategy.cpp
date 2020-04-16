@@ -4,7 +4,7 @@
 #include <dynamic_reconfigure/server.h>
 #include <strategy/strategyConfig.h>
 
-void param_callback(strategy::strategyConfig &cfg, uint32_t level);
+//void param_callback(strategy::strategyConfig &cfg, uint32_t level);
 
 const std::string Strategy::FOLLOW_X = "Easy";
 const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
@@ -12,7 +12,8 @@ const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
 class NewStrategyListener
 {
 public:
-	NewStrategyListener():m_pCurrentStrategy(nullptr){};
+	NewStrategyListener():m_pCurrentStrategy(nullptr),m_width(0),m_height(0){};
+	ros::Publisher _dimensionsUpdatedPublisher;
 
 	void callbackStartStrategy(const std_msgs::String::ConstPtr& i_msg)
 	{
@@ -28,16 +29,29 @@ public:
 		
 		else if(i_msg->data == Strategy::FOLLOW_X_WITH_REBOUND)
 		{
-			m_pCurrentStrategy = new FollowXWithReboundHandler();
+			m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
 		}
+	}
+	
+	void param_callback(strategy::strategyConfig &config, uint32_t level) 
+	{
+		m_height = config.table_height;
+		m_width = config.table_width;
+
+		std_msgs::Bool msg;
+		msg.data = true;
+
+		_dimensionsUpdatedPublisher.publish(msg);
 	}
 	
 private: 
 	Strategy * m_pCurrentStrategy;
+	float m_width;
+	float m_height
 };
 
 ros::Subscriber _startSubscriber;
-ros::Publisher _dimensionsUpdatedPublisher;
+
 
 int main(int argc, char*argv[])
 {
@@ -52,17 +66,8 @@ int main(int argc, char*argv[])
 
 	_dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsUpdated", 1000);
 
-	f = boost::bind(&param_callback, _1, _2);
+	f = boost::bind(&NewStrategyListener::param_callback, newStrategyListener, _1, _2);
   	server.setCallback(f);
-
+	
 	ros::spin();
-}
-
-void param_callback(strategy::strategyConfig &config, uint32_t level) {
-	//config.table_width
-	//config.table_height
-	std_msgs::Bool msg;
-	msg.data = true;
-
-	_dimensionsUpdatedPublisher.publish(msg);
 }

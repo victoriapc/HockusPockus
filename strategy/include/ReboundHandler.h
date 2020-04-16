@@ -8,7 +8,7 @@
 class ReboundHandler : public Strategy
 {
   public:
-	ReboundHandler();
+	ReboundHandler(float i_width, float i_height);
 	
 	virtual void predictionToDesiredPosition(Vector2 i_predictedPosition) = 0 ; 
 	void initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes);
@@ -19,7 +19,6 @@ class ReboundHandler : public Strategy
   	ros::NodeHandle n;
 	ros::Subscriber m_subscriberPositionActuellePuck;
 	ros::Publisher  m_publisherPositionDesiree;
-	ros::Subscriber m_subscriberDimensionsTerrain;
 	
   private:
 	static const int LEFT = -1;
