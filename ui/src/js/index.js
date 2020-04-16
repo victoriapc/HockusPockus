@@ -28,14 +28,6 @@ document.addEventListener("DOMContentLoaded", function(){
 /* ------------- Manual Control ------------ */
 /* ----------------------------------------- */
 
-// Publisher
-var joy_publisher = createPublisher("/joy_pos", "geometry_msgs/Point");
-
-move = function (posx, posy) {
-  var Point = createPointMsg(posx, posy);
-  joy_publisher.publish(Point);
-}
-
 function manualStart() {
   if(!modeManual) {
     modeManual = true;
