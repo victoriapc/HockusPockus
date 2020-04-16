@@ -1,17 +1,18 @@
 #ifndef STRATEGY_H  
 #define STRATEGY_H
 
+#include <string>
 #include <math.h>
 #include <ros/ros.h>
 #include <geometry_msgs/Point.h>
 #include <std_msgs/Float32MultiArray.h>
-#include <std_msgs/Int32.h>
+#include <std_msgs/String.h>
 
 class Strategy
 {
   public:
-    static const int FOLLOW_X = 0 ;
-	static const int FOLLOW_X_WITH_REBOUND = 1 ;
+    static const std::string FOLLOW_X;
+    static const std::string FOLLOW_X_WITH_REBOUND;
 };
 
 #endif

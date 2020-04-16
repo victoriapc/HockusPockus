@@ -2,7 +2,7 @@
 /* --------------- VARIABLES --------------- */
 /* ----------------------------------------- */
 
-var n_players;
+var nplayers;
 var names;
 
 /* ----------------------------------------- */
@@ -10,9 +10,9 @@ var names;
 /* ----------------------------------------- */
 
 window.onload = function() {
-    getParamValue(score_goal_limit, displayCurrentGoalLimit);
+    getParamValue(score_goal_limit, displayGoalLimit);
     getParamValue(score_names, displayPlayerRelatedInputs);
-    getParamValue(motor_manual_speed, displayCurrentJoystickSpeed);
+    getParamValue(motor_manual_speed, displayJoystickLimit);
 }
 
 /* ----------------------------------------- */
@@ -20,14 +20,14 @@ window.onload = function() {
 /* ----------------------------------------- */
 
 $(document).on('change', '#nplayers', function() {
-    while($("#nplayers").val() > n_players) {
-        n_players++;
-        addPlayerNameDiv(n_players);
-        displayCurrentPlayerName(getPlayerInputID(n_players), names[n_players - 1]);
+    while($("#nplayers").val() > nplayers) {
+        nplayers++;
+        addPlayerDiv(nplayers);
+        displayPlayerName(getPlayerInputID(nplayers), names[nplayers - 1]);
     }
-    while($("#nplayers").val() < n_players) {
-        removePlayerNameDiv(n_players);
-        n_players--;
+    while($("#nplayers").val() < nplayers) {
+        removePlayerDiv(nplayers);
+        nplayers--;
     }
 })
 
@@ -35,17 +35,17 @@ $(document).on('change', '#nplayers', function() {
 /* --------------- ON SUBMIT --------------- */
 /* ----------------------------------------- */
 
-function onSubmit() {
-    var new_names = createNamesArray(n_players);
+function updateParameters() {
+    var new_names = createNamesArray(nplayers);
+
     updateScoreConfig(concatenateNames(new_names));
-    
     updateMotorConfig();
     alert("Parameters were updated.")
 }
 
-function createNamesArray(n_players) {
+function createNamesArray(nplayers) {
     var names = [];
-    for(i = 1; i <= n_players; i++) {
+    for(i = 1; i <= nplayers; i++) {
         var id = getPlayerInputID(i);
         names[i - 1] = document.getElementById(id).value;
     }
@@ -56,51 +56,51 @@ function createNamesArray(n_players) {
 /* ------------- UPDATE INPUTS ------------- */
 /* ----------------------------------------- */
 
-function displayCurrentGoalLimit(value) {
+function displayGoalLimit(value) {
     $("#ngoals").prop("value", value);
 }
 
-function displayCurrentJoystickSpeed(value) {
-    $("#joystick-speed").prop("value", value);
+function displayJoystickLimit(value) {
+    $("#joystick-limit").prop("value", value);
 }
 
 function displayPlayerRelatedInputs(value) {
     names = splitNames(value);
-    n_players = names.length;
+    nplayers = names.length;
 
-    displayCurrentPlayerLimit(n_players);
-    displayAllPlayersNames(n_players, names);
+    displayPlayerLimit(nplayers);
+    displayAllPlayersNames(nplayers, names);
 }
 
-function displayCurrentPlayerLimit(value) {
+function displayPlayerLimit(value) {
     $("#nplayers").prop("value", value);
 }
 
-function displayAllPlayersNames(n_players, names) {
-    for(i = 1; i <= n_players; i++) {
+function displayAllPlayersNames(nplayers, names) {
+    for(i = 1; i <= nplayers; i++) {
         var id = getPlayerInputID(i);
 
-        addPlayerNameDiv(i);
-        displayCurrentPlayerName(id, names[i - 1]);
+        addPlayerDiv(i);
+        displayPlayerName(id, names[i - 1]);
     }
 }
 
-function displayCurrentPlayerName(id, value) {
+function displayPlayerName(id, value) {
     if(value != undefined) {
         document.getElementById(id).value = value;
     }
 }
 
 /* ----------------------------------------- */
-/* -------------  NAME INPUTS  ------------- */
+/* -------  PLAYER'S DIV INTERACTION  ------ */
 /* ----------------------------------------- */
 
-function addPlayerNameDiv(index) {
-    var html = createPlayerNameHTML(index);
+function addPlayerDiv(index) {
+    var html = createPlayerDivHTML(index);
     $("#name-container").append(html);
 }
 
-function createPlayerNameHTML(index) {
+function createPlayerDivHTML(index) {
     var div_id = getPlayerDivID(index);
     var input_id = getPlayerInputID(index);
 
@@ -111,10 +111,14 @@ function createPlayerNameHTML(index) {
     return html;
 }
 
-function removePlayerNameDiv(index) {
+function removePlayerDiv(index) {
     var id = "#" + getPlayerDivID(index);
     $(id).remove();
 }
+
+/* ----------------------------------------- */
+/* -------------  IDs function  ------------ */
+/* ----------------------------------------- */
 
 function getPlayerDivID(index) {
     return "name_" + index;
@@ -123,4 +127,3 @@ function getPlayerDivID(index) {
 function getPlayerInputID(index) {
     return "name_" + index + "_input";
 }
-

@@ -1,12 +1,15 @@
 #include "FollowX.h"
 #include "FollowXWithReboundHandler.h"
 
+const std::string Strategy::FOLLOW_X = "Easy";
+const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
+
 class NewStrategyListener
 {
 public:
 	NewStrategyListener():m_pCurrentStrategy(nullptr){};
-	
-	void callbackStartStrategy(const std_msgs::Int32::ConstPtr& i_msg)
+
+	void callbackStartStrategy(const std_msgs::String::ConstPtr& i_msg)
 	{
 		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
 		{

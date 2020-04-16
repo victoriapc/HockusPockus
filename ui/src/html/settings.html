@@ -9,8 +9,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 	<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-	<script type="text/javascript" src="../js/parameter_server.js"></script>
-	<script type="text/javascript" src="../js/dynamic_reconfigure.js"></script>
+	<script type="text/javascript" src="../js/ros/ros.js"></script>
+	<script type="text/javascript" src="../js/ros/parameter_server.js"></script>
+	<script type="text/javascript" src="../js/ros/dynamic_reconfigure.js"></script>
 	<script type="text/javascript" src="../js/settings.js"></script>
 </head>
 <body>
@@ -53,24 +54,28 @@
 	<!-- Page Content -->
 	<main>
 		<h1>Settings</h1>
-		<p>Adjust the game parameters, like the score limit or the number of players. You can also choose the name of each player.</p>
-		<form class="inputs">
+		&nbsp;&nbsp;
+		<div class="text">
+			<p>Adjust the game parameters, like the score limit or the number of players. You can also choose the name of each player.</p>
+		</div>
+		&nbsp;
+		<form class="inputs" onsubmit="updateParameters()">
 			<div class="goals">
 				<label>Max goals :</label>
-				<input id="ngoals" type="number" min="1" max="15">
+				<input id="ngoals" type="number" min="1" max="15" required>
 			</div>
 			<div class="players">
 				<label>Number of players (excluding the robot) :</label>
-				<input id="nplayers" type="number" min="1" max="4">
+				<input id="nplayers" type="number" min="1" max="4" required>
 				<div id="name-container" class="players-names">
 					
 				</div>
 			</div>
 			<div class="joystick">
 				<label>Joystick control maximum speed (10 being the fastest) :</label>
-				<input id="joystick-speed" type="number" min="1" max="10">
+				<input id="joystick-limit" type="number" min="1" max="10" required>
 			</div>
-			<input type="submit" id="submit" class="btn" value="Apply changes" onclick="onSubmit()"></input>
+			<input type="submit" id="submit" class="btn" value="Apply changes"></input>
 		</form>
 	</main>
 </body>

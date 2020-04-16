@@ -4,6 +4,9 @@ from std_msgs.msg import Bool
 from VisionPuckDetector.PuckDetectorBuilder import PuckDetectorBuilder
 from VisionROS.ROS_CONSTANTS import *
 
+from PyQt5.QtWidgets import QApplication
+import sys
+
 class MainVision():
     def __init__(self):
         """
@@ -24,7 +27,8 @@ class MainVision():
         """
         if self.puckDetector != None:
             self.puckDetector.userWantsToQuit()
-
+            self.puckDetector = None
+            
     def reconfigureCallBack(self, i_reconfigure):
         """
         Called on a reconfigure request by the webApp
@@ -46,5 +50,6 @@ class MainVision():
 
 # Main
 if __name__ == "__main__" :
+    app = QApplication(sys.argv)
     mainV = MainVision()
     rospy.spin()

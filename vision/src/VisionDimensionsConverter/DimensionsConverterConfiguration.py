@@ -71,21 +71,13 @@ class DimensionsConverterConfiguration(DimensionsConverterCore):
         """
         Compares the values of the sides in pixels to those in meters in order to compute the Pixel To Meters Ratio
         """
-        LEFT = 0
-        TOP = 1
-        RIGHT = 2
-        BOTTOM = 3
-        NUMBER_OF_SIDES = 4
+        ORIGIN = 0
+        TOP_RIGHT = 1
 
-        print(self.m_edges)
+        height = abs(self.m_edges[TOP_RIGHT][DimensionsConverterCore.Y] - self.m_edges[ORIGIN][DimensionsConverterCore.Y])
+        width = abs(self.m_edges[TOP_RIGHT][DimensionsConverterCore.X] - self.m_edges[ORIGIN][DimensionsConverterCore.X])
 
-        leftSide = abs(self.m_edges[TOP][DimensionsConverterCore.Y] - self.m_edges[LEFT][DimensionsConverterCore.Y])
-        topSide = abs(self.m_edges[TOP][DimensionsConverterCore.X] - self.m_edges[RIGHT][DimensionsConverterCore.X])
-        rightSide = abs(self.m_edges[RIGHT][DimensionsConverterCore.Y] - self.m_edges[BOTTOM][DimensionsConverterCore.Y])
-        bottomSide = abs(self.m_edges[LEFT][DimensionsConverterCore.X] - self.m_edges[BOTTOM][DimensionsConverterCore.X])
-
-        self.m_pixelToMetersRatio = (self.m_sidesDimensions.getLeft()/leftSide) + (self.m_sidesDimensions.getTop()/topSide) + (self.m_sidesDimensions.getRight()/rightSide) + (self.m_sidesDimensions.getBottom()/bottomSide)
-        self.m_pixelToMetersRatio = self.m_pixelToMetersRatio/NUMBER_OF_SIDES
+        self.m_pixelToMetersRatio = ((self.m_sidesDimensions.getHeight()/height) + (self.m_sidesDimensions.getWidth()/width) )/2 # average
 
     def DisplayEdges(self):
         """

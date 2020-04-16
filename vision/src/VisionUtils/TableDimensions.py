@@ -1,34 +1,20 @@
 class TableDimensions(object):
-    LEFT = 0
-    TOP = 1
-    RIGHT = 2
-    BOTTOM = 3
+    HEIGHT = 0
+    WIDTH = 1
     def __init__(self):
         self.sides = [0,0,0,0]
 
-    def getLeft(self):
-        return self.getSide(TableDimensions.LEFT)
+    def getHeight(self):
+        return self.getSide(TableDimensions.HEIGHT)
 
-    def getTop(self):
-        return self.getSide(TableDimensions.TOP)
+    def getWidth(self):
+        return self.getSide(TableDimensions.WIDTH)
 
-    def getRight(self):
-        return self.getSide(TableDimensions.RIGHT)
+    def setHeight(self,i_value):
+        self.setSide(TableDimensions.HEIGHT,i_value)
 
-    def getBottom(self):
-        return self.getSide(TableDimensions.BOTTOM)
-
-    def setLeft(self,i_value):
-        self.setSide(TableDimensions.LEFT,i_value)
-
-    def setTop(self,i_value):
-        self.setSide(TableDimensions.TOP,i_value)
-
-    def setRight(self,i_value):
-        self.setSide(TableDimensions.RIGHT,i_value)
-
-    def setBottom(self,i_value):
-        self.setSide(TableDimensions.BOTTOM,i_value)
+    def setWidth(self,i_value):
+        self.setSide(TableDimensions.WIDTH,i_value)
 
     def getSide(self,i_sideIndex):
         return self.sides[i_sideIndex]

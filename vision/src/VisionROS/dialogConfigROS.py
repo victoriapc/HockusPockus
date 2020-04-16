@@ -25,9 +25,7 @@ class RadiusConfigSubscriber:
         self.m_radiusSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_RADIUS_TOPIC_NAME, Int32, self.update_Radius)
         self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
 
-        thread = threading.Thread(target=self.m_config.DisplayRadius)
-        thread.daemon = True
-        thread.start()
+        self.m_config.DisplayRadius()
 
     def okPressed(self, i_apply):
         """
@@ -69,9 +67,7 @@ class HSVConfigSubscriber:
         self.m_SSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_S_TOPIC_NAME, Int32, self.update_S)
         self.m_VSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_V_TOPIC_NAME, Int32, self.update_V)
 
-        thread = threading.Thread(target=self.m_config.SetConfiguration)
-        thread.daemon = True
-        thread.start()
+        self.m_config.SetConfiguration()
 
     def publishCurrentValues(self):
         msg = Int32()
@@ -122,3 +118,46 @@ class HSVConfigSubscriber:
         V value in the PuckDetectorConfiguration object
         """
         self.m_config.SetHValue(i_V.data)
+
+class DimensionsConverterConfigSubscriber:
+    def __init__(self,i_DimensionsConverterConfiguration):
+        """
+        dialog_config_DimensionsConverter class's constructor. Initializes, notably, the ROS subscriber that is used to get the values
+        of the edges (in pixels and in meters)
+        Args:
+            i_config: A pointer to a PuckDetectorConfiguration object
+        """
+
+        self.m_DimensionsConverterConfiguration = i_DimensionsConverterConfiguration
+
+        self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
+        self.m_resetSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_RESET_TOPIC_NAME, Bool, self.retryPressed)
+        self.m_tableDimensionsSubscriber = rospy.Subscriber(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, self.onTableDimensionsChanges)
+
+        self.m_DimensionsConverterConfiguration.DisplayEdges()
+
+    def onTableDimensionsChanges(self, i_msg):
+        """
+        Specifies what should happen when the table dimensions are changed : setSidesDimensions() and computePixelToMetersRatio()
+        should be called with the new values
+        """
+        tableDimensions = TableDimensions()
+        tableDimensions.setHeight(i_msg.data[0])
+        tableDimensions.setWidth(i_msg.data[1])
+
+        self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
+        self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
+
+    def retryPressed(self):
+        """
+        Specifies what should happen when the "Retry" button of the GUI is pressed : it should remove all edges that
+        were selected
+        """
+        self.m_DimensionsConverterConfiguration.resetEdges()
+
+    def okPressed(self, i_apply):
+        """
+        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayEdges() thread dies
+        """
+        if i_apply.data:
+            self.m_DimensionsConverterConfiguration.userWantsToQuit()

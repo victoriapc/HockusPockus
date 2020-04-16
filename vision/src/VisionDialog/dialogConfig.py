@@ -178,10 +178,8 @@ class dialog_config_DimensionsConverter(QDialog, Ui_Dialog_DimensionsConverter):
         self.m_DimensionsConverterConfiguration.userWantsToQuit()
 
         tableDimensions = TableDimensions()
-        tableDimensions.setLeft(self.doubleSpinBox_LeftSide.value())
-        tableDimensions.setTop(self.doubleSpinBox_TopSide.value())
-        tableDimensions.setRight(self.doubleSpinBox_RightSide.value())
-        tableDimensions.setBottom(self.doubleSpinBox_BottomSide.value())
+        tableDimensions.setHeight(self.doubleSpinBox_Height.value())
+        tableDimensions.setWidth(self.doubleSpinBox_Width.value())
 
         self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
         self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()

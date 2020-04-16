@@ -9,7 +9,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="../js/ros/ros.js"></script>
+	<script type="text/javascript" src="../js/ros/parameter_server.js"></script>
 	<script type="text/javascript" src="../js/webcam.js"></script>
+
 </head>
 <body>
 	<!-- Basic WebApp Structure -->
@@ -58,19 +61,33 @@
 				<p>Reconfigure the vision parameters</p>
 				<button class="btn" onclick="step_2()">Start</button>
 			</div>
+			<!-- Click on the corners -->
+			<form id="corners" class="card-top" onsubmit="step_3(); return false;">
+				<div class="card-top-header">Step 2</div>
+				<p>Click on the mecanism's corners</p>
+				<div class="spinner-container">
+					<label>Width:  </label>
+					<input class="spinner" type="number" min="0" max="1" step="0.01" value="0" required>
+				</div>
+				<div class="spinner-container">
+					<label>Height:  </label>
+					<input class="spinner" type="number" min="0" max="1" step="0.01" value="0" required>
+				</div>
+				<input type="submit" class="btn" value="Next"></button>
+			</form>
 			<!-- Adjust the radius -->
 			<div id="radius" class="card-top">
-				<div class="card-top-header">Step 2</div>
+				<div class="card-top-header">Step 3</div>
 				<p>Adjust the radius to fit the puck</p>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateR()" class="slider" id="r">
 					<p class="p-slider">R: <span id="r_text"></span></p>
 				</div>
-				<button class="btn" onclick="step_3()">Enter</button>
+				<button class="btn" onclick="step_4()">Enter</button>
 			</div>
 			<!-- Adjust the HSV values -->
 			<div id="hsv" class="card-top">
-				<div class="card-top-header">Step 3</div>
+				<div class="card-top-header">Step 4</div>
 				<p>Adjust the HSV values</p>
 				<div class="slider-container">
 					<input type="range" min="1" max="100" value="50" oninput="updateH()" class="slider" id="h">
@@ -84,23 +101,16 @@
 					<input type="range" min="1" max="100" value="50" oninput="updateV()" class="slider" id="v">
 					<p class="p-slider">V: <span id="v_text"></span></p>
 				</div>
-				<button class="btn" onclick="step_4()">Enter</button>
-			</div>
-			<!-- Apply the changes -->
-			<div id="apply" class="card-top">
-				<div class="card-top-header">Step 4</div>
-				<p>Apply the changes</p>
 				<button class="btn" onclick="step_1()">Apply</button>
 			</div>
 		</div>
 		<div class="bottom-row">
 			<div class="card-bottom">
 				<div class="card-bottom-header">Video</div>
-				<!--img src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_output" width="100%" height="100%"></img-->
-				<img src="../resources/github.png" width="200px" height="200px"></img>
+				<img id="video" src="http://0.0.0.0:7070/stream?topic=/usb_cam/image_raw"></img>
+				<!--img id="video" src="../resources/github.png"></img-->
 			</div>
 		</div>
 	</main>
-
 </body>
 </html>
