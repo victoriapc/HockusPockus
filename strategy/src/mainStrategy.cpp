@@ -13,7 +13,7 @@ const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
 class NewStrategyListener
 {
 public:
-	NewStrategyListener():m_pCurrentStrategy(nullptr){};
+	NewStrategyListener():m_pCurrentStrategy(nullptr),m_width(0),m_height(0){};
 
 	void callbackStartStrategy(const std_msgs::String::ConstPtr& i_msg)
 	{
@@ -29,12 +29,20 @@ public:
 		
 		else if(i_msg->data == Strategy::FOLLOW_X_WITH_REBOUND)
 		{
-			m_pCurrentStrategy = new FollowXWithReboundHandler();
+			m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
 		}
+	}
+	
+	void param_callback(strategy::strategyConfig &config, uint32_t level) 
+	{
+	  m_height = config.table_height;
+	  m_width = config.table_width;
 	}
 	
 private: 
 	Strategy * m_pCurrentStrategy;
+	float m_width;
+	float m_height
 };
 
 ros::Subscriber _startSubscriber;
@@ -47,16 +55,11 @@ int main(int argc, char*argv[])
 	dynamic_reconfigure::Server<strategy::strategyConfig> server;
   	dynamic_reconfigure::Server<strategy::strategyConfig>::CallbackType f;
 
-	f = boost::bind(&param_callback, _1, _2);
-  	server.setCallback(f);
-
 	NewStrategyListener newStrategyListener = NewStrategyListener();
 	_startSubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
 
+	f = boost::bind(&NewStrategyListener::param_callback, newStrategyListener, _1, _2);
+  	server.setCallback(f);
+	
 	ros::spin();
-}
-
-void param_callback(strategy::strategyConfig &config, uint32_t level) {
-  ROS_INFO("Reconfigure Request: %lf", config.table_height);
-  ROS_INFO("Reconfigure Request: %lf", config.table_width);
 }

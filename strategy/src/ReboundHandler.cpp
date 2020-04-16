@@ -1,22 +1,22 @@
 #include "ReboundHandler.h"
 
 
-ReboundHandler::ReboundHandler():
-	m_subscriberDimensionsTerrain(n.subscribe("/table_dimensions", 1000, &ReboundHandler::initTerrain,this)),
+ReboundHandler::ReboundHandler(float i_width, float i_height):
 	m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this)),
 	m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000))
 {
+	initTerrain(i_width, i_height);
 }
 		
-void ReboundHandler::initTerrain(const std_msgs::Float32MultiArray i_dimensionsCotes)
+void ReboundHandler::initTerrain(float i_width, float i_height)
 {
 	map.BasGauche.X = 0 ; 
 	map.BasGauche.Y = 0 ; 
 	
 	map.HautGauche.X = map.BasGauche.X; 
-	map.HautGauche.Y = i_dimensionsCotes.data[0];
+	map.HautGauche.Y = i_height;
 	
-	map.HautDroite.X = i_dimensionsCotes.data[1];
+	map.HautDroite.X = i_width;
 	map.HautDroite.Y = map.HautGauche.Y;
 	
 	map.BasDroite.X = map.HautDroite.X;
