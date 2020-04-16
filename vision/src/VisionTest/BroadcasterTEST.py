@@ -22,12 +22,3 @@ class BroadcasterTEST(Broadcaster) :
         """
         cv2.imwrite("VisionTest\outputFrames\Outframe%d.jpg" % self.m_currentFrame, i_frame)
         self.m_currentFrame += 1
-
-
-    def broadCastTableDimensions(self,i_tableDimensions):
-        """
-        This implementation does nothing, as the USB implementation does not need to brodcast this information
-        Args:
-            i_tableDimensions: The table dimensions
-        """
-        pass

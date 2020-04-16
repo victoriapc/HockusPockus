@@ -21,8 +21,7 @@ class MinimalistBroadcasterROS(Broadcaster) :
         publishs the position of the puck
         """
         self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
-        self.m_tableDimensionsPublisher = rospy.Publisher(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, queue_size=10)
-        
+
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
         Broadcasts informations relatives to the position of the puck
@@ -41,14 +40,3 @@ class MinimalistBroadcasterROS(Broadcaster) :
         Does nothing
         """
         pass
-
-
-    def broadCastTableDimensions(self,i_tableDimensions):
-        """
-        Abstract method, implementation of this method is supposed to broadcast the table dimensions
-        Args:
-            i_tableDimensions: The table dimensions
-        """
-        msg = Float32MultiArray()
-        msg.data = [i_tableDimensions.getHeight(),i_tableDimensions.getWidth()]
-        self.m_tableDimensionsPublisher.publish(msg)

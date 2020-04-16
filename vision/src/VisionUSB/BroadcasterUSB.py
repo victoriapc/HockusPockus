@@ -21,12 +21,3 @@ class BroadcasterUSB(Broadcaster) :
             i_frame: The altered frame to publish
         """
         cv2.imshow(self.m_windowName, i_frame)
-
-
-    def broadCastTableDimensions(self,i_tableDimensions):
-        """
-        This implementation does nothing, as the USB implementation does not need to brodcast this information
-        Args:
-            i_tableDimensions: The table dimensions
-        """
-        pass

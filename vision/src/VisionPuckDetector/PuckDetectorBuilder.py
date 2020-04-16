@@ -119,7 +119,6 @@ class PuckDetectorBuilder(object):
                 configData['radius'] = puckDetectorConfigurator.m_radius
                 pickle.dump(configData, file)
 
-        self.m_broadcaster.broadCastTableDimensions(configData['tableDimensions'])
         dimensionsConverter = DimensionsConverter(configData['pixelToMetersRatio'],configData['edges'])
 
         return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,self.m_broadcaster,dimensionsConverter)

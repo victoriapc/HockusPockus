@@ -17,11 +17,3 @@ class Broadcaster(object):
             i_frame: The altered frame to publish
         """
         pass
-
-    def broadCastTableDimensions(self,i_tableDimensions):
-        """
-        Abstract method, implementation of this method is supposed to broadcast the table dimensions
-        Args:
-            i_tableDimensions: The table dimensions
-        """
-        pass

@@ -131,9 +131,8 @@ class DimensionsConverterConfigSubscriber:
 
         self.m_DimensionsConverterConfiguration = i_DimensionsConverterConfiguration
 
-        self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
         self.m_resetSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_RESET_TOPIC_NAME, Bool, self.retryPressed)
-        self.m_tableDimensionsSubscriber = rospy.Subscriber(ROS_PUBLISHER_TABLE_DIMENSIONS_TOPIC_NAME, Float32MultiArray, self.onTableDimensionsChanges)
+        self.m_tableDimensionsSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_TABLE_CHANGED_TOPIC_NAME, Bool, self.onTableDimensionsChanges)
 
         self.m_DimensionsConverterConfiguration.DisplayEdges()
 
@@ -142,9 +141,12 @@ class DimensionsConverterConfigSubscriber:
         Specifies what should happen when the table dimensions are changed : setSidesDimensions() and computePixelToMetersRatio()
         should be called with the new values
         """
+        self.m_DimensionsConverterConfiguration.userWantsToQuit()
+
         tableDimensions = TableDimensions()
-        tableDimensions.setHeight(i_msg.data[0])
-        tableDimensions.setWidth(i_msg.data[1])
+
+        tableDimensions.setHeight(rospy.get_param(ROS_TABLE_DIMENSIONS_HEIGHT_TOPIC_NAME))
+        tableDimensions.setWidth(rospy.get_param(ROS_TABLE_DIMENSIONS_WIDTH_TOPIC_NAME))
 
         self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
         self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
@@ -155,10 +157,3 @@ class DimensionsConverterConfigSubscriber:
         were selected
         """
         self.m_DimensionsConverterConfiguration.resetEdges()
-
-    def okPressed(self, i_apply):
-        """
-        Calls the userWantsToQuit() method of the PuckDetectorConfiguration object, so that the DisplayEdges() thread dies
-        """
-        if i_apply.data:
-            self.m_DimensionsConverterConfiguration.userWantsToQuit()
