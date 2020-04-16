@@ -42,7 +42,7 @@ class PuckDetectorBuilder(object):
     MINIMALIST_ROS = 2
     TEST = 3
 
-    def __init__(self, i_mode,i_FPS, i_reconfigure = False):
+    def __init__(self, i_mode,i_FPS):
         """
         PuckDetectorBuilder class's constructor. Initializes, notably, self.m_camera a
         pointer to a concrete implementation of the abstract base class Camera
@@ -55,7 +55,6 @@ class PuckDetectorBuilder(object):
         self.m_mouseEventHandler = None
         self.m_mode = i_mode
         self.m_path = ""
-        self.m_reconfigure = i_reconfigure
 
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
@@ -89,7 +88,7 @@ class PuckDetectorBuilder(object):
         self.m_path = self.m_path + '/config.json'
 
 
-    def build(self):
+    def build(self, i_reconfigure = False):
         """
         Builds a PuckDetector object. Tries to find configurations values from a file. It if succeeds, it initializes
         the PuckDetector object with these values. Otherwise, it begins the configuration process with the PuckDetectorConfiguration class
@@ -97,7 +96,7 @@ class PuckDetectorBuilder(object):
             The newly created PuckDetector object
         """
 
-        if os.path.isfile(self.m_path) and not self.m_reconfigure:
+        if os.path.isfile(self.m_path) and not i_reconfigure:
             with open(self.m_path, 'rb') as file:
                 configData = pickle.load(file)
         else:
