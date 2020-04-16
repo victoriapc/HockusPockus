@@ -16,7 +16,6 @@ class MainVision():
         rospy.on_shutdown(self.stopCurrentPuckDetector)
 
         self.puckDetector = None
-        self.builder = PuckDetectorBuilder(self.MODE, 30)
         self.MODE = PuckDetectorBuilder.ROS
         self.m_reconfigureSubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_START_TOPIC_NAME, Bool, self.reconfigureCallBack)
 
@@ -45,7 +44,8 @@ class MainVision():
             i_reconfigure: Bool that specifies if we should reconfigure or not
         """
         self.stopCurrentPuckDetector()
-        self.puckDetector = self.builder.build(i_reconfigure)
+        builder = PuckDetectorBuilder(self.MODE, 30, i_reconfigure)
+        self.puckDetector = builder.build()
         self.puckDetector.findPuck()
 
 # Main
