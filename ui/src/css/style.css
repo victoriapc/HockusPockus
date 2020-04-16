@@ -181,7 +181,7 @@ main h1 {
 }
 
 .info-container {
-	font-size: small;
+	font-size: 17.5px;
 	width: 80%;
 	margin-top: 1%;
 	display: flex;
@@ -420,10 +420,8 @@ main h1 {
 	flex-direction: column;
 	font-size: large;
 	font-weight: bold;
-	margin-left: 2%;
-}
-.players {
-	margin-top: 1%;
+	margin-left: 1.3%;
+	margin-bottom: 2%;
 }
 
 .players-names-item {
@@ -432,7 +430,7 @@ main h1 {
 }
 
 .joystick {
-	margin-bottom: 1vh;
+	margin-bottom: 3vh;
 }
 
 .inputs .btn {
@@ -448,6 +446,12 @@ main h1 {
 	border-color: #a9a9a9;
 }
 
+.text {
+	display: flex;
+	flex-direction: column;
+	margin-left: 1%;
+}
+
 /* ----------------------------------------- */
 /* -------- RULES.HTML SPECIFIC CSS -------- */
 /* ----------------------------------------- */
@@ -456,4 +460,5 @@ main h1 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-top: 5rem;
 }
