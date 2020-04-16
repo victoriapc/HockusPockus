@@ -59,7 +59,7 @@ class PuckDetectorBuilder(object):
 
         if self.m_mode == PuckDetectorBuilder.ROS:
             self.m_camera = CameraROS(i_FPS)
-            self.m_broadcaster = BroadcasterROS("/usb_cam/image_output_config") # TEMP, for debug
+            self.m_broadcaster = BroadcasterROS()
             self.dimensionsConverterConfigurator = DimensionsConverterConfiguration(self.m_camera,self.m_broadcaster)
             self.m_mouseEventHandler = MouseEventHandlerROS(self.dimensionsConverterConfigurator)
             self.m_path = rospy.get_param(ROS_CONFIG_FILE_PATH)
@@ -122,7 +122,7 @@ class PuckDetectorBuilder(object):
         self.m_broadcaster.broadCastTableDimensions(configData['tableDimensions'])
         dimensionsConverter = DimensionsConverter(configData['pixelToMetersRatio'],configData['edges'])
 
-        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,BroadcasterROS(),dimensionsConverter) # TEMP, for debug
+        return PuckDetector(configData["lowerColor"], configData["upperColor"], configData["radius"],self.m_camera,self.m_broadcaster,dimensionsConverter)
 
     def executeROSConfigGUI(self,i_puckDetectorConfigurator):
         """
