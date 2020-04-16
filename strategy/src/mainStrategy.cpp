@@ -6,7 +6,6 @@
 
 void param_callback(strategy::strategyConfig &cfg, uint32_t level);
 
-
 const std::string Strategy::FOLLOW_X = "Easy";
 const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
 
@@ -38,6 +37,7 @@ private:
 };
 
 ros::Subscriber _startSubscriber;
+ros::Publisher _dimensionsUpdatedPublisher;
 
 int main(int argc, char*argv[])
 {
@@ -47,16 +47,22 @@ int main(int argc, char*argv[])
 	dynamic_reconfigure::Server<strategy::strategyConfig> server;
   	dynamic_reconfigure::Server<strategy::strategyConfig>::CallbackType f;
 
-	f = boost::bind(&param_callback, _1, _2);
-  	server.setCallback(f);
-
 	NewStrategyListener newStrategyListener = NewStrategyListener();
 	_startSubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
+
+	_dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsUpdated", 1000);
+
+	f = boost::bind(&param_callback, _1, _2);
+  	server.setCallback(f);
 
 	ros::spin();
 }
 
 void param_callback(strategy::strategyConfig &config, uint32_t level) {
-  ROS_INFO("Reconfigure Request: %lf", config.table_height);
-  ROS_INFO("Reconfigure Request: %lf", config.table_width);
+	//config.table_width
+	//config.table_height
+	std_msgs::Bool msg;
+	msg.data = true;
+
+	_dimensionsUpdatedPublisher.publish(msg);
 }

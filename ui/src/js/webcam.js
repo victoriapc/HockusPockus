@@ -184,10 +184,8 @@ function stopListeningToClicks() {
 function manageCoordinate(event, obj) {
     var x = (event.pageX - obj.offsetLeft)*width_ratio;
     var y = (event.pageY - obj.offsetTop)*height_ratio;
-
-    console.log(y);
     
-    publishCoordinate(x, nclicks*50);
+    publishCoordinate(x, y);
     nclicks++;
 
     if(nclicks == 1) {
