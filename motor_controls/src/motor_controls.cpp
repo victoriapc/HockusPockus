@@ -95,9 +95,6 @@ int main(int argc, char*argv[])
 void *control(void* argc)
 {
     while(1){
-        desired_posx = joyx + current_posx;	
-		desired_posy = joyy + current_posy;
-
         if (desired_posx != current_posx){
         
 		    if (desired_posx > current_posx + OFFSET){
@@ -258,11 +255,11 @@ void control_callback(const geometry_msgs::Point desired_pos){
 void joy_callback(const geometry_msgs::Point joy_pos){
 	joyx = speed_ratio*joy_pos.x;
 	joyy = speed_ratio*joy_pos.y;
-	// desired_posx = joy_pos.x + current_posx;	
-	// desired_posy = joy_pos.y + current_posy;
-	// des_point.x = desired_posx;
-	// des_point.y = desired_posy;
-	// desired_pub.publish(des_point);
+	desired_posx = joyx + current_posx;	
+	desired_posy = joyy + current_posy;
+	des_point.x = desired_posx;
+	des_point.y = desired_posy;
+	desired_pub.publish(des_point);
 }
 
 void param_callback(motor_controls::motorConfig &config, uint32_t level) {

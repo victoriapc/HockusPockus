@@ -6,6 +6,7 @@ const HARD = "Hard";
 // Game parameters
 var names;
 
+
 // Publishers
 var start_game_pub = createPublisher('/game/start_game', 'std_msgs/Bool');
 var strategy_mode_pub = createPublisher('strategy_mode', 'std_msgs/String');
@@ -93,3 +94,15 @@ function stopGame() {
 }
 
 // Update Score
+var score_subscriber = createSubscriber("scores", "std_msgs/String");
+score_subscriber.subscribe(function(message) {
+    updateScore(message);
+});
+
+function updateScore(message) {
+    
+}
+
+function updateRobotScore(val) {
+    
+}
