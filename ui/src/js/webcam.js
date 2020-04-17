@@ -24,6 +24,7 @@ var h_pub = createPublisher('/vision/reconfigure/h', 'std_msgs/Int32');
 var s_pub = createPublisher('/vision/reconfigure/s', 'std_msgs/Int32');
 var v_pub = createPublisher('/vision/reconfigure/v', 'std_msgs/Int32');
 var apply_pub = createPublisher('/vision/reconfigure/apply', 'std_msgs/Bool');
+var reset_pub = createPublisher('/vision/reconfigure/resetHSV', 'std_msgs/Bool');
 
 // HSV values subscriber
 var h_sub = createSubscriber('/vision/reconfigure/h', 'std_msgs/Int32');
@@ -31,7 +32,6 @@ var s_sub = createSubscriber('/vision/reconfigure/s', 'std_msgs/Int32');
 var v_sub = createSubscriber('/vision/reconfigure/v', 'std_msgs/Int32');
 
 h_sub.subscribe(function(message) {
-    console.log(message.data);
     h_proposed = message.data;
     h_slider.value = h_proposed;
     h_text.innerHTML = h_proposed;
@@ -104,7 +104,7 @@ function step_2() {
     $("#start").addClass("disabled");
     $("#corners").removeClass("disabled");
 
-    alert("Click on the bottom left corner.")
+    alert("Click on the top left corner.")
 }
 
 function step_3() {
@@ -124,14 +124,8 @@ function step_4() {
 }
 
 function resetHSV() {
-    h_slider.value = h_proposed;
-    h_text.innerHTML = h_proposed;
-
-    s_slider.value = s_proposed;
-    s_text.innerHTML = s_proposed;
-
-    v_slider.value = v_proposed;
-    v_text.innerHTML = v_proposed;
+    var reset_msg = createBoolMsg(true);
+    reset_pub.publish(reset_msg);
 }
 
 function apply() {
@@ -233,7 +227,7 @@ function manageCoordinate(event, obj) {
     nclicks++;
 
     if(nclicks == 1) {
-        alert("Click on the top-rigth corner.");
+        alert("Click on the bottom-rigth corner.");
     }
 
     if(nclicks == 2) {
