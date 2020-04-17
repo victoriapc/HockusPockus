@@ -15,22 +15,28 @@ public:
 	NewStrategyListener():m_pCurrentStrategy(nullptr),m_width(0),m_height(0){};
 	ros::Publisher _dimensionsUpdatedPublisher;
 
-	void callbackStartStrategy(const std_msgs::String::ConstPtr& i_msg)
+	void callbackStartStrategy(const std_msgs::Bool::ConstPtr& i_msg)
 	{
 		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
 		{
 			delete m_pCurrentStrategy;
 		}
 		
-		if(i_msg->data == Strategy::FOLLOW_X)
-		{
-			m_pCurrentStrategy = new FollowX();
-		}
-		
-		else if(i_msg->data == Strategy::FOLLOW_X_WITH_REBOUND)
-		{
-			m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
-		}
+		if (i_msg->data)
+			if(m_sCurrentStrategy == Strategy::FOLLOW_X)
+			{
+				m_pCurrentStrategy = new FollowX();
+			}
+			
+			else if(m_sCurrentStrategy == Strategy::FOLLOW_X_WITH_REBOUND)
+			{
+				m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
+			}
+	}
+	
+	void callbackSetStrategy(const std_msgs::String::ConstPtr& i_msg)
+	{
+		m_sCurrentStrategy = i_msg.data;
 	}
 	
 	void param_callback(strategy::strategyConfig &config, uint32_t level) 
@@ -46,12 +52,13 @@ public:
 	
 private: 
 	Strategy * m_pCurrentStrategy;
+	std::string m_sCurrentStrategy;
 	float m_width;
 	float m_height;
 };
 
+ros::Subscriber _setStrategySubscriber;
 ros::Subscriber _startSubscriber;
-
 
 int main(int argc, char*argv[])
 {
@@ -62,7 +69,8 @@ int main(int argc, char*argv[])
   	dynamic_reconfigure::Server<strategy::strategyConfig>::CallbackType f;
 
 	NewStrategyListener newStrategyListener = NewStrategyListener();
-	_startSubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
+	_setStrategySubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackSetStrategy, &newStrategyListener);
+	_startSubscriber = n.subscribe("/game/start_game", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
 
 	newStrategyListener._dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsChanged", 1000);
 
