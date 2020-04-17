@@ -52,7 +52,6 @@ class PuckDetector(PuckDetectorCore) :
         """
         if self.newInfo :
             self.displayCirclesOnFrame(i_frame,self.xPosInPixels, self.yPosInPixels,self.m_radius)
-            self.displayCirclesPositionOnFrame(i_frame,self.xPosInMeters, self.yPosInMeters)
             self.newInfo = False
         self.m_broadcaster.broadcastVideoOfPuck(i_frame)
 
