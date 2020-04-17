@@ -2,8 +2,7 @@
 
 
 ReboundHandler::ReboundHandler(float i_width, float i_height):
-	m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this)),
-	m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000))
+	m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this))
 {
 	initTerrain(i_width, i_height);
 }

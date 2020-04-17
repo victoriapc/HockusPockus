@@ -16,9 +16,7 @@ class ReboundHandler : public Strategy
 	void reception(const geometry_msgs::Point i_puckPos);
 	
   protected:
-  	ros::NodeHandle n;
 	ros::Subscriber m_subscriberPositionActuellePuck;
-	ros::Publisher  m_publisherPositionDesiree;
 	
   private:
 	static const int LEFT = -1;
