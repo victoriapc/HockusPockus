@@ -6,9 +6,9 @@ const HARD = "Hard";
 // Game parameters
 var names;
 
-
 // Publishers
 var start_game_pub = createPublisher('/game/start_game', 'std_msgs/Bool');
+var stop_game_pub = createPublisher('/game/pause_game', 'std_msgs/Bool');
 var strategy_mode_pub = createPublisher('/strategy_mode', 'std_msgs/String');
 
 // Create game
@@ -75,11 +75,17 @@ function startGame() {
     var start_game_msg = createBoolMsg(true);
     start_game_pub.publish(start_game_msg);
 
+    var stop_game_msg = createBoolMsg(false);
+    stop_game_pub.publish(stop_game_msg);
+
     $("#start_game").addClass("disabled");
     $("#pause_game").removeClass("disabled");
 }
 
 function pauseGame() {
+    var stop_game_msg = createBoolMsg(true);
+    stop_game_pub.publish(stop_game_msg);
+
     $("#start_game").removeClass("disabled");
     $("#pause_game").addClass("disabled");
 }
@@ -88,6 +94,9 @@ function stopGame() {
     var start_game_msg = createBoolMsg(false);
     start_game_pub.publish(start_game_msg);
 
+    var stop_game_msg = createBoolMsg(true);
+    stop_game_pub.publish(stop_game_msg);
+    
     updateGameContent(home_content);
     $("#manual").removeClass("disabled");
     $("#new_game").removeClass("disabled");

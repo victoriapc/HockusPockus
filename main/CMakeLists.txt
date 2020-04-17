@@ -5,7 +5,6 @@ find_package(catkin REQUIRED COMPONENTS
   webcam
   ui
   vision
-  motor_controls
   score
   simulation
 )
