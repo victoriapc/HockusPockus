@@ -100,6 +100,13 @@ score_subscriber.subscribe(function(message) {
 });
 
 function updateScore(message) {
+    var dict = createDictionnaryFromString(message);
+    for(i = 0; i < names.length; i++) {
+        addPlayerDiv(i + 1, names[i]);
+    }
+}
+
+function createDictionnaryFromString(string) {
     
 }
 

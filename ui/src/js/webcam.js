@@ -5,10 +5,15 @@ var radius_text = null;
 // HSV
 var h_slider = null;
 var h_text = null;
+var h_proposed;
+
 var s_slider = null;
 var s_text = null;
+var s_proposed;
+
 var v_slider = null;
 var v_text = null;
+var v_proposed;
 
 // Variables
 var config_started = false;
@@ -19,6 +24,30 @@ var h_pub = createPublisher('/vision/reconfigure/h', 'std_msgs/Int32');
 var s_pub = createPublisher('/vision/reconfigure/s', 'std_msgs/Int32');
 var v_pub = createPublisher('/vision/reconfigure/v', 'std_msgs/Int32');
 var apply_pub = createPublisher('/vision/reconfigure/apply', 'std_msgs/Bool');
+
+// HSV values subscriber
+var h_sub = createSubscriber('/vision/reconfigure/h', 'std_msgs/Int32');
+var s_sub = createSubscriber('/vision/reconfigure/s', 'std_msgs/Int32');
+var v_sub = createSubscriber('/vision/reconfigure/v', 'std_msgs/Int32');
+
+h_sub.subscribe(function(message) {
+    console.log(message.data);
+    h_proposed = message.data;
+    h_slider.value = h_proposed;
+    h_text.innerHTML = h_proposed;
+});
+
+s_sub.subscribe(function(message) {
+    s_proposed = message.data;
+    s_slider.value = s_proposed;
+    s_text.innerHTML = s_proposed;
+});
+
+v_sub.subscribe(function(message) {
+    v_proposed = message.data;
+    v_slider.value = v_proposed;
+    v_text.innerHTML = v_proposed;
+});
 
 // Once the DOM is loaded
 document.addEventListener("DOMContentLoaded", function(){
@@ -59,9 +88,6 @@ window.onbeforeunload = function(){
 
 // Hidding section for the sequence
 function step_1() {
-    //var apply_msg = createBoolMsg(true);
-    //apply_pub.publish(apply_msg);
-
     $("#start").removeClass("disabled");
     $("#corners").addClass("disabled");
     $("#radius").addClass("disabled");
@@ -95,6 +121,24 @@ function step_4() {
     $("#radius").addClass("disabled");
     $("#hsv").removeClass("disabled");
     config_started = false;
+}
+
+function resetHSV() {
+    h_slider.value = h_proposed;
+    h_text.innerHTML = h_proposed;
+
+    s_slider.value = s_proposed;
+    s_text.innerHTML = s_proposed;
+
+    v_slider.value = v_proposed;
+    v_text.innerHTML = v_proposed;
+}
+
+function apply() {
+    var apply_msg = createBoolMsg(true);
+    apply_pub.publish(apply_msg);
+
+    step_1();
 }
 
 // Update the current slider value (each time you drag the slider handle)

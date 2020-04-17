@@ -7,7 +7,7 @@
 //void param_callback(strategy::strategyConfig &cfg, uint32_t level);
 
 const std::string Strategy::FOLLOW_X = "Easy";
-const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium" ;
+const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium";
 
 class NewStrategyListener
 {

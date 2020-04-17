@@ -1,5 +1,6 @@
 import threading
 import copy
+import time
 from VisionROS.ROS_CONSTANTS import *
 from VisionUtils.TableDimensions import  TableDimensions
 try:
@@ -59,6 +60,8 @@ class HSVConfigSubscriber:
         self.m_SPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_S_TOPIC_NAME, Int32, queue_size=10)
         self.m_VPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_V_TOPIC_NAME, Int32, queue_size=10)
 
+        time.sleep(0.5)
+
         self.publishCurrentValues() # So that the webApp knows the default values that were calculated by the autoConfiguration()
 
         self.m_applySubscriber = rospy.Subscriber(ROS_SUBSCRIBER_CONFIG_APPLY_TOPIC_NAME, Bool, self.okPressed)
@@ -71,16 +74,14 @@ class HSVConfigSubscriber:
         self.m_config.SetConfiguration()
 
     def publishCurrentValues(self):
-        msg = Int32()
+        h = self.m_config.GetHValue()
+        self.m_HPublisher.publish(h)
 
-        msg.data = self.m_config.GetHValue()
-        self.m_HPublisher.publish(msg)
+        s = self.m_config.GetSValue()
+        self.m_SPublisher.publish(s)
 
-        msg.data = self.m_config.GetSValue()
-        self.m_SPublisher.publish(msg)
-
-        msg.data = self.m_config.GetVValue()
-        self.m_VPublisher.publish(msg)
+        v = self.m_config.GetVValue()
+        self.m_VPublisher.publish(v)
 
     def resetValues(self,i_reset):
         """

@@ -91,18 +91,21 @@
 				<div class="card-top-header">Step 4</div>
 				<p>Adjust the HSV values</p>
 				<div class="slider-container">
-					<input type="range" min="1" max="255" oninput="updateH()" class="slider" id="h">
+					<input type="range" min="0" max="255" oninput="updateH()" class="slider" id="h">
 					<p class="p-slider">H: <span id="h_text"></span></p>
 				</div>
 				<div class="slider-container">
-					<input type="range" min="1" max="255" oninput="updateS()" class="slider" id="s">
+					<input type="range" min="0" max="255" oninput="updateS()" class="slider" id="s">
 					<p class="p-slider">S: <span id="s_text"></span></p>
 				</div>
 				<div class="slider-container">
-					<input type="range" min="1" max="255" oninput="updateV()" class="slider" id="v">
+					<input type="range" min="0" max="255" oninput="updateV()" class="slider" id="v">
 					<p class="p-slider">V: <span id="v_text"></span></p>
 				</div>
-				<button class="btn" onclick="step_1()">Apply</button>
+				<div class="hsv_btn">
+					<button class="btn" onclick="resetHSV()">Reset</button>
+					<button class="btn" onclick="apply()">Apply</button>
+				</div>
 			</div>
 		</div>
 		<div class="bottom-row">
