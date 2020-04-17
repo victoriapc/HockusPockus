@@ -1,6 +1,8 @@
 #include "FollowX.h"
 #include "FollowXWithReboundHandler.h"
 
+#include <ros/console.h>
+
 #include <dynamic_reconfigure/server.h>
 #include <strategy/strategyConfig.h>
 
@@ -36,7 +38,7 @@ public:
 	
 	void callbackSetStrategy(const std_msgs::String::ConstPtr& i_msg)
 	{
-		m_sCurrentStrategy = i_msg.data;
+		m_sCurrentStrategy = i_msg->data;
 	}
 	
 	void param_callback(strategy::strategyConfig &config, uint32_t level) 
