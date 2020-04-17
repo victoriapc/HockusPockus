@@ -19,12 +19,10 @@ public:
 
 	void callbackStartStrategy(const std_msgs::Bool::ConstPtr& i_msg)
 	{
-		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
-		{
-			delete m_pCurrentStrategy;
-		}
+		deleteCurrentStrategy();
 		
-		if (i_msg->data) {
+		if (i_msg->data) 
+		{
 			if(m_sCurrentStrategy == Strategy::FOLLOW_X)
 			{
 				m_pCurrentStrategy = new FollowX();
@@ -40,6 +38,22 @@ public:
 	void callbackSetStrategy(const std_msgs::String::ConstPtr& i_msg)
 	{
 		m_sCurrentStrategy = i_msg->data;
+	}
+	
+	void callbackPauseStrategy(const std_msgs::Bool::ConstPtr& i_msg)
+	{
+		if (i_msg->data) 
+		{
+			deleteCurrentStrategy();
+		}
+	}
+	
+	void deleteCurrentStrategy()
+	{
+		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
+		{
+			delete m_pCurrentStrategy;
+		}
 	}
 	
 	void param_callback(strategy::strategyConfig &config, uint32_t level) 
@@ -62,6 +76,7 @@ private:
 
 ros::Subscriber _setStrategySubscriber;
 ros::Subscriber _startSubscriber;
+ros::Subscriber _pauseSubscriber;
 
 int main(int argc, char*argv[])
 {
@@ -74,6 +89,7 @@ int main(int argc, char*argv[])
 	NewStrategyListener newStrategyListener = NewStrategyListener();
 	_setStrategySubscriber = n.subscribe("/strategy_mode", 1000, &NewStrategyListener::callbackSetStrategy, &newStrategyListener);
 	_startSubscriber = n.subscribe("/game/start_game", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
+	_pauseSubscriber = n.subscribe("/game/pause_game", 1000, &NewStrategyListener::callbackPauseStrategy, &newStrategyListener);
 
 	newStrategyListener._dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsChanged", 1000);
 
