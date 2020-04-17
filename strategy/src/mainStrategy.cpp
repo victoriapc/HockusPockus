@@ -24,7 +24,7 @@ public:
 			delete m_pCurrentStrategy;
 		}
 		
-		if (i_msg->data)
+		if (i_msg->data) {
 			if(m_sCurrentStrategy == Strategy::FOLLOW_X)
 			{
 				m_pCurrentStrategy = new FollowX();
@@ -34,6 +34,7 @@ public:
 			{
 				m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
 			}
+		}
 	}
 	
 	void callbackSetStrategy(const std_msgs::String::ConstPtr& i_msg)
@@ -71,7 +72,7 @@ int main(int argc, char*argv[])
   	dynamic_reconfigure::Server<strategy::strategyConfig>::CallbackType f;
 
 	NewStrategyListener newStrategyListener = NewStrategyListener();
-	_setStrategySubscriber = n.subscribe("strategy_mode", 1000, &NewStrategyListener::callbackSetStrategy, &newStrategyListener);
+	_setStrategySubscriber = n.subscribe("/strategy_mode", 1000, &NewStrategyListener::callbackSetStrategy, &newStrategyListener);
 	_startSubscriber = n.subscribe("/game/start_game", 1000, &NewStrategyListener::callbackStartStrategy, &newStrategyListener);
 
 	newStrategyListener._dimensionsUpdatedPublisher = n.advertise<std_msgs::Bool>("/strategy/tableDimensionsChanged", 1000);

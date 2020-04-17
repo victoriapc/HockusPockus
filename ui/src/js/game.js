@@ -9,7 +9,7 @@ var names;
 
 // Publishers
 var start_game_pub = createPublisher('/game/start_game', 'std_msgs/Bool');
-var strategy_mode_pub = createPublisher('strategy_mode', 'std_msgs/String');
+var strategy_mode_pub = createPublisher('/strategy_mode', 'std_msgs/String');
 
 // Create game
 function newGame(mode) {
