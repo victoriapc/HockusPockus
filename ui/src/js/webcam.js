@@ -103,6 +103,7 @@ function step_2() {
     var pos_msg = createPointMsg(0, 0);
     desired_pos_pub.publish(pos_msg);
 
+    $("#corners-apply").prop("disabled", true);
     startListeningToClicks();
 
     config_started = true;
@@ -240,7 +241,7 @@ function manageCoordinate(event, obj) {
 
     if(nclicks == 2) {
         stopListeningToClicks();
-        alert("Corners position sent. You can adjust the size the table dimensions.")
+        $("#corners-apply").prop("disabled", false);
     }
 }
 
