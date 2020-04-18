@@ -55,3 +55,9 @@ class CameraROS(Camera) :
             self.hasNewFrame= False
 
         return (True,self.m_frame)
+
+    def stop(self):
+        """
+        Implementation of the abstract method, unsubscribes from the ROS topic
+        """
+        self.m_webcam.unregister()

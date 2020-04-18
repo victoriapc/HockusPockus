@@ -47,6 +47,7 @@ class PuckDetectorCore(object) :
         are executed while self.m_userWantsToQuit is False
         """
         self.m_userWantsToQuit = True
+        self.m_camera.stop()
 
     def displayCirclesOnFrame(self,i_frame,i_xPosOfCenter,i_yPosOfCenter,i_radius):
         """
