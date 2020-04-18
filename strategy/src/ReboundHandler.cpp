@@ -1,8 +1,9 @@
 #include "ReboundHandler.h"
 
 
-ReboundHandler::ReboundHandler(float i_width, float i_height):
-	m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this))
+ReboundHandler::ReboundHandler(float i_width, float i_height,ros::Publisher * i_pPublisherPositionDesiree):
+	m_subscriberPositionActuellePuck(n.subscribe("/puck_pos", 1000,&ReboundHandler::reception,this)),
+	m_pPublisherPositionDesiree(i_pPublisherPositionDesiree)
 {
 	initTerrain(i_width, i_height);
 }

@@ -14,7 +14,7 @@ const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium";
 class NewStrategyListener
 {
 public:
-	NewStrategyListener():m_pCurrentStrategy(nullptr),m_width(0),m_height(0){};
+	NewStrategyListener():m_pCurrentStrategy(nullptr),m_width(0),m_height(0),m_publisherPositionDesiree(n.advertise<geometry_msgs::Point>("desired_pos", 1000)){};
 	ros::Publisher _dimensionsUpdatedPublisher;
 
 	void callbackStartStrategy(const std_msgs::Bool::ConstPtr& i_msg)
@@ -25,12 +25,12 @@ public:
 		{
 			if(m_sCurrentStrategy == Strategy::FOLLOW_X)
 			{
-				m_pCurrentStrategy = new FollowX();
+				m_pCurrentStrategy = new FollowX(&m_publisherPositionDesiree);
 			}
 			
 			else if(m_sCurrentStrategy == Strategy::FOLLOW_X_WITH_REBOUND)
 			{
-				m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height);
+				m_pCurrentStrategy = new FollowXWithReboundHandler(m_width, m_height,&m_publisherPositionDesiree);
 			}
 		}
 	}
@@ -53,6 +53,7 @@ public:
 		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
 		{
 			delete m_pCurrentStrategy;
+			m_pCurrentStrategy = nullptr ;
 		}
 	}
 	
@@ -68,6 +69,9 @@ public:
 	}
 	
 private: 
+	ros::NodeHandle n;
+	ros::Publisher  m_publisherPositionDesiree;
+
 	Strategy * m_pCurrentStrategy;
 	std::string m_sCurrentStrategy;
 	float m_width;
