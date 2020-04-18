@@ -10,7 +10,7 @@ void FollowXAndAttack::reception(const geometry_msgs::Point i_puckPos)
 {
 	geometry_msgs::Point msg;
 	msg.x = i_puckPos.x;
-	if(msg.y < ATTACK_Y_TRESHOLD)
+	if(i_puckPos.y < ATTACK_Y_TRESHOLD)
 	{
 		msg.y = ATTACK_Y_TRESHOLD; 
 	}
