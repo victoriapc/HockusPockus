@@ -12,6 +12,7 @@
 class Strategy
 {
   public:
+	Strategy();
     static const std::string FOLLOW_X;
     static const std::string FOLLOW_X_WITH_REBOUND;
 protected:
