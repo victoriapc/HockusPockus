@@ -107,6 +107,11 @@ function updateGameContent(html) {
 }
 
 // Manual control desired position info
+var desired_pos_sub = createSubscriber("/desired_pos", "geometry_msgs/Point")
+desired_pos_sub.subscribe(function(message) {
+  updateManualDesiredPosition(message);
+});
+
 function updateManualDesiredPosition(m) {
   document.getElementById("manual_x").innerHTML = m.x;
   document.getElementById("manual_y").innerHTML = m.y;

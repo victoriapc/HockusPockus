@@ -96,7 +96,7 @@ function stopGame() {
 
     var stop_game_msg = createBoolMsg(true);
     stop_game_pub.publish(stop_game_msg);
-    
+
     updateGameContent(home_content);
     $("#manual").removeClass("disabled");
     $("#new_game").removeClass("disabled");
@@ -109,16 +109,37 @@ score_subscriber.subscribe(function(message) {
 });
 
 function updateScore(message) {
-    var dict = createDictionnaryFromString(message);
-    for(i = 0; i < names.length; i++) {
-        addPlayerDiv(i + 1, names[i]);
+    var items = splitItems(message);
+    for(i = 0; i < items.length - 1; i++) {
+        var key_val = getItemKeyAndValue(items[i]);
+
+        var key = key_val[0];
+        var val = key_val[1];
+
+        if(names.includes(key)) {
+            updatePlayerScore(names.indexOf(key), val)
+        }
+        else {
+            updateRobotScore(val);
+        }
     }
 }
 
-function createDictionnaryFromString(string) {
-    
+function splitItems(string) {
+    var items = string.split("\n");
+    return items;
+}
+
+function getItemKeyAndValue(item) {
+    var key_val = item.split(" : ");
+    return key_val;
+}
+
+function updatePlayerScore(index, val) {
+    var id = getPlayerScoreID(index + 1);
+    $(id).innerHTML = val;
 }
 
 function updateRobotScore(val) {
-    
+    $("#score-robot").innerHTML = val;
 }
