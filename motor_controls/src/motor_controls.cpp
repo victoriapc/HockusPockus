@@ -295,7 +295,7 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 
 void tableDimensionsChangedCallback(const std_msgs::Bool::ConstPtr& i_msg)
 {
-	if(i_msg.data)
+	if(i_msg->data)
 	{
 		ros::param::get("/strategy/table_height", TABLE_HEIGHT);
 		ros::param::get("/strategy/table_width", TABLE_WIDTH);
