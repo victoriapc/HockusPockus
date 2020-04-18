@@ -8,6 +8,7 @@ class FollowX : public Strategy
 public:
 	FollowX(ros::Publisher * i_pPublisherPositionDesiree);
 	void reception(const geometry_msgs::Point i_puckPos);
+	void stop() ; 
 private:
 	const float FIXED_Y_POS = 0.05 ; 
 	ros::NodeHandle n;

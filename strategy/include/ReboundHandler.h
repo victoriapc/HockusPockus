@@ -15,6 +15,8 @@ class ReboundHandler : public Strategy
 	Vector3 linePredict(float A, float B, int dir, Vector2 pos, int iteration);
 	void reception(const geometry_msgs::Point i_puckPos);
 	
+	void stop(); 
+	
   protected:
   	ros::NodeHandle n;
 	ros::Subscriber m_subscriberPositionActuellePuck;

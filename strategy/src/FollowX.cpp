@@ -6,6 +6,11 @@ FollowX::FollowX(ros::Publisher * i_pPublisherPositionDesiree):
 {
 }
 
+void FollowX::stop()
+{
+	m_subscriberPositionActuellePuck.shutdown();
+}
+
 void FollowX::reception(const geometry_msgs::Point i_puckPos)
 {
 	geometry_msgs::Point msg;

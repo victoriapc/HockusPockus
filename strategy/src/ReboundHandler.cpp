@@ -7,6 +7,11 @@ ReboundHandler::ReboundHandler(float i_width, float i_height,ros::Publisher * i_
 {
 	initTerrain(i_width, i_height);
 }
+
+void ReboundHandler::stop()
+{
+	m_subscriberPositionActuellePuck.shutdown();
+}
 		
 void ReboundHandler::initTerrain(float i_width, float i_height)
 {

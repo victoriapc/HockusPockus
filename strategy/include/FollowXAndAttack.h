@@ -8,6 +8,8 @@ class FollowXAndAttack : public Strategy
 public:
 	FollowXAndAttack(ros::Publisher * i_pPublisherPositionDesiree);
 	void reception(const geometry_msgs::Point i_puckPos);
+	void stop() ; 
+
 private:
 	const float BASE_Y_POS = 0.01 ; 
 	const float ATTACK_Y_TRESHOLD = 0.15 ; 
