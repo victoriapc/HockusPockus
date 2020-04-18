@@ -53,6 +53,7 @@ public:
 		if(m_pCurrentStrategy != nullptr) //stop current strategy, if there's one
 		{
 			delete m_pCurrentStrategy;
+			m_pCurrentStrategy = nullptr ;
 		}
 	}
 	
