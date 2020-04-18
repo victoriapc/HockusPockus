@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(score)
 
-find_package(catkin REQUIRED
-COMPONENTS message_generation roscpp std_msgs dynamic_reconfigure)
-
-generate_messages(DEPENDENCIES std_msgs)
+find_package(catkin REQUIRED COMPONENTS 
+  roscpp 
+  std_msgs 
+  dynamic_reconfigure
+)
 
 generate_dynamic_reconfigure_options(
   config/score.cfg
@@ -12,7 +13,7 @@ generate_dynamic_reconfigure_options(
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp  message_runtime std_msgs dynamic_reconfigure
+  #CATKIN_DEPENDS roscpp  message_runtime std_msgs dynamic_reconfigure
 )
    
 include_directories(include ${catkin_INCLUDE_DIRS})
