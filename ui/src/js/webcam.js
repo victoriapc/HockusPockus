@@ -242,6 +242,8 @@ function manageCoordinate(event, obj) {
     if(nclicks == 2) {
         stopListeningToClicks();
         $("#corners-apply").prop("disabled", false);
+        var pos_msg = createPointMsg(0, 0);
+        desired_pos_pub.publish(pos_msg);
     }
 }
 
