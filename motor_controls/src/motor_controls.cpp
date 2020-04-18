@@ -15,6 +15,7 @@
 
 #include "ros/ros.h"
 #include <geometry_msgs/Point.h>
+#include <std_msgs/Bool.h>
 
 #include <dynamic_reconfigure/server.h>
 #include <motor_controls/motorConfig.h>
@@ -39,6 +40,9 @@ float joyy = 0;
 
 int speed_ratio = 5;
 
+float TABLE_HEIGHT = 0.25;
+float TABLE_WIDTH = 0.25;
+
 // Pub and Sub
 ros::Publisher pos_pub;
 ros::Publisher desired_pub;
@@ -46,6 +50,7 @@ ros::Publisher desired_pub;
 ros::Subscriber desired_sub;
 ros::Subscriber robot_sub;
 ros::Subscriber joy_sub;
+ros::Subscriber tableDimensionsChanged;
 
 void current_pos_callback(const geometry_msgs::Point robot_pos);
 void forward();
@@ -59,7 +64,7 @@ geometry_msgs::Point des_point;
 
 void control_callback(const geometry_msgs::Point desired_pos);
 void joy_callback(const geometry_msgs::Point joy_pos);
-
+void tableDimensionsChangedCallback(const std_msgs::Bool::ConstPtr& i_msg);
 void param_callback(motor_controls::motorConfig &cfg, uint32_t level);
 
 int main(int argc, char*argv[])
@@ -86,6 +91,7 @@ int main(int argc, char*argv[])
 	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
 	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
+	tableDimensionsChanged = n.subscribe("/strategy/tableDimensionsChanged", 1000, tableDimensionsChangedCallback);
 	
 	f = boost::bind(&param_callback, _1, _2);
   	server.setCallback(f);
@@ -228,8 +234,31 @@ void left(){
 	pos_pub.publish(point);
 }
 void control_callback(const geometry_msgs::Point desired_pos){
-    desired_posx = desired_pos.x;
-    desired_posy = desired_pos.y;
+	if(desired_pos.x < 0)
+	{
+		desired_posx = 0 ; 
+	}
+	else if(desired_pos.x > TABLE_WIDTH)
+	{
+		desired_posx = TABLE_WIDTH;
+	}
+	else
+	{
+		desired_posx = desired_pos.x;
+	}
+    
+	if(desired_pos.y < 0)
+	{
+		desired_posy = 0 ;
+	}
+	else if(desired_pos.y > TABLE_HEIGHT)
+	{
+		desired_posy = TABLE_HEIGHT;
+	}
+	else
+	{
+		desired_posy = desired_pos.y;
+	}
 
 	/*if (desired_pos.x != current_posx){
     
@@ -262,6 +291,15 @@ void joy_callback(const geometry_msgs::Point joy_pos){
 	des_point.x = desired_posx;
 	des_point.y = desired_posy;
 	desired_pub.publish(des_point);
+}
+
+void tableDimensionsChangedCallback(const std_msgs::Bool::ConstPtr& i_msg)
+{
+	if(i_msg.data)
+	{
+		ros::param::get("/strategy/table_height", TABLE_HEIGHT);
+		ros::param::get("/strategy/table_width", TABLE_WIDTH);
+	}
 }
 
 void param_callback(motor_controls::motorConfig &config, uint32_t level) {
