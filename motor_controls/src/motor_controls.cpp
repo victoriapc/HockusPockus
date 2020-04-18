@@ -67,6 +67,10 @@ void joy_callback(const geometry_msgs::Point joy_pos);
 void tableDimensionsChangedCallback(const std_msgs::Bool::ConstPtr& i_msg);
 void param_callback(motor_controls::motorConfig &cfg, uint32_t level);
 
+float xSafety(float i_desiredPos);
+float ySafety(float i_desiredPos);
+float safety(float i_desiredPos, float i_max);
+
 int main(int argc, char*argv[])
 {	
 	pthread_t thread_Control;
@@ -234,32 +238,9 @@ void left(){
 	pos_pub.publish(point);
 }
 void control_callback(const geometry_msgs::Point desired_pos){
-	if(desired_pos.x < 0)
-	{
-		desired_posx = 0 ; 
-	}
-	else if(desired_pos.x > TABLE_WIDTH)
-	{
-		desired_posx = TABLE_WIDTH;
-	}
-	else
-	{
-		desired_posx = desired_pos.x;
-	}
-    
-	if(desired_pos.y < 0)
-	{
-		desired_posy = 0 ;
-	}
-	else if(desired_pos.y > TABLE_HEIGHT)
-	{
-		desired_posy = TABLE_HEIGHT;
-	}
-	else
-	{
-		desired_posy = desired_pos.y;
-	}
-
+	desired_posx = xSafety(desired_pos.x);
+	desired_posy = ySafety(desired_pos.y);
+	
 	/*if (desired_pos.x != current_posx){
     
 		if (desired_pos.x > current_posx){
@@ -283,11 +264,37 @@ void control_callback(const geometry_msgs::Point desired_pos){
 	}*/ 
 }
 
+float xSafety(float i_desiredPos)
+{
+	return safety(i_desiredPos,TABLE_WIDTH);
+}
+
+float ySafety(float i_desiredPos)
+{ 
+	return safety(i_desiredPos,TABLE_HEIGHT);
+}
+
+float safety(float i_desiredPos, float i_max)
+{
+	if(i_desiredPos < 0)
+	{
+		return 0 ;
+	}
+	else if(i_desiredPos > i_max)
+	{
+		return i_max;
+	}
+	else
+	{
+		return i_desiredPos ; 
+	}
+}
+
 void joy_callback(const geometry_msgs::Point joy_pos){
 	joyx = speed_ratio*joy_pos.x;
 	joyy = speed_ratio*joy_pos.y;
-	desired_posx = joyx + current_posx;	
-	desired_posy = joyy + current_posy;
+	desired_posx = xSafety(joyx + current_posx);	
+	desired_posy = ySafety(joyy + current_posy);
 	des_point.x = desired_posx;
 	des_point.y = desired_posy;
 	desired_pub.publish(des_point);
