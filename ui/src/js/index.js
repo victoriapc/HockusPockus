@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function(){
 /* ----------------------------------------- */
 /* ------------- Manual Control ------------ */
 /* ----------------------------------------- */
+var desired_position_publisher = createPublisher("/desired_position", "geometry_msgs/Point");
+
 
 function manualStart() {
   if(!modeManual) {
@@ -46,6 +48,10 @@ function manualStop() {
   }
 }
 
+function goHome() {
+  var home = createPointMsg(0, 0);
+  desired_position_publisher.publish(home);
+}
 /* ----------------------------------------- */
 /* ----------- Information Card ------------ */
 /* ----------------------------------------- */
