@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 2.8.3)
 project(main)
 
 find_package(catkin REQUIRED COMPONENTS
-  webcam
+  motor_controls
+  score
+  strategy
   ui
   vision
-  score
-  simulation
+  webcam
 )
 
 catkin_package(

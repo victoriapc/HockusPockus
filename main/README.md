@@ -1,5 +1,9 @@
 # The Main Package
 
-This package is responsible to launch all of the code. It finds all of the other launch files and simplifies the process of launching the code. 
+This package is used to launch the packages on the Pi and the computer in the order for the project to work. It includes a launch file for both of them. 
 
-Currently, no parameters can be passed in the command line. In a future release, it will be possible to launch packages independently. 
+*pi.launch* is responsible to launch the motor_controls and score packages.
+
+*computer.launch* is responsible to launch the strategy, ui, vision and webcam packages.
+
+No parameters can be passed to this package. If you want to launch specific packages, you need to call its launch file directly.

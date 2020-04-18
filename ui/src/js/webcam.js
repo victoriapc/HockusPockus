@@ -26,6 +26,8 @@ var v_pub = createPublisher('/vision/reconfigure/v', 'std_msgs/Int32');
 var apply_pub = createPublisher('/vision/reconfigure/apply', 'std_msgs/Bool');
 var reset_pub = createPublisher('/vision/reconfigure/resetHSV', 'std_msgs/Bool');
 
+var desired_pos_pub = createPublisher("/desired_pos", "geometry_msgs/Point");
+
 // HSV values subscriber
 var h_sub = createSubscriber('/vision/reconfigure/h', 'std_msgs/Int32');
 var s_sub = createSubscriber('/vision/reconfigure/s', 'std_msgs/Int32');
@@ -98,13 +100,16 @@ function step_2() {
     var start_msg = createBoolMsg(true);
     start_pub.publish(start_msg);
 
+    var pos_msg = createPointMsg(0, 0);
+    desired_pos_pub.publish(pos_msg);
+
     startListeningToClicks();
 
     config_started = true;
     $("#start").addClass("disabled");
     $("#corners").removeClass("disabled");
 
-    alert("Click on the top left corner.")
+    alert("Adjust the dimensions of the table while the robot moves to the (0, 0) position. Once it stops to move, click on its position.")
 }
 
 function step_3() {
@@ -227,7 +232,10 @@ function manageCoordinate(event, obj) {
     nclicks++;
 
     if(nclicks == 1) {
-        alert("Click on the bottom-rigth corner.");
+        var pos_msg = createPointMsg(Number($("#width").val()), Number($("#height").val()));
+        desired_pos_pub.publish(pos_msg);
+
+        alert("Wait for the robot to stop moving. Click on its position once again.");
     }
 
     if(nclicks == 2) {

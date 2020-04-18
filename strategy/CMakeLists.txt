@@ -8,16 +8,17 @@ find_package(catkin REQUIRED COMPONENTS
    dynamic_reconfigure
 )
 
-#catkin_package(
-#   INCLUDE_DIRS include
-#   CATKIN_DEPENDS roscpp  message_runtime std_msgs geometry_msgs)
-   
-include_directories(include ${catkin_INCLUDE_DIRS})
-
 generate_dynamic_reconfigure_options(
   config/strategy.cfg
   #...
 )
+
+catkin_package(
+#   INCLUDE_DIRS include
+#   CATKIN_DEPENDS roscpp  message_runtime std_msgs geometry_msgs
+)
+   
+include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_executable(strategy src/mainStrategy.cpp src/Strategy.cpp src/ReboundHandler.cpp src/FollowXWithReboundHandler.cpp src/FollowX.cpp)
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)

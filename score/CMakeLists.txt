@@ -11,8 +11,9 @@ generate_dynamic_reconfigure_options(
 )
 
 catkin_package(
-   INCLUDE_DIRS include
-   CATKIN_DEPENDS roscpp  message_runtime std_msgs dynamic_reconfigure)
+  INCLUDE_DIRS include
+  CATKIN_DEPENDS roscpp  message_runtime std_msgs dynamic_reconfigure
+)
    
 include_directories(include ${catkin_INCLUDE_DIRS})
    

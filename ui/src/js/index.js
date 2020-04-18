@@ -113,6 +113,6 @@ desired_pos_sub.subscribe(function(message) {
 });
 
 function updateManualDesiredPosition(m) {
-  document.getElementById("manual_x").innerHTML = m.x;
-  document.getElementById("manual_y").innerHTML = m.y;
+  document.getElementById("manual_x").innerHTML = m.x.toFixed(3);
+  document.getElementById("manual_y").innerHTML = m.y.toFixed(3);
 }

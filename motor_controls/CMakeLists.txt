@@ -8,21 +8,21 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
 )
 
-#catkin_package(
+generate_dynamic_reconfigure_options(
+  config/motor.cfg
+  #...
+)
+
+catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES motor_controls
 #  CATKIN_DEPENDS geometry_twist roscpp
 #  DEPENDS system_lib
-#)
+)
 
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
-)
-
-generate_dynamic_reconfigure_options(
-  config/motor.cfg
-  #...
 )
 
 add_executable(${PROJECT_NAME}_node src/motor_controls.cpp)

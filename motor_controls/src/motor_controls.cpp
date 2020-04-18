@@ -41,9 +41,10 @@ int speed_ratio = 5;
 
 // Pub and Sub
 ros::Publisher pos_pub;
+ros::Publisher desired_pub;
+
 ros::Subscriber desired_sub;
 ros::Subscriber robot_sub;
-ros::Publisher desired_pub;
 ros::Subscriber joy_sub;
 
 void current_pos_callback(const geometry_msgs::Point robot_pos);
@@ -80,9 +81,10 @@ int main(int argc, char*argv[])
 
 	ros::NodeHandle n;
 	pos_pub = n.advertise<geometry_msgs::Point>("robot_pos", 1000);
+	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
+
 	desired_sub = n.subscribe("desired_pos", 1000, control_callback);
 	robot_sub = n.subscribe("robot_pos", 1000, current_pos_callback);
-	desired_pub = n.advertise<geometry_msgs::Point>("desired_pos", 1000);
 	joy_sub = n.subscribe("joy_pos", 1000, joy_callback);
 	
 	f = boost::bind(&param_callback, _1, _2);
