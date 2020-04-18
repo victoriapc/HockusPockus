@@ -27,6 +27,7 @@ class MainVision():
         """
         if self.puckDetector != None:
             self.puckDetector.userWantsToQuit()
+            self.puckDetector.stopIncommingCameraFeed()
             self.puckDetector = None
             
     def reconfigureCallBack(self, i_reconfigure):
@@ -46,6 +47,7 @@ class MainVision():
         builder = PuckDetectorBuilder(self.MODE, 30, i_reconfigure)
         self.stopCurrentPuckDetector()
         self.puckDetector = builder.build()
+        builder.stopIncommingCameraFeed()
         self.puckDetector.findPuck()
 
 # Main

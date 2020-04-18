@@ -47,6 +47,11 @@ class PuckDetectorCore(object) :
         are executed while self.m_userWantsToQuit is False
         """
         self.m_userWantsToQuit = True
+
+    def stopIncommingCameraFeed(self):
+        """
+        Calls the stop() method of the Camera object
+        """
         self.m_camera.stop()
 
     def displayCirclesOnFrame(self,i_frame,i_xPosOfCenter,i_yPosOfCenter,i_radius):
