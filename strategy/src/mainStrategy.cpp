@@ -1,5 +1,6 @@
 #include "FollowX.h"
 #include "FollowXWithReboundHandler.h"
+#include "FollowXAndAttack.h"
 
 #include <ros/console.h>
 
@@ -9,7 +10,8 @@
 //void param_callback(strategy::strategyConfig &cfg, uint32_t level);
 
 const std::string Strategy::FOLLOW_X = "Easy";
-const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Medium";
+const std::string Strategy::FOLLOW_X_AND_ATTACK = "Medium";
+const std::string Strategy::FOLLOW_X_WITH_REBOUND = "Hard";
 
 class NewStrategyListener
 {
@@ -26,6 +28,11 @@ public:
 			if(m_sCurrentStrategy == Strategy::FOLLOW_X)
 			{
 				m_pCurrentStrategy = new FollowX(&m_publisherPositionDesiree);
+			}
+			
+			else if(m_sCurrentStrategy == Strategy::FOLLOW_X_AND_ATTACK)
+			{
+				m_pCurrentStrategy = new FollowXAndAttack(&m_publisherPositionDesiree);
 			}
 			
 			else if(m_sCurrentStrategy == Strategy::FOLLOW_X_WITH_REBOUND)
