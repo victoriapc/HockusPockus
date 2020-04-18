@@ -27,6 +27,7 @@ class CameraROS(Camera) :
         self.waitTime = int(timeBetweenFrames/10)
         self.hasNewFrame = False
         self.hasNewFrameLock = threading.Lock()
+        self.isSubsribed = True
 
     def updateFrame(self,i_image):
         """
@@ -44,7 +45,7 @@ class CameraROS(Camera) :
         Returns:
             A tupple, whose first term is a boolean that says if getting the next frame was succesful or not, and whose second term is the actual frame
         """
-        while (not self.hasNewFrame) :
+        while (not self.hasNewFrame and self.isSubsribed) :
             cv2.waitKey(int(self.waitTime)) & 0xFF
 
         with self.hasNewFrameLock:
@@ -54,10 +55,11 @@ class CameraROS(Camera) :
                 pass
             self.hasNewFrame= False
 
-        return (True,self.m_frame)
+        return (self.isSubsribed,self.m_frame)
 
     def stop(self):
         """
         Implementation of the abstract method, unsubscribes from the ROS topic
         """
         self.m_webcam.unregister()
+        self.isSubsribed = False
