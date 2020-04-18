@@ -35,6 +35,8 @@ class RadiusConfigSubscriber:
         """
         if i_apply.data:
             self.m_config.userWantsToQuit()
+            self.m_radiusSubscriber.unregister()
+            self.m_applySubscriber.unregister()
 
     def update_Radius(self, i_radius):
         """
@@ -44,6 +46,10 @@ class RadiusConfigSubscriber:
         self.m_config.SetRadiusValue(i_radius.data)
 
 class HSVConfigSubscriber:
+    HPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_H_TOPIC_NAME, Int32, queue_size=10)
+    SPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_S_TOPIC_NAME, Int32, queue_size=10)
+    VPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_V_TOPIC_NAME, Int32, queue_size=10)
+
     def __init__(self,i_config):
         """
         HSVConfigSubscriber class's constructor. Initializes, notably, the ROS subscribers that are used to get the HSV
@@ -55,10 +61,6 @@ class HSVConfigSubscriber:
         self.m_config = i_config
         self.defaultLowerValues = copy.deepcopy(self.m_config.m_lowerColor)
         self.defaultUpperValues = copy.deepcopy(self.m_config.m_upperColor)
-
-        self.m_HPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_H_TOPIC_NAME, Int32, queue_size=10)
-        self.m_SPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_S_TOPIC_NAME, Int32, queue_size=10)
-        self.m_VPublisher = rospy.Publisher(ROS_SUBSCRIBER_CONFIG_V_TOPIC_NAME, Int32, queue_size=10)
 
         time.sleep(0.5)
 
@@ -75,13 +77,13 @@ class HSVConfigSubscriber:
 
     def publishCurrentValues(self):
         h = self.m_config.GetHValue()
-        self.m_HPublisher.publish(h)
+        HSVConfigSubscriber.HPublisher.publish(h)
 
         s = self.m_config.GetSValue()
-        self.m_SPublisher.publish(s)
+        HSVConfigSubscriber.SPublisher.publish(s)
 
         v = self.m_config.GetVValue()
-        self.m_VPublisher.publish(v)
+        HSVConfigSubscriber.VPublisher.publish(v)
 
     def resetValues(self,i_reset):
         """
@@ -100,6 +102,13 @@ class HSVConfigSubscriber:
         """
         if i_apply.data:
             self.m_config.userWantsToQuit()
+
+            self.m_applySubscriber.unregister()
+            self.m_resetSubscriber.unregister()
+
+            self.m_HSubscriber.unregister()
+            self.m_SSubscriber.unregister()
+            self.m_VSubscriber.unregister()
 
     def update_H(self, i_H):
         """
@@ -152,6 +161,10 @@ class DimensionsConverterConfigSubscriber:
 
         self.m_DimensionsConverterConfiguration.setSidesDimensions(tableDimensions)
         self.m_DimensionsConverterConfiguration.computePixelToMetersRatio()
+
+        self.m_resetSubscriber.unregister()
+        self.m_tableDimensionsSubscriber.unregister()
+
 
     def retryPressed(self):
         """

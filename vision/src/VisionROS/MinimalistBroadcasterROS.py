@@ -15,12 +15,7 @@ except ImportError:
 
 class MinimalistBroadcasterROS(Broadcaster) :
 
-    def __init__(self):
-        """
-        MinimalistBroadcasterROS class's constructor. Initializes, notably, self.positionPublisher, the attribute that
-        publishs the position of the puck
-        """
-        self.positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
+    positionPublisher = rospy.Publisher(ROS_PUBLISHER_PUCK_POSITION_TOPIC_NAME, Point, queue_size=10)
 
     def broadcastCoordinatesOfPuck(self,i_xPos,i_Ypos):
         """
@@ -33,7 +28,7 @@ class MinimalistBroadcasterROS(Broadcaster) :
         msg.x = i_xPos
         msg.y = i_Ypos
 
-        self.positionPublisher.publish(msg)
+        MinimalistBroadcasterROS.positionPublisher.publish(msg)
 
     def broadcastVideoOfPuck(self,i_frame):
         """
