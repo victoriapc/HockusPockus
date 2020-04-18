@@ -1,7 +1,7 @@
 #include "FollowXWithReboundHandler.h"
 
-FollowXWithReboundHandler::FollowXWithReboundHandler(float i_width, float i_height):
-ReboundHandler(i_width, i_height)
+FollowXWithReboundHandler::FollowXWithReboundHandler(float i_width, float i_height, ros::Publisher * i_pPublisherPositionDesiree):
+ReboundHandler(i_width, i_height,i_pPublisherPositionDesiree)
 {
 }
 
