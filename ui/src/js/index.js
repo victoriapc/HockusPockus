@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function(){
 /* ----------------------------------------- */
 /* ------------- Manual Control ------------ */
 /* ----------------------------------------- */
-var desired_pos_pub = createPublisher("/desired_pos", "geometry_msgs/Point");
 
+var desired_pos_pub = createPublisher("/desired_pos", "geometry_msgs/Point");
 
 function manualStart() {
   if(!modeManual) {
@@ -52,6 +52,7 @@ function goHome() {
   var pos_msg = createPointMsg(0, 0);
   desired_pos_pub.publish(pos_msg);
 }
+
 /* ----------------------------------------- */
 /* ----------- Information Card ------------ */
 /* ----------------------------------------- */
@@ -76,8 +77,8 @@ ros.on('close', function () {
 /* ------------ Position  Card ------------- */
 /* ----------------------------------------- */
 
-// Robot's position listener
 var robot_pos_listener = createSubscriber("/robot_pos", "geometry_msgs/Point");
+var puck_pos_listener = createSubscriber("/puck_pos", "geometry_msgs/Point")
 
 robot_pos_listener.subscribe(function(message) {
   updateRobotPosition(message);
@@ -88,8 +89,6 @@ function updateRobotPosition(m) {
   document.getElementById("robot_y").innerHTML = m.y.toFixed(3);
 }
 
-// Puck's position listener
-var puck_pos_listener = createSubscriber("/puck_pos", "geometry_msgs/Point")
 
 puck_pos_listener.subscribe(function(message) {
   updatePuckPosition(message);
@@ -114,6 +113,7 @@ function updateGameContent(html) {
 
 // Manual control desired position info
 var desired_pos_sub = createSubscriber("/desired_pos", "geometry_msgs/Point")
+
 desired_pos_sub.subscribe(function(message) {
   updateManualDesiredPosition(message);
 });

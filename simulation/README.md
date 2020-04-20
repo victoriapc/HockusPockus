@@ -1,0 +1,2 @@
+# The simulation package
+This package can be used to simulate position sent by the vision algorithm to validate that the robot moves accordingly. Currently, the robot should move in a square trajectory.

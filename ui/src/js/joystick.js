@@ -1,6 +1,3 @@
-// Joystick
-
-// Publisher
 var joy_publisher = createPublisher("/joy_pos", "geometry_msgs/Point");
 
 move = function (posx, posy) {
@@ -8,7 +5,6 @@ move = function (posx, posy) {
   joy_publisher.publish(Point);
 }
 
-//main joystick function
 createJoystick = function () {
   var options = {
     zone: document.getElementById('zone_joystick'),

@@ -10,3 +10,6 @@ The WebApp is hosted on port 8080, which is set in *src/server.py*. web_video_se
 
 ## Usage
 In the [Wiki](https://github.com/victoriapc/HockusPockus/wiki), you can find a guide to navigate through the WebApp's functions, like configuring the vision algorithm.
+
+## Javascript
+The code is divided in sections. In the HTML files, you can find which javascript files are needed in order for the page to work. Most of them use *roslibjs* in order to communicate with ROS. For that reason, the **ros** sub-folder allows to access to the most used functions, like creating a subscriber or a publisher, accessing parameters through *dynamic_reconfigure*, et cetera. 
