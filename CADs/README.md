@@ -13,7 +13,7 @@ The center piece changes with the number of players. Here are the examples for a
 
 
 ## Mecanism
-Here's a preview of the result so far:
+The mecanism was inspired by *JJRobots* original design. A few changes were needed to allow ajustments. Here's the result:
 
 ![alt](resources/mecanism.png)
 
