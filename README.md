@@ -18,4 +18,4 @@ Please visit the wiki section of the Github for the installation and constructio
 
 ## Last planned Update
 
-The last planned update is on 4/20/2020. No further updates are plan to be added after this date.
+The last planned update is on 4/20/2020. No further updates are planned to be added after this date.
