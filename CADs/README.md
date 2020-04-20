@@ -1,18 +1,22 @@
 # CADs
-## 3D Printed Parts
-Based on JJRobots' original project, the mecanism of the robot is mostly unchanged. The 3D Printed parts can be found on the [*Thingiverse*](https://www.thingiverse.com/thing:1804534) page of the original project.
-
-Since the table differs from the one used in the original project, the stick and the puck were redesigned to a proper size. They can be found in the **Game Pieces** directory. The one used in *The Hockus Pockus Project* were printed with a 20% fill level, which should be enough. The sides that carry the middle two rods and the "Robot-stick" were also modified and can be found in the **Game Pieces** directory.
+This section contains all of the CADs needed to build the project. In the Wiki, you can find the steps to follow in order to assemble the whole table and mecanism.
 
 ## Table
-The pieces used to make the table can be found in the **Table** directory. Here's a preview of the result:
+The pieces used to make the table can be found in the **Table** directory. It includes the parts of a play zone and the center pieces for a 2 or 3 player table. The play zone looks like this:
 
-![alt table](resources/table.png)
+![](resources/play_zone.png)
 
-The table is composed of a middle section, and 3 side sections. 
+The center piece changes with the number of players. Here are the examples for a 2 and 3 player table.
+
+![](resources/2_player.png)
+![](resources/3_player.png)
+
 
 ## Mecanism
 Here's a preview of the result so far:
 
 ![alt](resources/mecanism.png)
 
+## Game Pieces
+
+This folder includes the puck and the player's stick. 
